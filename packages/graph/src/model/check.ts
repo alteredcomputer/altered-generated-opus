@@ -8,7 +8,7 @@ import type { FeatureNode, NodeId } from "./node.ts"
  * by a node, which is what keeps the mirror honest: drift becomes a failed check rather than a
  * discovery months later.
  */
-const UNCLAIMED_BY_DESIGN = [".gitignore", ".nvmrc", "pnpm-lock.yaml", "**/next-env.d.ts"] as const
+const UNCLAIMED_BY_DESIGN = [".gitignore", "pnpm-lock.yaml"] as const
 
 /**
  * @remarks
