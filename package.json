@@ -1,0 +1,23 @@
+{
+    "name": "altered-generated-opus",
+    "private": true,
+    "type": "module",
+    "packageManager": "pnpm@10.33.3",
+    "engines": {
+        "node": ">=22"
+    },
+    "scripts": {
+        "build": "turbo run build",
+        "dev": "turbo run dev",
+        "check": "pnpm run check:types && pnpm run check:style && pnpm run check:graph",
+        "check:types": "turbo run check:types",
+        "check:style": "biome check .",
+        "check:graph": "pnpm --filter @opus/graph run check",
+        "fix:style": "biome check --write ."
+    },
+    "devDependencies": {
+        "@biomejs/biome": "2.5.8",
+        "turbo": "2.10.10",
+        "typescript": "5.9.3"
+    }
+}

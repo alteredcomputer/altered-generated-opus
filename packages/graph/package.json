@@ -1,0 +1,21 @@
+{
+    "name": "@opus/graph",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./model": "./src/model/index.ts",
+        "./nodes": "./src/nodes/index.ts"
+    },
+    "scripts": {
+        "check": "node --experimental-strip-types src/cli.ts",
+        "check:types": "tsc --noEmit"
+    },
+    "dependencies": {
+        "effect": "catalog:"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "typescript": "catalog:"
+    }
+}
