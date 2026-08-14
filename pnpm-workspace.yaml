@@ -1,0 +1,9 @@
+packages:
+    - apps/*
+    - packages/*
+
+#  Shared versions. Pinned exactly: a moving release candidate is only acceptable under a lock.
+catalog:
+    "@types/node": 26.2.0
+    effect: 4.0.0-rc.109
+    typescript: 5.9.3

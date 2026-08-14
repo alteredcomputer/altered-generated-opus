@@ -61,6 +61,10 @@ Reads are allowed.
 ### Git
 
 - Writes only inside `usealtered/altered-generated-opus`.
+- **Always branch from a freshly fetched `origin/main`.** A restarted session can resume with an
+  older branch checked out, and cutting a new branch from it silently reverts work that was already
+  merged. Start every session with `git fetch origin main && git checkout main && git reset --hard
+  origin/main`, then branch.
 - **Branch per logical change**, named `cursor/<descriptive-name>-<suffix>`. The owner wants the
   branch trail for visibility.
 - Commit per logical change with a real message. Never force push. Never amend a pushed commit.
