@@ -98,6 +98,34 @@ Contract first, reconcile last. From `AGENTS.md`:
 - After building, reconcile. Development always uncovers discrepancies, so this pass is mandatory.
   Run `graph:check` and fix every drift before merging.
 
+## Adopted from Liminal
+
+The owner's notes describe Liminal as conceptual version control: instead of versioning files, you
+version the intent, and code is only allowed to exist if it traces to a declared piece of it. Five
+ideas from those notes are cheap enough to adopt and materially improve this graph. They are
+recorded here as the intended direction; each is a `planned` node until built.
+
+- **Verify absence, not just presence.** His sharpest point is that a quality check should confirm
+  nothing *extra* was added: every piece of code has a reason to exist, and code without one gets
+  removed. A `minimalism` attribute alongside the existing quality flags makes scope creep visible
+  instead of invisible.
+- **Freeze stable nodes.** Snapshots in his notes store the state of a section of code, diff it, and
+  fail on unexpected change. For nodes that should not drift, a frozen flag plus the source hash
+  turns silent modification into a failed check.
+- **Revalidate dependents on change.** Already the staleness model. His framing is worth keeping in
+  mind: it behaves like a dependency array, so only what actually depends on a change gets
+  reconsidered rather than the whole tree.
+- **Inherited spec packs.** Rather than restating security or accessibility requirements on every
+  node, a subtree inherits a pack. Every node under the API domain would carry the same security
+  clauses by default.
+- **The junior-programmer test.** A node's description should answer the questions a junior engineer
+  would ask about the code it covers. If it does not, the description is not finished, and a vague
+  node should not be feeding an agent as context.
+
+Deliberately not adopted, because they belong to the product rather than to a repo tool: a thought
+ingestion and distillation pipeline, separate control planes with branch-like promotion between
+environments, scheduled invalidation, and a chat layer over every node.
+
 ## Scope discipline
 
 This is a light tool, not a product. It exists to give a fast, honest picture of the codebase and a
