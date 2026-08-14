@@ -37,7 +37,7 @@ const nodes = defineNodes([
         title: "Knowledge base",
         description:
             "The durable memory of the project: locked decisions with their reasoning, the open-question register, guardrails and resource inventory, prior-art failures to avoid, and the resume file. Written so a restarted session loses nothing.",
-        sources: ["knowledge/**", "README.md"],
+        sources: ["knowledge/*.md", "README.md"],
         status: "done",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true },
@@ -286,6 +286,33 @@ const nodes = defineNodes([
                 {
                     text: "Flag dependents stale, and make clearing a flag a deliberate act.",
                     priority: 3
+                },
+                {
+                    text: "Add a frozen flag so a node that should not drift fails the check when its files change.",
+                    priority: 4
+                }
+            ],
+            remarks: [
+                "Behaves like a dependency array: only what depends on a change is reconsidered, not the whole tree."
+            ]
+        }
+    },
+    {
+        id: "feature-graph-scope-verification",
+        parent: "feature-graph",
+        title: "Minimalism and inherited spec packs",
+        description:
+            "Not built yet. Verifying that nothing extra was added is as important as verifying the feature works, and requirements that apply to a whole domain should be inherited by its subtree rather than restated on every node.",
+        status: "planned",
+        data: {
+            todos: [
+                {
+                    text: "Add a minimalism attribute so unjustified scope is visible rather than invisible.",
+                    priority: 3
+                },
+                {
+                    text: "Let a subtree inherit a spec pack, so every API node carries the same security clauses by default.",
+                    priority: 4
                 }
             ]
         }
