@@ -4,7 +4,41 @@
     "tasks": {
         "build": {
             "dependsOn": ["^build"],
-            "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+            "outputs": [".next/**", "!.next/cache/**", "dist/**"],
+
+            //  Variables that can change the build output, so they belong in the cache key.
+            //  NEXT_PUBLIC_* is inlined into the client bundle, and APP_ENV is read at module load.
+            "env": ["APP_ENV", "NEXT_PUBLIC_*"],
+
+            //  Runtime credentials. The build must not read these, and none of them changes what is
+            //  produced, so they are passed through without invalidating the cache. They are listed
+            //  explicitly because Vercel sets them on the project and Turborepo otherwise strips
+            //  them, which would hide a genuine misconfiguration behind a warning.
+            "passThroughEnv": [
+                "OUTBOUND_ENABLED",
+                "DATABASE_URL",
+                "REDIS_URL",
+                "UPSTASH_REDIS_REST_URL",
+                "UPSTASH_REDIS_REST_TOKEN",
+                "QSTASH_URL",
+                "QSTASH_TOKEN",
+                "QSTASH_CURRENT_SIGNING_KEY",
+                "QSTASH_NEXT_SIGNING_KEY",
+                "OPENROUTER_API_KEY",
+                "SENDBLUE_API_KEY",
+                "SENDBLUE_API_SECRET",
+                "SENDBLUE_PHONE_NUMBER",
+                "SENDBLUE_SIGNING_SECRET",
+                "OPERATOR_PHONE_NUMBER",
+                "AUTH_SECRET",
+                "RESEND_API_KEY",
+                "AUTH_EMAIL_FROM",
+                "AUTUMN_SECRET_KEY",
+                "ZERNIO_API_KEY",
+                "ZERNIO_X_ACCOUNT_ID",
+                "CURSOR_API_KEY",
+                "GITHUB_TOKEN"
+            ]
         },
         "check:types": {
             "dependsOn": ["^build"]

@@ -1,0 +1,66 @@
+.section {
+    display: grid;
+    gap: var(--line);
+    padding-block: calc(var(--line) * 2);
+    border-top: 1px solid var(--rule);
+}
+
+.label {
+    color: var(--fg-muted);
+    letter-spacing: 0.08em;
+}
+
+.body {
+    display: grid;
+    gap: var(--line);
+    max-width: var(--measure);
+}
+
+.prose {
+    text-wrap: pretty;
+}
+
+.pairs {
+    display: grid;
+    gap: var(--line);
+}
+
+.pair {
+    display: grid;
+    gap: 0;
+}
+
+.term::before {
+    content: "> ";
+    color: var(--fg-muted);
+}
+
+.description {
+    color: var(--fg-muted);
+    text-wrap: pretty;
+}
+
+.list {
+    display: grid;
+    gap: 0;
+}
+
+.item {
+    display: grid;
+    grid-template-columns: 2ch 1fr;
+}
+
+.bullet {
+    color: var(--fg-muted);
+}
+
+/*
+    On a phone the two-column pair would wrap badly at this measure, so pairs stay stacked at every
+    width. The grid only widens the reading measure, never the structure.
+*/
+@media (min-width: 48rem) {
+    .pair {
+        grid-template-columns: 22ch 1fr;
+        gap: 0 2ch;
+    }
+}

@@ -130,30 +130,120 @@ const nodes = defineNodes([
         parent: "web",
         title: "Application shell",
         description:
-            "Next.js configuration, the root layout, placeholder styling, and a holding page. The visual system is deliberately not decided here; this exists so the application is deployable.",
+            "Next.js configuration and the root layout, including the typeface declaration and the theme colour. Next's own agent-instruction generation is disabled here, because a nested instruction file would sit below the operating contract and dilute it.",
         sources: [
             "apps/web/package.json",
             "apps/web/tsconfig.json",
             "apps/web/next.config.ts",
-            "apps/web/src/app/layout.tsx",
-            "apps/web/src/app/globals.css",
-            "apps/web/src/app/page.tsx"
+            "apps/web/src/app/layout.tsx"
         ],
-        status: "in-progress",
+        status: "done",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: false, security: true },
-            ui: { brandPalette: false, radiusRule: false, responsive: true },
+            remarks: ["Indexing stays disabled until the owner approves the copy."]
+        }
+    },
+    {
+        id: "web-visual-system",
+        parent: "web",
+        title: "Visual system",
+        description:
+            "Berkeley Mono on a strict baseline grid, with one neutral ramp resolved through light-dark so both themes come from a single palette, and a single accent used only for selection and focus. Every vertical measurement is a multiple of one line.",
+        sources: ["apps/web/src/app/globals.css", "apps/web/public/fonts/**"],
+        status: "in-progress",
+        data: {
+            quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" },
+            ui: { brandPalette: true, radiusRule: true, responsive: true },
             todos: [
                 {
-                    text: "Replace the holding page once the landing page is designed.",
-                    priority: 3
+                    text: "Decide whether PX Grotesk joins as a second face once the licence is bought.",
+                    priority: 4
                 },
                 {
-                    text: "Adopt the brand palette and radius rule once the visual system is decided.",
+                    text: "Confirm the accent hue; currently a warm neutral used only for selection.",
                     priority: 3
                 }
             ],
-            remarks: ["Indexing is disabled until there is something worth indexing."]
+            remarks: [
+                "Radius is zero everywhere, which is the brutalist default until something argues otherwise.",
+                "The blinking block cursor is the only motion on the page, and it respects reduced-motion."
+            ]
+        }
+    },
+    {
+        id: "web-site-copy",
+        parent: "web",
+        title: "Site copy and offer facts",
+        description:
+            "Every word on the public site, plus the commercial facts it derives from, in one module. Price and date are stated once and rendered everywhere from that value, so the drift that put three different prices in the previous project cannot happen here.",
+        sources: ["apps/web/src/site/content.ts"],
+        status: "in-progress",
+        data: {
+            quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" },
+            controls: ["offer.deposit", "offer.total", "offer.launchDate"],
+            todos: [
+                { text: "Owner approval of every line before indexing is enabled.", priority: 1 },
+                {
+                    text: "Move the offer facts into the settings store so they change without a deploy.",
+                    priority: 3
+                }
+            ],
+            remarks: [
+                "Already shaped as data rather than markup, so moving it to a store is a swap rather than a rewrite."
+            ]
+        }
+    },
+    {
+        id: "web-site-primitives",
+        parent: "web",
+        title: "Site primitives",
+        description:
+            "The four shapes the page is built from: a labelled section, prose, a list, and a two-column pair. Constraining the vocabulary keeps the layout on the baseline grid and lets copy stay editable as data.",
+        sources: ["apps/web/src/site/primitives.tsx", "apps/web/src/site/primitives.module.css"],
+        relations: [{ type: "uses", to: "web-visual-system" }],
+        status: "done",
+        data: {
+            quality: { logging: "n/a", errorHandling: "n/a", tests: false, security: "n/a" },
+            ui: { brandPalette: true, radiusRule: true, responsive: true }
+        }
+    },
+    {
+        id: "web-landing-page",
+        parent: "web",
+        title: "Landing page",
+        description:
+            "The public page. It states the offer plainly and moves the reader into a text thread, which is where the sale happens. If the contact number is not configured the call to action renders disabled rather than as a link to nowhere.",
+        sources: [
+            "apps/web/src/app/page.tsx",
+            "apps/web/src/site/landing.tsx",
+            "apps/web/src/site/landing.module.css"
+        ],
+        relations: [
+            { type: "composes", to: "web-site-primitives" },
+            { type: "uses", to: "web-site-copy" },
+            { type: "uses", to: "platform-configuration" }
+        ],
+        status: "in-progress",
+        data: {
+            quality: { logging: true, errorHandling: true, tests: false, security: true },
+            ui: { brandPalette: true, radiusRule: true, responsive: true },
+            todos: [
+                {
+                    text: "Copy review and approval with the owner, then enable indexing.",
+                    priority: 1
+                },
+                {
+                    text: "Add the proof section once the staged conversation assets exist.",
+                    priority: 2
+                },
+                {
+                    text: "Add a frequently-asked-questions section built from real objections.",
+                    priority: 3
+                }
+            ],
+            remarks: [
+                "Statically generated, so the contact number is read at build time and changing it needs a redeploy."
+            ]
         }
     },
     {
