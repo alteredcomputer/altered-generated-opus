@@ -156,17 +156,25 @@ const nodes = defineNodes([
             ui: { brandPalette: true, radiusRule: true, responsive: true },
             todos: [
                 {
-                    text: "Decide whether PX Grotesk joins as a second face once the licence is bought.",
-                    priority: 4
+                    text: "Confirm dark-first against the current system-preference behaviour. His notes specify a dark grey background; the page currently follows the reader's setting.",
+                    priority: 2
                 },
                 {
-                    text: "Confirm the accent hue; currently a warm neutral used only for selection.",
+                    text: "Confirm the border radius rule. Zero was an agent assumption, not a stated preference.",
+                    priority: 2
+                },
+                {
+                    text: "Confirm the accent. Currently a warm amber, which lands on 'human' in his semantic colour map, but chosen by taste rather than from it.",
+                    priority: 3
+                },
+                {
+                    text: "Consider an ASCII, dither, or CRT treatment for the hero. Among his most repeated visual requests, and entirely absent so far.",
                     priority: 3
                 }
             ],
             remarks: [
-                "Radius is zero everywhere, which is the brutalist default until something argues otherwise.",
-                "The blinking block cursor is the only motion on the page, and it respects reduced-motion."
+                "The blinking block cursor is the only motion on the page, and it respects reduced-motion.",
+                "Grounded in knowledge/design-reference.md, which ranks his stated preferences and lists where this implementation currently conflicts with them."
             ]
         }
     },
