@@ -105,6 +105,16 @@ const operator = Config.all({
     phoneNumber: Config.nonEmptyString(ENV.operatorPhoneNumber)
 })
 
+/**
+ * @remarks
+ * The public number, on its own. The site's call to action needs it without needing the messaging
+ * credentials, and it is read as an option so a missing value renders an honest page rather than a
+ * broken link.
+ */
+const contact = Config.all({
+    phoneNumber: Config.option(Config.nonEmptyString(ENV.sendbluePhoneNumber))
+})
+
 const auth = Config.all({
     secret: secret(ENV.authSecret),
     resendApiKey: secret(ENV.resendApiKey),
@@ -122,6 +132,7 @@ const publishing = Config.all({
 
 const config = {
     runtime,
+    contact,
     database,
     redis,
     queue,

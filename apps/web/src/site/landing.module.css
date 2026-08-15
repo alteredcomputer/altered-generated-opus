@@ -1,0 +1,89 @@
+.page {
+    max-width: 80ch;
+    margin: 0 auto;
+    padding: calc(var(--line) * 2) 1.5rem calc(var(--line) * 4);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.5ch;
+    letter-spacing: 0.12em;
+}
+
+.hero {
+    display: grid;
+    gap: var(--line);
+    max-width: var(--measure);
+    padding-block: calc(var(--line) * 3) calc(var(--line) * 2);
+}
+
+.headline {
+    font-size: 1.5rem;
+    line-height: calc(var(--line) * 1.5);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+}
+
+.subhead {
+    color: var(--fg-muted);
+    text-wrap: pretty;
+}
+
+.callToActionGroup {
+    display: grid;
+    gap: calc(var(--line) / 2);
+    justify-items: start;
+    padding-block-start: calc(var(--line) / 2);
+}
+
+.callToAction {
+    display: inline-block;
+    padding: calc(var(--line) / 2 - 1px) 2ch;
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+    letter-spacing: 0.04em;
+}
+
+.callToAction:hover {
+    background: transparent;
+    color: var(--fg);
+}
+
+.callToActionNote {
+    color: var(--fg-muted);
+}
+
+.callToActionUnavailable {
+    display: inline-block;
+    padding: calc(var(--line) / 2 - 1px) 2ch;
+    border: 1px dashed var(--rule);
+    color: var(--fg-muted);
+}
+
+.footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 2ch;
+    flex-wrap: wrap;
+    padding-block-start: calc(var(--line) * 2);
+    border-top: 1px solid var(--rule);
+    color: var(--fg-muted);
+}
+
+/*
+    The headline is the only element that changes size across breakpoints. Everything else is
+    already sized in characters and lines, so it scales without a second set of rules.
+*/
+@media (min-width: 48rem) {
+    .page {
+        padding-inline: 2.5rem;
+    }
+
+    .headline {
+        font-size: 1.875rem;
+        line-height: calc(var(--line) * 2);
+    }
+}
