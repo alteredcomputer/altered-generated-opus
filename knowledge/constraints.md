@@ -3,6 +3,10 @@
 The authoritative list of what an agent is allowed to touch. Default is deny. Nothing is added here
 without the owner approving it explicitly in the Cursor chat, with the date recorded.
 
+**Org rename, 2026-08-27:** the GitHub org `usealtered` is now `alteredcomputer`. Every
+`usealtered/...` reference in this file and in older decisions refers to the same repos under the
+new org; GitHub redirects the old paths. This repo is `alteredcomputer/altered-generated-opus`.
+
 ## Approved operations
 
 | Scope | Operation | Approved | Date |
