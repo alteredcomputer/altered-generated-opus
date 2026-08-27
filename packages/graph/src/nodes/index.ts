@@ -36,7 +36,7 @@ const nodes = defineNodes([
         parent: "governance",
         title: "Knowledge base",
         description:
-            "The durable memory of the project: locked decisions with their reasoning, the open-question register, guardrails and resource inventory, prior-art failures to avoid, and the resume file. Written so a restarted session loses nothing.",
+            "The durable memory of the project: locked decisions with their reasoning, the open-question register, the owner's compass and macro plan, the direction record, guardrails and resource inventory, prior-art failures to avoid, and the resume file. Written so a restarted session loses nothing.",
         sources: ["knowledge/*.md", "README.md"],
         status: "done",
         data: {
@@ -46,6 +46,17 @@ const nodes = defineNodes([
                 description: "Decisions, constraints, open questions, prior art, and current state."
             }
         }
+    },
+    {
+        id: "governance-source-archive",
+        parent: "governance",
+        title: "Source archive",
+        description:
+            "Verbatim records of the conversations the knowledge base distils from, preserved unaltered so no derivation loses its evidence. Content rules that apply to authored copy deliberately do not apply here.",
+        sources: ["knowledge/sources/**"],
+        relations: [{ type: "uses", to: "governance-knowledge-base" }],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true } }
     },
 
     //  === Platform ===
