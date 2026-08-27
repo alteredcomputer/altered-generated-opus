@@ -175,6 +175,121 @@ than the visual, and an effect built around copy that then changes is wasted wor
 
 ---
 
+## Round 5 - path anchoring and outreach (asked 2026-08-27)
+
+Asked in chat after the direction record was saved. Q41 to Q48. Background for all of them:
+`knowledge/direction-record.md` and `knowledge/compass.md`.
+
+### Q41 - the demand test
+
+The prior chat's final ruling was a demand test: one article, one honest reservation offer, fifty
+named ICP humans DMed as conversations, with pre-committed pass thresholds (10 real replies, 5
+problem conversations, 3 booked calls or 1 unprompted "how do I pay"). It was never explicitly
+confirmed, and its Sept 8 end date has nearly arrived unstarted.
+
+- a) Adopt it with re-anchored dates: outreach live within a week, test ends Sept 12.
+- b) Adopt it exactly as written, ending Sept 8, accepting the compressed window.
+- c) Skip the test; ALTERED is locked by D062 regardless, so spend the time building instead.
+
+**Recommendation:** a. The test is the only instrument that answers the one question every flip
+pivoted on - whether the ICP is reachable at current audience size - and D062 makes ALTERED the
+path either way, so the test now measures reach, not direction.
+
+### Q42 - the founding tier
+
+D021 locks Layer 1 at $100/$499. The owner has repeatedly gravitated to a higher tier: a $1,000
+deposit toward a program anchored near $12,500, one to three clients a month at $4,000-8,000
+total, with unscalable founder access as the premium (the Hormozi single-client logic).
+
+- a) Add a founding tier above Layer 1: 3-8 seats, $1,000 deposit, total priced only after five
+  real ICP conversations, anchored at $12,500 only if that is the genuine future price. Layer 1
+  stays unchanged underneath.
+- b) Replace Layer 1 with the high-ticket program entirely.
+- c) Stay $499-only for now.
+
+**Recommendation:** a. Three closes at $1,000 is closable by hand where thirty at $100 is not, it
+adds no product promise beyond D040, and the premium is access, which is deliverable now.
+
+### Q43 - the first-seat special
+
+If the first buyer doubles as the proof asset, the discount is the price of a written testimonial
+plus case-study rights.
+
+- a) One named seat, steeply discounted or free, testimonial and case-study rights agreed in
+  writing before delivery starts.
+- b) No special; first buyer pays the same as everyone.
+- c) A friend (for example Tino) gets it free as a delivery test and case study, explicitly not
+  counted as demand validation.
+
+**Recommendation:** a, with c allowed in parallel as a delivery rehearsal - a friend proves
+fulfilment, never price.
+
+### Q44 - the X profile tagline for alteredcomputer
+
+Needed now for the profile. Candidates drawn from locked narrative only:
+
+- a) "Never lose your best thinking again." (the product narrative, D052)
+- b) "You already know what to build. You keep un-deciding it." (the draft headline, Q31)
+- c) "Human truth, preserved. Machines on top, never underneath." (the ethos, D052)
+- d) "Thought to action. Distilling complexity, systematically." (his own fragment, direction
+  record)
+
+**Recommendation:** a for the brand account bio - it is the benefit statement and already locked
+as narrative. b stays the landing headline candidate; c is manifesto material.
+
+### Q45 - the source-of-truth surface
+
+Where the locked truth lives so it is usable from a phone.
+
+- a) A typed TypeScript constants package in this repo with pnpm scripts to query and render it,
+  as ruled in the prior chat; a read-only web view later once it is in daily use.
+- b) A generated shadcn PWA dashboard now.
+- c) Both now.
+
+**Recommendation:** a. The PWA is the tenets-renderer trap until the data is in daily use;
+constants are versioned, typed, phone-readable through Cursor, and zero infrastructure.
+
+### Q46 - the outreach bench scope
+
+The DM pipeline the owner described: niche in, reasoned lead list out; per-profile personalized
+drafts against locked intent and tonality; Clack approve/decline; then send.
+
+- a) Build sourcing, drafting, and review now; sending stays fully manual - the human pastes each
+  approved message into X by hand.
+- b) Build the full pipeline including automated sending behind a kill switch.
+- c) No tooling yet; do the first fifty by hand and build from what that teaches.
+
+**Recommendation:** a. Automated DM sending on X is both an external write (default deny, D003)
+and a real account-suspension risk on a brand-new profile; the expensive part of the work is
+sourcing and drafting quality, which tooling accelerates safely. Revisit b after the first fifty.
+
+### Q47 - which account does the outreach
+
+Q30 (the posting account) is still unanswered, and DMs need a sender identity now.
+
+- a) The owner's personal account: warm, human, highest reply odds for conversation-openers.
+- b) The alteredcomputer brand account.
+- c) A new person-extended alt per Q30's recommendation.
+
+**Recommendation:** a for the fifty test DMs - the narrative is first person and reply rate is the
+whole experiment. The Q30 alt remains the volume-posting answer.
+
+### Q48 - the generation batch
+
+Nothing generates without explicit approval. Proposed batch, each part small and hand-reviewable:
+the truth constants package (Q45a), the outreach bench (Q46a), and the article scaffold on the
+existing landing stack. Proposed model: the strongest available thinking model, one agent per
+part, sequenced rather than parallel so each lands reviewed.
+
+- a) Approve the batch as proposed.
+- b) Approve a subset (name which).
+- c) Hold; nothing generates yet.
+
+**Recommendation:** a, sequenced: constants package first (everything else reads from it), then
+the outreach bench, then the article scaffold.
+
+---
+
 ## Planned later rounds
 
 - **Round 5 - copy and design detail.** Section-by-section copy review, the Layer 1 explainer, proof

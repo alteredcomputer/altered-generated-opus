@@ -600,3 +600,38 @@ a new subdomain on a new top-level domain has no reputation, so it gets inspecte
 **Options, none urgent:** submit the domain for categorisation with the major URL-filtering vendors,
 which requires the owner's approval since it is an outbound write; or move to the apex under D055,
 which will accumulate reputation faster. Affects only networks that inspect TLS.
+
+---
+
+## Path and memory (2026-08-27)
+
+Stated by the owner after the ten-day path deliberation of 2026-08-16 to 2026-08-24, which is
+archived verbatim in `knowledge/sources/chats/` and distilled in `knowledge/direction-record.md`.
+
+### D062 - ALTERED is the main path; the SMS B2B company is stalled
+
+**Verdict:** The owner's words, 2026-08-27: "now that we're pretty certain ALTERED is the main
+path" and "assume the SMS B2B plan is stalled inside this one." The missed-call SMS company is not
+being built. Its full design survives in the direction record as a named fallback only.
+
+**Why (from the record, not from mood):** across ten flips, every off-lane money plan died within
+roughly thirty hours of commitment, while ALTERED remained the attractor in every energy state.
+Execution probability is part of the arithmetic, and only one path has it.
+
+**Re-open cost:** High, and gated. Re-opening requires the challenge protocol in the direction
+record: quote the specific recorded reason being overturned and defeat it. Failed challenges are
+logged and counted.
+
+### D063 - Direction-level memory is preserved at the source
+
+**Verdict:** Strategy conversations that shape the path are archived verbatim under
+`knowledge/sources/` and distilled into the knowledge base in the same turn. Any session doing
+direction-level work reads `direction-record.md` and `compass.md` before proposing or accepting a
+path change.
+
+**Why:** the Aug 16-24 chat wrote nothing to the repo by design, then errored. Roughly 300K tokens
+of deliberation, including the complete SMS design and the demand-test ruling, survived only
+because the conversation was still retrievable over the API. That near-loss does not get a second
+chance.
+
+**Re-open cost:** Low.
