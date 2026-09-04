@@ -10,6 +10,8 @@ touch git, pull requests, or code. Assume you are a fresh agent with no memory o
 3. `knowledge/open-questions.md` - what is unresolved. Never guess past an open question.
 4. `knowledge/feature-graph.md` - the contract you build against and update every turn.
 5. `knowledge/prior-art.md` - failure patterns from the previous attempt. Do not repeat them.
+6. `knowledge/plans/README.md` - the execution plans, their order and status, and the protocol
+ for picking one up when the owner says "next" or "finish".
 
 ## The hard wall
 
