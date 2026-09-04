@@ -75,7 +75,10 @@ Berkeley Mono Variable: 644 glyphs, fixed pitch, all advances 600 per 1000 units
 
 Registry as of 2026-08-15: `effect` rc 4.0.0-rc.109, `ai` 7.0.63, `next` 16.3.0, `drizzle-orm` rc
 1.0.0-rc.4, `@biomejs/biome` 2.5.8, `turbo` 2.10.10. TypeScript pinned at 5.9.3 though 7.0.2 exists.
-Re-verify before pinning anything new.
+
+Registry as of 2026-09-04, for the plans: `drizzle-orm` 0.45.2 (latest stable; the 1.0 line is
+still a release candidate), `drizzle-kit` 0.31.10, `@neondatabase/serverless` 1.1.0, `better-auth`
+1.7.2, `ai` 7.0.92, `@openrouter/ai-sdk-provider` 3.0.0, `vitest` 5.0.0. Re-verify before pinning.
 
 Effect v4 API notes, verified against the installed source: services live in `Context` via
 `Context.Service<Self, Shape>()("Key")`. `Config.literals` takes the array first, the name second.
