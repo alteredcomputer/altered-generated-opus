@@ -9,23 +9,138 @@ move to `decisions.md` and are removed from here.
 
 ---
 
-## Rounds 1 to 3
+## Rounds 1 to 3 and 5
 
 **Answered.** Round 1 on 2026-08-12 (D015 to D039), round 2 on 2026-08-14 (D040 to D051), round 3 on
-2026-08-15 (D052 to D061).
+2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077).
 
 ---
 
-## Round 4 - finishing the offer, then volume (asked 2026-08-15)
+## Round 6 - the offer, re-anchored (asked 2026-09-04)
 
-Q30 to Q36 cover the offer and go-to-market. Q37 to Q40 are design questions raised by the notes
-research, and three of them correct assumptions an agent made rather than decisions he stated. See
-`design-reference.md` for the evidence behind each.
+Round 5 moved Layer 1 to a founding program anchored at $12,500 with a $1,000 deposit (D065) and
+ruled that nothing depends on hand-written code before the first sale (D072). These questions
+finish the offer so the page, the sales script, and payments can be built without guessing.
+Background: `decisions.md` Round 5 and the source archive for 2026-09-04.
+
+### Q49 - what the $12,500 buys
+
+The premium over the product is founder access. Its shape decides the workload and the copy.
+
+- a) Weekly working session: one sixty-minute session a week for the six months, plus the
+  product, plus permanent influence over the platform's direction. Three to eight seats.
+- b) The daily-touch model he described: thirty minutes a day with one or two clients only,
+  priced above the anchor to reflect it. Everyone else waits for a later layer.
+- c) Done-with-you truth setup: a kickoff week where he installs their source of truth with
+  them (the method friends already ask him for), then a weekly session, then migration onto
+  ALTERED when it is stable.
+
+**Recommendation:** c. It is deliverable the week it is bought with nothing hand-coded, it is the
+thing people are already asking him for, and it is literally the on-ramp to the product. Option b
+is the highest-value version and should be held as the single premium seat if a buyer appears who
+wants it.
+
+### Q50 - what arrives at deposit, before the product exists
+
+D017 promised Discord and bonuses at deposit; the program itself started on launch day. With a
+service inside the offer, the service can start immediately.
+
+- a) The service starts the week of the deposit; the product arrives when it arrives. The deposit
+  buys the seat and the first session.
+- b) Deposit buys the seat only; everything, including the service, waits for the launch date.
+- c) A generated Koa demonstration (memory over iMessage, generated in this repo and disclosed)
+  is delivered at deposit as a taste, alongside the service start.
+
+**Recommendation:** a. Starting the service immediately is what makes a $1,000 deposit feel like a
+purchase rather than a pledge, and it produces the proof assets D022 needs. Option c is worth
+doing as a sales asset regardless, but not as a delivery promise.
+
+### Q51 - how wide the buyer is
+
+D018 locks detail-obsessed technical founders. The Sept 4 message describes a different person in
+detail: solo, hyper-committed, restarting repeatedly, willing to be homeless for the idea, and
+non-technical. "The solo scale system."
+
+- a) Keep D018 as the buyer. The friend is the story we tell, not the person we sell to.
+- b) Widen to solo hyper-committed builders, technical or not, who have a direction and cannot
+  hold it. Disqualification list unchanged.
+- c) Two segments with two pages.
+
+**Recommendation:** b. The pain is identical and the disqualification list already excludes the
+people we cannot help. The budget rule does the rest: someone who can pay $1,000 to reserve a
+$12,500 program is qualified by that act. One page, one voice.
+
+### Q52 - the launch date and the promise under the golden rule
+
+D040 promises memory, self-scheduled reach-outs, voice notes, and notes import on 2026-11-05,
+hand-written by the owner. D072 says hand-writing starts only after sales.
+
+- a) Keep Nov 5. The clock starts on the first deposit; if fewer than three seats are sold by
+  Oct 1, the date moves and buyers are told before they are asked for anything more.
+- b) Replace the fixed date with a relative one: the mechanism core ships within ninety days of
+  the third seat closing.
+- c) Drop the product date from the offer entirely. The service is the promise; the product is
+  the bonus when it lands.
+
+**Recommendation:** b. It keeps a real, checkable promise on the page, and it makes the promise
+depend on the thing that funds it, which is the honest framing D015 already uses.
+
+### Q53 - paying for X API reads
+
+Follower and following lookups are pay-per-use at $0.01 per user returned, and only the owner can
+open the developer account and buy credits. Fifty validated leads from a few thousand scanned
+profiles costs tens of dollars.
+
+- a) Buy credits now (suggest $50) and let the bench source automatically.
+- b) No API. The bench takes a pasted list of handles he collects by scrolling, and does the
+  validation and drafting from there.
+- c) Both: paste-in works from day one, API sourcing lands when credits exist.
+
+**Recommendation:** c. Paste-in means outreach starts tomorrow with no purchase; the API path is
+built behind it and switches on when the key arrives.
+
+### Q54 - the room
+
+D017 gave buyers Discord access at deposit. With three to eight seats and a service inside, a
+Discord server may be the wrong room.
+
+- a) Discord, one channel, as decided.
+- b) A group iMessage or a small group chat on the platform they already use, plus the direct
+  thread with Koa.
+- c) No shared room; direct threads only until there are three buyers.
+
+**Recommendation:** c, then b. An empty server signals a dead cohort; three people in a direct
+thread with him signals exactly what is being sold.
+
+### Q55 - funnel stage definitions (carried from Round 4, needed for the schema)
+
+The outreach bench and the sales desk both write funnel events, so these become the numbers.
+
+- Lead: anyone who sends a first inbound message that is not the owner or an operator, or who
+  replies to an outreach message.
+- Qualified: confirmed to be building something real with a direction, and not disqualified.
+- Committed: has said they will pay the deposit and named a date.
+- Reserved: deposit paid.
+- Lost: explicit no, or no reply after the follow-up sequence completes.
+
+**Recommendation:** adopt as written. Every stage transition is stored as an append-only event with
+a timestamp and a reason, so the funnel can be recomputed when definitions change. "Committed" is
+new; it is the Sept 8 minimum in D064 and has to be countable.
+
+---
+
+## Round 4 - still open, lower priority (asked 2026-08-15)
+
+Q30 to Q34 and Q36 to Q40 stay open. None of them blocks the plans in `knowledge/plans/`. The
+copy questions (Q31, Q32, Q33, Q34) are re-asked in copy review once Round 6 fixes the offer,
+because the page is being rewritten around it. The design questions (Q37 to Q40) wait for copy.
+Q35 has been folded into Q55 above.
 
 ### Q30 - the posting account
 
 Under D053 marketing volume goes to a dedicated alternate account. Two things are undecided: the
-handle, and which platforms it runs on first.
+handle, and which platforms it runs on first. D070 answers the DM sender (personal, for now); this
+question is about volume posting.
 
 - a) A person-extended handle, in the spirit of `@morehormozi`: the owner's voice, obviously his,
   clearly the overflow channel.
@@ -63,7 +178,8 @@ word sets an expectation, and we have to honour it.
 - c) Different wording that does not imply screening, for example "Text to reserve".
 
 **Recommendation:** a. We already wrote a disqualification list into the offer, so screening is real.
-Being able to say no is what makes the seat feel scarce, and it protects the refund rate.
+Being able to say no is what makes the seat feel scarce, and it protects the refund rate. With
+three to eight seats it is more true, not less.
 
 ### Q33 - the first proof assets
 
@@ -77,7 +193,7 @@ of Koa. Which scenarios get built first, in order?
 
 **Recommendation:** d, then a. The clarity session is the outcome the offer actually promises, and
 it is the one this whole project is a live example of. The alignment save is the most emotionally
-recognisable second.
+recognisable second, and the ten-flip loop in the direction record is its script.
 
 ### Q34 - content pillars and cadence
 
@@ -94,32 +210,9 @@ Cadence: daily, five a week, or three a week.
 opportunistically. Five a week. Pain posts attract the buyer, build-in-public posts are the proof,
 and the ethos posts are what make people follow rather than just read.
 
-### Q35 - funnel stage definitions
-
-Under D058 our database is the source of truth, constructed so internal traffic cannot contaminate
-it. I need the definitions locked before writing the schema, because these become the numbers we
-optimise against.
-
-- Lead: anyone who sends a first inbound message that is not the owner or an operator.
-- Qualified: confirmed to be a technical founder actively building, and not disqualified.
-- Reserved: deposit paid.
-- Lost: explicit no, or no reply after the follow-up sequence completes.
-
-**Recommendation:** adopt as written, with one addition: every stage transition is stored as an
-append-only event with a timestamp and a reason, so the funnel can be recomputed later when the
-definitions change, rather than being lost.
-
 ### Q36 - Discord
 
-Buyers get Discord access immediately on deposit (D017), so it has to exist before the first sale.
-
-- a) Set it up now, minimal: one channel for the cohort, one for build updates.
-- b) Set it up now, structured: several channels by topic.
-- c) Wait until the first deposit.
-
-**Recommendation:** a. An empty structured server signals a dead community; two channels with the
-builder actually in them signals a small one, which is the truth and is attractive at this stage.
-Creating it is the owner's action, since it is an external resource.
+Superseded by Q54 above.
 
 ### Q37 - dark first, or follow the reader's setting
 
@@ -175,135 +268,28 @@ than the visual, and an effect built around copy that then changes is wasted wor
 
 ---
 
-## Round 5 - path anchoring and outreach (asked 2026-08-27)
-
-Asked in chat after the direction record was saved. Q41 to Q48. Background for all of them:
-`knowledge/direction-record.md` and `knowledge/compass.md`.
-
-### Q41 - the demand test
-
-The prior chat's final ruling was a demand test: one article, one honest reservation offer, fifty
-named ICP humans DMed as conversations, with pre-committed pass thresholds (10 real replies, 5
-problem conversations, 3 booked calls or 1 unprompted "how do I pay"). It was never explicitly
-confirmed, and its Sept 8 end date has nearly arrived unstarted.
-
-- a) Adopt it with re-anchored dates: outreach live within a week, test ends Sept 12.
-- b) Adopt it exactly as written, ending Sept 8, accepting the compressed window.
-- c) Skip the test; ALTERED is locked by D062 regardless, so spend the time building instead.
-
-**Recommendation:** a. The test is the only instrument that answers the one question every flip
-pivoted on - whether the ICP is reachable at current audience size - and D062 makes ALTERED the
-path either way, so the test now measures reach, not direction.
-
-### Q42 - the founding tier
-
-D021 locks Layer 1 at $100/$499. The owner has repeatedly gravitated to a higher tier: a $1,000
-deposit toward a program anchored near $12,500, one to three clients a month at $4,000-8,000
-total, with unscalable founder access as the premium (the Hormozi single-client logic).
-
-- a) Add a founding tier above Layer 1: 3-8 seats, $1,000 deposit, total priced only after five
-  real ICP conversations, anchored at $12,500 only if that is the genuine future price. Layer 1
-  stays unchanged underneath.
-- b) Replace Layer 1 with the high-ticket program entirely.
-- c) Stay $499-only for now.
-
-**Recommendation:** a. Three closes at $1,000 is closable by hand where thirty at $100 is not, it
-adds no product promise beyond D040, and the premium is access, which is deliverable now.
-
-### Q43 - the first-seat special
-
-If the first buyer doubles as the proof asset, the discount is the price of a written testimonial
-plus case-study rights.
-
-- a) One named seat, steeply discounted or free, testimonial and case-study rights agreed in
-  writing before delivery starts.
-- b) No special; first buyer pays the same as everyone.
-- c) A friend (for example Tino) gets it free as a delivery test and case study, explicitly not
-  counted as demand validation.
-
-**Recommendation:** a, with c allowed in parallel as a delivery rehearsal - a friend proves
-fulfilment, never price.
-
-### Q44 - the X profile tagline for alteredcomputer
-
-Needed now for the profile. Candidates drawn from locked narrative only:
-
-- a) "Never lose your best thinking again." (the product narrative, D052)
-- b) "You already know what to build. You keep un-deciding it." (the draft headline, Q31)
-- c) "Human truth, preserved. Machines on top, never underneath." (the ethos, D052)
-- d) "Thought to action. Distilling complexity, systematically." (his own fragment, direction
-  record)
-
-**Recommendation:** a for the brand account bio - it is the benefit statement and already locked
-as narrative. b stays the landing headline candidate; c is manifesto material.
-
-### Q45 - the source-of-truth surface
-
-Where the locked truth lives so it is usable from a phone.
-
-- a) A typed TypeScript constants package in this repo with pnpm scripts to query and render it,
-  as ruled in the prior chat; a read-only web view later once it is in daily use.
-- b) A generated shadcn PWA dashboard now.
-- c) Both now.
-
-**Recommendation:** a. The PWA is the tenets-renderer trap until the data is in daily use;
-constants are versioned, typed, phone-readable through Cursor, and zero infrastructure.
-
-### Q46 - the outreach bench scope
-
-The DM pipeline the owner described: niche in, reasoned lead list out; per-profile personalized
-drafts against locked intent and tonality; Clack approve/decline; then send.
-
-- a) Build sourcing, drafting, and review now; sending stays fully manual - the human pastes each
-  approved message into X by hand.
-- b) Build the full pipeline including automated sending behind a kill switch.
-- c) No tooling yet; do the first fifty by hand and build from what that teaches.
-
-**Recommendation:** a. Automated DM sending on X is both an external write (default deny, D003)
-and a real account-suspension risk on a brand-new profile; the expensive part of the work is
-sourcing and drafting quality, which tooling accelerates safely. Revisit b after the first fifty.
-
-### Q47 - which account does the outreach
-
-Q30 (the posting account) is still unanswered, and DMs need a sender identity now.
-
-- a) The owner's personal account: warm, human, highest reply odds for conversation-openers.
-- b) The alteredcomputer brand account.
-- c) A new person-extended alt per Q30's recommendation.
-
-**Recommendation:** a for the fifty test DMs - the narrative is first person and reply rate is the
-whole experiment. The Q30 alt remains the volume-posting answer.
-
-### Q48 - the generation batch
-
-Nothing generates without explicit approval. Proposed batch, each part small and hand-reviewable:
-the truth constants package (Q45a), the outreach bench (Q46a), and the article scaffold on the
-existing landing stack. Proposed model: the strongest available thinking model, one agent per
-part, sequenced rather than parallel so each lands reviewed.
-
-- a) Approve the batch as proposed.
-- b) Approve a subset (name which).
-- c) Hold; nothing generates yet.
-
-**Recommendation:** a, sequenced: constants package first (everything else reads from it), then
-the outreach bench, then the article scaffold.
-
----
-
 ## Planned later rounds
 
-- **Round 5 - copy and design detail.** Section-by-section copy review, the Layer 1 explainer, proof
-  placement, the frequently-asked-questions set built from real objections, and the accent colour.
-- **Round 6 - sales conversation.** The qualification script, objection handling, escalation
-  triggers, follow-up cadence and timing.
+- **Round 7 - copy and design detail.** Section-by-section copy review of the rewritten page, the
+  Layer 1 explainer, the Koa pressure-pivot sub-statement, proof placement, the
+  frequently-asked-questions set built from real objections, and Q37 to Q40.
+- **Round 8 - sales conversation.** The qualification script, objection handling, escalation
+  triggers, follow-up cadence and timing, and the DM opener tonality for the bench.
 
 ---
 
 ## Waiting on the owner
 
-- **Resend credentials**, for dashboard login email.
-- **Autumn credentials**, for payments.
-- **Zernio credentials**, for publishing.
-- **Final confirmation of the 2026-11-05 launch date**, once sales are consistent.
+Actions, not questions. Each unblocks a plan in `knowledge/plans/`.
+
+- **Resend credentials** in Vercel, for dashboard login codes. Blocks the operator dashboard
+  (plan 01), and therefore everything the dashboard hosts.
+- **A GitHub fine-grained token with contents write on this repo only**, in Vercel, so the truth
+  surface can commit edits. Blocks plan 03.
+- **X developer account and pay-per-use credits**, if Q53 lands on a or c. Blocks automatic
+  sourcing in plan 02; paste-in sourcing does not need it.
+- **Autumn credentials**, for the deposit checkout (plan 05). Until then, an interim payment link
+  he creates himself is the only way a deposit can be taken.
+- **Zernio credentials**, for publishing. Not on the Sept 8 path.
 - **Approval to submit the domain for categorisation** with URL-filtering vendors, if we want to
   address the TLS-inspection issue in D061. Outbound write, so it needs explicit approval.

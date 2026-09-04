@@ -1,0 +1,103 @@
+# Plan 05 - Money rails
+
+**Status:** waiting. **Blockers:** Round 6 (Q49, Q50) so the product being sold is defined;
+`AUTUMN_SECRET_KEY` in Vercel and an Autumn account configured by the owner. Until Autumn exists,
+the interim path below is the only way a deposit can be taken, and it needs the owner to create a
+payment link himself.
+
+**Depends on:** 04 for the stated offer; 01 for the dashboard view of reservations. **Unblocks:**
+the Sept 8 target (one deposit paid).
+
+## Outcome
+
+A stranger in the text thread is sent one link, pays the $1,000 deposit, and a `reserved` funnel
+event appears in our database within seconds, with the person tied to their prospect row when one
+exists. The owner sees it on the dashboard home and receives a one-line iMessage notification
+(when the notification path exists, plan 06). Refunds are recorded as events with the reason the
+buyer gave, per D023. Nothing charges anyone without the payments kill switch on and the operation
+recorded in `constraints.md`.
+
+## Locked inputs
+
+D021 superseded by D065: $1,000 deposit, $12,500 anchor; D023 refund through a process, window
+after launch and use; D039 revenue target; D041 Autumn over direct Stripe, because the program is
+built around a usage allowance and Autumn carries usage billing; D058 our own events are the
+financial truth; D003 payments are an external write, default deny; Q55 stage definitions.
+
+## Scope
+
+1. **Interim path (no code beyond a setting):** the owner creates a payment link himself in
+   whatever processor he can open today (Stripe payment link or an e-transfer instruction) and
+   records it in the settings store as `payments.interimLink`. The sales script sends that link.
+   Reservations are recorded by hand with `pnpm bench reserved <handle> --amount 100000 --ref
+   <receipt>` from plan 02's ledger. This exists so Sept 8 does not wait on an integration.
+2. **Autumn integration:** one product, `layer-1-deposit`, $1,000 one-time. Customer created per
+   buyer with our prospect id as the external id. Checkout URL generated server-side per buyer
+   (no shared link once Autumn is live, so the payment is tied to a person). Webhook at
+   `/api/webhooks/autumn` with signature verification and replay protection, writing `reserved`
+   with the payment reference. Absent signing secret means every request is rejected.
+3. **Balance and program billing:** out of scope until the first three seats are sold and Q49 has
+   fixed the program's contents. Record the intent: Autumn products for the balance and any usage
+   allowance, defined then.
+4. **Refund recording:** an operator action on the dashboard that records the buyer's stated
+   reason and feedback, then the refund issued through Autumn behind the payments kill switch. The
+   refund window rule (D023) is a setting, not a constant.
+5. **Dashboard view:** reservations list, total collected, refunds. Reads events only.
+
+## Not in scope
+
+Subscriptions, the $12,500 balance collection, invoices, tax handling (record the question for
+the owner's accountant), and anything that charges automatically.
+
+## Design
+
+- **Kill switches:** `OUTBOUND_ENABLED` and `outbound.payments` must both be true for checkout
+  creation and refunds. Webhook receipt is a read and is always on.
+- **Idempotency:** webhook events are stored by provider event id before processing; a duplicate
+  is acknowledged and ignored, logged as such.
+- **The financial truth is the events table**, not Autumn's dashboard. Reconciliation is a
+  query comparing our `reserved` events to Autumn's payments, run by hand when needed.
+- **Prospect linkage:** the checkout is created from the sales desk or the bench with the
+  prospect id, so a payment always resolves to a person and the funnel is complete from first DM
+  to money.
+
+## Steps
+
+1. Settings keys `payments.interimLink`, `outbound.payments`, `payments.refundWindowDays`; the
+   `bench reserved` command in plan 02's ledger if not already present. Commit.
+2. Autumn client behind a `Payments` service: create customer, create checkout, issue refund.
+   Typed errors. Tests with recorded fixtures. Commit.
+3. Webhook route with signature verification, replay store, and the `reserved` event write.
+   Tests: missing secret rejects, bad signature rejects, duplicate event id is ignored. Commit.
+4. Refund recording action and the reservations dashboard view. Commit.
+5. `.env.example`, `turbo.json`, `config.ts`, and `constraints.md` (record the approved
+   operation and the date when the owner approves it in chat). Commit.
+6. Reconcile the feature graph, security pass, `state.md`, merge.
+
+## Verification
+
+- With `outbound.payments` off, checkout creation returns a typed refusal and logs it; nothing
+  reaches Autumn.
+- A webhook with no signing secret configured is rejected with 503, not processed.
+- A replayed webhook produces exactly one `reserved` event.
+- The dashboard total matches a hand sum of the events.
+
+## Security pass specifics
+
+- Webhook: signature verified, replay considered, rejected outright when the key is absent.
+- No payment link or customer id in a log line at info level; ids only at debug, never secrets.
+- Refund action is behind `requireOperator()` and writes an audit row.
+- The interim link is a setting read by the operator only; it is never rendered on the public
+  page.
+
+## Feature graph nodes
+
+`payments` (root) with `payments-interim`, `payments-autumn-client`, `payments-webhook`,
+`payments-refunds`, `payments-view`. Controls: `payments.interimLink`, `outbound.payments`,
+`payments.refundWindowDays`.
+
+## Agent notes
+
+- 2026-09-04 (planning agent): the interim path is deliberately manual. A single deposit by Sept 8
+  is worth more than a finished integration by Sept 20, and the manual record keeps the funnel
+  truth in our table either way.

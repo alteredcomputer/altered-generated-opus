@@ -58,6 +58,23 @@ const nodes = defineNodes([
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true } }
     },
+    {
+        id: "governance-plans",
+        parent: "governance",
+        title: "Execution plans",
+        description:
+            "End-to-end plans, one per workstream, plus a master file carrying order and status. Written so a fresh agent can execute a plan from the file alone when the owner opens a chat and says next or finish. Executing agents append dated notes and update status in place.",
+        sources: ["knowledge/plans/**"],
+        relations: [{ type: "uses", to: "governance-knowledge-base" }],
+        status: "done",
+        data: {
+            quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true },
+            docs: {
+                title: "Plans",
+                description: "The protocol for picking up a plan, the order, and the daily KPI log."
+            }
+        }
+    },
 
     //  === Platform ===
 
@@ -449,6 +466,131 @@ const nodes = defineNodes([
                     priority: 3
                 },
                 { text: "Add todo filtering by domain and priority.", priority: 3 }
+            ]
+        }
+    },
+
+    //  === Planned workstreams ===
+    //
+    //  One root per plan in knowledge/plans. Each plan names the child nodes it will add when it
+    //  is executed; until then the root carries the contract so the graph and the plans agree.
+
+    {
+        id: "data-layer",
+        title: "Data layer",
+        description:
+            "Not built yet. Postgres through Drizzle with a typed database service, the settings store that holds every value a human might change, and an append-only audit log of operator actions. Plan 01.",
+        status: "planned",
+        data: {
+            controls: [
+                "outbound.imessage",
+                "outbound.payments",
+                "outbound.publishing",
+                "outbound.x"
+            ],
+            todos: [
+                {
+                    text: "Database service, first migration, settings and audit tables.",
+                    priority: 1
+                },
+                { text: "Tests for the empty-key and missing-setting cases.", priority: 1 }
+            ]
+        }
+    },
+    {
+        id: "dashboard",
+        title: "Operator dashboard",
+        description:
+            "Not built yet. The phone-first shell every operator surface renders in: email-code login restricted to an operator allowlist that admits nobody when empty, bottom navigation, a home screen of readiness, kill switches, and the day's KPIs, installable as a PWA. Plan 01.",
+        relations: [
+            { type: "uses", to: "data-layer" },
+            { type: "uses", to: "platform-readiness" }
+        ],
+        status: "planned",
+        data: {
+            todos: [
+                { text: "Better Auth with email OTP via Resend; allowlist tests.", priority: 1 },
+                { text: "Shell, home screen, PWA manifest, verified at 390px.", priority: 1 }
+            ]
+        }
+    },
+    {
+        id: "outreach",
+        title: "Outreach bench",
+        description:
+            "Not built yet. Sources candidate profiles from a pasted list, a seed account's graph, or a keyword search on X; scores each against a rubric with written reasoning; drafts one conversation opener per qualified profile; and records approvals, sends, and replies as funnel events so the daily KPI is a query. Sending is manual by decision. Plan 02.",
+        relations: [{ type: "uses", to: "data-layer" }],
+        status: "planned",
+        data: {
+            controls: [
+                "outreach.scoreThreshold",
+                "outreach.dailyBudgetCents",
+                "outreach.excludedHandles",
+                "ai.model.scoring",
+                "ai.model.drafting"
+            ],
+            todos: [
+                { text: "Tables, rubric and brief files, paste-mode sourcing.", priority: 1 },
+                { text: "X client with cost estimate and budget refusal.", priority: 1 },
+                {
+                    text: "Scoring and drafting with structured output and injection tests.",
+                    priority: 1
+                },
+                { text: "Non-interactive CLI for an agent to run from a chat.", priority: 1 },
+                { text: "Dashboard review screen once the shell exists.", priority: 2 }
+            ]
+        }
+    },
+    {
+        id: "truth",
+        title: "Truth surface",
+        description:
+            "Not built yet. Reads and edits the knowledge files from the phone through commits to this repository, so the owner and every agent read the same source. Section-level editing of decisions and questions, an answer flow that turns a question into a decision in one commit, plan status toggles, and copy rules enforced on save. Plan 03.",
+        relations: [{ type: "uses", to: "dashboard" }],
+        status: "planned",
+        data: {
+            todos: [
+                { text: "GitHub contents service with SHA-conditional writes.", priority: 2 },
+                {
+                    text: "Markdown section parser with a byte-identical round-trip test.",
+                    priority: 2
+                },
+                { text: "Decisions, questions, compass, plans, and files views.", priority: 2 }
+            ]
+        }
+    },
+    {
+        id: "payments",
+        title: "Money rails",
+        description:
+            "Not built yet. Takes the deposit: an interim operator-held payment link recorded in settings for the first sale, then Autumn checkout per buyer, a signature-verified webhook that writes the reserved event, and refund recording with the buyer's stated reason. Every charge sits behind two kill switches. Plan 05.",
+        relations: [{ type: "uses", to: "data-layer" }],
+        status: "planned",
+        data: {
+            controls: ["payments.interimLink", "payments.refundWindowDays", "outbound.payments"],
+            todos: [
+                { text: "Interim link setting and manual reserved recording.", priority: 1 },
+                { text: "Autumn client, webhook with replay protection, refunds.", priority: 2 }
+            ]
+        }
+    },
+    {
+        id: "desk",
+        title: "Sales desk",
+        description:
+            "Not built yet. Human-in-the-loop selling over iMessage: verified inbound messages, an agent-drafted reply from the locked offer and the thread, a one-line notification to the operator, and a phone screen where he edits and approves before anything sends. No autonomous reply exists. Plan 06.",
+        relations: [
+            { type: "uses", to: "dashboard" },
+            { type: "uses", to: "outreach" },
+            { type: "supersedes", to: "web-imessage-webhook" }
+        ],
+        status: "planned",
+        data: {
+            controls: ["imessage.allowedRecipients", "ai.model.advisor", "desk.burstWindowSeconds"],
+            todos: [
+                { text: "Signature verification and message storage in the webhook.", priority: 1 },
+                { text: "Advisor drafting with escalation flags and stale handling.", priority: 2 },
+                { text: "Send behind both switches and a recipient allowlist.", priority: 2 }
             ]
         }
     },
