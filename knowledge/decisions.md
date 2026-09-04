@@ -635,3 +635,195 @@ because the conversation was still retrievable over the API. That near-loss does
 chance.
 
 **Re-open cost:** Low.
+
+---
+
+## Round 5 - offer reshaping and generation-first (2026-09-04)
+
+Answered by the owner in one message written across Aug 30 to Sept 4, archived verbatim at
+`knowledge/sources/chats/2026-09-04-offer-reshaping-and-generation-first.md`. Context that drove
+it: rent lands on him alone from Sept 16, the household holds six people until then, and he wants
+money movement by Sept 8. He asked for the questions to be answered "very very briefly", so several
+verdicts below carry an agent-chosen detail that he delegated; each is marked and can be corrected
+with one word in chat.
+
+### D064 - Q41: the Sept 8 checkpoint measures money, not only demand
+
+**Verdict:** Option b, adapted. The fifty-conversation demand test runs against its original end
+date, Sept 8, and the pass condition now includes financial progress. His words: "We need that time
+pressure. But not just demand, financial progress." and "We need to see something, money wise, by
+the 8th."
+
+**Daily KPIs (agent-set, he said "you can adjust"):** on a work day, ten conversation openers sent
+and three interested replies; on a day off, double. Tracked in the truth surface once it exists,
+in `knowledge/plans/README.md` until then.
+
+**Sept 8 checkpoint (agent-set):** minimum is one named person who has said they will pay the
+deposit and named a date; target is one deposit actually paid. Below the minimum, the checkpoint is
+missed in writing and the direction record's inheritor protocol applies. It is a checkpoint, not
+a kill switch on ALTERED (D062).
+
+**Re-open cost:** Low; dates move by decision, never by drift.
+
+### D065 - Q42: Layer 1 is the founding program
+
+**Verdict:** His words: "answer A IS layer 1." There is one program, and it is the high tier: three
+to eight seats, a serious deposit, anchored at $12,500 total for a service-related offer. "We need
+to keep our worth, our target offer price of whatever we're offering $12,500 w/ the pre-sale for a
+service-related offer."
+
+**Supersedes D021.** The $100 deposit and $499 total are retired from copy. A lower self-serve
+layer may return later under a different name; it is not offered now.
+
+**Deposit amount:** he listed $997, $999, $1,000, $1,249, $1,250 and said "one of those. That's
+still sellable by chat, there's people that do it. That is our art." **Agent pick: $1,000.** Reason:
+the buyer is detail-obsessed and technical, and a round number reads as honest where $997 reads as
+an information product; it is also the figure he used throughout the direction record. Correct with
+one word if wrong.
+
+**What the $12,500 buys is OPEN** (Round 6). The premium is founder access in some form; the shape
+of that access is his call. Until it is locked, no page states the total.
+
+**Re-open cost:** High. The page, the sales script, and the payments plan all inherit this.
+
+### D066 - Q43: first seat at full price first, discount as the fallback
+
+**Verdict:** Try b first, fall back to a. The first buyer is offered the regular program at the
+regular price. If they hesitate, the fallback is a discount in exchange for a written testimonial
+and written permission to advertise the use case. Never free.
+
+**Friends do not count.** A friend may rehearse fulfilment, but only a stranger proves the funnel.
+Ngoc's stated intent to deposit when he has the cash is recorded as the first opt-in and is not
+counted as demand, by the owner's own caution.
+
+### D067 - Q44: the tagline is mechanism plus outcome
+
+**Verdict:** "Knowledge orchestration infrastructure. Never lose your best thinking again."
+
+**Why:** loss is the thread through every mechanism: tagging prevents loss to disorganisation,
+versioning prevents loss of progress, Koa prevents loss of time and effort, data structures
+prevent loss of utility. Retired: "the AI platform for human control" and "Store, develop, and use
+your thoughts on the fastest thought-to-action platform to exist."
+
+**Koa sub-statement:** something about pressure pivots, for Koa's own surface rather than the
+ALTERED profile. To be drafted and approved in copy review.
+
+### D068 - Q45: the truth surface is a generated web app, now
+
+**Verdict:** Option b now, option a as the fallback. His words: "let's generate/build a good
+web/pwa that we can manage our truth in first, and if we encounter issues we can migrate to TS
+constants/CLI/scripts." He rejects the trap framing: "As long as we use you, and you use
+technologies you're trained on, a web app is not a trap - it is the easy build."
+
+**Architecture (agent's call, stated so it can be challenged):** the truth itself stays in git as
+the files in `knowledge/`, and the web surface reads and writes those files through commits to this
+repo. One source of truth that agents and the owner both read, versioned for free, zero new
+storage. Operational data - leads, outreach candidates, funnel events, KPIs - lives in Postgres
+per D058. The two never duplicate each other.
+
+### D069 - Q46: sourcing, drafting, and review are built; sending is manual
+
+**Verdict:** Option a. The bench sources candidates, drafts per profile against locked intent and
+tonality, and presents approve or decline. The human pastes each approved message into X. Automated
+sending is revisited after the first fifty.
+
+**Sourcing, as he described it:** find and validate profiles through the X API from a general
+category or a seed profile, expanding through followers and following, with human review and
+fine-tuning of the results. "That kind of generated automation that we could review and fine-tune
+is what will save us time and help us fly. As long as we have HITL/approval."
+
+**Cost fact (verified 2026-09-04):** the X API is pay-per-use for new developers. Follower and
+following lookups bill at $0.01 per user returned; user lookups the same. Fifty validated leads
+from a few thousand scanned profiles is tens of dollars. Buying credits is his action (Round 6).
+
+### D070 - Q47: the personal account does the outreach, with a named fallback
+
+**Verdict:** His personal X account sends the DMs for now. The brand account is the close
+alternative, kept ready.
+
+**Why personal:** a DM from a person gets a reply where a DM from a business profile gets ignored,
+and the marketing is personal-brand driven, which is what other coaches do at volume.
+
+**Why the fallback stays close:** he does not want outreach drowning out his friends' messages or
+getting his personal account rate-limited. Mitigations: no mass sends, pins and read state to
+separate personal threads, and the bench itself tracks every conversation so the inbox does not
+have to.
+
+### D071 - Q48: generation is approved, and it runs plans-first
+
+**Verdict:** Approved. The protocol:
+
+- The planning agent writes end-to-end plans, top to bottom, one per workstream, plus a master
+  plan that carries order and status. All saved in `knowledge/plans/`.
+- The owner starts a fresh Cursor chat per plan and says "next" or "finish". The plan and the
+  master file orient the new agent; nothing depends on chat memory.
+- Agents executing a plan may modify it or append notes when they hit something meaningful.
+- The owner does not review code. He user-tests the result. Code quality is on the plan and the
+  agent, gated by `pnpm check` and the operating contract.
+- Strongest available thinking model, one agent per plan, sequenced so each lands reviewed.
+
+**Batch changes from the proposal:** the truth constants package is skipped in favour of the web
+surface (D068). The outreach bench is confirmed. The article scaffold is the agent's call: the
+landing page is the single truth artifact, rewritten article-shaped for the new offer, rather
+than a second page competing with it.
+
+### D072 - Golden rule: no hand-written code until there are sales
+
+**Verdict:** His words: "until we have sales - NO hand coding should be incorporated. It's just not
+time-appropriate. An agent can do everything I can but better, EXCEPT for the product where my truth
+is important."
+
+**What it means:** nothing in the offer, the funnel, or the pre-sale deliverables may depend on the
+owner writing code before the first deposit. D016 stands - the core is still his and still
+hand-written - but it starts after money, not before. A generated demonstration of Koa is
+permitted as a sales asset ("if we need to pre-sell on a generated demonstration, then so be it").
+
+**Consequence left OPEN (Round 6):** D040 promised the mechanism core on 2026-11-05, hand-written.
+Under this rule that work begins only after sales, so the date and the promise need re-anchoring.
+
+### D073 - Sell in chat, reaffirmed; the HITL sales desk is the long-term move
+
+**Verdict:** Chat closes, not calls, reaffirming D042. The long-term shape is a human-in-the-loop
+control panel where the agent drafts every reply and he approves before it sends. A call after
+purchase is welcome and buys build time.
+
+**Why (his reasons):** it fits the demographic; he has watched $5-15k offers close in chat off a
+document; and he is analytical rather than social, so texting at a slower pace multiplies his
+intelligence where a call does not. He recorded the counter-argument himself - human touch on a
+call may be the one thing an agent cannot do - and still chose chat as "our art to master".
+
+### D074 - Sticker store and reminder app are parked
+
+**Verdict:** The re:mind sticker store (physical reminders with QR codes to a promise app) and a
+one-directional reminder app under ALTERED (web configuration, personalised iMessage nudges) are
+both parked. His assessment: real ideas, inferior to Koa in value and not the launch. The reminder
+behaviour is a future ALTERED feature. "We should try and solve as much of this problem with Koa
+first."
+
+### D075 - What ALTERED is, in one sentence
+
+**Verdict:** "A managed, minimal, dynamic source-of-truth and alignment/integration agent system."
+Restated more simply for newcomers in copy.
+
+**Positioning boundary:** ALTERED is not primarily a code tool. The technical seam it offers early
+is a data MCP, not code generation. He does not want to be "the guy that teaches how to set up and
+use a knowledge base in another app", although that setup is a viable substitute service until the
+product is stable (Round 6).
+
+### D076 - Build surfaces: web first, scripts where they fit
+
+**Verdict:** "Stick to what you as the model is best trained on: a web app for POC/demo that I can
+also use from mobile. Simple, trusted, flexible." CLI and scripts are acceptable for less
+interactive work, but they limit him at work where he has a phone.
+
+### D077 - Generation-first operating mode
+
+**Verdict:** "We need to limit our inputs, generate more, and get results." Less coding, less
+re-typing of conclusions, less textual review. The highest-signal feedback is the product itself;
+lower-level infrastructure concepts are the exception and still need to be right.
+
+**Stated workflow, in his order:** entropic chat is converted to source of truth; the source of
+truth is converted into code, or into action through our code and connectors. The workflow comes
+first, the offer and features are the intermediary, and execution is the part he calls easy. "It's
+the resolving of ambiguity, maintaining of that truth to completion, and the reasonable
+optimization of that truth up until completion, that is the really hard part."

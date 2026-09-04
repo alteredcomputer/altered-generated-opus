@@ -4,43 +4,59 @@ The owner's focal-point file: the current answer to every load-bearing offer que
 page, readable on a phone. Derived from `decisions.md`; if the two ever disagree, `decisions.md`
 wins. Items marked **OPEN** are registered in `open-questions.md` and must not ship in copy.
 
-Last reconciled 2026-08-27.
+Last reconciled 2026-09-04, after Round 5.
 
-## Mission
+## What ALTERED is
 
-Two narratives at two levels (D052):
+"A managed, minimal, dynamic source-of-truth and alignment/integration agent system" (D075),
+restated simply for newcomers. Not primarily a code tool; the early technical seam is a data MCP.
+
+## Tagline
+
+**"Knowledge orchestration infrastructure. Never lose your best thinking again."** (D067). A Koa
+sub-statement about pressure pivots is still to be drafted.
+
+## Narratives
+
+Two levels (D052):
 
 - **Brand ethos:** human truth is preserved through versioning, attribution, and aggregation, and
   only then do machines distribute and produce on top of it. Machines sit above human input,
   never underneath it.
 - **Product narrative:** never lose your best thinking again.
 
-## Tagline
+## Program
 
-**OPEN** (Round 5). The locked raw material: the product narrative above, and the draft headline
-"You already know what to build. You keep un-deciding it." (Q31, unanswered).
+**ALTERED Koa Layer 1** (D020) is the founding program (D065): three to eight seats, a $1,000
+deposit (agent pick from his list, correctable), anchored at $12,500 total for a service-related
+offer. The $100/$499 tier is retired from copy.
 
-## Program name and scope
+- **What the $12,500 buys: OPEN** (Q49). The premium is founder access; the shape is his call.
+- **What arrives at deposit: OPEN** (Q50). Recommendation: the service starts that week.
+- **First seat:** full price first; fallback is a discount for a written testimonial and
+  advertising permission; never free; friends do not count as demand (D066).
+- **Refund:** guaranteed through a process, window opens after launch and use (D023).
+- **The room:** Discord at deposit (D017) is under review (Q54).
 
-**ALTERED Koa Layer 1** (D020). ALTERED is the company, Koa is the product, Layer 1 is the
-program: the first wave of user testing, whose members shape the platform's direction permanently.
-Six-month program beginning 2026-11-05 (D024). Domain: `altered.computer`.
+## What ships, and when
 
-## What ships on launch day
+D040 promised memory, self-scheduled reach-outs, voice notes, and notes import on 2026-11-05,
+hand-written. D072 now rules that no hand-written code happens before sales, so the date and the
+promise are being re-anchored: **OPEN** (Q52). Until it closes, the page states no product date.
 
-The mechanism core, nothing more (D040): memory, self-scheduled reach-outs, voice notes, notes
-import. No agent may add to the launch promise list. Nothing is released before the date.
+## Golden rules
 
-## Offer structure
+- No hand-written code until there are sales (D072). The core stays his (D016), after money.
+- Generation-first: limit inputs, generate more, get results (D077). Plans in `knowledge/plans/`,
+  one fresh chat per plan, the owner user-tests rather than reviews (D071).
+- Build surfaces are web-first and phone-usable; scripts where they fit (D076).
 
-- $100 deposit reserves a build slot and locks the price; $399 due at launch; $499 total (D021).
-- Deposit delivers immediately: Discord access and any bonuses we create (D017). Jet tags and a
-  physical care package are the intended deposit bonus (direction record, not yet locked as copy).
-- Refund is guaranteed through a process - buyer states why and gives feedback, then it is
-  honoured unconditionally; the window opens after launch and use (D023).
-- A higher founding tier above Layer 1 ($1,000-plus deposit toward a program anchored as high as
-  $12,500) is **OPEN** - explored at length in the direction record, priced only after five real
-  ICP conversations.
+## The Sept 8 checkpoint
+
+Money, not only demand (D064). Minimum: one named person committed to the deposit with a date.
+Target: one deposit paid. Daily KPIs: ten openers and three interested replies on a work day,
+double on a day off. Missed in writing means the direction record's inheritor protocol; ALTERED
+stays the path (D062).
 
 ## The problems we solve, in the buyer's language
 
@@ -57,29 +73,28 @@ We never promise revenue. The outcome chain: get crystal clear on what your prod
 consolidate the scattered thoughts into the few that matter, build product and marketing around
 those, ship, hold steady.
 
-## ICP
+## Buyer
 
-Detail-obsessed technical founders (D018). Qualify: they have a sense of what they want and real
-problems to solve. Disqualify: no budget; procrastination we cannot solve; a skill gap we cannot
-close; no direction at all. The mirror of the owner, per the direction record: the person who can
-name the fog. How far the profile may vary is **OPEN**.
+Detail-obsessed technical founders (D018). Qualify: a sense of what they want and real problems to
+solve. Disqualify: no budget; procrastination we cannot solve; a skill gap we cannot close; no
+direction at all. Widening to solo hyper-committed builders, technical or not: **OPEN** (Q51).
 
 ## Proof
 
 Staged reconstructions of outcomes that genuinely happened in the owner's own use (D022). We never
 stage an outcome that did not happen. The generated system itself is the testimonial (D047).
-Strongest asset on file: the ten-flip loop of August 2026, caught and settled by the system
-(direction record). First scenarios to build: **OPEN** (Q33, recommendation: clarity session, then
-alignment save).
+Strongest asset on file: the ten-flip loop of August 2026, caught and settled by the system.
+First scenarios to build: **OPEN** (Q33).
 
 ## Channels and fulfilment
 
-- The landing page informs; the iMessage thread closes (D042). "Start application" style CTA with
-  real screening: **OPEN** (Q32).
-- Outreach and content run in parallel (D043); publishing via Zernio from a dedicated alternate
-  account, every post approved (D044, D053); handle and platform mix **OPEN** (Q30).
-- Payments via Autumn (D041). Dashboard login via Resend email codes (D046). Both credentials
-  still unprovisioned.
-- Funnel truth lives in our own database, uncontaminated by internal traffic (D058).
-- Fulfilment after launch: the hand-written product plus the Layer 1 informational layer; nothing
-  ships to buyers until V1 is whole (D016).
+- The landing page informs; the chat thread closes (D042, D073). A human-in-the-loop sales desk
+  where the agent drafts and he approves is the long-term shape. A call after purchase is welcome.
+- Outreach: his personal X account sends, the brand account is the named fallback (D070). The
+  bench sources, drafts, and reviews; sending is manual (D069).
+- Content runs in parallel (D043) through a dedicated alternate account (D053); handle and
+  platform mix **OPEN** (Q30).
+- Payments via Autumn (D041). Dashboard login via Resend email codes (D046). Both unprovisioned.
+- Funnel truth lives in our own database, uncontaminated by internal traffic (D058). Locked
+  truth lives in git and is edited through the truth surface (D068).
+- Parked: the re:mind sticker store and the one-directional reminder app (D074).
