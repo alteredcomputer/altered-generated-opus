@@ -1,16 +1,15 @@
 # Plan 05 - Money rails
 
-**Status:** waiting. **Blockers:** Round 6 (Q49, Q50) so the product being sold is defined;
-`AUTUMN_SECRET_KEY` in Vercel and an Autumn account configured by the owner. Until Autumn exists,
-the interim path below is the only way a deposit can be taken, and it needs the owner to create a
-payment link himself.
+**Status:** waiting. **Blockers:** `AUTUMN_SECRET_KEY` in Vercel and an Autumn account configured
+by the owner; Round 7 Q56 for the balance schedule. Until Autumn exists, the interim path below is
+the only way a deposit can be taken, and it needs the owner to create a payment link himself.
 
 **Depends on:** 04 for the stated offer; 01 for the dashboard view of reservations. **Unblocks:**
-the Sept 8 target (one deposit paid).
+the Sept 14 target (one deposit paid).
 
 ## Outcome
 
-A stranger in the text thread is sent one link, pays the $1,000 deposit, and a `reserved` funnel
+A stranger in the text thread is sent one link, pays the $2,500 deposit, and a `reserved` funnel
 event appears in our database within seconds, with the person tied to their prospect row when one
 exists. The owner sees it on the dashboard home and receives a one-line iMessage notification
 (when the notification path exists, plan 06). Refunds are recorded as events with the reason the
@@ -19,8 +18,8 @@ recorded in `constraints.md`.
 
 ## Locked inputs
 
-D021 superseded by D065: $1,000 deposit, $12,500 anchor; D023 refund through a process, window
-after launch and use; D039 revenue target; D041 Autumn over direct Stripe, because the program is
+D079: $2,500 deposit toward $12,500; D023 refund through a process (timing under no date is Q57);
+D082 no hard product date; D039 revenue target; D041 Autumn over direct Stripe, because the program is
 built around a usage allowance and Autumn carries usage billing; D058 our own events are the
 financial truth; D003 payments are an external write, default deny; Q55 stage definitions.
 
@@ -29,16 +28,16 @@ financial truth; D003 payments are an external write, default deny; Q55 stage de
 1. **Interim path (no code beyond a setting):** the owner creates a payment link himself in
    whatever processor he can open today (Stripe payment link or an e-transfer instruction) and
    records it in the settings store as `payments.interimLink`. The sales script sends that link.
-   Reservations are recorded by hand with `pnpm bench reserved <handle> --amount 100000 --ref
-   <receipt>` from plan 02's ledger. This exists so Sept 8 does not wait on an integration.
-2. **Autumn integration:** one product, `layer-1-deposit`, $1,000 one-time. Customer created per
+   Reservations are recorded by hand with `pnpm bench reserved <handle> --amount 250000 --ref
+   <receipt>` from plan 02's ledger. This exists so Sept 14 does not wait on an integration.
+2. **Autumn integration:** one product, `layer-1-deposit`, $2,500 one-time. Customer created per
    buyer with our prospect id as the external id. Checkout URL generated server-side per buyer
    (no shared link once Autumn is live, so the payment is tied to a person). Webhook at
    `/api/webhooks/autumn` with signature verification and replay protection, writing `reserved`
    with the payment reference. Absent signing secret means every request is rejected.
-3. **Balance and program billing:** out of scope until the first three seats are sold and Q49 has
-   fixed the program's contents. Record the intent: Autumn products for the balance and any usage
-   allowance, defined then.
+3. **Balance and program billing:** shaped by Q56 (instalments, lump at product access, or a
+   fixed point). Built after the first deposit, not before; record the intent as Autumn products
+   for the balance schedule and any usage allowance.
 4. **Refund recording:** an operator action on the dashboard that records the buyer's stated
    reason and feedback, then the refund issued through Autumn behind the payments kill switch. The
    refund window rule (D023) is a setting, not a constant.
@@ -98,6 +97,7 @@ the owner's accountant), and anything that charges automatically.
 
 ## Agent notes
 
-- 2026-09-04 (planning agent): the interim path is deliberately manual. A single deposit by Sept 8
-  is worth more than a finished integration by Sept 20, and the manual record keeps the funnel
-  truth in our table either way.
+- 2026-09-04 (planning agent): the interim path is deliberately manual. A single deposit by the
+  checkpoint is worth more than a finished integration a week later, and the manual record keeps
+  the funnel truth in our table either way.
+- 2026-09-07: deposit is $2,500 (D079). Checkpoint is Sept 14 (D085).

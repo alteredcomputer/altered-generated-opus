@@ -1,49 +1,51 @@
 # Current state
 
-Updated 2026-09-04. Read this first, then `decisions.md`, `compass.md`, `plans/README.md`,
-`open-questions.md`, `direction-record.md`, `macro-plan.md`, `feature-graph.md`, `prior-art.md`,
-`constraints.md`, `product-primitives.md`, `design-reference.md`.
+Updated 2026-09-07. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
+`plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
+`feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
+`design-reference.md`.
 
 ## Where the project stands
 
 Live at `generated.altered.computer`, deployed from `main`, not indexed. The application builds
 and runs. The landing page still shows the **retired** $100/$499 offer and the Nov 5 deliverables
-as a promise; plan 04 replaces it once Round 6 lands, and an interim one-line change is proposed
-in that plan pending the owner's word.
+as a promise; plan 04 is `ready` to replace it from `offer.md`, and an interim one-line change is
+proposed in that plan pending the owner's word.
 
-Round 5 was answered on 2026-09-04 and recorded as D064 to D077. The owner's message is archived
-verbatim in `sources/chats/2026-09-04-offer-reshaping-and-generation-first.md`. Headlines:
+Round 6 was answered on 2026-09-07 and recorded as D078 to D087; the message is archived
+verbatim in `sources/chats/2026-09-07-round-6-and-the-build-slot.md`. The offer is now fixed and
+stated in full in `offer.md`:
 
-- Layer 1 is now the founding program: three to eight seats, $1,000 deposit (agent pick from his
-  list), anchored at $12,500 for a service-related offer. What the $12,500 buys is open (Q49).
-- Golden rule: no hand-written code until there are sales. The core stays his, afterwards.
-- Generation-first, plans-first. Six end-to-end plans exist in `knowledge/plans/`. The owner opens
-  a fresh chat per plan and says "next" or "finish". He user-tests; he does not review code.
-- Sept 8 is a money checkpoint: minimum one named commitment with a date, target one paid deposit.
-- Tagline locked: "Knowledge orchestration infrastructure. Never lose your best thinking again."
-- Sell in chat; the human-in-the-loop sales desk is the long-term shape. Personal X account
-  sends outreach; the bench sources, scores, drafts, and reviews; sending is manual.
-- Truth surface is a generated web app whose data stays in git (D068).
+- One custom build slot, one offer, no tiers. Weekly sessions, six to twelve months, one to ten
+  clients. $2,500 deposit toward $12,500.
+- Deposit week: onboarding inside 24 hours, a hand-built care package, the Koa runway (his,
+  hand-written, outbound-only), a personal "1/10" page when scoped.
+- No hard product date; soft "Est. November". The buyer is the solo hyper-committed builder,
+  technical or not. Instagram first, through Zernio; sourcing and first messages are manual there
+  by Meta's rule. The room is iMessage. The checkpoint is Sept 14.
+- The long-form video is the primary informer; script generated, shoot his.
 
-The feature graph is enforced and passes: 39 nodes, every file accounted for. The six workstreams
-exist as `planned` roots; each plan names the children it will add.
+Round 7 (Q56 to Q62) is asked: balance timing, refund timing under no date, care package
+contents and budget, video timing, how much of his hands go to code before the first deposit,
+runway cadence, personal page timing.
+
+Seven plans exist. Three are `ready` with no owner action needed: 02 outreach bench (Instagram
+paste-in), 04 offer and page, 07 offer assets. The feature graph passes: 40 nodes, every file
+accounted for.
 
 ## What is blocking
 
-- **Round 6 answers** (asked 2026-09-04): Q49 what the $12,500 buys, Q50 what arrives at deposit,
-  Q51 buyer width, Q52 the product date rule under the golden rule, Q53 X API credits, Q54 the
-  room, Q55 funnel stage definitions. Full text in `open-questions.md`. Plans 04 and 05 wait on
-  these.
-- **Owner actions**: Resend credentials plus `OPERATOR_EMAILS` in Vercel (plan 01); a GitHub
-  contents-write token for this repo (plan 03); X developer credits if Q53 says so (plan 02
-  auto-sourcing); Autumn (plan 05); an interim payment link he creates (plan 05, Sept 8 path).
-- **Copy approval** before the page can be indexed (plan 04, Round 7).
+- **Round 7 answers.** Plans 04 and 07 proceed with placeholders for Q56 and Q57; plan 05's
+  balance schedule and plan 07's package and page wait.
+- **Owner actions**, in `open-questions.md` under "Waiting on the owner": Resend plus
+  `OPERATOR_EMAILS` (plan 01), Zernio with his Instagram connected (plan 06), a GitHub
+  contents-write token (plan 03), an interim payment link (plan 05), Autumn (plan 05).
+- **Copy approval** before the page can be indexed (plan 04).
 
 ## What can proceed without answers
 
-Plan 02, paste-in slice, in full: tables, rubric and brief drafts, scoring, drafting, ledger, CLI.
-Plan 01 up to the point where a real login must be tested. Both are marked accordingly in
-`plans/README.md`.
+Plans 02, 04, and 07 in full, minus the gated parts each names. Plan 01 up to the point where a
+real login must be tested.
 
 ## Working notes for a fresh session
 
@@ -67,6 +69,13 @@ Plan 01 up to the point where a real login must be tested. Both are marked accor
   already points at `alteredcomputer/altered-generated-opus`.
 - **X API is pay-per-use only for new developers** (verified 2026-09-04): $0.01 per user returned
   on follower, following, and user lookups; legacy Basic and Pro are closed to new signups.
+  Zernio passes these through at cost (verified 2026-09-07).
+- **Instagram has no sourcing or cold-DM API** (verified 2026-09-07): Meta exposes no follower
+  lists of other accounts, no user search, and only allows API replies within 24 hours of the
+  user's last message. Zernio reads and sends Instagram DMs inside that rule; first two connected
+  accounts free.
+- **The Instagram reel he linked is not fetchable** without a login. Ask him to paste a
+  transcript if his content is needed as source material.
 
 ## Verified facts
 

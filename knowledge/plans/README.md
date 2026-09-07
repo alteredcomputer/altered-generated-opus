@@ -37,27 +37,28 @@ Round 6 answer before it can start; the plan says which).
 
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
-| 01 | [Dashboard foundation](01-dashboard-foundation.md) | waiting | Resend credentials in Vercel |
-| 02 | [Outreach bench](02-outreach-bench.md) | ready | none for paste-in; X API credits for auto-sourcing (Q53) |
+| 02 | [Outreach bench](02-outreach-bench.md) | ready | none; Instagram paste-in is the primary mode |
+| 04 | [Offer and page](04-offer-and-page.md) | ready | copy approval in chat before indexing; Q56 and Q57 lines are placeholders |
+| 07 | [Offer assets](07-offer-assets.md) | ready | Round 7 (Q58, Q59, Q61, Q62) for the parts it gates; the script and session run-sheets need nothing |
+| 01 | [Dashboard foundation](01-dashboard-foundation.md) | waiting | Resend credentials and `OPERATOR_EMAILS` in Vercel |
 | 03 | [Truth surface](03-truth-surface.md) | waiting | plan 01; GitHub contents-write token in Vercel |
-| 04 | [Offer and page](04-offer-and-page.md) | waiting | Round 6 (Q49 to Q52), then copy approval |
-| 05 | [Money rails](05-money-rails.md) | waiting | Round 6 (Q49, Q50); Autumn credentials |
-| 06 | [Sales desk](06-sales-desk.md) | waiting | plan 01; plan 04 |
+| 05 | [Money rails](05-money-rails.md) | waiting | Autumn credentials; Q56 for the balance schedule |
+| 06 | [Sales desk](06-sales-desk.md) | waiting | plan 01; plan 04; Zernio credentials for the Instagram inbox |
 
-Why this order: 02 is the only plan that moves the Sept 8 number with no owner action, so it is
-first. 01 is the shell everything else renders in and is gated only by a five-minute credential.
-03 is what he asked for in Round 5 and is the highest-leverage operator tool, but it does not
-touch revenue. 04 and 05 wait on Round 6 because they state the offer. 06 is the long-term shape
-of selling (D073) and needs both a shell and a locked offer.
+Why this order: 02, 04, and 07 move the Sept 14 number and need no owner action to start, so
+they lead. 01 is the shell everything else renders in and is gated only by a five-minute
+credential. 03 is the highest-leverage operator tool but does not touch revenue. 05 waits on
+Autumn and the balance rule. 06 is the long-term shape of selling (D073) and needs a shell, a
+locked page, and the Instagram inbox.
 
-Plans may run in parallel where their dependencies allow - 02 and 01 can both start today - but
-each is one chat, one branch, one merge.
+Plans may run in parallel where their dependencies allow - 02, 04, and 07 can all start today -
+but each is one chat, one branch, one merge.
 
 ## Not yet planned in detail
 
 Written when reached, not before: proof assets (Q33), content publishing through Zernio (D044),
-the Koa generated demonstration (D072 permits it as a sales asset), analytics, and the operator
-agent's link to the feature graph (D057). None is on the Sept 8 path.
+analytics, and the operator agent's link to the feature graph (D057). None is on the Sept 14
+path. The Koa runway (D080) is never planned here: it is product, hand-written in his repo.
 
 ## Shared technical decisions
 
@@ -101,3 +102,4 @@ chat; the agent that hears it writes it down.
 | Date | Openers sent | Interested replies | Committed | Deposits | Notes |
 | --- | --- | --- | --- | --- | --- |
 | 2026-09-04 | 0 | 0 | 0 | 0 | Plans written. Ngoc's stated intent recorded, not counted (D066). |
+| 2026-09-05 to 07 | 0 | 0 | 0 | 0 | Round 6 answered; offer fixed; checkpoint moved to Sept 14 (D085). |

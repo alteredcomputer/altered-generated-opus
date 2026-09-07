@@ -1,7 +1,8 @@
 # Plan 06 - Sales desk
 
 **Status:** waiting. **Blockers:** plan 01 (shell and auth) and plan 04 (the offer the desk
-sells). Sendblue credentials exist in Vercel. Sending anything to a real recipient additionally
+sells). Sendblue credentials exist in Vercel; Zernio credentials with his personal Instagram
+connected are needed for the Instagram inbox. Sending anything to a real recipient additionally
 needs the owner's approval in chat, recorded in `constraints.md`, and both kill switches on.
 
 **Depends on:** 01, 04, and plan 02's ledger for prospects and funnel events. **Unblocks:** the
@@ -9,8 +10,9 @@ long-term selling shape (D073).
 
 ## Outcome
 
-Someone texts the number from the page. The message is verified, stored, and tied to a prospect
-(matched from the bench when they came from outreach, created otherwise). Within seconds the
+Someone texts the number from the page, or replies to one of his Instagram openers. The message
+is verified, stored, and tied to a prospect (matched from the bench when they came from outreach,
+created otherwise). Within seconds the
 agent has drafted a reply from the locked offer and the conversation so far, and the owner's phone
 shows a one-line notification with a link. He opens `/dashboard/desk`, reads the thread and the
 draft, edits if he wants, taps send. The reply goes out over iMessage. Nothing is ever sent that he
@@ -25,14 +27,19 @@ machinery (see design note); D036 and D057 the operator agent reports and does n
 the thread closes; D045 hard escalation topics: product claims beyond the locked list, the
 launch date, refunds; D050 webhook at `/api/webhooks/sendblue`; D054 notify by iMessage, approve
 on the dashboard; D058 funnel events in our database; D073 chat closes, the HITL desk is the
-long-term shape; Q32 whether "application" screens (pending); Q55 stages.
+long-term shape; D083 Instagram first through Zernio, replies readable by API, sends only inside
+Meta's 24-hour window; Q32 whether "application" screens (pending); D085 stages. The offer the
+desk sells is `knowledge/offer.md`.
 
 ## Scope
 
-1. **Inbound**: replace the inert webhook handler with one that verifies the provider signature
-   (rejecting outright when the secret is absent), deduplicates by provider message id, stores
-   the message, and resolves or creates the prospect. Plan 02's tables are reused; a
-   `conversations` and `messages` pair is added.
+1. **Inbound, iMessage**: replace the inert webhook handler with one that verifies the provider
+   signature (rejecting outright when the secret is absent), deduplicates by provider message id,
+   stores the message, and resolves or creates the prospect. Plan 02's tables are reused; a
+   `conversations` and `messages` pair is added with a `channel` column.
+1b. **Inbound, Instagram**: Zernio's message webhook for the connected personal account, same
+   verification and storage, channel `instagram`. Replies to outreach openers arrive here and
+   turn the prospect into a lead automatically instead of by the owner saying "replied".
 2. **Drafting**: an `Advisor` service that composes the reply from: the locked offer facts (plan
    04's `offer.json`), the sales brief (`knowledge/sales-brief.md`: tone, the qualification
    questions, the disqualification list, what is never claimed), and the thread. Output is a
@@ -43,8 +50,9 @@ long-term shape; Q32 whether "application" screens (pending); Q55 stages.
    messages arrive within the burst window, one notification.
 4. **Desk screen**: thread list sorted by waiting time; thread view with messages, the draft, an
    editor, send, and stage buttons (qualified, committed, lost, with a reason). Send writes the
-   outbound message row first, then calls Sendblue, then records delivery state from the
-   provider's response and later status webhooks.
+   outbound message row first, then calls the channel's provider (Sendblue, or Zernio for
+   Instagram inside the 24-hour window, refused outside it with the window's close time shown),
+   then records delivery state from the provider's response and later status webhooks.
 5. **Stale drafts**: if a new inbound message arrives while a draft is pending, the draft is marked
    stale and regenerated; the desk shows the newest only. The operator never sends a reply written
    against an older thread.
@@ -55,9 +63,9 @@ long-term shape; Q32 whether "application" screens (pending); Q55 stages.
 ## Not in scope
 
 Autonomous replies (D045 becomes relevant only if the owner later chooses to let the agent send
-without approval; that is a new decision). X direct messages: replies on X are read by the owner
-in the X app and logged through the bench until the X DM read endpoints are worth their cost.
-Voice notes, memory, and anything product-shaped (D016).
+without approval; that is a new decision). X direct messages: read by the owner in the X app and
+logged through the bench until X DM reads are worth their pass-through cost. Voice notes, memory,
+and anything product-shaped (D016). The Koa runway is his, in his repo (D080), not this desk.
 
 ## Design
 
@@ -124,3 +132,6 @@ Voice notes, memory, and anything product-shaped (D016).
 - 2026-09-04 (planning agent): the prior attempt spent fifteen commits fighting iMessage
   concurrency for an autonomous agent (prior-art A3). This desk avoids the problem by design
   rather than solving it. Do not reintroduce an autonomous path "just for testing".
+- 2026-09-07 (planning agent): Instagram added as a second inbound channel after D083. Meta's
+  24-hour window is enforced in code, not in the operator's head; a send outside it must be
+  refused before the provider is called.
