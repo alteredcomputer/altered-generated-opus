@@ -1,30 +1,33 @@
 # Plan 02 - Outreach bench
 
-**Status:** ready. Paste-in sourcing needs nothing new. Automatic sourcing needs `X_BEARER_TOKEN`
-in Vercel once the owner opens a developer account and buys pay-per-use credits (Q53). Both
-modes need `DATABASE_URL` and `OPENROUTER_API_KEY`, which exist in Vercel and are pulled with the
-command in `constraints.md`.
+**Status:** ready. Instagram first (D083): sourcing and the first message are manual by Meta's
+rule, so the bench's paste-in mode is the primary mode, not a fallback, and nothing waits on
+credentials beyond `DATABASE_URL` and `OPENROUTER_API_KEY`, which exist in Vercel and are pulled
+with the command in `constraints.md`. X sourcing through Zernio's pass-through is a later mode,
+switched on only once a lead source on X proves worth paying for.
 
-**Depends on:** nothing for the first slice; plan 01 for the web review. **Unblocks:** the Sept 8
+**Depends on:** nothing for the first slice; plan 01 for the web review. **Unblocks:** the Sept 14
 number.
 
 ## Outcome
 
-The owner says, in a Cursor chat, "source fifty from @seed" or pastes twenty handles. The agent
-runs the bench. Minutes later the chat shows a ranked list: handle, one-paragraph reasoning for
-the score, and a drafted conversation opener for each. He replies with approvals, edits, and
-declines. He copies each approved opener into X from his personal account (D070) and says "sent".
+The owner scrolls Instagram, and for each profile worth a look pastes the handle with the bio and
+a few recent captions into a Cursor chat (or, later, a share-sheet shortcut). The agent runs the
+bench. Minutes later the chat shows a ranked list: handle, one-paragraph reasoning for the score,
+and a drafted conversation opener for each. He replies with approvals, edits, and declines. He
+sends each approved opener from his personal Instagram (D083) and says "sent".
 When replies come in he says "replied, interested" or "replied, no". Every one of those becomes a
 row, and the daily KPI is a query, not a memory. Once plan 01 lands, the same review happens on
 his phone at `/dashboard/outreach` with approve, edit, decline, copy, and mark-sent buttons.
 
 ## Locked inputs
 
-- D043 outreach runs; D064 the Sept 8 checkpoint and daily KPIs; D066 friends do not count; D069
-  sourcing, drafting, and review are built, sending is manual, revisit automation after fifty;
-  D070 personal account sends, brand account is the fallback; D073 chat closes, not calls; D018
-  the buyer and the disqualification list (Q51 may widen it; build the rubric as data so it can
-  change without code); D019 outcome-led, never revenue; D003 no automated sends.
+- D043 outreach runs; D064 and D085 the Sept 14 checkpoint and daily KPIs; D066 friends do not
+  count; D069 sourcing, drafting, and review are built, sending is manual, revisit automation
+  after fifty; D070 and D083 personal accounts send, Instagram first, X second; D073 chat closes,
+  not calls; D081 the buyer (solo hyper-committed builders, technical or not) and D018's
+  disqualification list, held as data in the rubric; D019 outcome-led, never revenue; D003 no
+  automated sends. The offer the opener eventually leads to is `knowledge/offer.md`.
 - The direction record's demand-test shape: fifty named humans, DMed as conversation openers, not
   pitches.
 
@@ -37,11 +40,14 @@ his phone at `/dashboard/outreach` with approve, edit, decline, copy, and mark-s
    `funnel_events` (append-only; stages per Q55, held as data so a definition change is a
    migration of a lookup, not a rewrite).
 3. Sourcing modes:
-   - **paste**: handles, or handles with pasted bio and recent-post text when there is no API.
-   - **seed**: a seed handle, expand through `following` (who a good prospect follows is a better
-     signal than who follows them), optionally `followers`, with a hard cap on users returned and
-     a cost estimate printed before the first paid call.
-   - **category**: recent-post search on locked keyword sets, authors collected and deduplicated.
+   - **paste** (primary): platform, handle, pasted bio, and recent caption or post text. On
+     Instagram this is the only mode that exists, by Meta's rule. Accepts a loose block of text
+     per profile and parses it; refuses a profile with no bio and no posts rather than scoring
+     air.
+   - **seed** (X only, later): a seed handle, expand through `following`, optionally
+     `followers`, through Zernio's X pass-through, hard cap on users returned, cost estimate
+     printed before the first paid call, refused until `outreach.xSourcingEnabled` is true.
+   - **category** (X only, later): recent-post search on locked keyword sets, same gates.
 4. Scoring: one model call per prospect reading bio and recent posts against a rubric stored in
    `knowledge/outreach-rubric.md` (qualify and disqualify criteria from D018, plus what the
    compass names as the buyer's pain). Output is a 0-100 score, a one-paragraph reasoning, and a
@@ -49,8 +55,9 @@ his phone at `/dashboard/outreach` with approve, edit, decline, copy, and mark-s
    not the code.
 5. Drafting: one model call per prospect above `outreach.scoreThreshold`, reading the profile and
    `knowledge/outreach-brief.md` (intent, tonality, the one question the opener asks, what it
-   never does). Output is one opener under X's DM length, first person, no link, no pitch, no
-   price. Every draft stores model, prompt version, tokens, and cost.
+   never does). Output is one opener under the platform's DM length, first person, no link, no
+   pitch, no price. Instagram openers may reference a specific recent post, which is the native
+   way a stranger's DM gets read there. Every draft stores model, prompt version, tokens, and cost.
 6. Review, first slice: `pnpm bench review` prints the pending batch; `pnpm bench decide` records
    approve, decline, or an edited body per prospect; `pnpm bench sent <handle>` and
    `pnpm bench replied <handle> --interested|--not` write funnel events. Output is formatted for a
@@ -69,11 +76,12 @@ Offering the bench as a product (direction record parking lot; same rule as D049
 
 ## Design
 
-- **X access** through the official v2 API with an app-only bearer token, pay-per-use. Followers
-  and following lookups and user lookups bill at $0.01 per user returned (verified 2026-09-04;
-  re-verify at build time). Use a maintained client library or plain `fetch` against the
-  documented endpoints; do not scrape. Every paid call logs endpoint, count, and estimated cost,
-  and increments the run's cost.
+- **Instagram has no sourcing API.** Meta exposes no follower lists of other accounts, no user
+  search, and no cold DM. Do not scrape, do not use unofficial clients; both are account-ending.
+  The human does the scrolling; the bench does everything after.
+- **X access**, when enabled, goes through Zernio's X pass-through at X's exact rates ($0.01 per
+  user read, verified 2026-09-07; re-verify at build time). Every paid call logs endpoint, count,
+  and estimated cost, and increments the run's cost.
 - **Rubric and brief are files, not prompts in code.** They live in `knowledge/` so the truth
   surface (plan 03) can edit them and so they are versioned with the decisions they derive from.
   The prompt template in code only assembles them with the profile.
@@ -96,9 +104,9 @@ Offering the bench as a product (direction record parking lot; same rule as D049
 2. Write `knowledge/outreach-rubric.md` and `knowledge/outreach-brief.md` from the locked
    decisions and the compass. Both are drafts until the owner has read three real outputs; say so
    at the top of each. Commit.
-3. `Sourcing`: paste mode first, then seed and category behind the X client, with the cost
-   estimate and the budget check. Tests for deduplication, exclusion, and the budget refusal.
-   Commit.
+3. `Sourcing`: paste mode, with the loose-text parser and its tests. Seed and category are
+   stubs that refuse with a clear message until `outreach.xSourcingEnabled` is true; build them
+   only when the owner turns that on. Commit.
 4. `Scoring` with the AI SDK through OpenRouter, model name from settings, structured output
    parsed and validated, raw output stored. Test the parser on a malformed response. Commit.
 5. `Drafting`, same shape, with the length guard: too long is a retry with the length named, never
@@ -117,8 +125,8 @@ Offering the bench as a product (direction record parking lot; same rule as D049
 ## Verification
 
 - `pnpm check` and `pnpm build` pass.
-- A run with an unset `X_BEARER_TOKEN` in seed mode fails before any call with a message naming
-  the variable; paste mode works without it.
+- Seed and category modes refuse cleanly while `outreach.xSourcingEnabled` is false; paste mode
+  works with nothing but the database and the model key.
 - A run whose estimate exceeds the daily budget stops before the first paid call.
 - Every draft in the batch is under the DM length and contains no link, no price, and no product
   name unless the brief allows it.
@@ -141,7 +149,8 @@ Offering the bench as a product (direction record parking lot; same rule as D049
 `outreach-drafting`, `outreach-ledger`, `outreach-cli`, `outreach-review-screen`; `data-layer`
 additions for the tables; `governance-knowledge-base` gains the rubric and brief as sources or
 they get their own `outreach-brief` node. Controls: `outreach.scoreThreshold`,
-`outreach.dailyBudgetCents`, `outreach.excludedHandles`, `ai.model.scoring`, `ai.model.drafting`.
+`outreach.dailyBudgetCents`, `outreach.excludedHandles`, `outreach.xSourcingEnabled`,
+`ai.model.scoring`, `ai.model.drafting`.
 
 ## Agent notes
 
@@ -151,3 +160,7 @@ they get their own `outreach-brief` node. Controls: `outreach.scoreThreshold`,
   is superseded by this for the same reason.
 - 2026-09-04: legacy Basic and Pro X tiers are closed to new developers; pay-per-use is the only
   entry. Do not plan around a monthly subscription.
+- 2026-09-07 (planning agent): re-planned Instagram-first after D083. The X client moved from
+  step 3 to a gated later mode; the paste parser became the centre of sourcing. Reading Instagram
+  replies through Zernio belongs to plan 06, not here; the bench only records what the owner
+  tells it.
