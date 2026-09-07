@@ -9,132 +9,122 @@ move to `decisions.md` and are removed from here.
 
 ---
 
-## Rounds 1 to 3 and 5
+## Rounds 1 to 3, 5, and 6
 
 **Answered.** Round 1 on 2026-08-12 (D015 to D039), round 2 on 2026-08-14 (D040 to D051), round 3 on
-2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077).
+2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077), round 6 on 2026-09-07 (D078 to
+D087).
 
 ---
 
-## Round 6 - the offer, re-anchored (asked 2026-09-04)
+## Round 7 - closing the offer's open edges (asked 2026-09-07)
 
-Round 5 moved Layer 1 to a founding program anchored at $12,500 with a $1,000 deposit (D065) and
-ruled that nothing depends on hand-written code before the first sale (D072). These questions
-finish the offer so the page, the sales script, and payments can be built without guessing.
-Background: `decisions.md` Round 5 and the source archive for 2026-09-04.
+Round 6 fixed the offer: one custom build slot, $2,500 down toward $12,500, service from the
+deposit week, no hard product date. These close the edges the page and the sales brief cannot
+ship without. Background: `knowledge/offer.md`.
 
-### Q49 - what the $12,500 buys
+### Q56 - when the balance is due, and the early-pay incentive
 
-The premium over the product is founder access. Its shape decides the workload and the copy.
+$10,000 remains after the deposit. The service runs from week one; the product has no hard date.
 
-- a) Weekly working session: one sixty-minute session a week for the six months, plus the
-  product, plus permanent influence over the platform's direction. Three to eight seats.
-- b) The daily-touch model he described: thirty minutes a day with one or two clients only,
-  priced above the anchor to reflect it. Everyone else waits for a later layer.
-- c) Done-with-you truth setup: a kickoff week where he installs their source of truth with
-  them (the method friends already ask him for), then a weekly session, then migration onto
-  ALTERED when it is stable.
+- a) Balance due when the product is in their hands, with an incentive for paying in full at
+  deposit (for example a named bonus session or a permanent price lock on future layers).
+- b) Balance in monthly instalments from month two, so cash tracks the sessions being delivered.
+- c) Balance due at a fixed point, ninety days after deposit, whichever comes first with product
+  access.
 
-**Recommendation:** c. It is deliverable the week it is bought with nothing hand-coded, it is the
-thing people are already asking him for, and it is literally the on-ramp to the product. Option b
-is the highest-value version and should be held as the single premium seat if a buyer appears who
-wants it.
+**Recommendation:** b. Sessions are being delivered from week one; instalments match cash to
+delivery, keep the deposit's "serious" signal, and remove the risk of ten thousand dollars
+waiting on a date we deliberately did not set. Keep a pay-in-full incentive as a) describes for
+the buyer who prefers one payment.
 
-### Q50 - what arrives at deposit, before the product exists
+### Q57 - the refund rule with no launch date
 
-D017 promised Discord and bonuses at deposit; the program itself started on launch day. With a
-service inside the offer, the service can start immediately.
+D023 opened the refund window after launch and use. D082 removed the date.
 
-- a) The service starts the week of the deposit; the product arrives when it arrives. The deposit
-  buys the seat and the first session.
-- b) Deposit buys the seat only; everything, including the service, waits for the launch date.
-- c) A generated Koa demonstration (memory over iMessage, generated in this repo and disclosed)
-  is delivered at deposit as a taste, alongside the service start.
+- a) Refundable through the process at any time before the product is in their hands; after
+  that, D023 as written.
+- b) Deposit refundable through the process until the first session is delivered; after that,
+  refunds only for the unused balance.
+- c) A flat fourteen-day window after deposit, then the process applies to the balance only.
 
-**Recommendation:** a. Starting the service immediately is what makes a $1,000 deposit feel like a
-purchase rather than a pledge, and it produces the proof assets D022 needs. Option c is worth
-doing as a sales asset regardless, but not as a delivery promise.
+**Recommendation:** a. It is the strongest honest claim, it costs us only discipline (deposits are
+not spent on acquisition until the product ships, which D023 already implied), and it matches
+"we would rather sell the promise and get it right" (D015).
 
-### Q51 - how wide the buyer is
+### Q58 - the care package
 
-D018 locks detail-obsessed technical founders. The Sept 4 message describes a different person in
-detail: solo, hyper-committed, restarting repeatedly, willing to be homeless for the idea, and
-non-technical. "The solo scale system."
+Hand-built, tailored, shipped within one to two weeks (D080). Two numbers decide it.
 
-- a) Keep D018 as the buyer. The friend is the story we tell, not the person we sell to.
-- b) Widen to solo hyper-committed builders, technical or not, who have a direction and cannot
-  hold it. Disqualification list unchanged.
-- c) Two segments with two pages.
+- a) Unit budget around $75 to $150, ten mailers and inserts printed upfront so the first ships
+  fast; contents: a hand-written letter, a printed plate with their number of ten, one durable
+  object (a jet tag or notebook per the direction record), and a card that explains the runway.
+- b) Unit budget under $50, print-on-demand, no upfront stock.
+- c) Design it after the first deposit; promise only "a package" until then.
 
-**Recommendation:** b. The pain is identical and the disqualification list already excludes the
-people we cannot help. The budget rule does the rest: someone who can pay $1,000 to reserve a
-$12,500 program is qualified by that act. One page, one voice.
+**Recommendation:** a. The lead time is the whole reason to stock upfront, and the letter is the
+part that carries the weight; the rest is the shelf object.
 
-### Q52 - the launch date and the promise under the golden rule
+### Q59 - when the video gets made
 
-D040 promises memory, self-scheduled reach-outs, voice notes, and notes import on 2026-11-05,
-hand-written by the owner. D072 says hand-writing starts only after sales.
+D086 makes the long-form video the primary informer. The script is generated from the truth; the
+shoot is his.
 
-- a) Keep Nov 5. The clock starts on the first deposit; if fewer than three seats are sold by
-  Oct 1, the date moves and buyers are told before they are asked for anything more.
-- b) Replace the fixed date with a relative one: the mechanism core ships within ninety days of
-  the third seat closing.
-- c) Drop the product date from the offer entirely. The service is the promise; the product is
-  the bonus when it lands.
+- a) Script now, shoot after the first deposit, so the first sales run on the page and the
+  conversation and the video carries the proof of a real first client.
+- b) Script and shoot before outreach scales; outreach waits for it.
+- c) Script now, shoot this week regardless.
 
-**Recommendation:** b. It keeps a real, checkable promise on the page, and it makes the promise
-depend on the thing that funds it, which is the honest framing D015 already uses.
+**Recommendation:** a. The Sept 14 number cannot wait on a shoot, and a video with a real first
+client in it is a different video.
 
-### Q53 - paying for X API reads
+### Q60 - his hands before the first deposit
 
-Follower and following lookups are pay-per-use at $0.01 per user returned, and only the owner can
-open the developer account and buy credits. Fifty validated leads from a few thousand scanned
-profiles costs tens of dollars.
+D072 said no hand-written code until sales. D080 says the runway must be hand-written. Sept 6 and
+7 he was in flow and listed cleanup work he wants to do: commit covenant, auth, AI SDK cleanup,
+iMessage concurrency, system prompt.
 
-- a) Buy credits now (suggest $50) and let the bench source automatically.
-- b) No API. The bench takes a pasted list of handles he collects by scrolling, and does the
-  validation and drafting from there.
-- c) Both: paste-in works from day one, API sourcing lands when credits exist.
+- a) Hand-write only the runway until the first deposit: the outbound-only send, the canned
+  intents, the answer store. Nothing else in the core moves before money.
+- b) The runway plus the cleanup list he named.
+- c) Nothing at all until the first deposit; flow hours go to outreach and the plans.
 
-**Recommendation:** c. Paste-in means outreach starts tomorrow with no purchase; the API path is
-built behind it and switches on when the key arrives.
+**Recommendation:** a. The runway is the only thing that is both his by rule and a deliverable a
+buyer is paying for. The cleanup list is exactly what his own dev doctrine forbids before revenue:
+"No covenant CLI, no JSDoc passes, no perfectionism on names until revenue" (direction record,
+2026-08-22). The generated dashboard and page must not take his hours at all; that is the point
+of this repo.
 
-### Q54 - the room
+### Q61 - the runway's cadence
 
-D017 gave buyers Discord access at deposit. With three to eight seats and a service inside, a
-Discord server may be the wrong room.
+Continuous, not a countdown (D082).
 
-- a) Discord, one channel, as decided.
-- b) A group iMessage or a small group chat on the platform they already use, plus the direct
-  thread with Koa.
-- c) No shared room; direct threads only until there are three buyers.
+- a) Weekdays at a fixed morning time the person picks in onboarding.
+- b) Daily including weekends.
+- c) Three a week.
 
-**Recommendation:** c, then b. An empty server signals a dead cohort; three people in a direct
-thread with him signals exactly what is being sold.
+**Recommendation:** a. Daily is the Koa habit we are selling, weekends off keeps it from becoming
+noise, and a chosen time is the first piece of personalisation.
 
-### Q55 - funnel stage definitions (carried from Round 4, needed for the schema)
+### Q62 - the personal "1/10" page
 
-The outreach bench and the sales desk both write funnel events, so these become the numbers.
+Digital candy (D080). It is go-to-market, so it can be generated here and disclosed.
 
-- Lead: anyone who sends a first inbound message that is not the owner or an operator, or who
-  replies to an outreach message.
-- Qualified: confirmed to be building something real with a direction, and not disqualified.
-- Committed: has said they will pay the deposit and named a date.
-- Reserved: deposit paid.
-- Lost: explicit no, or no reply after the follow-up sequence completes.
+- a) Build after the first deposit, for that person, and reuse the design for the next.
+- b) Build a generic version now so it can be shown in sales conversations.
+- c) Drop it; the package and the call are the substance.
 
-**Recommendation:** adopt as written. Every stage transition is stored as an append-only event with
-a timestamp and a reason, so the funnel can be recomputed when definitions change. "Committed" is
-new; it is the Sept 8 minimum in D064 and has to be countable.
+**Recommendation:** a. Nothing about it moves the Sept 14 number, and the first real buyer's
+answers make it a better page than a mock.
 
 ---
 
 ## Round 4 - still open, lower priority (asked 2026-08-15)
 
-Q30 to Q34 and Q36 to Q40 stay open. None of them blocks the plans in `knowledge/plans/`. The
+Q30 to Q34 and Q37 to Q40 stay open. None of them blocks the plans in `knowledge/plans/`. The
 copy questions (Q31, Q32, Q33, Q34) are re-asked in copy review once Round 6 fixes the offer,
 because the page is being rewritten around it. The design questions (Q37 to Q40) wait for copy.
-Q35 has been folded into Q55 above.
+Q35 was folded into Q55 and answered in D085; Q36 was answered in D084.
 
 ### Q30 - the posting account
 
@@ -210,10 +200,6 @@ Cadence: daily, five a week, or three a week.
 opportunistically. Five a week. Pain posts attract the buyer, build-in-public posts are the proof,
 and the ethos posts are what make people follow rather than just read.
 
-### Q36 - Discord
-
-Superseded by Q54 above.
-
 ### Q37 - dark first, or follow the reader's setting
 
 The page currently resolves both themes through `light-dark()`, which follows the operating system.
@@ -282,14 +268,17 @@ than the visual, and an effect built around copy that then changes is wasted wor
 
 Actions, not questions. Each unblocks a plan in `knowledge/plans/`.
 
-- **Resend credentials** in Vercel, for dashboard login codes. Blocks the operator dashboard
-  (plan 01), and therefore everything the dashboard hosts.
+- **Resend credentials, `AUTH_EMAIL_FROM`, and `OPERATOR_EMAILS`** in Vercel, for dashboard
+  login. Blocks the operator dashboard (plan 01), and therefore everything the dashboard hosts.
+- **Zernio API key with his personal Instagram connected**, in Vercel as `ZERNIO_API_KEY` plus
+  the account id. Free for the first two accounts. Lets the sales desk read Instagram replies
+  (plan 06) and publishing land later (D044).
 - **A GitHub fine-grained token with contents write on this repo only**, in Vercel, so the truth
   surface can commit edits. Blocks plan 03.
-- **X developer account and pay-per-use credits**, if Q53 lands on a or c. Blocks automatic
-  sourcing in plan 02; paste-in sourcing does not need it.
-- **Autumn credentials**, for the deposit checkout (plan 05). Until then, an interim payment link
-  he creates himself is the only way a deposit can be taken.
-- **Zernio credentials**, for publishing. Not on the Sept 8 path.
+- **An interim payment link he creates himself** (Stripe payment link or e-transfer instruction),
+  recorded in settings once plan 01 exists. Until Autumn, it is the only way a deposit can be
+  taken (plan 05).
+- **Autumn credentials**, for the deposit checkout (plan 05).
+- **X credits through Zernio**, only once a lead source on X proves worth paying for (D083).
 - **Approval to submit the domain for categorisation** with URL-filtering vendors, if we want to
   address the TLS-inspection issue in D061. Outbound write, so it needs explicit approval.

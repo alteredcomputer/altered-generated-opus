@@ -827,3 +827,189 @@ truth is converted into code, or into action through our code and connectors. Th
 first, the offer and features are the intermediary, and execution is the part he calls easy. "It's
 the resolving of ambiguity, maintaining of that truth to completion, and the reasonable
 optimization of that truth up until completion, that is the really hard part."
+
+---
+
+## Round 6 - the offer, re-anchored (2026-09-07)
+
+Answered across Sept 6 and 7, archived verbatim at
+`knowledge/sources/chats/2026-09-07-round-6-and-the-build-slot.md`. The full statement of the
+offer these decisions produce is `knowledge/offer.md`; the compass carries the one-page version.
+
+### D078 - Q49: the ticket buys one custom build slot
+
+**Verdict:** One single offer. No tiers, no premium seat. "Focus in one place, for one person, to
+the maximum degree."
+
+**What it is, in his words:** "a custom, user-land plus backend implementation and features that
+are tailored towards a single user's greatest goal and struggles. Exactly for their life,
+business, and issues. Tailored and fine-tuned by me, the technician, to build a hyper-functioning
+brain that enables them as an extension to the ALTERED core." Each client's implementation is
+intended to be refactored later into something any user can create in userland.
+
+**The program:** weekly sessions of 30 to 150 minutes depending on purpose; six months to a year;
+the first session is a guided one-to-one tutorial and initial setup. Included: how-to-use,
+strategic planning of systems and architecture, custom plugin and extension development, hot
+fixes, converting what works for them in external or physical systems into ALTERED, and building
+from there. Knowledge-strategy consulting along the way.
+
+**The outcome, in his words:** "help my customers overcome issues they've been blocked by for
+YEARS, unlocking domains of growth and capability that just wouldn't have been possible without
+ALTERED's data tools." Mechanism is the build; outcome is the unblocking. Revenue is never
+promised (D019).
+
+**Capacity:** one to ten clients, roughly one new client every three to eight weeks, which buys
+about a year of building. Once fulfilment is proven, more may be taken on without outpacing
+delivery.
+
+**Re-open cost:** Very high. Page, script, payments, and fulfilment all inherit this.
+
+### D079 - the deposit is $2,500
+
+**Verdict:** $2,500 down, balance toward $12,500. Supersedes the $1,000 agent pick in D065.
+
+**Why (his reasoning):** it means the buyer is "actually serious and not on a tight budget", it
+gives him "the aura/energy to offer the best thing I can confidently", and two of them are the
+hard yes to leave the job. "Then, I only need to close 2 pre-sales a month for 1-4 months, then
+convert them to the full package price."
+
+**Condition he attached:** "definitely not [out of my mind] if we're delivering something
+significant upfront." D080 is what makes the number honest. If D080 shrinks, this number is
+re-opened.
+
+**Why a deposit at all, rather than the full ticket alone:** selling only a finished product means
+one to three months of build before the first sale. The pre-sale predates that build so it can be
+funded and faster. Those who believe in it and would buy anyway "should have no problem putting
+[the deposit] down and the rest later for some sort of incentive." Balance timing and incentive:
+**OPEN** (Q56).
+
+### D080 - Q50: what arrives in the deposit week
+
+**Verdict:** The service starts immediately. Four deliverables:
+
+1. **A structured onboarding session within 24 hours.** Pre-structured for its purpose:
+   questions, feedback, resolving conflicting goals, expectation setting, and a meaningful,
+   exciting takeaway. Every subsequent session follows the same cycle - ask, resolve, deliver or
+   report, repeat - to keep momentum for both sides.
+2. **A hand-built care package**, tailored to their goals and their onboarding answers, in
+   packaging worth keeping on a shelf. Custom mailers printed upfront or locally; shipped within
+   one to two weeks because that is the real lead time. Contents and unit budget: **OPEN** (Q58).
+3. **The Koa runway**: an outbound-only iMessage sequence. Each message is sent at a fixed time
+   with a canned intent, generated per person by AI from their aggregated answers so each one is
+   more personal than the last; replies are collected as answers, never interpreted in a
+   back-and-forth, so there is no concurrency to manage. Progress cards as precise PNGs. A
+   continuous sequence rather than a countdown - the loading-screen feel of an adventure game,
+   rotating insightful questions and unlocks that build on each other, rooted in generalised
+   offer, leads, and one-person-business frameworks. Everything collected pre-loads Koa at launch
+   so nobody starts from zero. It may send Koa's contact card.
+4. **A personal page** - "1/10", the exclusivity of their spot, in a concrete, brutalist,
+   blackout-with-warm-lamp aesthetic (an R3F render or a high-detail 2D page; the Vercel Ship
+   badge page is the reference). Only if it can be scoped solid; not a promise until it exists.
+
+**Not offered:** the Cursor knowledge-base setup as an interim product. "Anyone can hack that in
+with Claude Code, and that's a distraction for me and for them from the purpose of ALTERED.
+Sometimes, it's better to wait. If we give them just enough to wait, that is the best outcome."
+
+**Authorship rule for these deliverables:** "nothing code or product-related should be generated.
+All hand-verified. The handcrafted authenticity is the part that makes it valid." The runway is
+product-shaped, so it is his, in his repo, by hand. The page and the package design are
+go-to-market and may be generated here with his approval, disclosed as always.
+
+**Re-open cost:** High. D079 depends on it.
+
+### D081 - Q51: the buyer is the solo, hyper-committed builder
+
+**Verdict:** Option b. Builder, thinker, founder, or creator, technical or not, with a direction
+they cannot hold. Disqualification list unchanged (D018): no budget, procrastination we cannot
+solve, a skill gap we cannot close, no direction at all. Supersedes the word "technical" in D018
+as a proxy for coding ability: "That was an easy filter for intelligence... this isn't an API or
+developer tool." The budget rule does the filtering now.
+
+**Why:** "broad enough to capture all high-detail thinkers/builders, but specific enough that they
+crave the minimalism, perfection, and control that I aim to offer." No perfect noun is required:
+"as long as they have the pain and meet the constraints, we win."
+
+**Related fact:** he has started posting daily talking-head reels on his personal Instagram to
+test the six-month personal-brand theory. That audience, grown toward people who care about the
+depth of the topics, is the mirrored ICP.
+
+### D082 - Q52: no hard product date
+
+**Verdict:** Option c. The service is the promise; the product arrives when it is ready, with a
+soft "Est. November" that can move. Supersedes D024's published launch date and its
+refund-if-missed mechanic. D040's list (memory, self-scheduled reach-outs, voice notes, notes
+import) remains the description of the mechanism core, now under the soft estimate rather than a
+date.
+
+**Why:** "life happens and I KNOW there will be people that don't care as much about the date,
+they just want it to happen." A hard deadline buys scarcity energy; "making it continuous but very
+intimate with tight progress and a massive promise is more attractive." The runway sequence
+therefore runs continuously rather than as a countdown.
+
+**Consequence:** the refund rule in D023 was anchored to a launch date. Its restatement under no
+date is **OPEN** (Q57). Until it closes, the page states the refund as guaranteed through the
+process and says nothing about timing.
+
+### D083 - Q53: Zernio, Instagram first, X as pass-through
+
+**Verdict:** Zernio is the social API layer (already chosen for publishing in D044). Outreach
+leads on Instagram, not X: "I answer and use DMs much more in IG and text almost no one on X."
+Free limits first; X reads through Zernio's zero-markup pass-through only once there is proof the
+leads are worth paying for. He will spend $20 to $50 on credits when justified, and would rather
+save it for the Sendblue number.
+
+**Platform facts (verified 2026-09-07):** Zernio's first two connected accounts are free, DMs are
+readable and sendable, and 10,000 sent messages a month are free. Meta's rule is hard: no API can
+message an Instagram user who has not messaged the account first, only reply within 24 hours of
+their last message, and no API lists another account's followers or searches users. So on
+Instagram, sourcing and the first message are manual by rule. The bench's job there is scoring,
+drafting, and the ledger; the API's job is reading replies into the sales desk.
+
+**Extends D070:** his personal Instagram account is the sender, for the same reasons the personal
+X account was.
+
+### D084 - Q54: the room is iMessage, then Discord if needed
+
+**Verdict:** Direct iMessage threads and one group iMessage thread for the cohort. A minimal
+Discord only when something greater is needed. A custom or ALTERED-native group messaging
+feature later, if ever, consolidating into ALTERED's primitives. Supersedes D017's Discord at
+deposit.
+
+**Why:** Discord is bloated, Slack's style is wrong, and intimacy is the point of a cohort of one
+to ten. Building a platform now is "probably not worth the time/effort/tokens".
+
+### D085 - Q55: funnel stages adopted; the checkpoint moves to Sept 14
+
+**Verdict:** Lead, qualified, committed (said yes with a date), reserved (paid), lost, as written
+in Q55, every transition an append-only event with a reason. The checkpoint in D064 moves from
+Sept 8 to **Sept 14**, same minimum and target: one named commitment with a date, one paid
+deposit.
+
+**Financial context (his statement):** lawn income should cover food and rent until roughly
+November if managed; student funding of about $7,000 arrives Nov 1 (Athabasca University),
+reserved for essentials. "So financially, yes I WANT to win, but it's not an immediate rush... it
+is a rush, because our core goal is to make money aside launching ALTERED's core product." The
+deadline exists for productivity, not survival.
+
+### D086 - the long-form video is the primary informer
+
+**Verdict:** A long-form video, VSL in shape and "short film" in energy, is the general explainer:
+story, use cases, promise, offer. Written as a script first, which doubles as the article; then
+shot by him. YouTube, a funnel embed, or both. The landing page stays as the reading surface and
+the place the video lives. Timing relative to outreach: **OPEN** (Q59).
+
+**Why:** "what TRULY sells to almost everyone is the purest form of communication besides
+real-time... a long-form video. Encoded with emotion, cadence/timing, a narrative, sound/music."
+And it is a thing he can make.
+
+### D087 - parked and framed, 2026-09-07
+
+- **iMessage access to arbitrary MCPs is not the product.** ALTERED is the product; a feature that
+  connects the ALTERED brain and the iMessage agent to MCP tooling comes later.
+- **Group messaging inside ALTERED** is a future feature idea, not a build.
+- **The desktop control surface** leans Raycast (keyboard-integrated, snappy, natural beside the
+  iMessage companion) over a custom desktop PWA or native app. The name for the thought editor
+  ("control plane", "access panel") is open and is his, since it is product.
+- **The $5k AI-implementation door-to-door urge** (Sept 6) is logged as a challenge under the
+  direction record's protocol. It quoted no recorded reason and defeated none; he named it himself
+  as "the typical pivot" and let it pass. It shaped nothing.

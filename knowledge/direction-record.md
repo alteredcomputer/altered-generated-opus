@@ -146,6 +146,20 @@ tenets-renderer trap), Postgres (infrastructure without need), SQLite (binaries 
 - Offering the DM/outreach tooling itself as a product for the ICP: same rule as D049 - not
   promised, not mentioned, until we have used it successfully ourselves.
 
+## Challenge log
+
+Path challenges after the ruling, logged per the protocol. A challenge must quote the recorded
+reason it overturns and defeat it; otherwise it is logged and counted, and the ledger does not
+move.
+
+| Date | Challenge | Reason it would overturn | Result |
+| --- | --- | --- | --- |
+| 2026-09-06 | Door-to-door and cold-call a $5k "AI implementation" package to local businesses, to cover an Airbnb until move-in. | D062 and the measured constant: off-lane money plans die within thirty hours; execution probability dominates. | Failed. He named it "the typical pivot" himself, quoted no reason, and let it pass within the day. Fuel redirected to outreach and the runway. Count: 1. |
+
+Owner-stated principle from the same day, worth keeping: "the degree to which identity, energy,
+and environment affects your productivity is insane." Flow returned at a coffee shop; the
+apartment with six people in it is the environment tax until Sept 16.
+
 ## What happened after the chat
 
 The chat errored and could not be continued. On 2026-08-27 the owner opened this session with:
