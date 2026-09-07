@@ -518,7 +518,7 @@ const nodes = defineNodes([
         id: "outreach",
         title: "Outreach bench",
         description:
-            "Not built yet. Sources candidate profiles from a pasted list, a seed account's graph, or a keyword search on X; scores each against a rubric with written reasoning; drafts one conversation opener per qualified profile; and records approvals, sends, and replies as funnel events so the daily KPI is a query. Sending is manual by decision. Plan 02.",
+            "Not built yet. Takes profiles the owner pastes from Instagram (the only mode Meta's rules allow there), and later a seed account's graph or a keyword search on X through Zernio; scores each against a rubric with written reasoning; drafts one conversation opener per qualified profile; and records approvals, sends, and replies as funnel events so the daily KPI is a query. Sending is manual by decision. Plan 02.",
         relations: [{ type: "uses", to: "data-layer" }],
         status: "planned",
         data: {
@@ -526,12 +526,16 @@ const nodes = defineNodes([
                 "outreach.scoreThreshold",
                 "outreach.dailyBudgetCents",
                 "outreach.excludedHandles",
+                "outreach.xSourcingEnabled",
                 "ai.model.scoring",
                 "ai.model.drafting"
             ],
             todos: [
                 { text: "Tables, rubric and brief files, paste-mode sourcing.", priority: 1 },
-                { text: "X client with cost estimate and budget refusal.", priority: 1 },
+                {
+                    text: "X client behind a switch, with cost estimate and budget refusal.",
+                    priority: 3
+                },
                 {
                     text: "Scoring and drafting with structured output and injection tests.",
                     priority: 1
@@ -578,7 +582,7 @@ const nodes = defineNodes([
         id: "desk",
         title: "Sales desk",
         description:
-            "Not built yet. Human-in-the-loop selling over iMessage: verified inbound messages, an agent-drafted reply from the locked offer and the thread, a one-line notification to the operator, and a phone screen where he edits and approves before anything sends. No autonomous reply exists. Plan 06.",
+            "Not built yet. Human-in-the-loop selling over iMessage and Instagram: verified inbound messages from both channels, an agent-drafted reply from the locked offer and the thread, a one-line notification to the operator, and a phone screen where he edits and approves before anything sends. Instagram sends are refused outside Meta's 24-hour window. No autonomous reply exists. Plan 06.",
         relations: [
             { type: "uses", to: "dashboard" },
             { type: "uses", to: "outreach" },
@@ -591,6 +595,26 @@ const nodes = defineNodes([
                 { text: "Signature verification and message storage in the webhook.", priority: 1 },
                 { text: "Advisor drafting with escalation flags and stale handling.", priority: 2 },
                 { text: "Send behind both switches and a recipient allowlist.", priority: 2 }
+            ]
+        }
+    },
+
+    {
+        id: "assets",
+        title: "Offer assets",
+        description:
+            "Not built yet. The non-product things a buyer touches in the deposit week: the long-form video script, the onboarding run-sheet and weekly session template, the care package design and print files, and the personal numbered page. Generated here and disclosed; the runway itself is product and lives in the owner's repo. Plan 07.",
+        relations: [{ type: "uses", to: "web-visual-system" }],
+        status: "planned",
+        data: {
+            todos: [
+                {
+                    text: "Video script, full and ninety-second cut, beat by beat with decision traces.",
+                    priority: 1
+                },
+                { text: "Onboarding run-sheet and weekly session template.", priority: 1 },
+                { text: "Care package spec and print files, after Q58.", priority: 2 },
+                { text: "Personal page, after Q62.", priority: 3 }
             ]
         }
     },
