@@ -5,7 +5,7 @@ page, readable on a phone. Derived from `decisions.md`; if the two ever disagree
 wins. The full offer statement is `offer.md`. Items marked **OPEN** are registered in
 `open-questions.md` and must not ship in copy.
 
-Last reconciled 2026-09-07, after Round 6.
+Last reconciled 2026-09-11, after Round 7.
 
 ## What ALTERED is
 
@@ -29,19 +29,22 @@ Two levels (D052):
 ## The offer
 
 **ALTERED Koa Layer 1** (D020): one custom build slot, one offer, no tiers (D078). ALTERED built
-around one person's greatest goal and struggles, by the founder as technician, weekly sessions of
-30 to 150 minutes for six months to a year, one to ten clients, one new client every three to
-eight weeks.
+around one person's greatest goal and struggles, by the founder as technician, one weekly 30 to
+45 minute session per client at a locked recurring time (D093), six months to a year, one to ten
+clients, one new client every three to eight weeks, 60% of his calendar kept free.
 
-- **$2,500 deposit**, $12,500 total (D079, D065). Balance timing and early-pay incentive:
-  **OPEN** (Q56).
-- **Deposit week** (D080): structured onboarding within 24 hours; hand-built care package
-  shipped within two weeks (contents **OPEN**, Q58); the Koa runway, an outbound-only
-  AI-personalised iMessage sequence hand-written by the founder (cadence **OPEN**, Q61); a
-  personal "1/10" page once scoped (**OPEN**, Q62).
+- **$12,500 total; $2,500 reserves and starts** (D079, D065). Balance due at product access;
+  pay-in-full is always asked first and earns added delivery (D088; bonus **OPEN**, Q68).
+  Whether the close leads with the full ticket or the reservation: **OPEN** (Q63).
+- **Reservation week** (D080): structured onboarding within 24 hours; hand-built care package -
+  mailer, hand-written letter, woven jet tag, stickers, $100 to $200 for the batch, designed
+  after the first reservation and shipped inside three weeks (D090); the Koa runway, outbound-only
+  and hand-written by the founder (message cadence **OPEN** Q64, channel **OPEN** Q66); the
+  personal "1/10" page after the first reservation, fed by the payment (D094).
 - **Product:** the mechanism core (memory, self-scheduled reach-outs, voice notes, notes
   import, D040) at a soft "Est. November" that can move (D082). No hard date.
-- **Refund:** guaranteed through a process (D023). Timing under no date: **OPEN** (Q57).
+- **Refund:** at any time before the product is in their hands, through the process; at most
+  75% of reservation cash spent before access (D089, D023).
 - **First seat:** full price first; fallback is a discount for a written testimonial and
   advertising permission; never free; friends do not count (D066).
 - **The room:** direct iMessage threads and one group thread; Discord only if needed (D084).
@@ -49,17 +52,21 @@ eight weeks.
 ## Golden rules
 
 - Nothing product-shaped that reaches a buyer is generated; the core and the runway are his by
-  hand (D016, D080). How much of his hands go to code before the first deposit: **OPEN** (Q60).
+  hand (D016, D080). Until the first reservation his hands write the runway and nothing else;
+  the cleanup list is stashed (D092).
 - Generation-first for everything else: limit inputs, generate more, get results (D077). Plans
   in `knowledge/plans/`, one fresh chat per plan, the owner user-tests rather than reviews (D071).
 - Build surfaces are web-first and phone-usable; scripts where they fit (D076).
 
 ## The Sept 14 checkpoint
 
-Money, not only demand (D064, moved by D085). Minimum: one named person committed to the deposit
-with a date. Target: one deposit paid. Daily KPIs: ten openers and three interested replies on a
-work day, double on a day off. Missed in writing means the direction record's inheritor protocol;
-ALTERED stays the path (D062). Financially a productivity deadline, not survival (D085).
+The date stands; its realistic content is re-scoped (D091): ICP validation and collected leads
+by Sept 14, with a paid reservation taken early only if someone is ready. The deposit
+experience - call structure, workflows, touchpoints - needs another week or two of design before
+reservations are confidently accepted. Daily KPIs: ten openers and three interested replies on a
+work day, double on a day off (D064). Missed in writing means the direction record's inheritor
+protocol; ALTERED stays the path (D062). Financially a productivity deadline, not survival
+(D085).
 
 ## The problems we solve, in the buyer's language
 
@@ -94,13 +101,17 @@ First scenarios to build: **OPEN** (Q33).
 - The long-form video informs (D086, timing **OPEN** Q59); the page holds it and states the
   offer (D042); the chat thread closes (D073). A human-in-the-loop sales desk where the agent
   drafts and he approves is the long-term shape. A call after purchase is welcome.
-- Outreach: his personal Instagram first, personal X second, Zernio as the API layer, X reads only
-  once proven worth paying for (D083, D070). Sourcing and first messages are manual on Instagram
-  by Meta's rule; the bench scores, drafts, and keeps the ledger (D069).
+- Outreach: Instagram first, X second, Zernio as the API layer for replies, X reads only once
+  proven worth paying for (D083, D070). The system sources from seed accounts and his following
+  by scraping public data, scores, drafts, and queues; he approves every send in a control panel
+  (D095). The send mechanism is **OPEN** (Q65); no automation ever logs into his personal
+  account. No official API can send a first Instagram message (verified 2026-09-11).
 - Content: daily personal-brand reels already running on his Instagram (D081). Volume posting
   through a dedicated alternate account (D053); handle and platform mix **OPEN** (Q30).
-- Payments via Autumn (D041), an owner-created interim link until then. Dashboard login via
-  Resend email codes (D046). Both unprovisioned.
+- Payments: Interac e-transfer with a small discount is the only live rail; Stripe is limited
+  until incorporation through Ownr, funded by the first reservation; PayPal for card buyers;
+  Autumn later (D097, D041). Dashboard login via Resend email codes (D046). Provisioning of all
+  credentials is batched after alignment rounds finish (D098).
 - Funnel truth lives in our own database, uncontaminated by internal traffic (D058). Locked
   truth lives in git and is edited through the truth surface (D068).
 - Parked: the re:mind sticker store, the reminder app (D074), iMessage-to-MCP as a product, group

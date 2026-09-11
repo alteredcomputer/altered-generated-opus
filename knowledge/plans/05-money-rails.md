@@ -1,8 +1,9 @@
 # Plan 05 - Money rails
 
-**Status:** waiting. **Blockers:** `AUTUMN_SECRET_KEY` in Vercel and an Autumn account configured
-by the owner; Round 7 Q56 for the balance schedule. Until Autumn exists, the interim path below is
-the only way a deposit can be taken, and it needs the owner to create a payment link himself.
+**Status:** waiting. **Blockers:** Q63 (whether the close leads with the full ticket or the
+$2,500 reservation) shapes what the checkout sells; Autumn and Stripe are blocked behind
+incorporation (D097). The interim path below is live as soon as the owner states his e-transfer
+instruction; that is the only rail that can take money today.
 
 **Depends on:** 04 for the stated offer; 01 for the dashboard view of reservations. **Unblocks:**
 the Sept 14 target (one deposit paid).
@@ -18,26 +19,32 @@ recorded in `constraints.md`.
 
 ## Locked inputs
 
-D079: $2,500 deposit toward $12,500; D023 refund through a process (timing under no date is Q57);
-D082 no hard product date; D039 revenue target; D041 Autumn over direct Stripe, because the program is
-built around a usage allowance and Autumn carries usage billing; D058 our own events are the
+D079: $2,500 reserves toward $12,500; D088 balance due at product access, pay-in-full asked
+first with added-delivery incentive (Q68), instalments a workaround only; D089 refundable any
+time before product access, at most 75% of reservation cash spent; D097 payments reality:
+Stripe limited until incorporation through Ownr, Interac e-transfer with a small discount is
+the interim rail, PayPal for card buyers, no processor switch; D082 no hard product date; D039
+revenue target; D041 Autumn over direct Stripe once Stripe works; D058 our own events are the
 financial truth; D003 payments are an external write, default deny; Q55 stage definitions.
 
 ## Scope
 
-1. **Interim path (no code beyond a setting):** the owner creates a payment link himself in
-   whatever processor he can open today (Stripe payment link or an e-transfer instruction) and
-   records it in the settings store as `payments.interimLink`. The sales script sends that link.
-   Reservations are recorded by hand with `pnpm bench reserved <handle> --amount 250000 --ref
-   <receipt>` from plan 02's ledger. This exists so Sept 14 does not wait on an integration.
+1. **Interim path (no code beyond a setting):** Interac e-transfer (D097). The owner states the
+   receiving contact and the exact instruction wording buyers get, recorded as
+   `payments.interimInstruction` in settings (in the sales script until plan 01 exists). Proof
+   is a screenshot; a small discount incentivises the rail. Reservations are recorded by hand
+   with `pnpm bench reserved <handle> --amount <cents> --ref <receipt>` from plan 02's ledger.
+   PayPal is the card fallback, same manual recording. This exists so no sale ever waits on an
+   integration.
 2. **Autumn integration:** one product, `layer-1-deposit`, $2,500 one-time. Customer created per
    buyer with our prospect id as the external id. Checkout URL generated server-side per buyer
    (no shared link once Autumn is live, so the payment is tied to a person). Webhook at
    `/api/webhooks/autumn` with signature verification and replay protection, writing `reserved`
    with the payment reference. Absent signing secret means every request is rejected.
-3. **Balance and program billing:** shaped by Q56 (instalments, lump at product access, or a
-   fixed point). Built after the first deposit, not before; record the intent as Autumn products
-   for the balance schedule and any usage allowance.
+3. **Balance and program billing:** the balance is due at product access (D088); pay-in-full at
+   the start is a second product. Built after the first reservation, not before; record the
+   intent as Autumn products for the balance and any usage allowance. Instalment mechanics
+   (accredited provider versus self-managed) follow Q63's resolution.
 4. **Refund recording:** an operator action on the dashboard that records the buyer's stated
    reason and feedback, then the refund issued through Autumn behind the payments kill switch. The
    refund window rule (D023) is a setting, not a constant.
@@ -62,7 +69,7 @@ the owner's accountant), and anything that charges automatically.
 
 ## Steps
 
-1. Settings keys `payments.interimLink`, `outbound.payments`, `payments.refundWindowDays`; the
+1. Settings keys `payments.interimInstruction`, `outbound.payments`, `payments.refundWindowDays`; the
    `bench reserved` command in plan 02's ledger if not already present. Commit.
 2. Autumn client behind a `Payments` service: create customer, create checkout, issue refund.
    Typed errors. Tests with recorded fixtures. Commit.
@@ -92,7 +99,7 @@ the owner's accountant), and anything that charges automatically.
 ## Feature graph nodes
 
 `payments` (root) with `payments-interim`, `payments-autumn-client`, `payments-webhook`,
-`payments-refunds`, `payments-view`. Controls: `payments.interimLink`, `outbound.payments`,
+`payments-refunds`, `payments-view`. Controls: `payments.interimInstruction`, `outbound.payments`,
 `payments.refundWindowDays`.
 
 ## Agent notes
@@ -101,3 +108,8 @@ the owner's accountant), and anything that charges automatically.
   checkpoint is worth more than a finished integration a week later, and the manual record keeps
   the funnel truth in our table either way.
 - 2026-09-07: deposit is $2,500 (D079). Checkpoint is Sept 14 (D085).
+- 2026-09-11 (planning agent): Stripe is limited until the corporation is proven (D097), so the
+  interim rail is e-transfer, not a Stripe link. Q56 closed as balance-at-access (D088); Q57
+  closed as refundable-before-access (D089). The remaining shaper is Q63. Note for the page and
+  the "1/10" flow: D094 assumed address collection through Stripe's payment form; on the
+  e-transfer rail the address is collected in the thread or on the personal page instead.
