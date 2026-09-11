@@ -1,6 +1,6 @@
 # Macro plan
 
-Re-anchored 2026-09-07 on the Round 6 answers. Phases are gated by evidence and dates, not by mood;
+Re-anchored 2026-09-11 on the Round 7 answers. Phases are gated by evidence and dates, not by mood;
 between checkpoints, execution only. The plan assumes the owner's real constraints: lawn job
 roughly 6:00-13:30 on work days, a phone at work, a household of six until the Sept 16 move, rent
 on him alone from that date, and grass season ending around October. Everything is generated; he
@@ -17,20 +17,24 @@ source of truth again.**
 ## Phase 2 - the Sept 14 checkpoint (now to Sept 14)
 
 The governing question has two parts: is the buyer reachable at current audience size, and will
-one of them commit money. The offer is fixed (D078 to D087); Round 7 closes its edges.
+one of them commit money. The offer's edges are closed (D088 to D094); Q63 (full ticket versus
+reservation-led close) is the one load-bearing open item, and Round 8 carries it.
 
-- The outreach bench (plan 02) scores pasted Instagram profiles, drafts openers, and keeps the
-  ledger; he sends by hand from his personal Instagram (D069, D083). No API can do the first
-  message on Instagram, so nothing waits on credentials.
+- The outreach bench (plan 02) sources by scraping public data from seed accounts and his
+  following, scores, drafts, and queues; he approves every send in a control panel (D095). The
+  send mechanism is Q65; nothing automated touches his personal account. Plans run in series,
+  one chat at a time (D096).
 - The page (plan 04) is rewritten around the build slot from `offer.md`, article-shaped, and
-  indexed once he approves the copy. The video script (plan 07) is written from the same source.
-- A deposit can be taken by an interim payment link he creates (plan 05), until Autumn exists.
-- His own hours: the runway in his repo, and only that, if Q60 lands as recommended.
+  indexed once he approves the copy. The video script (plan 07) is written from the same source;
+  the shoot comes near the end of marketing setup, pre-conversion (D091).
+- A reservation can be taken by e-transfer with proof by screenshot (D097), recorded by hand.
+- His own hours: the runway in his repo, and only that (D092).
 - Daily KPIs are logged: ten openers and three interested replies on a work day (D064).
 
-**Milestone: one named commitment with a date at minimum, one paid deposit as the target, in
-writing on Sept 14.** Miss activates the inheritor protocol in the direction record; ALTERED stays
-the path (D062).
+**Milestone, re-scoped by D091: validated ICP and collected leads in writing on Sept 14; a paid
+reservation is the stretch, taken early only if someone is ready.** The reservation-experience
+design (run-sheets, workflows, touchpoints) lands within the following two weeks. Miss activates
+the inheritor protocol in the direction record; ALTERED stays the path (D062).
 
 ## Phase 3 - the operator surfaces (Sept, overlapping)
 
@@ -44,8 +48,9 @@ starting the next plan.**
 
 ## Phase 4 - fulfilment and the product clock (from the first seat)
 
-The deposit week runs as D080 states: onboarding inside 24 hours, the care package shipped inside
-two weeks, the runway live, the personal page when scoped. Weekly sessions begin. Full build mode
+The reservation week runs as D080 and D090 state: onboarding inside 24 hours, the care package
+designed in a 2 to 3 day sprint and shipped inside three weeks, the runway live, the personal
+page built for that person. Weekly 30 to 45 minute sessions begin (D093). Full build mode
 on the mechanism core begins after the first deposit (D072) toward the soft November estimate
 (D082). Two deposits is the hard yes to leave the job (D079). Oct 15 winter checkpoint: deposit
 and program revenue versus the job floor, decided by the numbers on that day; student funding

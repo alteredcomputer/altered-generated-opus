@@ -1,6 +1,6 @@
 # Current state
 
-Updated 2026-09-07. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
+Updated 2026-09-11. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
 `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
@@ -9,43 +9,55 @@ Updated 2026-09-07. Read this first, then `decisions.md`, `compass.md`, `offer.m
 
 Live at `generated.altered.computer`, deployed from `main`, not indexed. The application builds
 and runs. The landing page still shows the **retired** $100/$499 offer and the Nov 5 deliverables
-as a promise; plan 04 is `ready` to replace it from `offer.md`, and an interim one-line change is
-proposed in that plan pending the owner's word.
+as a promise; plan 04 is `ready` to replace it from `offer.md`.
 
-Round 6 was answered on 2026-09-07 and recorded as D078 to D087; the message is archived
-verbatim in `sources/chats/2026-09-07-round-6-and-the-build-slot.md`. The offer is now fixed and
-stated in full in `offer.md`:
+Round 7 was answered on 2026-09-11 and recorded as D088 to D099; the message is archived
+verbatim in `sources/chats/2026-09-11-round-7-anger-and-the-path.md`. The offer's edges are
+closed: balance due at product access with pay-in-full asked first (D088), refundable any time
+before product access (D089), care package locked and produced after the first reservation
+(D090), video near the end of marketing setup (D091), his hands write the runway only (D092),
+weekly 30 to 45 minute sessions (D093), the "1/10" page after the first reservation (D094).
 
-- One custom build slot, one offer, no tiers. Weekly sessions, six to twelve months, one to ten
-  clients. $2,500 deposit toward $12,500.
-- Deposit week: onboarding inside 24 hours, a hand-built care package, the Koa runway (his,
-  hand-written, outbound-only), a personal "1/10" page when scoped.
-- No hard product date; soft "Est. November". The buyer is the solo hyper-committed builder,
-  technical or not. Instagram first, through Zernio; sourcing and first messages are manual there
-  by Meta's rule. The room is iMessage. The checkpoint is Sept 14.
-- The long-form video is the primary informer; script generated, shoot his.
+The structural changes from Round 7:
 
-Round 7 (Q56 to Q62) is asked: balance timing, refund timing under no date, care package
-contents and budget, video timing, how much of his hands go to code before the first deposit,
-runway cadence, personal page timing.
+- **The outreach machine (D095):** he does not scroll, paste, or type sends. The system sources
+  by scraping public logged-out Instagram surfaces from seed accounts (Dan Koe, Hormozi, Zach
+  Kravitz style, plus his following at @inducingchaos), scores, drafts, and queues; he approves
+  each send in a control panel. Verified 2026-09-11 against Zernio's own docs: no official API
+  can send a first Instagram message on any account type, so the send step is one-tap manual
+  until Q65 closes. No automation ever logs into his personal account.
+- **Plans run in series (D096):** one chat, one plan, one merge, review between.
+- **Payments reality (D097):** Stripe is limited until he proves incorporation (Ownr, roughly
+  $500, after the first reservation funds it). Interim rail: Interac e-transfer with a small
+  discount, proof by screenshot, recorded by hand. PayPal for card buyers.
+- **Provisioning is batched (D098):** no credentials until the alignment rounds settle.
+- **The checkpoint re-scoped (D091):** Sept 14 stays but its realistic content is validated ICP
+  and collected leads; the reservation experience needs another week or two of design (plan
+  07's run-sheets and touchpoints) before deposits are confidently accepted.
 
-Seven plans exist. Three are `ready` with no owner action needed: 02 outreach bench (Instagram
-paste-in), 04 offer and page, 07 offer assets. The feature graph passes: 40 nodes, every file
-accounted for.
+Round 8 (Q63 to Q68) is asked: full-ticket versus reservation-led close (he is fifty-fifty and
+this is the load-bearing one), runway message cadence (Q61 was misread as call cadence), the
+physical send mechanism, the runway channel (Twilio SMS versus Sendblue iMessage), the sourcing
+budget and business-account conversion, and the pay-in-full bonus.
+
+Seven plans exist. Three are `ready`: 02 outreach bench (re-planned 2026-09-11 around the
+sourcing machine), 04 offer and page, 07 offer assets. They execute in series; "next" takes 02
+first. The feature graph passes: 40 nodes, every file accounted for.
 
 ## What is blocking
 
-- **Round 7 answers.** Plans 04 and 07 proceed with placeholders for Q56 and Q57; plan 05's
-  balance schedule and plan 07's package and page wait.
-- **Owner actions**, in `open-questions.md` under "Waiting on the owner": Resend plus
-  `OPERATOR_EMAILS` (plan 01), Zernio with his Instagram connected (plan 06), a GitHub
-  contents-write token (plan 03), an interim payment link (plan 05), Autumn (plan 05).
+- **Q63** shapes plan 04's price framing, plan 05's checkout, and plan 06's close script. Plans
+  02 and 07 do not wait on it.
+- **Q65 and Q67** gate only plan 02's send mechanics and paid scraping backends; sourcing,
+  scoring, drafting, and the queue build now.
+- **Owner actions** are batched by D098 and listed in `open-questions.md` under "Waiting on the
+  owner"; nothing is chased until the rounds settle.
 - **Copy approval** before the page can be indexed (plan 04).
 
 ## What can proceed without answers
 
-Plans 02, 04, and 07 in full, minus the gated parts each names. Plan 01 up to the point where a
-real login must be tested.
+Plan 02 minus the send mechanism, plan 04 minus the price framing line, plan 07 in full, in that
+series order. Plan 01 up to the point where a real login must be tested.
 
 ## Working notes for a fresh session
 
@@ -70,12 +82,19 @@ real login must be tested.
 - **X API is pay-per-use only for new developers** (verified 2026-09-04): $0.01 per user returned
   on follower, following, and user lookups; legacy Basic and Pro are closed to new signups.
   Zernio passes these through at cost (verified 2026-09-07).
-- **Instagram has no sourcing or cold-DM API** (verified 2026-09-07): Meta exposes no follower
-  lists of other accounts, no user search, and only allows API replies within 24 hours of the
-  user's last message. Zernio reads and sends Instagram DMs inside that rule; first two connected
-  accounts free.
-- **The Instagram reel he linked is not fetchable** without a login. Ask him to paste a
-  transcript if his content is needed as source material.
+- **Instagram has no cold-DM API, re-verified 2026-09-11 against Zernio's own docs** after the
+  owner believed otherwise: the send endpoint requires a recipient-scoped id that only exists
+  once the user messages first, on any account type; Zernio's 10,000 free monthly messages are
+  replies inside Meta's 24-hour window (plus the HUMAN_AGENT support tag to 7 days). Cold
+  sending exists only through grey-market browser-automation tools (Slide Cold, InstaOutreach)
+  with real suspension risk - their own copy says to use accounts you can afford to lose.
+- **Public Instagram data is scrapeable with a real browser, not with plain fetches** (verified
+  2026-09-11): imginn returned a Cloudflare JS challenge to a fetch; a headless browser passes.
+  Reel transcripts come from public transcript tools the same way. Sourcing therefore needs
+  Playwright, and the owner has explicitly approved scraping public surfaces (D095) - logged
+  out only, never as his account.
+- **Write questions in full sentences.** He said Q60's brevity made it hard to understand;
+  phone-readable means short lines, not clipped grammar.
 
 ## Verified facts
 
