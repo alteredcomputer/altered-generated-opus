@@ -518,20 +518,28 @@ const nodes = defineNodes([
         id: "outreach",
         title: "Outreach bench",
         description:
-            "Not built yet. Takes profiles the owner pastes from Instagram (the only mode Meta's rules allow there), and later a seed account's graph or a keyword search on X through Zernio; scores each against a rubric with written reasoning; drafts one conversation opener per qualified profile; and records approvals, sends, and replies as funnel events so the daily KPI is a query. Sending is manual by decision. Plan 02.",
+            "Not built yet. Sources candidate profiles by scraping public, logged-out Instagram surfaces from seed accounts and the owner's following (D095), with paste-in as fallback and X through Zernio as a gated later mode; scores each against a rubric with written reasoning; drafts one conversation opener per qualified profile; queues approved sends for a one-tap manual send until Q65 closes; and records approvals, sends, and replies as funnel events so the daily KPI is a query. No automation ever logs into the owner's account. Plan 02.",
         relations: [{ type: "uses", to: "data-layer" }],
         status: "planned",
         data: {
             controls: [
+                "outreach.seedHandles",
                 "outreach.scoreThreshold",
                 "outreach.dailyBudgetCents",
                 "outreach.excludedHandles",
                 "outreach.xSourcingEnabled",
+                "outreach.scrapeDelayMs",
+                "outreach.scrapeMaxPages",
+                "outreach.autoSendEnabled",
                 "ai.model.scoring",
                 "ai.model.drafting"
             ],
             todos: [
-                { text: "Tables, rubric and brief files, paste-mode sourcing.", priority: 1 },
+                { text: "Tables, rubric and brief files.", priority: 1 },
+                {
+                    text: "Logged-out scraper over public sources with rate limits and honest partial results.",
+                    priority: 1
+                },
                 {
                     text: "X client behind a switch, with cost estimate and budget refusal.",
                     priority: 3
@@ -540,8 +548,9 @@ const nodes = defineNodes([
                     text: "Scoring and drafting with structured output and injection tests.",
                     priority: 1
                 },
+                { text: "Send queue with copy-and-open manual mode.", priority: 1 },
                 { text: "Non-interactive CLI for an agent to run from a chat.", priority: 1 },
-                { text: "Dashboard review screen once the shell exists.", priority: 2 }
+                { text: "Dashboard control panel once the shell exists.", priority: 2 }
             ]
         }
     },
@@ -567,13 +576,20 @@ const nodes = defineNodes([
         id: "payments",
         title: "Money rails",
         description:
-            "Not built yet. Takes the deposit: an interim operator-held payment link recorded in settings for the first sale, then Autumn checkout per buyer, a signature-verified webhook that writes the reserved event, and refund recording with the buyer's stated reason. Every charge sits behind two kill switches. Plan 05.",
+            "Not built yet. Takes the reservation: an interim e-transfer instruction recorded in settings while Stripe waits on incorporation (D097), then Autumn checkout per buyer, a signature-verified webhook that writes the reserved event, and refund recording with the buyer's stated reason. Balance due at product access (D088); refundable before access (D089). Every charge sits behind two kill switches. Plan 05.",
         relations: [{ type: "uses", to: "data-layer" }],
         status: "planned",
         data: {
-            controls: ["payments.interimLink", "payments.refundWindowDays", "outbound.payments"],
+            controls: [
+                "payments.interimInstruction",
+                "payments.refundWindowDays",
+                "outbound.payments"
+            ],
             todos: [
-                { text: "Interim link setting and manual reserved recording.", priority: 1 },
+                {
+                    text: "Interim e-transfer instruction setting and manual reserved recording.",
+                    priority: 1
+                },
                 { text: "Autumn client, webhook with replay protection, refunds.", priority: 2 }
             ]
         }
@@ -612,9 +628,15 @@ const nodes = defineNodes([
                     text: "Video script, full and ninety-second cut, beat by beat with decision traces.",
                     priority: 1
                 },
-                { text: "Onboarding run-sheet and weekly session template.", priority: 1 },
-                { text: "Care package spec and print files, after Q58.", priority: 2 },
-                { text: "Personal page, after Q62.", priority: 3 }
+                {
+                    text: "Onboarding run-sheet, weekly session template, reservation-week touchpoints.",
+                    priority: 1
+                },
+                { text: "Care package print files and bill of materials (D090).", priority: 2 },
+                {
+                    text: "Personal page scaffold, filled after the first reservation (D094).",
+                    priority: 3
+                }
             ]
         }
     },

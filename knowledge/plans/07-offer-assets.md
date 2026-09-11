@@ -1,8 +1,10 @@
 # Plan 07 - Offer assets
 
-**Status:** ready for the ungated parts. The video script and the session run-sheets need nothing.
-The care package (Q58), the personal page (Q62), and anything touching the runway's cadence
-(Q61) wait on Round 7.
+**Status:** ready. Round 7 closed its gates: the care package contents are locked (D090), the
+personal page is built after the first reservation (D094), the session cadence is weekly 30 to
+45 minutes (D093), and the video is scripted now and shot near the end of marketing setup
+(D091). The run-sheets carry extra weight after D091: they are the "deposit experience" design
+the owner said needs a week or two before reservations are confidently accepted.
 
 **Depends on:** `knowledge/offer.md`. **Unblocks:** the shoot (his), fulfilment of the first
 deposit week, and the sales brief in plan 06.
@@ -34,21 +36,28 @@ D022 (proof is staged truth), D047 (generated and disclosed), D052 (two narrativ
    takeaway they leave with. Time-boxed. Feeds the care package's tailoring and the runway's
    first answers.
 3. **Weekly session template.** The ask, resolve, deliver or report, next-step cycle (D080) as a
-   one-page sheet with a pre-session checklist and a post-session note format that lands in the
-   ledger as an event.
-4. **Care package** (after Q58): contents list, unit cost, supplier options in Edmonton and
-   online, print files for the mailer, the numbered plate, and the runway card in the visual
-   system, and the hand-written letter's prompts (not its text; the letter is his).
-5. **Personal page** (after Q62): the "1/10" page in the blackout-with-warm-lamp aesthetic, one
-   route per buyer behind an unguessable path plus a signed token, no personal data beyond first
-   name and number of ten, generated here and disclosed in its footer.
+   one-page sheet for the weekly 30 to 45 minute session at the client's locked time (D093),
+   with a pre-session checklist and a post-session note format that lands in the ledger as an
+   event. Include the reservation-week touchpoint schedule (D091): what happens on day one, the
+   first week, and the weeks to the package's arrival, so there is never radio silence.
+4. **Care package** (contents locked, D090): print files for the custom bubble mailer, the
+   weathered-paper letter design (prompts only; the text is his), the hard-woven jet tag artwork,
+   and the sticker pack, in the visual system; a supplier shortlist in Edmonton and
+   print-on-demand with sample lead times; a costed bill of materials inside the $100 to $200
+   batch budget. Production runs only after the first reservation, in his 2 to 3 day sprint;
+   this plan makes that sprint a matter of ordering, not designing.
+5. **Personal page** (after the first reservation, D094): the "1/10" page in the
+   blackout-with-warm-lamp aesthetic, one route per buyer behind an unguessable path plus a
+   signed token, personalised from the payment's details, collecting the shipping address for
+   the package when the payment rail did not (see plan 05's 2026-09-11 note), no other personal
+   data, generated here and disclosed in its footer.
 
 ## Not in scope
 
 The Koa runway in any form - code, intents, or message copy. It is product-shaped and his by rule
-(D080). If he wants a research digest of the frameworks he named to draw from, he asks; it is
-not produced unprompted. The sales brief (plan 06). Anything that states a balance or refund
-timing before Q56 and Q57 close.
+(D080, D092). If he wants a research digest of the frameworks he named to draw from, he asks; it
+is not produced unprompted. The sales brief (plan 06). Anything that states how the close leads
+(full ticket versus reservation) before Q63 closes, or the pay-in-full bonus before Q68 closes.
 
 ## Design
 
@@ -67,10 +76,12 @@ timing before Q56 and Q57 close.
 ## Steps
 
 1. Video script, full and ninety-second cut. Present beat by beat in chat for his edits. Commit
-   after each pass.
-2. Onboarding run-sheet and weekly template. Present in chat. Commit.
-3. After Q58: care package spec, supplier shortlist with prices, print files. Commit.
-4. After Q62: personal page. Verify at 390px. Commit.
+   after each pass. The shoot itself waits for marketing setup to be near done (D091).
+2. Onboarding run-sheet, weekly template, and the reservation-week touchpoint schedule. Present
+   in chat. Commit.
+3. Care package print files, supplier shortlist with prices, bill of materials (D090). Commit.
+4. Personal page scaffold, built so the first reservation's details drop in (D094). Verify at
+   390px. Commit.
 5. Reconcile the feature graph, security pass (the page is the only code), `state.md`, merge.
 
 ## Verification
