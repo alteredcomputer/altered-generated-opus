@@ -9,113 +9,138 @@ move to `decisions.md` and are removed from here.
 
 ---
 
-## Rounds 1 to 3, 5, and 6
+## Rounds 1 to 3 and 5 to 7
 
 **Answered.** Round 1 on 2026-08-12 (D015 to D039), round 2 on 2026-08-14 (D040 to D051), round 3 on
 2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077), round 6 on 2026-09-07 (D078 to
-D087).
+D087), round 7 on 2026-09-11 (D088 to D099).
 
 ---
 
-## Round 7 - closing the offer's open edges (asked 2026-09-07)
+## Round 8 - the structure of the money, and the machine's edges (asked 2026-09-11)
 
-Round 6 fixed the offer: one custom build slot, $2,500 down toward $12,500, service from the
-deposit week, no hard product date. These close the edges the page and the sales brief cannot
-ship without. Background: `knowledge/offer.md`.
+Round 7 closed the offer's edges but reopened the biggest one: he is fifty-fifty on dropping the
+deposit and closing the full $12,500 up front, and asked for the comparison. The rest are the
+runway's two mechanical choices and the outreach machine's two mechanical choices, all of which
+gate code that is otherwise ready to build.
 
-### Q56 - when the balance is due, and the early-pay incentive
+### Q63 - the $2,500 start, or closing the full $12,500 up front
 
-$10,000 remains after the deposit. The service runs from week one; the product has no hard date.
+He is fifty-fifty and asked for the comparison (source archive 2026-09-11). Both models sell the
+same $12,500 program. The difference is what is asked for at the close, what is owed before the
+product exists, and what the first payment is called.
 
-- a) Balance due when the product is in their hands, with an incentive for paying in full at
-  deposit (for example a named bonus session or a permanent price lock on future layers).
-- b) Balance in monthly instalments from month two, so cash tracks the sessions being delivered.
-- c) Balance due at a fixed point, ninety days after deposit, whichever comes first with product
-  access.
+- a) **Keep the $2,500 start as the standard path, and always ask for full payment first.** The
+  close presents the full ticket with the pay-in-full incentive (D088); the $2,500 start is the
+  fallback offered in the same breath, framed as "start now, balance at product access." Light
+  pre-launch obligations: onboarding call, runway, care package, page - all refundable-safe
+  (D089). His build hours stay his until launch.
+- b) **Full $12,500 only, with payment plans as the workaround.** Strongest cash and commitment;
+  requires a stated maximum product timeline (he floated "nine months maximum") and a scheduled
+  pre-launch service calendar heavy enough to justify holding the full amount, which spends his
+  build hours on fulfilment before the product exists.
+- c) **$2,500 only at close, full ticket raised later at product access.** Simplest close,
+  weakest cash, and re-opens the price conversation at the worst moment.
 
-**Recommendation:** b. Sessions are being delivered from week one; instalments match cash to
-delivery, keep the deposit's "serious" signal, and remove the risk of ten thousand dollars
-waiting on a date we deliberately did not set. Keep a pay-in-full incentive as a) describes for
-the buyer who prefers one payment.
+**Recommendation:** a. It is what he described himself when he said "you might as well ask for
+the full amount up front" and "close on the twelve five, and then figure out how to deliver" -
+but it keeps the escape hatch that protects the build: a buyer who balks at $12,500 today can
+still say yes to $2,500 today, and D088 already makes the balance due at access. Option b's real
+cost is the one he named: 50% of his focus sold to pre-launch fulfilment before the product that
+makes fulfilment cheap exists. If a is chosen, the first payment is not called a deposit; call
+it what it is - reserving the slot and starting the program - and the page says "Start for
+$2,500" against the $12,500 program price. Instalment mechanic when a buyer cannot pay the
+balance in full: accredited provider first (cash up front, their credit risk), self-managed
+splits only at his discretion for an exceptional buyer.
 
-### Q57 - the refund rule with no launch date
+### Q64 - how often the runway messages arrive (re-asked; Q61 was answered as call cadence)
 
-D023 opened the refund window after launch and use. D082 removed the date.
+This is about the automated outbound-only messages the runway sends, not calls. They are
+generated and sent by the system at fixed times; they cost him no live time regardless of
+frequency. The weekly 30-45 minute session is already locked (D093) and is separate.
 
-- a) Refundable through the process at any time before the product is in their hands; after
-  that, D023 as written.
-- b) Deposit refundable through the process until the first session is delivered; after that,
-  refunds only for the unused balance.
-- c) A flat fourteen-day window after deposit, then the process applies to the balance only.
+- a) One message every weekday at a time the person picks at onboarding, quiet on weekends.
+- b) One a day including weekends.
+- c) Two or three a week.
 
-**Recommendation:** a. It is the strongest honest claim, it costs us only discipline (deposits are
-not spent on acquisition until the product ships, which D023 already implied), and it matches
-"we would rather sell the promise and get it right" (D015).
+**Recommendation:** a. Daily is the Koa habit the program sells, a chosen time is the first act
+of personalisation, and weekend silence keeps it from becoming noise.
 
-### Q58 - the care package
+### Q65 - how an approved opener physically reaches a stranger's Instagram inbox
 
-Hand-built, tailored, shipped within one to two weeks (D080). Two numbers decide it.
+Verified 2026-09-11: the official Instagram API cannot start a conversation with someone who has
+not messaged the account first, on any account type - Zernio's own docs state it. Zernio still
+reads replies and sends inside the 24-hour window, so everything after the first message is
+automatable. The first message has three honest options:
 
-- a) Unit budget around $75 to $150, ten mailers and inserts printed upfront so the first ships
-  fast; contents: a hand-written letter, a printed plate with their number of ten, one durable
-  object (a jet tag or notebook per the direction record), and a card that explains the runway.
-- b) Unit budget under $50, print-on-demand, no upfront stock.
-- c) Design it after the first deposit; promise only "a package" until then.
+- a) **One-tap manual:** the control panel queues approved sends; on his phone, each is a tap
+  that copies the text and opens the profile, he pastes and sends from his personal account.
+  Zero account risk, roughly 20 seconds per send, and the DM comes from a real person's profile,
+  which is also why it gets read.
+- b) **A grey-market sender** (browser automation, warmed accounts, proxies) wired to our control
+  panel, running on a dedicated business or burner account, never his personal one. True
+  hands-off sending; real suspension risk (the vendors themselves say to use accounts you can
+  afford to lose), a warmup period before volume, and roughly $50 to $100 a month.
+- c) **a now, b when volume proves out:** manual one-tap until fifty sends and a conversion
+  signal exist (the D069 revisit line), then a burner-account automation for scale while his
+  personal account only ever holds conversations that came back.
 
-**Recommendation:** a. The lead time is the whole reason to stock upfront, and the letter is the
-part that carries the weight; the rest is the shelf object.
+**Recommendation:** c. It matches the automation-after-fifty rule already locked in D069, it
+never risks the personal account that his content and credibility live on, and it spends money
+on automation only after the list it automates is proven to convert.
 
-### Q59 - when the video gets made
+### Q66 - the runway's channel: SMS through Twilio, or iMessage through Sendblue
 
-D086 makes the long-form video the primary informer. The script is generated from the truth; the
-shoot is his.
+The runway is outbound-only either way, and the answer store is identical. This decides sender
+identity, cost, and feel.
 
-- a) Script now, shoot after the first deposit, so the first sales run on the page and the
-  conversation and the video carries the proof of a real first client.
-- b) Script and shoot before outreach scales; outreach waits for it.
-- c) Script now, shoot this week regardless.
+- a) Twilio SMS: cheapest (fractions of a cent per message), simplest integration, he named it
+  himself; green bubble, sender is a bare number, A2P registration paperwork in North America.
+- b) Sendblue iMessage: blue bubble, real iMessage identity, the same channel Koa will live on,
+  so the runway literally becomes Koa's number later; roughly $50+ a month and an onboarding
+  step.
+- c) Twilio now, migrate the number experience to iMessage at Koa's launch.
 
-**Recommendation:** a. The Sept 14 number cannot wait on a shoot, and a video with a real first
-client in it is a different video.
+**Recommendation:** b. The runway is sold as "Koa before Koa" - the blue bubble is part of the
+product's identity (D080 pre-loads Koa from the runway's answers), the buyer count is one to
+ten so per-message cost is irrelevant, and paying for it out of the first deposit is exactly
+what the deposit is for. If the monthly cost before the first deposit matters, a is a fine
+start, but the switch cost later is a number change for every client.
 
-### Q60 - his hands before the first deposit
+### Q67 - the sourcing machine's budget and the business-account conversion
 
-D072 said no hand-written code until sales. D080 says the runway must be hand-written. Sept 6 and
-7 he was in flow and listed cleanup work he wants to do: commit covenant, auth, AI SDK cleanup,
-iMessage concurrency, system prompt.
+Sourcing will scrape public data (seed accounts' followers and engagers, candidate bios, posts,
+reel transcripts) with a headless browser and, where it saves days, a paid scraping service.
+Public viewers are Cloudflare-gated against plain fetches but pass with a real browser (verified
+2026-09-11), so a pure self-built scraper is possible but slower to harden.
 
-- a) Hand-write only the runway until the first deposit: the outbound-only send, the canned
-  intents, the answer store. Nothing else in the core moves before money.
-- b) The runway plus the cleanup list he named.
-- c) Nothing at all until the first deposit; flow hours go to outreach and the plans.
+- a) Pre-approve up to $50 a month for scraping infrastructure (a scraping API or proxy service),
+  spent only when the self-built path stalls, each service named in `constraints.md` when first
+  used.
+- b) Self-built headless browser only, no paid services; accept slower and flakier sourcing.
+- c) Decide per-service in chat as each need arises.
 
-**Recommendation:** a. The runway is the only thing that is both his by rule and a deliverable a
-buyer is paying for. The cleanup list is exactly what his own dev doctrine forbids before revenue:
-"No covenant CLI, no JSDoc passes, no perfectionism on names until revenue" (direction record,
-2026-08-22). The generated dashboard and page must not take his hours at all; that is the point
-of this repo.
+Attached: converting his Instagram to a business account unlocks Zernio's inbox for replies
+(plan 06). It is his account, so the conversion is his action; the known trade-off chatter is
+about reach on business accounts, which Meta denies and which matters less for a DM-first motion.
 
-### Q61 - the runway's cadence
+**Recommendation:** a for the budget - it is inside the $20 to $50 he already said he would
+spend when justified (D083), and naming each service on first use keeps default-deny honest.
+Convert the account whenever convenient before the sales desk lands; nothing before plan 06
+needs it.
 
-Continuous, not a countdown (D082).
+### Q68 - what paying in full at the start actually earns
 
-- a) Weekdays at a fixed morning time the person picks in onboarding.
-- b) Daily including weekends.
-- c) Three a week.
+D088 says the incentive is added delivery, not a discount. It needs a number and a name before
+the page and the sales brief can state it.
 
-**Recommendation:** a. Daily is the Koa habit we are selling, weekends off keeps it from becoming
-noise, and a chosen time is the first piece of personalisation.
+- a) Two additional sessions in the first month (an intensive start), named plainly.
+- b) A permanent price lock on every future ALTERED layer, named as founding status.
+- c) Both, since neither costs cash today.
 
-### Q62 - the personal "1/10" page
-
-Digital candy (D080). It is go-to-market, so it can be generated here and disclosed.
-
-- a) Build after the first deposit, for that person, and reuse the design for the next.
-- b) Build a generic version now so it can be shown in sales conversations.
-- c) Drop it; the package and the call are the substance.
-
-**Recommendation:** a. Nothing about it moves the Sept 14 number, and the first real buyer's
-answers make it a better page than a mock.
+**Recommendation:** a. It is concrete, immediately valuable, and costs only hours that a
+full-paying client has already funded. b promises pricing of products that do not exist yet,
+which is a claim we cannot trace to anything.
 
 ---
 
@@ -256,29 +281,33 @@ than the visual, and an effect built around copy that then changes is wasted wor
 
 ## Planned later rounds
 
-- **Round 7 - copy and design detail.** Section-by-section copy review of the rewritten page, the
+- **Round 9 - copy and design detail.** Section-by-section copy review of the rewritten page, the
   Layer 1 explainer, the Koa pressure-pivot sub-statement, proof placement, the
   frequently-asked-questions set built from real objections, and Q37 to Q40.
-- **Round 8 - sales conversation.** The qualification script, objection handling, escalation
+- **Round 10 - sales conversation.** The qualification script, objection handling, escalation
   triggers, follow-up cadence and timing, and the DM opener tonality for the bench.
 
 ---
 
 ## Waiting on the owner
 
-Actions, not questions. Each unblocks a plan in `knowledge/plans/`.
+Actions, not questions. Each unblocks a plan in `knowledge/plans/`. **Deferred as a batch by
+D098:** he provisions everything at once after the current alignment rounds settle what is
+needed. Nothing here is chased until he says the rounds are done.
 
 - **Resend credentials, `AUTH_EMAIL_FROM`, and `OPERATOR_EMAILS`** in Vercel, for dashboard
   login. Blocks the operator dashboard (plan 01), and therefore everything the dashboard hosts.
-- **Zernio API key with his personal Instagram connected**, in Vercel as `ZERNIO_API_KEY` plus
-  the account id. Free for the first two accounts. Lets the sales desk read Instagram replies
-  (plan 06) and publishing land later (D044).
+- **Zernio API key with his Instagram connected** (converted to a business account, Q67), in
+  Vercel as `ZERNIO_API_KEY` plus the account id. Free for the first two accounts. Lets the
+  sales desk read Instagram replies (plan 06) and publishing land later (D044).
 - **A GitHub fine-grained token with contents write on this repo only**, in Vercel, so the truth
   surface can commit edits. Blocks plan 03.
-- **An interim payment link he creates himself** (Stripe payment link or e-transfer instruction),
-  recorded in settings once plan 01 exists. Until Autumn, it is the only way a deposit can be
-  taken (plan 05).
-- **Autumn credentials**, for the deposit checkout (plan 05).
+- **His e-transfer instruction** (the receiving email or phone and the exact wording buyers get),
+  recorded in settings once plan 01 exists; until then it lives in the sales script. Stripe is
+  limited until incorporation (D097); Interac e-transfer is the only live rail (plan 05).
+- **Incorporation through Ownr, then Stripe verification**, once the first deposit funds it
+  (D097).
+- **Autumn credentials**, for the deposit checkout (plan 05), after Stripe works.
 - **X credits through Zernio**, only once a lead source on X proves worth paying for (D083).
 - **Approval to submit the domain for categorisation** with URL-filtering vendors, if we want to
   address the TLS-inspection issue in D061. Outbound write, so it needs explicit approval.

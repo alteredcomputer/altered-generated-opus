@@ -1013,3 +1013,195 @@ And it is a thing he can make.
 - **The $5k AI-implementation door-to-door urge** (Sept 6) is logged as a challenge under the
   direction record's protocol. It quoted no recorded reason and defeated none; he named it himself
   as "the typical pivot" and let it pass. It shaped nothing.
+
+---
+
+## Round 7 - the offer's edges closed, the machine spec, payments reality (2026-09-11)
+
+Source: `sources/chats/2026-09-11-round-7-anger-and-the-path.md`. Q56 to Q62 answered, plus
+directives on Instagram automation, plan sequencing, payments, and provisioning. One question
+(the runway message cadence) was misread and is re-asked; one big one (deposit versus full
+ticket) was reopened by him and is registered as Q63.
+
+### D088 - Q56: the balance is due at product access; full payment up front is the target
+
+**Verdict:** Option a. The $10,000 balance is due when the product is in their hands. Payment in
+full at deposit is incentivised - and the incentive is added delivery, such as extra one-to-one
+sessions, not primarily a discount, because "that's really the most valuable thing to a lot of
+people." Instalments are a workaround at his discretion for buyers who cannot pay in full, never
+the target. Two instalment mechanics are on the table and undecided: an accredited provider
+(Klarna-style, cash up front to us, credit check on them) or self-managed splits (more closings,
+collection risk on us). That mechanic is part of Q63's resolution.
+
+**Why:** "cash is tracking the delivery, in that the deposit is for the initial service up until
+the product is launched." Monthly instalments from month two would put a collections clock and a
+ship clock on us simultaneously, and one client's instalments would not fund full-time anyway.
+
+**Framing note he attached:** "deposit" implies refundability. If heavy service is delivered
+before launch, it is closer to a pre-launch service payment, so either the pre-launch effort
+stays light enough to refund without loss, or the word changes. Folded into Q63.
+
+**Re-open cost:** Medium. Page copy and the sales brief inherit the wording.
+
+### D089 - Q57: refundable any time before the product is in their hands
+
+**Verdict:** Option a. The deposit is refundable at any time before the product is in their
+hands, through the D023 process: they state why, they give feedback, and nothing material has
+been consumed. After product access, D023 applies as written.
+
+**Discipline he attached:** at most 75% of deposit cash may be spent (acquisition and living
+costs); the rest stays liquid for refunds. Refunds are recovered first - by fixing the reason -
+unless the client is wrong for the program, and the vetting is supposed to prevent that case
+entirely.
+
+**Re-open cost:** High. It is the honesty claim the page makes.
+
+### D090 - Q58: the care package is locked; designed after the first deposit
+
+**Verdict:** Contents locked: a custom bubble mailer, a hand-written letter with a structured,
+sentimental design ("a handwritten letter on some weathered paper of sorts, very brutalist"), a
+quality hard-woven jet tag for their keychain (a metal tag idea folded into it as small
+lettering), and a sticker pack. Budget: $100 to $200 for the whole first batch, not per unit; no
+$500 upfront stock. Timing is a combination of options a and c: the exact contents are decided
+now (this decision), but design and production start only after the first deposit, funded by it,
+in a 2 to 3 day sprint; shipped within 2 to 3 weeks of the deposit so the runway's collected
+answers can tailor the letter; arrival is something to look forward to, not day-one. Production:
+local print for quality on the first few, or print-on-demand with a fast sample to him.
+
+**Why:** "It allows us to leverage the capital that they purchase with... It also doesn't
+distract us from the marketing and sales, which is what we need to focus on right now."
+
+**Re-open cost:** Low. It is a spec; plan 07 holds the files.
+
+### D091 - Q59: the video comes near the end of marketing setup, before conversion pushes
+
+**Verdict:** The long-form video is scripted and shot after the offer and path are solidified,
+the landing page and account bios exist, and roughly 75% of the marketing infrastructure is in
+place - and before the conversion push it exists to power. Outreach and lead collection start
+before it and do not wait for it. Purpose restated: it informs (the full offer, condensed, high
+energy), builds trust (a real face), and carries a stronger call to action than a page because
+"it's me telling them directly."
+
+**Attached re-scope of the checkpoint (amends D085's expectation, not its date):** Sept 14
+stays, but its realistic content is ICP validation and collected leads, not a paid deposit.
+"I don't even know if we can get to the point where we're prepared to take a deposit by
+September fourteenth." The deposit experience - call structure, workflows, what to say, what to
+give, touchpoint schedule, where it is recorded - needs another week or two of design before
+deposits are confidently accepted, because the deposit experience must be smooth and engaging,
+never radio silence. A deposit is still taken early if someone is ready and confident.
+
+**Re-open cost:** Low.
+
+### D092 - Q60: his hands write the runway, and nothing else, until money
+
+**Verdict:** Option a. Until the first deposit, his hand-written code is the runway only: the
+outbound-only sequence (SMS through Twilio is acceptable and simple; channel choice is Q66), the
+canned intents, the answer store. Recipients can be added by writing a phone number to the
+database by hand; no landing-page bridge to the generated repo is needed for v1. The commit
+covenant and cleanup list are stashed as a later project; while hand-coding the runway he keeps
+that one area clean by review rather than building certification tooling first. Nothing past the
+runway - "the point of the runway is to provide time to do the further thing."
+
+**Definition fixed:** the runway is the delivery segment between deposit and product launch.
+His hands touch only what affects the period around the deposit; long-term product development
+waits until runway revenue sustains it.
+
+**Re-open cost:** Medium; Q63's resolution feeds back into how heavy the runway must be.
+
+### D093 - the session cadence is weekly, 30 to 45 minutes, at a locked time
+
+**Verdict:** Each client gets one weekly session of 30 to 45 minutes at a recurring time they
+pick at onboarding, weekends included, adjustable when either side is unavailable. The rest of
+the week is his: processing the session's results and planning the next one. At full capacity
+of ten clients this is about seven hours of calls a week; 60% of his calendar stays free for
+development. Over-the-wire message threads carry anything between sessions. Refines D078's
+"30 to 150 minutes" to this narrower default; session one (onboarding) may still run longer.
+
+**Note:** this arrived as his answer to Q61, which actually asked about the automated runway
+message cadence, not calls. The question was written too tersely (his stated complaint) and he
+answered the more important question. The message cadence is re-asked as Q64 with the cost
+model stated plainly: automated messages take none of his time.
+
+**Re-open cost:** Low. "Let's run with that for now. We can refine it later."
+
+### D094 - Q62: the personal page is built after the first deposit, fed by the payment
+
+**Verdict:** Option a. The "1/10" page is built after the first deposit, for that person, and
+the design is reused for the next. The payment redirects to it. It pulls the buyer's details
+from the payment record, and the payment form collects the shipping address for the care
+package, so the page can double as the confirmation that fulfilment has begun.
+
+**Re-open cost:** Low.
+
+### D095 - the outreach machine: automated sourcing, one-tap approved sending, no scrolling
+
+**Verdict:** He does not scroll, does not paste profiles, and does not want to hand-type sends.
+The system sources: seeded from the accounts he named (Dan Koe, Alex Hormozi, Zach Kravitz
+style) and his own following list at @inducingchaos, it finds candidate profiles, scrapes what
+scoring needs (bio, posts, reel transcripts through public tools where useful), vets them, and
+presents them in a control panel where he 1) reviews the profile, 2) approves or edits the
+message, 3) hits send. Converting his Instagram to a business account is acceptable if it
+unlocks capability. Paste-in remains as a fallback input, not the primary mode. Supersedes the
+manual-sourcing framing of D083 and the "he sends by hand from the app" mechanics of D069's
+first slice; HITL approval per send is unchanged and remains binding (D003).
+
+**Platform reality (verified 2026-09-11 against Zernio's own docs):** the official Instagram
+API cannot send a first message to a user who has not messaged the account first, on any
+account type; Zernio's free 10,000 messages a month are replies inside Meta's 24-hour window.
+Cold sending exists only through grey-market browser-automation tools (account warmup, proxies)
+whose own copy says to use accounts you can afford to lose. So: sourcing and drafting are fully
+automatable at low risk without touching his account; the send step's mechanism (one-tap manual
+from his account versus a burner-account automation tool) is Q65. No automation ever runs
+logged in as his personal account.
+
+**Re-open cost:** Medium. Plan 02 is re-planned around this.
+
+### D096 - plans run in series, one chat at a time
+
+**Verdict:** Plans execute sequentially, not in parallel. One chat, one plan, one merge; he
+reviews and refines each before starting the next. "I can only keep up with one chat at a
+time." Supersedes the parallel note in `plans/README.md`.
+
+**Re-open cost:** Low.
+
+### D097 - payments: e-transfer first, Stripe after incorporation, PayPal as card fallback
+
+**Verdict:** His Stripe account is limited until proof of incorporation is submitted; it cannot
+accept payments today. The interim rail is Interac e-transfer for Canadian buyers, proof by
+screenshot, recorded by hand in the ledger, with a small discount as the incentive to use it.
+PayPal is the fallback when a buyer must pay by card. Crypto only if a buyer insists. He
+incorporates through Ownr (roughly $500) once the first deposit funds it, then unblocks Stripe.
+Not switching processors wholesale. Google Sheets was offered as an interim CRM; declined -
+the plans already carry Postgres and the ledger, and a second store of truth violates D058.
+
+**Re-open cost:** Low; this is sequencing, not architecture. Plan 05's interim path is updated.
+
+### D098 - provisioning waits for alignment
+
+**Verdict:** No credentials are provisioned yet. He will provide all environment variables in
+one batch after another round or two of alignment settles what is actually needed. The TODO
+list stands but is not urgent until then. Supersedes the urgency, not the content, of the
+"Waiting on the owner" register.
+
+**Re-open cost:** None.
+
+### D099 - challenges logged 2026-09-11: the anger doctrine, the B2B pivot, the mirror product
+
+Logged under the direction record's protocol; none acted on. The alignment answer was given in
+chat the same day.
+
+- **The anger doctrine** is a fuel-management insight, not a path change: internalised anger as
+  deliberate work fuel, aimed at the hardest logically-efficient move inside legal and
+  good-faith boundaries. Adopted as posture; it changes what he does with flow hours, not what
+  the plan is.
+- **The B2B SMS pivot and the $1-a-day daily-feature app** are challenges. Neither quoted nor
+  defeated a recorded reason (D062's bar). He named the B2B case's own condition himself: it
+  wins only if it reaches $1,800 a month in about two weeks of off-path work, which its own
+  fulfilment obligations make unlikely. Both parked.
+- **The generated mirror product** (a generated tier of ALTERED shipped before the hand-written
+  core) was raised and answered by his own sentence: "maybe the TRUE value is NOT speed or
+  feature-richness here... BUT LIMITED, REFINED ACCURACY of the software designed by me." The
+  hard wall (D016) stands. Generation stays on go-to-market, tooling, and the runway's
+  surroundings; the product core stays his.
+- **A voice layer** (ElevenLabs phone-call latency) is noted as a future Koa capability, not a
+  build.
