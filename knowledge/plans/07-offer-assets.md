@@ -33,7 +33,7 @@ D022 (proof is staged truth), D047 (generated and disclosed), D052 (two narrativ
    article text until the video exists (plan 04).
 2. **Onboarding run-sheet.** The 24-hour session (D080): purpose, the question set that
    unravels the goal and the blockers, the conflict-resolution pass, expectation setting, and the
-   takeaway they leave with. Time-boxed. Feeds the care package's tailoring and the runway's
+   takeaway they leave with. Time-boxed. Feeds the care package's tailoring and Koa's
    first answers.
 3. **Weekly session template.** The ask, resolve, deliver or report, next-step cycle (D080) as a
    one-page sheet for the weekly 30 to 45 minute session at the client's locked time (D093),
@@ -54,10 +54,10 @@ D022 (proof is staged truth), D047 (generated and disclosed), D052 (two narrativ
 
 ## Not in scope
 
-The Koa runway in any form - code, intents, or message copy. It is product-shaped and his by rule
-(D080, D092). If he wants a research digest of the frameworks he named to draw from, he asks; it
-is not produced unprompted. The sales brief (plan 06). Anything that states how the close leads
-(full ticket versus reservation) before Q63 closes, or the pay-in-full bonus before Q68 closes.
+Koa itself in any form - code, prompts, or message copy. It is product and belongs to plan 08
+(D100, D101). If he wants a research digest of the frameworks he named to draw from, he asks; it
+is not produced unprompted. The sales brief (plan 06). Price copy is fixed by D102: the full
+$12,500, the floor tier unmentioned; the pay-in-full framing per D106.
 
 ## Design
 

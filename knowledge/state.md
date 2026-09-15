@@ -1,63 +1,69 @@
 # Current state
 
-Updated 2026-09-11. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
+Updated 2026-09-15. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
 `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
 
 ## Where the project stands
 
-Live at `generated.altered.computer`, deployed from `main`, not indexed. The application builds
-and runs. The landing page still shows the **retired** $100/$499 offer and the Nov 5 deliverables
-as a promise; plan 04 is `ready` to replace it from `offer.md`.
+**Round 8 (2026-09-15) is the generation flip.** Recorded as D100 to D111; archived verbatim in
+`sources/chats/2026-09-15-round-8-the-generation-flip.md`. The structural changes:
 
-Round 7 was answered on 2026-09-11 and recorded as D088 to D099; the message is archived
-verbatim in `sources/chats/2026-09-11-round-7-anger-and-the-path.md`. The offer's edges are
-closed: balance due at product access with pay-in-full asked first (D088), refundable any time
-before product access (D089), care package locked and produced after the first reservation
-(D090), video near the end of marketing setup (D091), his hands write the runway only (D092),
-weekly 30 to 45 minute sessions (D093), the "1/10" page after the first reservation (D094).
+- **The MVP is generated (D100).** The Koa product buyers touch is built by agents in this repo
+  under binding guardrails, with an escalation ladder (generate, correct, hand-coded primitive,
+  thinnest slice) and an inverted challenge protocol: concerns about generation get fixed before
+  any flip back to hand code. The hard wall around `usealtered/altered` stands untouched; the
+  hand-written core is the long-term V1 with data migrating by transform. AGENTS.md is amended.
+- **The outbound-only runway is scrapped (D101).** Full interactive Koa - persistent vector
+  memory, self-scheduled reach-outs by agent judgment, no fixed cadence - ships on the paid
+  Sendblue number. Plan 08 (`plans/08-koa-mvp.md`) carries the proposed six-phase scope.
+- **The close is the full $12,500 (D102).** No reservation framing. Financing via an accredited
+  provider once Stripe works; $2,500 is the hidden floor tier (same product, no one-to-one),
+  never mentioned unless full price and financing both fail. Paying in full earns priority, not
+  extras (D106).
+- **The funnel is inbound-led (D103, D104):** every call to action is "text Koa";
+  `altered.computer/go` opens the thread; Koa sells at about half lean until the wall (Q70
+  open); outbound Instagram openers stay manual from his personal account.
+- **Model and cost governance (D107),** now in AGENTS.md: explicit models always, Opus 5 minimum
+  for coding, Fable 5 only with explicit approval, Sonnet-class for proceduralised light tasks
+  (D105, $25 sourcing budget), roughly 300k context then summarise or restart, save every turn,
+  series execution, cost reported against progress.
+- **The checkpoint is Sept 17 (D108):** meaningful lever-moving action. He moves into the new
+  apartment Sept 16. Honest financial runway: roughly end of December.
+- **Standing response format (D109):** every chat turn ends with his TODO list, then a deployed
+  assets list.
+- **Content (D110):** he is the demonstration user (his own Koa, screen recordings, talking
+  head); client 1 is the feedback loop, not public content. The "Video content strategy" chat
+  (id `bc-01a0937b-4169-7495-a3a5-d4647fd8e3a9`) holds his @inducingchaos transcripts for the
+  content plan.
 
-The structural changes from Round 7:
+Round 9 (Q69 to Q75) is asked - the last round before generation: MVP scope confirmation, the
+wall design, the standing monthly burn and Sendblue timing, pre-purchase access policy, public
+naming of the early build, the weekly generation budget, and the interim page. After the
+answers, the flow becomes generate-answer cycles: a build slice between every Q&A round, in
+series, fresh-context subagents on explicit models.
 
-- **The outreach machine (D095):** he does not scroll, paste, or type sends. The system sources
-  by scraping public logged-out Instagram surfaces from seed accounts (Dan Koe, Hormozi, Zach
-  Kravitz style, plus his following at @inducingchaos), scores, drafts, and queues; he approves
-  each send in a control panel. Verified 2026-09-11 against Zernio's own docs: no official API
-  can send a first Instagram message on any account type, so the send step is one-tap manual
-  until Q65 closes. No automation ever logs into his personal account.
-- **Plans run in series (D096):** one chat, one plan, one merge, review between.
-- **Payments reality (D097):** Stripe is limited until he proves incorporation (Ownr, roughly
-  $500, after the first reservation funds it). Interim rail: Interac e-transfer with a small
-  discount, proof by screenshot, recorded by hand. PayPal for card buyers.
-- **Provisioning is batched (D098):** no credentials until the alignment rounds settle.
-- **The checkpoint re-scoped (D091):** Sept 14 stays but its realistic content is validated ICP
-  and collected leads; the reservation experience needs another week or two of design (plan
-  07's run-sheets and touchpoints) before deposits are confidently accepted.
-
-Round 8 (Q63 to Q68) is asked: full-ticket versus reservation-led close (he is fifty-fifty and
-this is the load-bearing one), runway message cadence (Q61 was misread as call cadence), the
-physical send mechanism, the runway channel (Twilio SMS versus Sendblue iMessage), the sourcing
-budget and business-account conversion, and the pay-in-full bonus.
-
-Seven plans exist. Three are `ready`: 02 outreach bench (re-planned 2026-09-11 around the
-sourcing machine), 04 offer and page, 07 offer assets. They execute in series; "next" takes 02
-first. The feature graph passes: 40 nodes, every file accounted for.
+Live at `generated.altered.computer`, deployed from `main`, not indexed. The landing page still
+shows the **retired** $100/$499 offer; Q75 proposes a minimal interim page pointing at the
+thread. Eight plans exist; plan 08 (Koa MVP) leads the order. The feature graph passes with the
+new `koa` node planned.
 
 ## What is blocking
 
-- **Q63** shapes plan 04's price framing, plan 05's checkout, and plan 06's close script. Plans
-  02 and 07 do not wait on it.
-- **Q65 and Q67** gate only plan 02's send mechanics and paid scraping backends; sourcing,
-  scoring, drafting, and the queue build now.
-- **Owner actions** are batched by D098 and listed in `open-questions.md` under "Waiting on the
-  owner"; nothing is chased until the rounds settle.
-- **Copy approval** before the page can be indexed (plan 04).
+- **Round 9 answers** gate plan 08's go signal (scope Q69, wall Q70, Sendblue Q71, access Q72)
+  and the interim page (Q75). Phase 1 can build against a mock Sendblue adapter regardless.
+- **Sendblue credentials** gate the loop going live; **Neon database** provisioning comes with
+  plan 08 phase 1 (the data-layer slice it needs).
+- **Owner actions** are listed in `open-questions.md` under "Waiting on the owner"; the plan-08
+  items lead now.
+- **Copy approval** before any page is indexed (plan 04).
 
 ## What can proceed without answers
 
-Plan 02 minus the send mechanism, plan 04 minus the price framing line, plan 07 in full, in that
-series order. Plan 01 up to the point where a real login must be tested.
+Plan 08 phase 1 against the mock adapter (webhook shape, store, agent turn, CLI conversation,
+allowlist, kill switches) - everything except the live line. Plan 07's script and run-sheets.
+Plan 02's sourcing procedure inside the $25 budget (D105).
 
 ## Working notes for a fresh session
 
@@ -95,6 +101,14 @@ series order. Plan 01 up to the point where a real login must be tested.
   out only, never as his account.
 - **Write questions in full sentences.** He said Q60's brevity made it hard to understand;
   phone-readable means short lines, not clipped grammar.
+- **Sendblue mechanics from his own account of the docs (2026-09-15, to verify against Sendblue
+  before building):** replies are free within 24 hours of the person's last message; messages
+  beyond that window count against a 150-per-day follow-up cap; the first message of any thread
+  must be inbound; the line costs about $100 USD a month; FaceTime features need a sales call.
+- **Concurrency prior art:** the previous attempt's iMessage concurrency failure was first an
+  observability failure - no event data existed to diagnose duplicate sends. Plan 08 designs the
+  event ledger in phase 1. His Redis interrupt-and-continue sketch is recorded in D111 as design
+  input, not a commitment.
 
 ## Verified facts
 

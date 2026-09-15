@@ -9,138 +9,129 @@ move to `decisions.md` and are removed from here.
 
 ---
 
-## Rounds 1 to 3 and 5 to 7
+## Rounds 1 to 3 and 5 to 8
 
 **Answered.** Round 1 on 2026-08-12 (D015 to D039), round 2 on 2026-08-14 (D040 to D051), round 3 on
 2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077), round 6 on 2026-09-07 (D078 to
-D087), round 7 on 2026-09-11 (D088 to D099).
+D087), round 7 on 2026-09-11 (D088 to D099), round 8 on 2026-09-15 (D100 to D111).
 
 ---
 
-## Round 8 - the structure of the money, and the machine's edges (asked 2026-09-11)
+## Round 9 - the last round before generation (asked 2026-09-15)
 
-Round 7 closed the offer's edges but reopened the biggest one: he is fifty-fifty on dropping the
-deposit and closing the full $12,500 up front, and asked for the comparison. The rest are the
-runway's two mechanical choices and the outreach machine's two mechanical choices, all of which
-gate code that is otherwise ready to build.
+Round 8 flipped the MVP to generated (D100), scrapped the outbound-only runway for full Koa
+(D101), and set the close at the full $12,500 (D102). He asked for one more round, then
+generation begins with a build cycle between answers. These are the questions generation cannot
+proceed past without guessing. Plan 08 carries the proposed scope these refer to.
 
-### Q63 - the $2,500 start, or closing the full $12,500 up front
+### Q69 - the MVP scope: confirm or trim the proposed cut
 
-He is fifty-fifty and asked for the comparison (source archive 2026-09-11). Both models sell the
-same $12,500 program. The difference is what is asked for at the close, what is owed before the
-product exists, and what the first payment is called.
+Plan 08 proposes six phases: 1) the reply loop on Sendblue behind an allowlist, 2) vector
+memory, 3) self-scheduled reach-outs, 4) concurrency and the event ledger, 5) the wall and
+sales mode, 6) public number with the `/go` redirect and per-user cost tracking. Everything
+else - voice, the thought editor, group features, the dashboard views beyond a minimal
+conversation log - is explicitly out of v1.
 
-- a) **Keep the $2,500 start as the standard path, and always ask for full payment first.** The
-  close presents the full ticket with the pay-in-full incentive (D088); the $2,500 start is the
-  fallback offered in the same breath, framed as "start now, balance at product access." Light
-  pre-launch obligations: onboarding call, runway, care package, page - all refundable-safe
-  (D089). His build hours stay his until launch.
-- b) **Full $12,500 only, with payment plans as the workaround.** Strongest cash and commitment;
-  requires a stated maximum product timeline (he floated "nine months maximum") and a scheduled
-  pre-launch service calendar heavy enough to justify holding the full amount, which spends his
-  build hours on fulfilment before the product exists.
-- c) **$2,500 only at close, full ticket raised later at product access.** Simplest close,
-  weakest cash, and re-opens the price conversation at the worst moment.
+- a) Build phases 1 to 6 as proposed, in order, nothing else.
+- b) Trim phase 5 or 6 for now: stop at a private Koa he uses himself and demos on camera, and
+  open it to the public only after his own daily use proves it.
+- c) Add something the plan missed, named in his reply.
 
-**Recommendation:** a. It is what he described himself when he said "you might as well ask for
-the full amount up front" and "close on the twelve five, and then figure out how to deliver" -
-but it keeps the escape hatch that protects the build: a buyer who balks at $12,500 today can
-still say yes to $2,500 today, and D088 already makes the balance due at access. Option b's real
-cost is the one he named: 50% of his focus sold to pre-launch fulfilment before the product that
-makes fulfilment cheap exists. If a is chosen, the first payment is not called a deposit; call
-it what it is - reserving the slot and starting the program - and the page says "Start for
-$2,500" against the $12,500 program price. Instalment mechanic when a buyer cannot pay the
-balance in full: accredited provider first (cash up front, their credit risk), self-managed
-splits only at his discretion for an exceptional buyer.
+**Recommendation:** a, with the note that b is embedded anyway: the phases ship in order, so his
+private daily-use Koa exists at the end of phase 3 and the public wall only opens when phases 5
+and 6 land. Nothing is public until the allowlist is deliberately widened.
 
-### Q64 - how often the runway messages arrive (re-asked; Q61 was answered as call cadence)
+### Q70 - where the wall sits for a prospect texting Koa
 
-This is about the automated outbound-only messages the runway sends, not calls. They are
-generated and sent by the system at fixed times; they cost him no live time regardless of
-frequency. The weekly 30-45 minute session is already locked (D093) and is separate.
+D104: Koa is genuinely useful, leans about half toward the program, and free riders must hit a
+wall. He asked for options and a recommendation.
 
-- a) One message every weekday at a time the person picks at onboarding, quiet on weekends.
-- b) One a day including weekends.
-- c) Two or three a week.
+- a) A message wall: a fixed number of Koa exchanges (say 30 to 50 messages), then the thread
+  shifts to program-only until they book or pay. Predictable, gameable, blunt.
+- b) A capability wall: conversation stays unlimited, but the product features - persistent
+  memory across days and self-scheduled reach-outs - activate only for program members. Free
+  Koa is a great conversation that forgets and never texts first; paid Koa remembers and
+  initiates. The wall is the product's own value, not a meter.
+- c) A milestone wall: the onboarding intents complete (goal, blocker, context collected), Koa
+  delivers one genuinely useful synthesis of what it heard, then gates: the next step is the
+  call or the program. Naturally personal, needs judgment, hardest to game.
+- d) A cost wall only: a per-user daily token budget, silent until hit. Protects spend but sells
+  nothing.
 
-**Recommendation:** a. Daily is the Koa habit the program sells, a chosen time is the first act
-of personalisation, and weekend silence keeps it from becoming noise.
+**Recommendation:** c layered on d, with one element of b. The milestone wall is the sales
+process (their own words, synthesised, is the strongest pitch Koa can make); the token budget
+underneath protects spend from day one and is needed regardless; and self-scheduled reach-outs
+staying member-only keeps the most expensive, most magical feature as the thing they are
+buying. A pure message count (a) punishes the exact person we want - the one who goes deep.
 
-### Q65 - how an approved opener physically reaches a stranger's Instagram inbox
+### Q71 - the standing monthly burn, and when Sendblue gets bought
 
-Verified 2026-09-11: the official Instagram API cannot start a conversation with someone who has
-not messaged the account first, on any account type - Zernio's own docs state it. Zernio still
-reads replies and sends inside the 24-hour window, so everything after the first message is
-automatable. The first message has three honest options:
+The MVP's real costs: Sendblue about $100 USD a month, a Twilio number a few dollars if ported,
+OpenRouter usage (his $25 sourcing budget plus Koa's own generation, protected by per-user
+budgets), Neon and Vercel free tiers to start. Roughly $150 to $200 a month all in.
 
-- a) **One-tap manual:** the control panel queues approved sends; on his phone, each is a tap
-  that copies the text and opens the profile, he pastes and sends from his personal account.
-  Zero account risk, roughly 20 seconds per send, and the DM comes from a real person's profile,
-  which is also why it gets read.
-- b) **A grey-market sender** (browser automation, warmed accounts, proxies) wired to our control
-  panel, running on a dedicated business or burner account, never his personal one. True
-  hands-off sending; real suspension risk (the vendors themselves say to use accounts you can
-  afford to lose), a warmup period before volume, and roughly $50 to $100 a month.
-- c) **a now, b when volume proves out:** manual one-tap until fifty sends and a conversion
-  signal exist (the D069 revisit line), then a burner-account automation for scale while his
-  personal account only ever holds conversations that came back.
+- a) Approve the standing burn now; buy Sendblue when phase 1 is deployed and the webhook is
+  ready to receive (a few days in), so the paid month starts when messages can actually flow.
+- b) Approve and buy Sendblue today as the commitment stake, per his own "signal to move fast".
+- c) Hold Sendblue until the loop works against a mock; approve only token spend now.
 
-**Recommendation:** c. It matches the automation-after-fifty rule already locked in D069, it
-never risks the personal account that his content and credibility live on, and it spends money
-on automation only after the list it automates is proven to convert.
+**Recommendation:** a. It honours the stake without paying for dead days: the moment the
+webhook deploys, the line goes live. b costs the same money for the same outcome minus a few
+days of unusable line; c saves nothing meaningful and loses the momentum he named.
 
-### Q66 - the runway's channel: SMS through Twilio, or iMessage through Sendblue
+### Q72 - who can text Koa before the program opens
 
-The runway is outbound-only either way, and the answer store is identical. This decides sender
-identity, cost, and feel.
+- a) Allowlist only (him, Kiera, one or two friends) until phases 4 and 5 are verified, then
+  public.
+- b) Public from the moment the loop works, wall from day one.
+- c) Allowlist plus a manually invited handful of warm prospects as the first real test.
 
-- a) Twilio SMS: cheapest (fractions of a cent per message), simplest integration, he named it
-  himself; green bubble, sender is a bare number, A2P registration paperwork in North America.
-- b) Sendblue iMessage: blue bubble, real iMessage identity, the same channel Koa will live on,
-  so the runway literally becomes Koa's number later; roughly $50+ a month and an onboarding
-  step.
-- c) Twilio now, migrate the number experience to iMessage at Koa's launch.
+**Recommendation:** a moving to c: the allowlist is the fail-closed default the codebase already
+mandates, his own daily use is the demo content engine (D110), and the first strangers should
+be invited on purpose, not discovered by accident before the event ledger proves the system
+does not double-send.
 
-**Recommendation:** b. The runway is sold as "Koa before Koa" - the blue bubble is part of the
-product's identity (D080 pre-loads Koa from the runway's answers), the buyer count is one to
-ten so per-message cost is irrelevant, and paying for it out of the first deposit is exactly
-what the deposit is for. If the monthly cost before the first deposit matters, a is a fine
-start, but the switch cost later is a number change for every client.
+### Q73 - how the early build is named in public
 
-### Q67 - the sourcing machine's budget and the business-account conversion
+D047 requires disclosure of generated work; his Sept 13 framing was "a very experimental state".
+The public surface needs one consistent term.
 
-Sourcing will scrape public data (seed accounts' followers and engagers, candidate bios, posts,
-reel transcripts) with a headless browser and, where it saves days, a paid scraping service.
-Public viewers are Cloudflare-gated against plain fetches but pass with a real browser (verified
-2026-09-11), so a pure self-built scraper is possible but slower to harden.
+- a) "Koa - early access": confident, honest about maturity, no engineering detail on the
+  label; the page's fine print carries the generated-and-disclosed line as it already does.
+- b) "Koa beta" or "experimental": more hedged, invites forgiveness, costs authority.
+- c) No qualifier at all.
 
-- a) Pre-approve up to $50 a month for scraping infrastructure (a scraping API or proxy service),
-  spent only when the self-built path stalls, each service named in `constraints.md` when first
-  used.
-- b) Self-built headless browser only, no paid services; accept slower and flakier sourcing.
-- c) Decide per-service in chat as each need arises.
+**Recommendation:** a. "Early access" matches the Layer 1 founding story, keeps D047 honest in
+the footer where it belongs, and does not undersell a product that works.
 
-Attached: converting his Instagram to a business account unlocks Zernio's inbox for replies
-(plan 06). It is his account, so the conversion is his action; the known trade-off chatter is
-about reach on business accounts, which Meta denies and which matters less for a DM-first motion.
+### Q74 - the weekly generation budget
 
-**Recommendation:** a for the budget - it is inside the $20 to $50 he already said he would
-spend when justified (D083), and naming each service on first use keeps default-deny honest.
-Convert the account whenever convenient before the sales desk lands; nothing before plan 06
-needs it.
+D107 makes cost an active duty; a number makes it operable. His one bad day cost about $100.
 
-### Q68 - what paying in full at the start actually earns
+- a) About $50 a week of Cursor and token spend for the build, reported against progress each
+  turn.
+- b) About $100 a week while the MVP is actively generating, dropping after phase 6.
+- c) No weekly cap; per-task judgment with the D107 rules (explicit models, 300k context cap,
+  save-and-restart).
 
-D088 says the incentive is added delivery, not a discount. It needs a number and a name before
-the page and the sales brief can state it.
+**Recommendation:** b during the MVP push, then a. The MVP is the revenue gate; underfunding
+its two or three build weeks to save $50 delays the $12,500. The D107 rules are what keep
+either number honest.
 
-- a) Two additional sessions in the first month (an intensive start), named plainly.
-- b) A permanent price lock on every future ALTERED layer, named as founding status.
-- c) Both, since neither costs cash today.
+### Q75 - the live page in the meantime
 
-**Recommendation:** a. It is concrete, immediately valuable, and costs only hours that a
-full-paying client has already funded. b promises pricing of products that do not exist yet,
-which is a claim we cannot trace to anything.
+The live landing page still shows the retired $100/$499 offer. Plan 04's full rewrite waits on
+copy approval, but the page is wrong today and the funnel is changing to "text Koa".
+
+- a) Ship a minimal interim page now: one screen, the tagline, "Koa - early access", one
+  button that opens the thread (`/go`), no prices, no dates. Full page (plan 04) follows once
+  Koa is live and copy is approved.
+- b) Take the price and date lines off the current page, change nothing else.
+- c) Leave it; nobody is being sent there yet.
+
+**Recommendation:** a. It is a one-day generated task, it makes every surface point at the same
+funnel, it removes a page that is actively wrong, and it gives his daily reels somewhere to
+send people the moment Koa can receive them.
 
 ---
 
@@ -292,22 +283,24 @@ than the visual, and an effect built around copy that then changes is wasted wor
 ## Waiting on the owner
 
 Actions, not questions. Each unblocks a plan in `knowledge/plans/`. **Deferred as a batch by
-D098:** he provisions everything at once after the current alignment rounds settle what is
-needed. Nothing here is chased until he says the rounds are done.
+D098** except where Round 9 or plan 08 names them; the plan-08 items lead now.
 
+- **Round 9 answers** (Q69 to Q75), then generation starts.
+- **Sendblue account and `SENDBLUE_API_KEY` + `SENDBLUE_SIGNING_SECRET`** in Vercel, per Q71's
+  timing. Blocks plan 08 phase 1 going live (the loop builds against a mock until then).
+- **Instagram converted to a business account** (D105), his action, before plan 06's inbox.
 - **Resend credentials, `AUTH_EMAIL_FROM`, and `OPERATOR_EMAILS`** in Vercel, for dashboard
   login. Blocks the operator dashboard (plan 01), and therefore everything the dashboard hosts.
-- **Zernio API key with his Instagram connected** (converted to a business account, Q67), in
-  Vercel as `ZERNIO_API_KEY` plus the account id. Free for the first two accounts. Lets the
-  sales desk read Instagram replies (plan 06) and publishing land later (D044).
+- **Zernio API key with his Instagram connected**, in Vercel as `ZERNIO_API_KEY` plus the
+  account id. Free for the first two accounts. Lets the sales desk read Instagram replies
+  (plan 06) and publishing land later (D044).
 - **A GitHub fine-grained token with contents write on this repo only**, in Vercel, so the truth
   surface can commit edits. Blocks plan 03.
-- **His e-transfer instruction** (the receiving email or phone and the exact wording buyers get),
-  recorded in settings once plan 01 exists; until then it lives in the sales script. Stripe is
-  limited until incorporation (D097); Interac e-transfer is the only live rail (plan 05).
-- **Incorporation through Ownr, then Stripe verification**, once the first deposit funds it
-  (D097).
-- **Autumn credentials**, for the deposit checkout (plan 05), after Stripe works.
+- **His e-transfer instruction** (the receiving email or phone and the exact wording buyers get);
+  Stripe is limited until incorporation (D097); Interac e-transfer is the only live rail
+  (plan 05), and financing (D102) waits on Stripe.
+- **Incorporation through Ownr, then Stripe verification**, once the first sale funds it (D097).
+- **Autumn credentials**, for checkout (plan 05), after Stripe works.
 - **X credits through Zernio**, only once a lead source on X proves worth paying for (D083).
 - **Approval to submit the domain for categorisation** with URL-filtering vendors, if we want to
   address the TLS-inspection issue in D061. Outbound write, so it needs explicit approval.
