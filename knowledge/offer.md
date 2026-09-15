@@ -1,11 +1,12 @@
 # The offer, deconstructed
 
-The full statement of what we sell, derived from `decisions.md` Rounds 6 and 7 (D078 to D099) and
+The full statement of what we sell, derived from `decisions.md` Rounds 6 to 8 (D078 to D111) and
 the earlier rounds they rest on. The compass carries the one-page version; this file is what the
-page (plan 04), the sales brief (plan 06), the deposit-week kit (plan 07), and the video script
-read from. Items marked **OPEN** are registered in `open-questions.md` and do not ship in copy.
+page (plan 04), the sales brief (plan 06), the fulfilment kit (plan 07), Koa's own sales lean
+(plan 08), and the video script read from. Items marked **OPEN** are registered in
+`open-questions.md` and do not ship in copy.
 
-Last reconciled 2026-09-11.
+Last reconciled 2026-09-15.
 
 ## One sentence
 
@@ -17,16 +18,22 @@ with the builder in the room every week until it is unblocked.
 ALTERED Koa Layer 1 (D020). Layer 1 is the founding program: the people who shape the platform
 permanently. One offer, no tiers (D078).
 
-## Price
+## Price (D102)
 
-- $12,500 total (D065). $2,500 reserves the slot and starts the program that week (D079).
-- The $10,000 balance is due when the product is in their hands (D088). Paying in full at the
-  start is always offered first and earns added delivery, not a discount; the specific bonus:
-  **OPEN** (Q68). Instalments are a workaround at his discretion, never the target (D088).
-- Whether the close leads with the full ticket or the $2,500 start, and what the first payment
-  is called: **OPEN** (Q63). Until it closes, copy says "reserve" and never "deposit" alone.
+- **$12,500, closed in full.** No "start for less" framing; optionality is a financial risk we
+  do not carry.
+- **Cannot pay in full:** financing through an accredited provider (Klarna-style; we receive the
+  full amount, they carry the credit) once a payment processor exists; self-managed splits only
+  with caution at his discretion. Until incorporation unblocks Stripe (D097), collection is by
+  Interac e-transfer, and splits are self-managed.
+- **The floor tier, never mentioned unless both full price and financing fail:** $2,500 minimum
+  payment for the same product without the one-to-one - access, bug-fix support, the community,
+  and the clarity-and-consistency promise; no custom build, no custom integrations. Same offer
+  minus service components, so the one-offer rule (D078) survives.
+- **Paying in full is the standard and earns priority attention, not extras** (D106). No bonus
+  sessions, no price locks on future ALTERED pricing.
 - Refundable at any time before the product is in their hands, through the process: they state
-  why, give feedback, nothing material consumed (D089, D023). At most 75% of reservation cash is
+  why, give feedback, nothing material consumed (D089, D023). At most 75% of collected cash is
   spent before product access; the rest stays liquid for refunds (D089).
 
 ## Who it is for
@@ -37,7 +44,7 @@ switching ships under pressure, a thousand scattered thoughts and no source of t
 re-explained to every AI from zero, the quiet important work dropping.
 
 Not for: no budget; procrastination we cannot solve; a skill gap we cannot close; no direction at
-all (D018). The deposit does most of this filtering (D079).
+all (D018). The price does most of this filtering, and Koa's own wall does the rest (D104).
 
 ## The promise
 
@@ -61,28 +68,28 @@ opens (D078). Never revenue (D019).
   or physical systems into ALTERED; knowledge-strategy consulting along the way.
 - Capacity: one to ten clients, one new client every three to eight weeks.
 
-## The deposit week (D080)
+## The first week (D080, amended by D101)
 
 1. A structured onboarding session within 24 hours.
 2. A hand-built care package (D090): a custom bubble mailer, a hand-written letter on weathered
    paper, a hard-woven jet tag for their keys, and a sticker pack. $100 to $200 for the whole
-   first batch. Designed in a 2 to 3 day sprint after the first reservation, funded by it, and
-   shipped within 2 to 3 weeks so the runway's answers can tailor the letter.
-3. The Koa runway: outbound-only messages at fixed times, canned intents, AI-personalised from
-   their aggregated answers, replies collected as answers only, progress cards as PNGs,
-   continuous rather than a countdown, everything pre-loading Koa at launch. Hand-written by the
-   founder in his repo (D092). Message cadence: **OPEN** (Q64). Channel, SMS or iMessage:
-   **OPEN** (Q66).
-4. A personal "1/10" page in the blackout-with-warm-lamp aesthetic, built after the first
-   reservation for that person, reached by redirect from the payment, personalised from the
-   payment's details, and collecting the shipping address for the package (D094).
+   first batch. Designed in a 2 to 3 day sprint after the first sale, funded by it, and shipped
+   within 2 to 3 weeks so their Koa conversations can tailor the letter.
+3. **Koa early access, live from day one** (D101): the full interactive agent on iMessage -
+   persistent memory, self-scheduled reach-outs by its own judgment, no fixed cadence. Their
+   conversation history carries straight into the program; nothing starts from zero. Supersedes
+   the outbound-only runway.
+4. A personal "1/10" page in the blackout-with-warm-lamp aesthetic, built after the first sale
+   for that person, reached by redirect from the payment, personalised from the payment's
+   details, and collecting the shipping address for the package (D094).
 
 ## The product, and when
 
-The mechanism core - memory, self-scheduled reach-outs, voice notes, notes import (D040) - with a
-soft "Est. November" that can move (D082). The service carries the relationship until then. The
-core is hand-written by the founder, and nothing that ships to a buyer as product is generated
-(D016, D080).
+**Koa early access exists now as a generated build** (D100): the iMessage agent with persistent
+vector memory and self-scheduled reach-outs, presented publicly per Q73 (**OPEN**), disclosed as
+generated where disclosure lives (D047). The hand-written core by the founder remains the
+long-term V1; user data migrates to it by transform. Voice notes and notes import (D040) join as
+the build progresses; the soft "Est. November" language for the full platform can move (D082).
 
 ## The room (D084)
 
@@ -91,18 +98,21 @@ needed.
 
 ## How it is sold
 
-The long-form video informs (D086), scripted and shot near the end of marketing setup, before
-the conversion push and after the page and bios exist (D091); the page holds the video and
-states the offer (D042); the chat thread closes (D073). Outreach is Instagram first: the system
-sources and drafts, he approves each send from a control panel (D095); how the approved opener
-physically sends: **OPEN** (Q65). The first seat pays full price first; the fallback is a
-discount for a written testimonial and advertising permission; never free; friends do not count
-(D066).
+**The funnel is the product** (D103, D104): every call to action is "text Koa" -
+`altered.computer/go` opens the thread. Koa is genuinely useful from the first message, leans
+about half toward the program, and gates at the wall (**OPEN**, Q70). The first iMessage is
+always inbound by platform rule. The long-form video informs (D086), scripted and shot near the
+end of marketing setup (D091); the page holds the video, states the offer, and points at the
+thread (D042); the close happens in the thread with HITL where sensitive (D073, D104). Outreach:
+Instagram openers sent manually from his personal account, sourced and drafted by the bench
+(D095, D103); his daily content demonstrates his own Koa (D110). The first seat pays full price
+first; the fallback is a discount for a written testimonial and advertising permission; never
+free; friends do not count (D066).
 
-## Sales arithmetic (D079)
+## Sales arithmetic (D079, restated under D102)
 
-Two deposits a month for one to four months, then conversion to the full ticket. Two deposits is
-the hard yes to leave the job. One to ten clients funds about a year of building.
+Two closes in the first months is the hard yes to leave the job. One to ten clients at $12,500
+funds about a year of building; the program can extend by another ten later if warranted.
 
 ## Copy sources
 

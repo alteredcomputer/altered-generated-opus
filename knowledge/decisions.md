@@ -1205,3 +1205,198 @@ chat the same day.
   surroundings; the product core stays his.
 - **A voice layer** (ElevenLabs phone-call latency) is noted as a future Koa capability, not a
   build.
+
+---
+
+## Round 8 - the generation flip (2026-09-15)
+
+Source: `sources/chats/2026-09-15-round-8-the-generation-flip.md`. The most structural round
+since Round 1: the MVP is generated, the outbound-only runway is scrapped for full Koa, the close
+is the full ticket, and the operating rules for models, context, and cost are set. Checkpoint
+moves to Sept 17.
+
+### D100 - the MVP is generated
+
+**Verdict:** The Koa MVP - the product buyers and prospects touch - is generated in this repo by
+agents, not hand-written. His words: "I think, we should decide the scope of the MVP, and the MVP
+(for my personal use, testing, and then demonstration - and finally, for program users to use)
+could be generated. Boom. Never thought I'd say that. But it's reality!!!" The hand-written core
+in his repo remains the long-term V1 and his authorship remains the end goal; user data in the
+generated MVP is trusted as durable, with a migration transform when the hand-written product
+lands. The generated version is presented honestly as an early, evolving build.
+
+**Supersedes:** the authorship boundary as applied to the MVP in D016 and D080 ("nothing code or
+product-related should be generated") and D092's runway-only rule. **Does not touch:** the hard
+wall around `usealtered/altered` - no agent writes in his repo, ever, and this repo still never
+imports from it.
+
+**Why (his reasoning):** pre-selling with nothing is selling an empty box; the box gets filled
+fastest by generation. "Every minute that we take longer to code by hand, is 1 minute further
+away from a $12,500 sale." His value is "deep attention to detail and accuracy to what I
+PERSONALLY know that works - not necessarily my hands on the code." Hormozi: speed of delivery
+is how you charge more. The earlier rebuttal (AI cutting corners) is addressed by smarter models
+plus the guardrails below.
+
+**The escalation ladder he set:** try to generate; if insufficient, correct; if seemingly
+impossible, hand-code that primitive as a package the generated app consumes; failing that, a
+thinnest-slice replacement; only then hand-build more.
+
+**The inverted challenge protocol he ordered:** when a concern about generation comes up, agents
+must help him fix and resolve it - build, fix, patch - before letting him flip back to hand
+coding. Same bar as path challenges: the concern must be worked, not obeyed.
+
+**Guardrail conditions he attached (binding):** an intelligent model generates; time is spent
+refining function and aesthetic; the feature graph bounds scope exactly; strict cleanliness,
+security, and reliability guardrails per pass (security hole checks, atomic data reliability,
+end-to-end Effect error handling); Cursor as the agent interface; a manipulable source of truth
+tracking feature state, data points, and TODOs.
+
+**Re-open cost:** Very high. Everything from here builds on it.
+
+### D101 - the outbound-only runway is scrapped; full Koa ships on the number
+
+**Verdict:** No hard-coded outbound-only sequence. The generated MVP is interactive Koa with its
+real features - persistent vector memory and self-scheduled reach-outs - live on the paid
+iMessage number for prospects and customers. "Skip the limited outbound-only sequence... No need
+to limit functionality because really, you and other intelligent agents can build it in a day."
+
+**Cadence (answers Q64):** no fixed schedules. Koa replies when they text; the self-scheduling
+tool decides follow-ups by agent judgment of their texting energy - engaged gets an evening
+check-in, dry gets space then a sharp morning touch, unresponsive for days gets one final
+contextual "I'll stop following up on this; say the word and we continue where we left off."
+Onboarding intents are guidelines, not a fixed question order; tangents are followed; the name
+may be collected persistently. Sendblue constraints respected: free replies inside 24 hours of
+their last message; beyond that counts against the 150-per-day follow-up limit.
+
+**Supersedes:** D080 item 3 (the runway as an outbound-only product), D093's note re-asking Q64,
+and the runway framing in D092. The reservation-week deliverables in D080 otherwise stand, with
+"the runway" replaced by "Koa early access".
+
+**Re-open cost:** High. The funnel, the offer, and plan 08 build on it.
+
+### D102 - Q63: the close is the full $12,500; $2,500 becomes the hidden floor tier
+
+**Verdict:** One offer, closed at the full $12,500. No "start for $2,500" framing: "I don't want
+there to be optionality because that creates a security risk for me financially." When a buyer
+cannot pay in full, financing through an accredited provider (Klarna-style: we get the full
+amount, they carry the credit) is the preferred split; self-managed plans only with caution.
+Only when both the full price and financing fail does the **floor tier** get mentioned: $2,500
+minimum payment for the same product without the one-to-one - access, bug-fix support, the
+community, and the promise of clarity and consistency with the agent - no custom build, no
+custom integrations. It is the same offer minus service components, so the one-offer rule
+survives. "That $2,500 doesn't even get mentioned until we get hard-nosed on both the custom
+build and the financing."
+
+**Supersedes:** D088's balance-at-access structure and the reservation-led close in D079's
+framing (the $2,500 number survives as the floor tier and minimum payment). D089's refund rule
+carries over to whatever was paid.
+
+**Reality note (recorded, not resolved):** accredited financing requires a working payment
+processor, which requires incorporation (D097). Until then the full ticket collects by
+e-transfer, and splits are self-managed at his discretion.
+
+**Re-open cost:** High. Page, sales brief, and payments inherit it.
+
+### D103 - Q65: the funnel is inbound-led; outbound openers stay manual
+
+**Verdict:** The primary call to action everywhere is **text Koa**. The first iMessage is always
+inbound (Sendblue permits nothing else), so the funnel starts when they text the number;
+`altered.computer/go` (or the main page button) triggers the `sms:` link as smoothly as the web
+APIs allow. Outbound social openers (Instagram DMs from the bench) are sent manually from his
+personal account until conversions justify automating on a burner - confirming Q65's option c.
+
+### D104 - Q66: buy the number; Koa sells at 50% until they pay
+
+**Verdict:** Bite the bullet on Sendblue (about $100 USD a month) as the commitment signal - "I
+want to be using that line I'm paying for." Prefer a memorable number (a clean sequence or
+ALTERED-adjacent digits), possibly chosen on Twilio and ported; the Sendblue-provided number is
+acceptable to start. Koa on that number is both the product and the sales agent: genuinely
+useful, roughly half its lean toward joining the program, never a pure pitch bot, with a wall
+that stops free riders from consuming the product indefinitely. Where exactly the wall sits
+(messages, usage, milestone, or a booked call) is **OPEN** (Q70); he asked for a recommendation
+and options. A landing page remains for visual and detailed information; the thread is the
+primary funnel channel. Sensitive topics may route through HITL approval.
+
+### D105 - Q67: $25 sourcing budget, Sonnet-class models for light work, full cost observability
+
+**Verdict:** $25 of AI token spend approved to develop and run the Instagram sourcing and
+scraping procedure, topped up on results. Approach: experiment first, document the procedure,
+then hand execution to a cheaper Sonnet-class model with dedicated instructions; Opus-class is
+not required for scraping and judging profiles. Observability is mandatory: cost per run,
+results per cost, total cost, run duration, cost over time - "I want to see everything as if I
+was doing it myself." Converting his Instagram to a business account goes on his TODO list.
+
+**Refines D107's model rule:** Sonnet-class is explicitly approved for lightweight, well-proceduralised
+tasks like scraping and profile judging.
+
+### D106 - Q68: paying in full is the standard and earns priority, not extras
+
+**Verdict:** Paying in full earns no extra sessions and no price locks - it is the standard, and
+it earns his full attention on their goal. No promises about future ALTERED software pricing
+(the model - likely usage plus subscription, Cursor-like - is not designed yet). The program
+itself gets structure and named milestones: how it works over time, the meeting schedule, what
+they receive, the roadmap per objective, presented in the program material (page or PDF for warm
+leads). The custom-integration service is packaged with named components rather than "I'll be
+your developer." Supersedes the incentive framing in D088 and closes Q68 with "none needed".
+
+### D107 - model, context, and cost governance (operating rules, binding on every agent)
+
+**Verdict, stated as rules:**
+
+1. **No subagent ever runs on a default model.** Every spawned agent names its model explicitly.
+2. **Opus 5 is the minimum for coding work.** Fable 5 only where he explicitly approves, and it
+   is reserved for planning (he runs his own planning chats on it). Sonnet-class is allowed for
+   lightweight proceduralised tasks per D105.
+3. **Context is capped at roughly 300,000 tokens per chat or agent.** At the cap: summarise or
+   start fresh. This works because of rule 4.
+4. **Every turn saves state.** Knowledge and code changes are committed every turn so any agent
+   can be restarted with minimal context. (Already the operating contract; now also the cost
+   mechanism.)
+5. **Sequential execution** to avoid merge-conflict token waste (extends D096 to generation).
+6. **Cost consciousness is an active duty:** watch Cursor limits and on-demand spend, operate
+   inside the budgets he sets, and report progress in proportion to cost.
+7. **Later, under autonomy:** a dashboard showing cost over time, cost per task, and live
+   agents. Not built now; recorded as the transparency requirement for that mode.
+
+**Re-open cost:** Low to change numbers, high to ignore. These exist because a single
+unmanaged chat day cost roughly $100.
+
+### D108 - the checkpoint moves to Sept 17
+
+**Verdict:** Sept 14 passed mid-move with no validation done; the apartment move is Sept 16.
+New checkpoint: **Sept 17, "meaningful lever-moving action"** - not a deposit, but visible
+motion: the MVP generation underway, marketing surfaces moving, or leads touched. Amends D085
+and D091's dates; the KPI targets stand.
+
+### D109 - standing response format in this chat
+
+**Verdict:** Every turn ends with, in order: a super-concise TODO list of his actions (env vars,
+account changes, purchases), then a **Deployed assets** list of URLs he can visit (live site,
+dashboards, graph views, anything usable). He forgets these exist; the agent's job is to keep
+them in front of him. The agent is also charged with accountability: remind, correct, align,
+and push.
+
+### D110 - content: he is the demonstration user; client 1 is the feedback loop
+
+**Verdict:** The demonstration user for content is him - his own Koa on his own iPhone, screen
+recordings with talking-head narration, posted constantly. Client 1 is not public content by
+default (people rarely want that, and it would need compensation); client 1 is the realest
+feedback loop, shaping program, product, and content themes. ALTERED integrates into his
+personal-brand content on @inducingchaos (the "Video content strategy" chat holds pulled
+transcripts and context). Organic first; ads only if strategic; total non-token cash for
+anything stays inside a couple hundred dollars.
+
+### D111 - parked and noted, 2026-09-15
+
+- **ElevenLabs V3 conversational voice** is a committed future layer beside iMessage: needs a
+  long-running server (Railway beside Vercel, routing only long-running work there), and
+  Sendblue FaceTime needs a sales call; Twilio voice on the same number is the cheaper fallback.
+  Later, deliberately.
+- **The Redis interrupt-and-continue concurrency sketch** (inbound sets a live flag, the running
+  generation pulls the new message in and continues) is recorded as design input for plan 08's
+  concurrency work, alongside his requirement: heavy event logging so any duplicate or timing
+  bug is diagnosable from data. Past attempts failed on observability first.
+- **The thought editor** (web or Swift) is the next generation target after Koa iMessage is
+  stable, not now.
+- **The commit covenant work** he started by hand is stashed by his own call; generation makes
+  it a later project.

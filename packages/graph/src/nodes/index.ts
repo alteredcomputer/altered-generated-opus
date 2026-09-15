@@ -498,6 +498,51 @@ const nodes = defineNodes([
         }
     },
     {
+        id: "koa",
+        title: "Koa MVP",
+        description:
+            "Not built yet. The generated product (D100): the interactive Koa agent on iMessage through Sendblue, with persistent vector memory, self-scheduled reach-outs by agent judgment (D101), per-conversation concurrency control with a full event ledger, a per-user token budget, the prospect wall (Q70), an HITL hold for sensitive turns, and the sms-link funnel entry (D103). Fail-closed everywhere: absent webhook secret rejects, empty allowlist admits nobody, kill switches default off. Plan 08, built in six phases in series.",
+        relations: [
+            { type: "uses", to: "data-layer" },
+            { type: "supersedes", to: "web-imessage-webhook" }
+        ],
+        status: "planned",
+        data: {
+            controls: [
+                "koa.sendEnabled",
+                "koa.allowlist",
+                "koa.systemPrompt",
+                "koa.dailyTokenBudgetPerUser",
+                "koa.followupDailyCap",
+                "koa.burstWindowMs",
+                "ai.model.koa",
+                "ai.model.embedding",
+                "ai.model.sensitiveClassifier",
+                "outbound.imessage"
+            ],
+            todos: [
+                {
+                    text: "Phase 1: verified webhook, message store, one agent turn, mock adapter, allowlist.",
+                    priority: 1
+                },
+                { text: "Phase 2: pgvector memory with person-scoped retrieval.", priority: 1 },
+                {
+                    text: "Phase 3: self-scheduling tool, cron drain, follow-up budget.",
+                    priority: 1
+                },
+                {
+                    text: "Phase 4: burst serialisation, idempotent sends, the event ledger.",
+                    priority: 1
+                },
+                {
+                    text: "Phase 5: token budget, the wall per Q70, sales lean, HITL hold.",
+                    priority: 2
+                },
+                { text: "Phase 6: /go redirect, public number, cost views.", priority: 2 }
+            ]
+        }
+    },
+    {
         id: "dashboard",
         title: "Operator dashboard",
         description:
@@ -576,7 +621,7 @@ const nodes = defineNodes([
         id: "payments",
         title: "Money rails",
         description:
-            "Not built yet. Takes the reservation: an interim e-transfer instruction recorded in settings while Stripe waits on incorporation (D097), then Autumn checkout per buyer, a signature-verified webhook that writes the reserved event, and refund recording with the buyer's stated reason. Balance due at product access (D088); refundable before access (D089). Every charge sits behind two kill switches. Plan 05.",
+            "Not built yet. Takes the full-ticket payment (D102): an interim e-transfer instruction recorded in settings while Stripe waits on incorporation (D097), then Autumn checkout per buyer, accredited financing once Stripe works, a signature-verified webhook that writes the paid event, and refund recording with the buyer's stated reason (D089). The floor tier is recorded but never surfaced in copy. Every charge sits behind two kill switches. Plan 05.",
         relations: [{ type: "uses", to: "data-layer" }],
         status: "planned",
         data: {
@@ -598,19 +643,18 @@ const nodes = defineNodes([
         id: "desk",
         title: "Sales desk",
         description:
-            "Not built yet. Human-in-the-loop selling over iMessage and Instagram: verified inbound messages from both channels, an agent-drafted reply from the locked offer and the thread, a one-line notification to the operator, and a phone screen where he edits and approves before anything sends. Instagram sends are refused outside Meta's 24-hour window. No autonomous reply exists. Plan 06.",
+            "Not built yet. Human-in-the-loop selling over the social channels: verified inbound Instagram messages, an agent-drafted reply from the locked offer and the thread, a one-line notification to the operator, and a phone screen where he edits and approves before anything sends. Instagram sends are refused outside Meta's 24-hour window. No autonomous reply exists. Koa's own iMessage thread closes in plan 08 with HITL holds; this desk is the social side. Plan 06.",
         relations: [
             { type: "uses", to: "dashboard" },
-            { type: "uses", to: "outreach" },
-            { type: "supersedes", to: "web-imessage-webhook" }
+            { type: "uses", to: "outreach" }
         ],
         status: "planned",
         data: {
-            controls: ["imessage.allowedRecipients", "ai.model.advisor", "desk.burstWindowSeconds"],
+            controls: ["ai.model.advisor", "desk.burstWindowSeconds"],
             todos: [
-                { text: "Signature verification and message storage in the webhook.", priority: 1 },
+                { text: "Instagram inbound reads and message storage.", priority: 1 },
                 { text: "Advisor drafting with escalation flags and stale handling.", priority: 2 },
-                { text: "Send behind both switches and a recipient allowlist.", priority: 2 }
+                { text: "Send behind both switches and the 24-hour window check.", priority: 2 }
             ]
         }
     },
@@ -619,7 +663,7 @@ const nodes = defineNodes([
         id: "assets",
         title: "Offer assets",
         description:
-            "Not built yet. The non-product things a buyer touches in the deposit week: the long-form video script, the onboarding run-sheet and weekly session template, the care package design and print files, and the personal numbered page. Generated here and disclosed; the runway itself is product and lives in the owner's repo. Plan 07.",
+            "Not built yet. The non-product things a buyer touches in the first week: the long-form video script, the onboarding run-sheet and weekly session template, the care package design and print files, and the personal numbered page. Koa itself is product and belongs to plan 08. Plan 07.",
         relations: [{ type: "uses", to: "web-visual-system" }],
         status: "planned",
         data: {
@@ -629,12 +673,12 @@ const nodes = defineNodes([
                     priority: 1
                 },
                 {
-                    text: "Onboarding run-sheet, weekly session template, reservation-week touchpoints.",
+                    text: "Onboarding run-sheet, weekly session template, first-week touchpoints.",
                     priority: 1
                 },
                 { text: "Care package print files and bill of materials (D090).", priority: 2 },
                 {
-                    text: "Personal page scaffold, filled after the first reservation (D094).",
+                    text: "Personal page scaffold, filled after the first sale (D094).",
                     priority: 3
                 }
             ]

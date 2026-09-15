@@ -5,7 +5,7 @@ page, readable on a phone. Derived from `decisions.md`; if the two ever disagree
 wins. The full offer statement is `offer.md`. Items marked **OPEN** are registered in
 `open-questions.md` and must not ship in copy.
 
-Last reconciled 2026-09-11, after Round 7.
+Last reconciled 2026-09-15, after Round 8 (the generation flip).
 
 ## What ALTERED is
 
@@ -33,40 +33,48 @@ around one person's greatest goal and struggles, by the founder as technician, o
 45 minute session per client at a locked recurring time (D093), six months to a year, one to ten
 clients, one new client every three to eight weeks, 60% of his calendar kept free.
 
-- **$12,500 total; $2,500 reserves and starts** (D079, D065). Balance due at product access;
-  pay-in-full is always asked first and earns added delivery (D088; bonus **OPEN**, Q68).
-  Whether the close leads with the full ticket or the reservation: **OPEN** (Q63).
-- **Reservation week** (D080): structured onboarding within 24 hours; hand-built care package -
+- **$12,500, closed in full** (D102). Financing through an accredited provider once Stripe
+  works; e-transfer and self-managed splits until then (D097). The **floor tier** - $2,500 for
+  the same product without the one-to-one - is never mentioned unless full price and financing
+  both fail. Paying in full is the standard and earns priority, not extras (D106).
+- **First week** (D080, D101): structured onboarding within 24 hours; hand-built care package -
   mailer, hand-written letter, woven jet tag, stickers, $100 to $200 for the batch, designed
-  after the first reservation and shipped inside three weeks (D090); the Koa runway, outbound-only
-  and hand-written by the founder (message cadence **OPEN** Q64, channel **OPEN** Q66); the
-  personal "1/10" page after the first reservation, fed by the payment (D094).
-- **Product:** the mechanism core (memory, self-scheduled reach-outs, voice notes, notes
-  import, D040) at a soft "Est. November" that can move (D082). No hard date.
+  after the first sale and shipped inside three weeks (D090); **Koa early access live from day
+  one** - full interactive agent, memory and self-scheduling, no fixed cadence (D101); the
+  personal "1/10" page after the first sale, fed by the payment (D094).
+- **Product:** **Koa early access is generated and exists now** (D100, plan 08); the
+  hand-written core remains the long-term V1, data migrating by transform. Public naming:
+  **OPEN** (Q73). The wall for free users: **OPEN** (Q70).
 - **Refund:** at any time before the product is in their hands, through the process; at most
-  75% of reservation cash spent before access (D089, D023).
+  75% of collected cash spent before access (D089, D023).
 - **First seat:** full price first; fallback is a discount for a written testimonial and
   advertising permission; never free; friends do not count (D066).
 - **The room:** direct iMessage threads and one group thread; Discord only if needed (D084).
 
 ## Golden rules
 
-- Nothing product-shaped that reaches a buyer is generated; the core and the runway are his by
-  hand (D016, D080). Until the first reservation his hands write the runway and nothing else;
-  the cleanup list is stashed (D092).
-- Generation-first for everything else: limit inputs, generate more, get results (D077). Plans
-  in `knowledge/plans/`, one fresh chat per plan, the owner user-tests rather than reviews (D071).
+- **The MVP is generated** (D100), under binding guardrails: intelligent models only, the
+  feature graph bounds scope, strict security and reliability passes, Effect error handling,
+  and refinement time spent. The escalation ladder: generate, correct, hand-coded primitive as
+  a package, thinnest slice, only then hand-build. Concerns about generation get fixed before
+  any flip back to hand code (the inverted challenge protocol).
+- The hard wall stands: no agent ever writes in `usealtered/altered`, and this repo never
+  imports from it. The hand-written core is the long-term V1; his commit covenant work is
+  stashed (D111).
+- Model and cost governance (D107): explicit models always, Opus 5 minimum for coding, Fable 5
+  only with explicit approval, Sonnet-class for proceduralised light tasks, roughly 300k context
+  then summarise or restart, state saved every turn, series execution, cost reported against
+  progress.
 - Build surfaces are web-first and phone-usable; scripts where they fit (D076).
 
-## The Sept 14 checkpoint
+## The Sept 17 checkpoint
 
-The date stands; its realistic content is re-scoped (D091): ICP validation and collected leads
-by Sept 14, with a paid reservation taken early only if someone is ready. The deposit
-experience - call structure, workflows, touchpoints - needs another week or two of design before
-reservations are confidently accepted. Daily KPIs: ten openers and three interested replies on a
-work day, double on a day off (D064). Missed in writing means the direction record's inheritor
-protocol; ALTERED stays the path (D062). Financially a productivity deadline, not survival
-(D085).
+Moved from Sept 14 mid-move (D108): **meaningful lever-moving action by Sept 17** - the MVP
+generation underway, marketing surfaces moving, or leads touched. The apartment move is Sept 16.
+Daily KPIs stand: ten openers and three interested replies on a work day, double on a day off
+(D064). Missed in writing means the direction record's inheritor protocol; ALTERED stays the
+path (D062). Financially a productivity deadline, not survival (D085); the honest runway is
+roughly end of December with October rent free and November student funding.
 
 ## The problems we solve, in the buyer's language
 
@@ -98,9 +106,11 @@ First scenarios to build: **OPEN** (Q33).
 
 ## Channels and fulfilment
 
-- The long-form video informs (D086, timing **OPEN** Q59); the page holds it and states the
-  offer (D042); the chat thread closes (D073). A human-in-the-loop sales desk where the agent
-  drafts and he approves is the long-term shape. A call after purchase is welcome.
+- **The funnel is Koa** (D103, D104): every call to action is "text Koa";
+  `altered.computer/go` opens the thread; Koa sells at about half lean until the wall (**OPEN**
+  Q70), with HITL on sensitive turns. The long-form video informs (D086, shot near the end of
+  marketing setup, D091); the page holds it and points at the thread (D042). He is the
+  demonstration user in his own content (D110). A call after purchase is welcome.
 - Outreach: Instagram first, X second, Zernio as the API layer for replies, X reads only once
   proven worth paying for (D083, D070). The system sources from seed accounts and his following
   by scraping public data, scores, drafts, and queues; he approves every send in a control panel

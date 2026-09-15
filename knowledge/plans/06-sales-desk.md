@@ -64,8 +64,9 @@ desk sells is `knowledge/offer.md`.
 
 Autonomous replies (D045 becomes relevant only if the owner later chooses to let the agent send
 without approval; that is a new decision). X direct messages: read by the owner in the X app and
-logged through the bench until X DM reads are worth their pass-through cost. Voice notes, memory,
-and anything product-shaped (D016). The Koa runway is his, in his repo (D080), not this desk.
+logged through the bench until X DM reads are worth their pass-through cost. Koa's own iMessage
+thread is plan 08, not this desk: this desk handles Instagram and X social threads; Koa closes
+in its own thread with HITL holds on sensitive turns (D104).
 
 ## Design
 
