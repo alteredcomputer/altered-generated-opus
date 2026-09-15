@@ -15,16 +15,23 @@ touch git, pull requests, or code. Assume you are a fresh agent with no memory o
 
 ## The hard wall
 
-The core product lives in `usealtered/altered` and is hand-written by the owner, line by line, on
-purpose. It is infrastructure that other people will build on top of, and its primitives, data
-models, and API surface must be his. **No agent writes core product code, ever.**
+The long-term core product lives in `usealtered/altered` and is hand-written by the owner, line
+by line, on purpose. It is infrastructure that other people will build on top of, and its
+primitives, data models, and API surface must be his. **No agent writes in that repo, ever.**
 
-This repo owns everything else: go-to-market, content, leads, sales, operator surfaces, docs, and
-the landing page. Anything generated here is disclosed as generated.
+The wall is hard in both directions. This repo does not import from the core product's source,
+and does not write to its database. The only sanctioned future seams are published packages the
+owner chooses to install, and read-only access to the core product's data once it is live.
 
-The wall is hard in both directions. This repo does not import from the core product's source, and
-does not write to its database. The only sanctioned future seams are published packages the owner
-chooses to install, and read-only access to the core product's data once it is live.
+**Amended by D100 (2026-09-15):** the Koa MVP - the product buyers and prospects touch today -
+is generated in THIS repo, under the guardrails recorded in D100 and the plan in
+`knowledge/plans/08-koa-mvp.md`. The hand-written core remains the long-term V1; user data
+migrates to it by transform. When a concern about generated code comes up, the standing order is
+to fix it (build, correct, or hand off a hand-coded primitive as a package) before any flip back
+to hand coding is accepted.
+
+This repo owns everything else too: go-to-market, content, leads, sales, operator surfaces,
+docs, and the landing page. Anything generated here is disclosed as generated.
 
 ## Prime directives
 
@@ -83,8 +90,27 @@ indirectly. A missing credential is a loud startup failure, never a silent fallb
 
 - **Cursor chat** is the only channel for development, code, and architecture.
 - **iMessage** is the owner's assistant and top-level operator, not a development channel. See D016.
-- Keep chat output scannable on a phone: short lines, no wide tables, no walls of text.
+- Keep chat output scannable on a phone: short lines, no wide tables, no walls of text. Write
+  questions in full sentences; clipped grammar has caused misreads.
 - If you do not understand why he wants something, ask. Do not reverse-engineer intent.
+- **Every turn ends with** (D109): a super-concise TODO list of the owner's actions, then a
+  "Deployed assets" list of URLs he can visit. He forgets these exist; keep them in front of him.
+
+## Model and cost governance (D107)
+
+Binding on every agent and every spawned subagent:
+
+- **Never a default model.** Every spawned agent names its model explicitly.
+- **Opus 5 minimum for coding.** Fable 5 only with the owner's explicit approval (reserved for
+  planning). Sonnet-class is allowed for proceduralised lightweight tasks (D105), such as
+  scraping and profile judging.
+- **Context cap around 300,000 tokens** per chat or agent; at the cap, summarise or start fresh.
+  This works because state is saved to the repo every turn.
+- **Save every turn.** Knowledge and code changes are committed each turn so any agent restarts
+  with minimal context.
+- **Series execution** (D096); avoid parallel worktrees that waste tokens on merge conflicts.
+- **Cost is an active duty:** operate inside the budgets the owner sets, and report progress in
+  proportion to spend.
 
 ## Quality bar
 
