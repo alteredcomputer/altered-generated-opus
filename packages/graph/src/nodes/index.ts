@@ -640,7 +640,11 @@ const nodes = defineNodes([
         title: "Agent turn",
         description:
             "One reply to one person: the system prompt from settings, the person's own history as context, and everything the person wrote wrapped as untrusted data behind a per-turn boundary they cannot guess. The model comes from settings, and tokens and cost go to the ledger around every call.",
-        sources: ["packages/koa/src/agent.ts", "packages/koa/src/agent.test.ts"],
+        sources: [
+            "packages/koa/src/agent.ts",
+            "packages/koa/src/agent.test.ts",
+            "packages/koa/src/models.ts"
+        ],
         relations: [
             { type: "uses", to: "koa-store" },
             { type: "uses", to: "koa-ledger" },
