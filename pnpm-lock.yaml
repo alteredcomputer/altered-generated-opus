@@ -38,6 +38,9 @@ importers:
       '@opus/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@opus/koa':
+        specifier: workspace:*
+        version: link:../../packages/koa
       effect:
         specifier: 'catalog:'
         version: 4.0.0-rc.109
