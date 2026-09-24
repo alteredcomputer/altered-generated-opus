@@ -140,7 +140,7 @@ const StoreLive = Layer.effect(
                             or(eq(messages.direction, "inbound"), eq(messages.status, "sent"))
                         )
                     )
-                    .orderBy(asc(messages.createdAt), asc(messages.id))
+                    .orderBy(asc(messages.seq))
             )
 
         const claimOutbound = (personId: string, idempotencyKey: string, text: string) =>

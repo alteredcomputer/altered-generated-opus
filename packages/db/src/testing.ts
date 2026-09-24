@@ -2,7 +2,8 @@ import { PGlite } from "@electric-sql/pglite"
 import { drizzle } from "drizzle-orm/pglite"
 import { migrate } from "drizzle-orm/pglite/migrator"
 import { Effect, Layer } from "effect"
-import { Database, fromDrizzle, MIGRATIONS_FOLDER } from "./client.ts"
+import { Database, fromDrizzle } from "./client.ts"
+import { MIGRATIONS_FOLDER } from "./migrate.ts"
 import * as schema from "./schema.ts"
 
 /**
