@@ -13,23 +13,23 @@ import { Section } from "./primitives.tsx"
  * If the number is not configured the button is not rendered as a link. An invented or empty href
  * would look fine and silently lose every lead, which is the worst possible failure here.
  */
-const CallToAction = ({ phoneNumber }: { phoneNumber: Option.Option<string> }) => {
-    if (Option.isNone(phoneNumber))
-        return (
+const CallToAction = ({ phoneNumber }: { phoneNumber: Option.Option<string> }) => (
+    <div className={styles.callToActionGroup}>
+        <span className={styles.callToActionLabel}>{hero.callToActionLabel}</span>
+        {Option.isNone(phoneNumber) ? (
             <div className={styles.callToActionUnavailable}>
                 {hero.callToAction} - unavailable, no contact number configured
             </div>
-        )
-
-    return (
-        <div className={styles.callToActionGroup}>
-            <a className={styles.callToAction} href={`sms:${phoneNumber.value}`}>
-                {hero.callToAction}
-            </a>
-            <span className={styles.callToActionNote}>{hero.callToActionNote}</span>
-        </div>
-    )
-}
+        ) : (
+            <>
+                <a className={styles.callToAction} href={`sms:${phoneNumber.value}`}>
+                    {hero.callToAction}
+                </a>
+                <span className={styles.callToActionNote}>{hero.callToActionNote}</span>
+            </>
+        )}
+    </div>
+)
 
 const Landing = async () => {
     const phoneNumber = await runRequest(
