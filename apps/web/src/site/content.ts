@@ -38,11 +38,11 @@ const sections: readonly Section[] = [
         id: "who",
         label: "WHO THIS IS FOR",
         blocks: [
-            //  D081, D018
             {
                 kind: "prose",
                 text: "You have the idea. You have re-scoped it four times. The blocker is not effort."
             },
+            //  D081, D018
             {
                 kind: "prose",
                 text: "It is not for you if you have no direction at all, if the budget would hurt, or if the thing standing between you and shipping is a skill you have not learned yet."
