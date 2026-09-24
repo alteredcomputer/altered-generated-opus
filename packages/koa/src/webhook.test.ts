@@ -71,6 +71,13 @@ describe("webhook handler", () => {
         expect(result.deferred).toBe(0)
     })
 
+    it("treats an empty SENDBLUE_SIGNING_SECRET as absent, even against an empty header", async () => {
+        const result = await handle([post(payload(), "")], { SENDBLUE_SIGNING_SECRET: "" })
+
+        expect(result.responses[0]?.status).toBe(503)
+        expect(result.deferred).toBe(0)
+    })
+
     it("answers 401 on a bad signature", async () => {
         const result = await handle([post(payload(), "wrong")], {
             SENDBLUE_SIGNING_SECRET: SECRET

@@ -1,6 +1,7 @@
 import { Effect, Option } from "effect"
 import { describe, expect, it } from "vitest"
-import { inbound, OTHER_PHONE, PHONE, runKoa, Store } from "./testing.ts"
+import { Store } from "./store.ts"
+import { inbound, OTHER_PHONE, PHONE, runKoa } from "./testing.ts"
 
 const recordFor = (text: string, id: string, phone = PHONE) =>
     Effect.flatMap(Store, store => store.recordInbound(inbound(text, id, phone))).pipe(

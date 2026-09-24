@@ -5,7 +5,7 @@ import { ConfigProvider, Effect, Layer, References } from "effect"
 import { Ledger, LedgerLive } from "./ledger.ts"
 import { type Outbound, OutboundMock } from "./messenger.ts"
 import { type GenerationRequest, Models } from "./models.ts"
-import { Store, StoreLive } from "./store.ts"
+import { StoreLive } from "./store.ts"
 import { type FetchedMedia, Media, MediaFetchError } from "./voice.ts"
 
 const PHONE = "+15555550100" as E164
@@ -94,6 +94,5 @@ export {
     OTHER_PHONE,
     PHONE,
     runKoa,
-    Store,
     seedSettings
 }

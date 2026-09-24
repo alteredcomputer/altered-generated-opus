@@ -120,7 +120,7 @@ const nodes = defineNodes([
         parent: "platform",
         title: "Observability and request execution",
         description:
-            "Structured JSON logging in deployed environments, readable output locally, and a single entry point that runs a request-scoped effect and logs the full cause of any failure before it propagates.",
+            "Structured JSON logging in deployed environments, readable output locally, a single entry point that runs a request-scoped effect and logs the full cause of any failure before it propagates, and a command-line runner that keeps logs on stderr, uncoloured, so a printed transcript stays clean.",
         sources: ["packages/core/src/runtime.ts"],
         status: "in-progress",
         data: {
@@ -482,7 +482,7 @@ const nodes = defineNodes([
             "packages/db/drizzle.config.ts",
             "packages/db/drizzle/**"
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: true } }
     },
     {
@@ -500,7 +500,7 @@ const nodes = defineNodes([
             { type: "uses", to: "data-layer-schema" },
             { type: "uses", to: "platform-configuration" }
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: true } }
     },
     {
@@ -515,7 +515,7 @@ const nodes = defineNodes([
             "packages/db/src/cli.ts"
         ],
         relations: [{ type: "uses", to: "data-layer-database" }],
-        status: "in-progress",
+        status: "done",
         data: {
             quality: { logging: true, errorHandling: true, tests: true, security: true },
             controls: [
@@ -611,7 +611,7 @@ const nodes = defineNodes([
             "packages/core/src/phone.ts"
         ],
         relations: [{ type: "uses", to: "data-layer-database" }],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: true } }
     },
     {
@@ -636,9 +636,12 @@ const nodes = defineNodes([
                     priority: 3
                 },
                 {
-                    text: "Verify transcription against a real iMessage voice note; the provider's audio format is unconfirmed.",
+                    text: "Verify transcription against a real iMessage voice note; the provider's audio format is unconfirmed, and OpenRouter refuses formats outside wav, mp3, aiff, aac, ogg, flac, m4a, and pcm (a .caf note would be recorded as a transcription error).",
                     priority: 1
                 }
+            ],
+            remarks: [
+                "The transcription model returned invented text for one second of silence in a 2026-09-24 check, so a transcript is the model's reading, not ground truth."
             ]
         }
     },
@@ -724,12 +727,17 @@ const nodes = defineNodes([
             quality: { logging: true, errorHandling: true, tests: true, security: true },
             controls: ["koa.allowlist"],
             remarks: [
+                "Verified locally under next start on 2026-09-24: 401 without or with a wrong header, 200 and persisted with the right one, replay a no-op, deferred turn recorded as skipped because OUTBOUND_ENABLED is off. Never yet exercised by Sendblue itself.",
                 "Absorbed the inert web-imessage-webhook node in plan 08 phase 1; that id is retired and not reused."
             ],
             todos: [
                 {
                     text: "Phase 4: messages arriving during a running turn each get their own turn today; the burst window fixes that.",
                     priority: 1
+                },
+                {
+                    text: "Group-thread messages and senders that are not E.164 are acknowledged and logged but not stored.",
+                    priority: 3
                 }
             ]
         }
@@ -745,8 +753,13 @@ const nodes = defineNodes([
             { type: "uses", to: "koa-webhook" },
             { type: "uses", to: "koa-ledger" }
         ],
-        status: "in-progress",
-        data: { quality: { logging: true, errorHandling: true, tests: false, security: true } }
+        status: "done",
+        data: {
+            quality: { logging: true, errorHandling: true, tests: false, security: true },
+            remarks: [
+                "Chat refuses every number until it is on koa.allowlist, exactly like the webhook; add a test number with pnpm run db settings set, and remove it after."
+            ]
+        }
     },
     {
         id: "koa-package",
@@ -935,13 +948,12 @@ const nodes = defineNodes([
         parent: "tooling",
         title: "Verification commands",
         description:
-            "`pnpm check` runs types, style, and the feature graph together. It is the gate an agent runs before merging, and the reason a drifted graph cannot reach main.",
+            "`pnpm check` runs types, style, the Vitest suites, and the feature graph together. It is the gate an agent runs before merging, and the reason a drifted graph cannot reach main.",
         sources: ["package.json"],
         relations: [{ type: "uses", to: "feature-graph-cli" }],
         status: "done",
         data: {
-            quality: { logging: "n/a", errorHandling: true, tests: false, security: "n/a" },
-            todos: [{ text: "Add a test task once there is a test suite.", priority: 2 }]
+            quality: { logging: "n/a", errorHandling: true, tests: "n/a", security: "n/a" }
         }
     },
     {
