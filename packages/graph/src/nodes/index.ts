@@ -541,7 +541,11 @@ const nodes = defineNodes([
         parent: "data-layer",
         title: "Database package definition",
         description: "Manifest and TypeScript configuration for the database package.",
-        sources: ["packages/db/package.json", "packages/db/tsconfig.json"],
+        sources: [
+            "packages/db/package.json",
+            "packages/db/tsconfig.json",
+            "packages/db/vitest.config.ts"
+        ],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" } }
     },
@@ -769,7 +773,11 @@ const nodes = defineNodes([
         parent: "koa",
         title: "Koa package definition",
         description: "Manifest and TypeScript configuration for the Koa package.",
-        sources: ["packages/koa/package.json", "packages/koa/tsconfig.json"],
+        sources: [
+            "packages/koa/package.json",
+            "packages/koa/tsconfig.json",
+            "packages/koa/vitest.config.ts"
+        ],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" } }
     },
