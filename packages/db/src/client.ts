@@ -1,16 +1,12 @@
-import { fileURLToPath } from "node:url"
 import { neon } from "@neondatabase/serverless"
 import { config } from "@opus/core/config"
 import { DrizzleQueryError } from "drizzle-orm/errors"
 import { drizzle } from "drizzle-orm/neon-http"
-import { migrate } from "drizzle-orm/neon-http/migrator"
 import type { PgDatabase, PgQueryResultHKT } from "drizzle-orm/pg-core"
 import { Context, Data, Effect, Layer, Redacted } from "effect"
 import * as schema from "./schema.ts"
 
 type Db = PgDatabase<PgQueryResultHKT, typeof schema>
-
-const MIGRATIONS_FOLDER = fileURLToPath(new URL("../drizzle", import.meta.url))
 
 /**
  * @remarks
@@ -22,7 +18,7 @@ class DatabaseError extends Data.TaggedError("DatabaseError")<{
     readonly detail: string
 }> {}
 
-const describe = (cause: unknown): string => {
+const describeFailure = (cause: unknown): string => {
     const inner = cause instanceof DrizzleQueryError ? cause.cause : cause
     return inner instanceof Error ? inner.message : "unknown database failure"
 }
@@ -41,7 +37,7 @@ const fromDrizzle = (db: Db): DatabaseShape => ({
     run: (operation, query) =>
         Effect.tryPromise({
             try: () => query(db),
-            catch: cause => new DatabaseError({ operation, detail: describe(cause) })
+            catch: cause => new DatabaseError({ operation, detail: describeFailure(cause) })
         }).pipe(
             Effect.tapError(error =>
                 Effect.logError("Database operation failed", {
@@ -59,15 +55,5 @@ const connect = Effect.gen(function* () {
 
 const DatabaseLive = Layer.effect(Database, Effect.map(connect, fromDrizzle))
 
-const runMigrations = Effect.gen(function* () {
-    const db = yield* connect
-
-    yield* Effect.tryPromise({
-        try: () => migrate(db, { migrationsFolder: MIGRATIONS_FOLDER }),
-        catch: cause => new DatabaseError({ operation: "migrate", detail: describe(cause) })
-    })
-    yield* Effect.logInfo("Migrations applied", { folder: "packages/db/drizzle" })
-})
-
 export type { DatabaseShape, Db }
-export { Database, DatabaseError, DatabaseLive, fromDrizzle, MIGRATIONS_FOLDER, runMigrations }
+export { connect, Database, DatabaseError, DatabaseLive, describeFailure, fromDrizzle }

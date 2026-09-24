@@ -1,6 +1,7 @@
 import { runCli } from "@opus/core/runtime"
 import { Data, Effect, Layer } from "effect"
-import { DatabaseLive, runMigrations } from "./client.ts"
+import { DatabaseLive } from "./client.ts"
+import { runMigrations } from "./migrate.ts"
 import { isSettingKey, SETTING_KEYS, Settings, SettingsLive } from "./settings.ts"
 
 /**

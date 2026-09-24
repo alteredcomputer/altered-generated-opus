@@ -64,7 +64,7 @@ const LedgerLive = Layer.effect(
                     .select()
                     .from(events)
                     .where(eq(events.personId, personId))
-                    .orderBy(asc(events.createdAt), asc(events.id))
+                    .orderBy(asc(events.seq))
             )
 
         return { record, forPerson }

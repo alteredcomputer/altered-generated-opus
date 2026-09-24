@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm"
 import {
+    bigint,
     customType,
     index,
     integer,
@@ -13,6 +14,13 @@ import {
 } from "drizzle-orm/pg-core"
 
 const createdAt = () => timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+
+/**
+ * @remarks
+ * Insertion order, for rows whose order matters. Timestamps tie within a millisecond and a random
+ * id breaks the tie arbitrarily, which would scramble a conversation or a ledger read back in order.
+ */
+const sequence = () => bigint("seq", { mode: "number" }).notNull().generatedAlwaysAsIdentity()
 
 const bytea = customType<{ data: Uint8Array; driverData: Uint8Array }>({
     dataType: () => "bytea"
@@ -49,6 +57,7 @@ const messages = pgTable(
     "messages",
     {
         id: uuid("id").primaryKey().defaultRandom(),
+        seq: sequence(),
         personId: uuid("person_id")
             .notNull()
             .references(() => persons.id),
@@ -63,7 +72,7 @@ const messages = pgTable(
         sentAt: timestamp("sent_at", { withTimezone: true }),
         createdAt: createdAt()
     },
-    table => [index("messages_person_created_idx").on(table.personId, table.createdAt)]
+    table => [index("messages_person_seq_idx").on(table.personId, table.seq)]
 )
 
 /**
@@ -107,6 +116,7 @@ const events = pgTable(
     "events",
     {
         id: uuid("id").primaryKey().defaultRandom(),
+        seq: sequence(),
         kind: eventKind("kind").notNull(),
         personId: uuid("person_id").references(() => persons.id),
         correlationId: text("correlation_id").notNull(),
@@ -121,7 +131,7 @@ const events = pgTable(
         createdAt: createdAt()
     },
     table => [
-        index("events_person_created_idx").on(table.personId, table.createdAt),
+        index("events_person_seq_idx").on(table.personId, table.seq),
         index("events_correlation_idx").on(table.correlationId)
     ]
 )
