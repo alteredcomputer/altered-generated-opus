@@ -38,6 +38,11 @@
     padding-block-start: calc(var(--line) / 2);
 }
 
+.callToActionLabel {
+    color: var(--fg-muted);
+    letter-spacing: 0.08em;
+}
+
 .callToAction {
     display: inline-block;
     padding: calc(var(--line) / 2 - 1px) 2ch;
