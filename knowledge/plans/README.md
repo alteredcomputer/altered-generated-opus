@@ -37,7 +37,7 @@ Round 6 answer before it can start; the plan says which).
 
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
-| 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 underway (D112); Round 10 (Q76 to Q83) before anyone outside the allowlist texts; Sendblue subscription to confirm (D114) |
+| 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 (the loop) done 2026-09-24; phase 2 (memory) next; Round 10 (Q76 to Q83) before anyone outside the allowlist texts; Sendblue subscription to confirm (D114) |
 | 04 | [Offer and page](04-offer-and-page.md) | ready | interim step decided (D118): strip price and date, monochrome palette, short explainer per Q80; runs right after plan 08 phase 1 in this chat; full copy approval before indexing |
 | 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; business-account conversion is his action; sourcing budget $25 (D105) |
 | 07 | [Offer assets](07-offer-assets.md) | ready | script and run-sheets need nothing; care package files per D090 |
@@ -90,7 +90,8 @@ is allowed when a plan's design says so, and must be recorded in that plan's not
   existing neutral ramp and single accent, follows the system theme, small radius on controls.
   Mobile-first: designed at 390px wide and verified there before anything else.
 - **Tests:** Vitest. Pure logic gets unit tests; anything with a fail-closed rule gets a test for
-  the empty case. `pnpm check` grows a `check:tests` step in plan 01.
+  the empty case. `pnpm check` runs them as `check:tests` (landed in plan 08 phase 1). Anything
+  touching the database tests against PGlite with the committed migrations (`@opus/db/testing`).
 - **Settings store:** a `settings` table of typed keys, read through one module, with the key
   names declared in the feature graph's `controls` dataset. Anything a human might want to change
   lives there (D009).

@@ -124,9 +124,10 @@ in its own thread with HITL holds on sensitive turns (D104).
 ## Feature graph nodes
 
 `desk` (root) with `desk-inbound`, `desk-conversations`, `desk-advisor`, `desk-notify`,
-`desk-send`, `desk-screen`; `web-imessage-webhook` is superseded by `desk-inbound` (use the
-`supersedes` relation). Controls: `outbound.imessage`, `imessage.allowedRecipients`,
-`ai.model.advisor`, `desk.burstWindowSeconds`.
+`desk-send`, `desk-screen`. The Sendblue webhook is now `koa-webhook` (plan 08 phase 1 retired
+`web-imessage-webhook`); when this plan starts, relate `desk-inbound` to `koa-webhook` instead.
+Controls: `outbound.imessage`, `imessage.allowedRecipients`, `ai.model.advisor`,
+`desk.burstWindowSeconds`.
 
 ## Agent notes
 

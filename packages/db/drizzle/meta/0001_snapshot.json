@@ -1,0 +1,474 @@
+{
+    "id": "37484cd0-04a1-410e-8d40-71f03a8c9bde",
+    "prevId": "07611fc5-e4cc-4ded-a74d-8a84ac6ca4a6",
+    "version": "7",
+    "dialect": "postgresql",
+    "tables": {
+        "public.events": {
+            "name": "events",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "uuid",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "default": "gen_random_uuid()"
+                },
+                "seq": {
+                    "name": "seq",
+                    "type": "bigint",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "events_seq_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "9223372036854775807",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "kind": {
+                    "name": "kind",
+                    "type": "event_kind",
+                    "typeSchema": "public",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "person_id": {
+                    "name": "person_id",
+                    "type": "uuid",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "correlation_id": {
+                    "name": "correlation_id",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "model": {
+                    "name": "model",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "tokens_in": {
+                    "name": "tokens_in",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "tokens_out": {
+                    "name": "tokens_out",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "cost_usd": {
+                    "name": "cost_usd",
+                    "type": "numeric(12, 6)",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "payload": {
+                    "name": "payload",
+                    "type": "jsonb",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "'{}'::jsonb"
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {
+                "events_person_seq_idx": {
+                    "name": "events_person_seq_idx",
+                    "columns": [
+                        {
+                            "expression": "person_id",
+                            "isExpression": false,
+                            "asc": true,
+                            "nulls": "last"
+                        },
+                        {
+                            "expression": "seq",
+                            "isExpression": false,
+                            "asc": true,
+                            "nulls": "last"
+                        }
+                    ],
+                    "isUnique": false,
+                    "concurrently": false,
+                    "method": "btree",
+                    "with": {}
+                },
+                "events_correlation_idx": {
+                    "name": "events_correlation_idx",
+                    "columns": [
+                        {
+                            "expression": "correlation_id",
+                            "isExpression": false,
+                            "asc": true,
+                            "nulls": "last"
+                        }
+                    ],
+                    "isUnique": false,
+                    "concurrently": false,
+                    "method": "btree",
+                    "with": {}
+                }
+            },
+            "foreignKeys": {
+                "events_person_id_persons_id_fk": {
+                    "name": "events_person_id_persons_id_fk",
+                    "tableFrom": "events",
+                    "tableTo": "persons",
+                    "columnsFrom": ["person_id"],
+                    "columnsTo": ["id"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.media": {
+            "name": "media",
+            "schema": "",
+            "columns": {
+                "message_id": {
+                    "name": "message_id",
+                    "type": "uuid",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                "person_id": {
+                    "name": "person_id",
+                    "type": "uuid",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "content_type": {
+                    "name": "content_type",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "byte_length": {
+                    "name": "byte_length",
+                    "type": "integer",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "bytes": {
+                    "name": "bytes",
+                    "type": "bytea",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {
+                "media_message_id_messages_id_fk": {
+                    "name": "media_message_id_messages_id_fk",
+                    "tableFrom": "media",
+                    "tableTo": "messages",
+                    "columnsFrom": ["message_id"],
+                    "columnsTo": ["id"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                },
+                "media_person_id_persons_id_fk": {
+                    "name": "media_person_id_persons_id_fk",
+                    "tableFrom": "media",
+                    "tableTo": "persons",
+                    "columnsFrom": ["person_id"],
+                    "columnsTo": ["id"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.messages": {
+            "name": "messages",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "uuid",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "default": "gen_random_uuid()"
+                },
+                "seq": {
+                    "name": "seq",
+                    "type": "bigint",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "identity": {
+                        "type": "always",
+                        "name": "messages_seq_seq",
+                        "schema": "public",
+                        "increment": "1",
+                        "startWith": "1",
+                        "minValue": "1",
+                        "maxValue": "9223372036854775807",
+                        "cache": "1",
+                        "cycle": false
+                    }
+                },
+                "person_id": {
+                    "name": "person_id",
+                    "type": "uuid",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "direction": {
+                    "name": "direction",
+                    "type": "message_direction",
+                    "typeSchema": "public",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "status": {
+                    "name": "status",
+                    "type": "message_status",
+                    "typeSchema": "public",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "text": {
+                    "name": "text",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "provider_message_id": {
+                    "name": "provider_message_id",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "idempotency_key": {
+                    "name": "idempotency_key",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "media_url": {
+                    "name": "media_url",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "transcript": {
+                    "name": "transcript",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "transcript_model": {
+                    "name": "transcript_model",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "sent_at": {
+                    "name": "sent_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": false
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {
+                "messages_person_seq_idx": {
+                    "name": "messages_person_seq_idx",
+                    "columns": [
+                        {
+                            "expression": "person_id",
+                            "isExpression": false,
+                            "asc": true,
+                            "nulls": "last"
+                        },
+                        {
+                            "expression": "seq",
+                            "isExpression": false,
+                            "asc": true,
+                            "nulls": "last"
+                        }
+                    ],
+                    "isUnique": false,
+                    "concurrently": false,
+                    "method": "btree",
+                    "with": {}
+                }
+            },
+            "foreignKeys": {
+                "messages_person_id_persons_id_fk": {
+                    "name": "messages_person_id_persons_id_fk",
+                    "tableFrom": "messages",
+                    "tableTo": "persons",
+                    "columnsFrom": ["person_id"],
+                    "columnsTo": ["id"],
+                    "onDelete": "no action",
+                    "onUpdate": "no action"
+                }
+            },
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {
+                "messages_provider_message_id_unique": {
+                    "name": "messages_provider_message_id_unique",
+                    "nullsNotDistinct": false,
+                    "columns": ["provider_message_id"]
+                },
+                "messages_idempotency_key_unique": {
+                    "name": "messages_idempotency_key_unique",
+                    "nullsNotDistinct": false,
+                    "columns": ["idempotency_key"]
+                }
+            },
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.persons": {
+            "name": "persons",
+            "schema": "",
+            "columns": {
+                "id": {
+                    "name": "id",
+                    "type": "uuid",
+                    "primaryKey": true,
+                    "notNull": true,
+                    "default": "gen_random_uuid()"
+                },
+                "phone": {
+                    "name": "phone",
+                    "type": "text",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "created_at": {
+                    "name": "created_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {},
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {
+                "persons_phone_unique": {
+                    "name": "persons_phone_unique",
+                    "nullsNotDistinct": false,
+                    "columns": ["phone"]
+                }
+            },
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        },
+        "public.settings": {
+            "name": "settings",
+            "schema": "",
+            "columns": {
+                "key": {
+                    "name": "key",
+                    "type": "text",
+                    "primaryKey": true,
+                    "notNull": true
+                },
+                "value": {
+                    "name": "value",
+                    "type": "jsonb",
+                    "primaryKey": false,
+                    "notNull": true
+                },
+                "updated_at": {
+                    "name": "updated_at",
+                    "type": "timestamp with time zone",
+                    "primaryKey": false,
+                    "notNull": true,
+                    "default": "now()"
+                }
+            },
+            "indexes": {},
+            "foreignKeys": {},
+            "compositePrimaryKeys": {},
+            "uniqueConstraints": {},
+            "policies": {},
+            "checkConstraints": {},
+            "isRLSEnabled": false
+        }
+    },
+    "enums": {
+        "public.event_kind": {
+            "name": "event_kind",
+            "schema": "public",
+            "values": [
+                "inbound",
+                "skip",
+                "error",
+                "transcription.start",
+                "transcription.end",
+                "generation.start",
+                "generation.end",
+                "outbound"
+            ]
+        },
+        "public.message_direction": {
+            "name": "message_direction",
+            "schema": "public",
+            "values": ["inbound", "outbound"]
+        },
+        "public.message_status": {
+            "name": "message_status",
+            "schema": "public",
+            "values": ["received", "pending", "sent", "failed"]
+        }
+    },
+    "schemas": {},
+    "sequences": {},
+    "roles": {},
+    "policies": {},
+    "views": {},
+    "_meta": {
+        "columns": {},
+        "schemas": {},
+        "tables": {}
+    }
+}

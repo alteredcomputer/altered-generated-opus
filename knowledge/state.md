@@ -1,7 +1,7 @@
 # Current state
 
-Updated 2026-09-24. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
-`plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
+Updated 2026-09-24 (after plan 08 phase 1). Read this first, then `decisions.md`, `compass.md`,
+`offer.md`, `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
 
@@ -35,14 +35,23 @@ Round 10 (Q76 to Q83) is asked: Koa's first reply, the onboarding intents, the t
 numbers, behaviour past the wall, the interim explainer's sections, which number, outreach
 pacing, and the HITL surface. Phase 1 builds with fail-closed placeholders for all of them.
 
-**Plan 08 phase 1 is in progress** on a fresh-context Opus 5.5 agent. Plan 04's interim page step
-follows it in the same chat, in series. Live at `generated.altered.computer`, deployed from
+**Plan 08 phase 1 (the loop) is done** (2026-09-24). A verified Sendblue webhook persists every
+inbound, an empty allowlist refuses everyone, voice notes are saved and transcribed, one agent
+turn replies through OpenRouter, and every step lands in the event ledger. Sending stays off:
+`OUTBOUND_ENABLED` and `koa.sendEnabled` are both false, so a live inbound today is stored and
+skipped. Proven by CLI conversation on the dev database and a local run of the route. Phase 2
+(memory) is next; plan 04's interim page step follows in series. Live at `generated.altered.computer`, deployed from
 `main`, not indexed; the landing page still shows the retired offer until the interim step lands.
 
 ## What is blocking
 
-- **Sendblue subscription confirmation** (D114) gates the loop going live; the code ships
-  against the mock adapter and the real adapter behind kill switches regardless.
+- **Sendblue subscription confirmation** (D114) gates the loop going live. Going live also
+  needs: the production deploy of phase 1, migrations applied to the database the deploy uses,
+  the webhook secret configured in Sendblue matching `SENDBLUE_SIGNING_SECRET`, the owner's number
+  on `koa.allowlist`, then both switches on. None of that is done; each is an owner approval.
+- **No real voice note has been transcribed yet.** If Sendblue delivers `.caf`, OpenRouter
+  refuses it and the ledger records the error; the first real one decides whether conversion is
+  needed.
 - **Round 10 answers** gate anyone outside the allowlist texting Koa (Q76 to Q79, Q83) and the
   interim explainer's section set (Q80).
 - **Owner actions** are listed in `open-questions.md` under "Waiting on the owner".
@@ -54,6 +63,18 @@ allowlist closed. Plan 04's interim step except the explainer's section choice. 
 time tracker and sourcing procedure inside the $25 budget (D105). Plan 07's script and run-sheets.
 
 ## Working notes for a fresh session
+
+- **Koa and database commands** (run from the repo root; they read `apps/web/.env.local`, and a
+  missing value fails loudly): `pnpm run db migrate` applies committed migrations;
+  `pnpm run db settings list|get <key>|set <key> <json>|seed`; `pnpm run koa chat --as <E.164>
+  [--say "text"]` talks to Koa through the real pipeline with the mock messenger (the number must
+  be on `koa.allowlist` first, and should be removed after); `pnpm run koa ledger --person
+  <E.164>` prints every event. Use `pnpm run`, not the `pnpm db` shorthand, which pnpm rejects.
+- **Schema changes:** edit `packages/db/src/schema.ts`, then `pnpm --filter @opus/db generate
+  --name <what>`, commit the SQL and the snapshot, then `pnpm run db migrate`. Never edit an
+  applied migration.
+- **The app bundler cannot see `new URL(..., import.meta.url)` to a directory.** That is why the
+  migration runner lives in `packages/db/src/migrate.ts`, which the app never imports.
 
 - **Always branch from a freshly fetched `origin/main`.** A restarted session can resume with an
   older branch checked out; cutting from it silently reverts merged work. This has happened once.

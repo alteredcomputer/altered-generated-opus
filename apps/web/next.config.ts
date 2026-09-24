@@ -2,7 +2,7 @@ import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
     //  Workspace packages ship as TypeScript source and are compiled by the app that consumes them.
-    transpilePackages: ["@opus/core"],
+    transpilePackages: ["@opus/core", "@opus/db", "@opus/koa"],
 
     typedRoutes: true,
 
