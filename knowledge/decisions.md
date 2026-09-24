@@ -1549,3 +1549,156 @@ subagents." Amends D107 rule 2 and D119: every spawned subagent runs on Opus 5.5
 explicitly, with the reasoning level chosen by the orchestrating agent for the task (high for
 coding by default). Fable stays reserved for planning with his approval; Sonnet-class stays
 allowed for proceduralised light tasks (D105).
+
+---
+
+## Round 10 - what Koa says, the threshold, and the markdown page (2026-09-24, evening)
+
+Source: `sources/chats/2026-09-24-round-10-and-the-markdown-page.md`. Answered the same day
+Round 10 was asked. Every question closed; the landing page redirected in detail.
+
+### D125 - Q76 and Q77: Koa introduces itself and asks a name; intents plus the AI-and-notes signal
+
+**Verdict:** Q76 option b: the first reply says what Koa is in one line (an alignment agent
+built by him, early access, remembers what it is told), asks what they are working on, and asks
+their name. Q77 option b: goal, blocker, context, plus how they use AI or notes today. No budget
+question before the wall.
+
+### D126 - Q78 and Q79: a $5 total cap, seven days to the wall, then sales mode with unlimited budget
+
+**Verdict, replacing the Q78 recommendation:**
+
+- **Not a daily limit: a total spend cap of about $5 USD per person** on low-to-moderate cost
+  models preset in settings ("which is what Vercel seems to do for v0"). Someone may spend it
+  in one day.
+- **Seven days, not fourteen.** "One way or another, we should try and squeeze them through to
+  our wall within 7 days." Koa's pacing aims the milestone inside a week.
+- **A significant milestone** (intents collected, one genuine synthesis delivered) also puts
+  them at the wall.
+- **Past the wall the AI does not stop.** It hard-shifts to a sales-driven mode optimised for
+  one outcome: brief, converting whatever they ask into sales leverage and handling, and
+  flipping it back to them to progress toward a sale. No weaselling more product usage out of
+  it: attempts to work around the wall are handled as objections, not served.
+- **Sales mode has an unlimited budget.** "If they have a million objections - we will allow
+  answering all of them, precisely and shortly."
+- **Reach-outs continue in sales mode**, used for the sale especially, with a **stop filter**:
+  anything like "stop texting me" immediately disables follow-ups for that person (and can
+  re-enable on their word), to avoid blocks and spam flags.
+- **Hard jailbreak prevention and workaround-intent guardrails** are required alongside.
+
+**Supersedes:** the daily-budget framing in plan 08 phase 5 and Q78's numbers. `koa.dailyTokenBudgetPerUser`
+becomes `koa.spendCapUsd`; `koa.trialDays` is 7.
+
+**Re-open cost:** Medium. Phase 5 builds exactly this.
+
+### D127 - Q80: the page mentions the program without a price
+
+**Verdict:** Option b. One honest line that a founding program exists for people who want a
+custom build; no price on the page; Koa carries the pitch in the thread.
+
+### D128 - Q81: memorable number first on Twilio, Sendblue number as-is now, one paid plan
+
+**Verdict:** Find a memorable number on Twilio (or similar) after settling a few prioritised
+search schemes; use the Sendblue number as-is meanwhile; put a **Twilio canned auto-response**
+on the memorable number immediately, roughly "for ALTERED, use X number instead. We are in the
+process of transferring phone lines. Once the transfer is complete, you will receive a
+notification. Thank you for your understanding."; port the memorable number to Sendblue a few
+weeks later and notify users. Only one Sendblue plan is ever paid for. The auto-responder is a
+runtime outbound write: it needs its own kill switch and its approval is recorded here in
+principle, with the exact text approved before it goes live.
+
+### D129 - Q82: warm-up pacing accepted; the ad sprint only after the funnel is a proven winner
+
+**Verdict:** Option a accepted on the agent's word. With small counts, the opener and the
+profile selection are hyper-optimised. If throughput is insufficient: low-budget ads and/or
+him personally producing organic content (philosophical, tech-build, or ALTERED information
+value; "you guide me on this" - a later question). **The ad sprint** he described (one to three
+killer ads, a fifteen-day roofing stint, $1,500 into ads) is allowed only once the program and
+funnel are complete and proven; a work stint before that risks falling off track.
+
+### D130 - Q83: build the dashboard
+
+**Verdict:** "Just build the damn dashboard." Plan 01, a PWA-friendly web dashboard (shadcn,
+Next), scheduled wherever it fits best in the plan. It hosts the HITL approval, the allowlist,
+settings, and the ledger views. Placed after plan 08 phase 2 in the order. Login still needs
+Resend credentials (D046); that is his action.
+
+### D131 - build tooling: Cursor agents on his plan, never OpenRouter
+
+**Verdict:** All generation of this codebase runs on Cursor agents (directly or via the CLI) on
+his plan. OpenRouter is for the user-land product only. Confirmed for the record: phase 1's
+"$0.02 of OpenRouter" was the Koa CLI conversation test (three product turns), not build work.
+
+### D132 - pricing mindset and the ladder above $12,500 (consideration, recorded)
+
+**Verdict:** Recorded as a consideration, not a price change. Reference:
+`https://www.instagram.com/reel/DdrFPZPSCZ6/` - "choose what level of delusion you want and
+then work as hard as you can to fulfil it", holding up the back end of the promise. $12,500 may
+be the entry program for the first five to ten people; after that the price rises and custom
+builds sell higher ($30,000 AI contracts exist; individuals and solo businesses are viable
+buyers). That revenue funds building the platform until it is scalable and affordable for
+general consumers. D102 stands until he re-opens it.
+
+### D133 - Sendblue: the free plan now, the paid plan when cash allows
+
+**Verdict:** The credentials in Vercel are the active **free plan**: generous limits, but
+recipients must be verified in the Sendblue dashboard, so it serves his own testing and a few
+friends. The paid plan (about $160 CAD) waits for a pay cheque, earliest next week. Amends
+D114's timing: real customers need the paid plan; his own daily use does not.
+
+### D134 - the allowlist stays dynamic; he is added by hand
+
+**Verdict:** `OPERATOR_PHONE_NUMBER` (present in Vercel) is not wired into the allowlist. He is
+added manually by CLI, so adding and removing an allowed person is itself exercised.
+
+### D135 - the databases: development and production are separate; migrations to production on approval
+
+**Verdict, clarifying his question:** Vercel holds different `DATABASE_URL`, `REDIS_URL`, and
+`OPENROUTER_API_KEY` values for development and production (compared by hash, never printed);
+the Sendblue number and operator number are the same in both. Phase 1's migrations ran against
+the **development** database only; production has no schema yet. Applying the committed
+migrations to production is the go-live step and is done on his word ("I'm all for pushing to
+main, or pushing schemas" is taken as that word, confirmed in the TODO).
+
+### D136 - the landing page: markdown-inspired, at /koa, with drafted copy for review
+
+**Verdict, the specification:**
+
+- **Route:** the campaign page lives at `/koa`; the root redirects to `/koa` until a main
+  product page exists.
+- **Typography:** every piece of text the same size - a couple of points larger than the current
+  body text, smaller rather than bigger if in doubt; tighter, terminal-like line spacing.
+  Headings are not larger: they carry a literal `# ` prefix, bolder, pure white; body stays the
+  grey. Dividers are literal `---`. Links use markdown syntax, `[text](target)`, in white, not
+  blue. No buttons.
+- **Logo:** text-based, no blinking cursor, no lettered logo, no SVG yet; plain Unicode, for
+  example the word between three dashes each side. The old brand-mark SVG (option-symbol mark
+  plus lowercase wordmark) exists in a previous ALTERED project; locate and record its path,
+  do not use it yet.
+- **Palette:** try the dark background at `#333333` and re-tune the rest of the ramp; he may
+  revert toward `#111111` after seeing it.
+- **Footer:** "This page was intentionally generated by AI." Later: a "learn more about our
+  approach to AI authoring" link once that page exists.
+- **Copy, drafted by the agent for his review** (he asked: "see what you come up with"):
+  headline kept or varied toward "you know what you want to build, you cannot lock it in";
+  subtitle anchored to the mission statement and the pressure-pivot language in the compass,
+  less AI-sounding; an **Early Access Program** section explaining that early access to Koa
+  comes through the Layer 1 program - "Try the generated version of the product and learn more
+  about Layer 1" - with the link `Get early access to Koa`; **Who this is for** rewritten
+  conversational and concrete, still concise; a **Frequently asked questions** section (Who is
+  Koa built for? Is Koa right for me? When is ALTERED officially going to ship? What approach
+  are you taking to building with AI? and a closing "How can I get access?" whose link scrolls
+  to the access section), answering in his voice on AI authoring, the covenant approach to hand
+  building, and the mirror between generated and hand-built products.
+- **CTA weight:** kept minimal for now; experiments later. No yellow.
+- The page stays not indexed until he approves the copy.
+
+**Supersedes:** D118's "write no new sentences" constraint for this pass only; every claim still
+traces to a decision (D019, D047, D067, D075, D078, D081, D082, D100, D113, D116, D122, D127).
+
+### D137 - Instagram: "professional" is sufficient
+
+**Verdict:** His account is on "professional". Instagram's professional accounts come in two
+types, business and creator; both are professional and both work with the Instagram API. No
+change needed unless Zernio asks for the business type specifically, in which case the switch
+is Settings, Account type and tools, Switch to business account.

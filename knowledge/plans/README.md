@@ -37,18 +37,20 @@ Round 6 answer before it can start; the plan says which).
 
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
-| 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 (the loop) done 2026-09-24; phase 2 (memory) next; Round 10 (Q76 to Q83) before anyone outside the allowlist texts; Sendblue subscription to confirm (D114) |
-| 04 | [Offer and page](04-offer-and-page.md) | ready | interim step (D118) done 2026-09-24: no price, date, or deliverables; "Text Koa" under "Koa - early access"; zero-chroma neutrals; explainer is existing traced copy only, pending Q80. Next: step 1 onward (full rewrite), gated on Q80 and copy review; full copy approval before indexing |
-| 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; business-account conversion is his action; sourcing budget $25 (D105) |
+| 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 (the loop) done 2026-09-24; phase 2 (memory) next; Round 10 answered (D125 to D137); production migrations on his word (D135) |
+| 04 | [Offer and page](04-offer-and-page.md) | in progress | markdown-style rework at /koa with drafted copy for review (D136); not indexed until he approves the copy |
+| 01 | [Dashboard foundation](01-dashboard-foundation.md) | ready | ordered by D130, right after plan 08 phase 2; login needs Resend credentials and `OPERATOR_EMAILS` in Vercel |
+| 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; pacing per D129; his Instagram is professional (D137); sourcing budget $25 (D105) |
 | 07 | [Offer assets](07-offer-assets.md) | ready | script and run-sheets need nothing; care package files per D090 |
-| 01 | [Dashboard foundation](01-dashboard-foundation.md) | waiting | Resend credentials and `OPERATOR_EMAILS` in Vercel |
 | 03 | [Truth surface](03-truth-surface.md) | waiting | plan 01; GitHub contents-write token in Vercel |
 | 05 | [Money rails](05-money-rails.md) | waiting | D102 close structure (full ticket, e-transfer interim); financing waits on incorporation |
 | 06 | [Sales desk](06-sales-desk.md) | waiting | plan 01; plan 04; Zernio credentials and the business-account conversion for the Instagram inbox |
 
 Why this order: 08 is the product, the funnel, and the demo engine in one (D100 to D104), so it
-leads everything. 04's interim page gives the funnel a door. 02 feeds the funnel from outside.
-07 readies fulfilment. 01, 03, 05, 06 follow as their gates open.
+leads everything. 04's page gives the funnel a door. 01 lands after 08 phase 2 (D130) so the
+HITL hold, allowlist, settings, and ledger have a phone surface before phases 3 to 6 need
+them; 08 then resumes. 02 feeds the funnel from outside. 07 readies fulfilment. 03, 05, 06
+follow as their gates open.
 
 **Plans run in series (D096):** one chat, one plan, one branch, one merge, and the owner reviews
 each result before saying "next" for the following one. Never start a plan while another is

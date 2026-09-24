@@ -68,14 +68,19 @@ event data to diagnose from (`prior-art.md`); observability lands before clevern
    and error, timestamped and correlated. The Redis interrupt-and-continue sketch (D111) is the
    design input; if a simpler Postgres-lock burst window meets the behaviour, prefer it and
    record why. Build the ledger first, the cleverness second.
-5. **The wall and sales mode.** Per-user daily token budget (fail-closed, silent degradation is
-   forbidden - Koa says it has hit its limit for the day rather than quietly worsening), the
-   wall per D113: a threshold of time, cost, or milestone on the **full** product - memory and
-   reach-outs work identically before and after - past which the thread shifts to the program
-   conversation (numbers and behaviour per Q78 and Q79); the 50% sales lean in the system
-   prompt reading the offer from `knowledge/offer.md` truth including the mirror (D122); and a
-   sensitive-topic flag that holds a draft for HITL approval instead of sending (surface per
-   Q83; CLI queue at minimum).
+5. **The wall and sales mode (D126).** A per-person **total spend cap** of about $5 USD
+   (`koa.spendCapUsd`, fail-closed: an absent value sends nothing) on low-to-moderate cost
+   models preset in settings; a **seven-day** trial window (`koa.trialDays`) that Koa's pacing
+   aims the milestone inside; and the **milestone** (intents collected, one genuine synthesis
+   delivered). Any of the three puts the person past the wall. Past the wall Koa does not stop:
+   it hard-shifts to **sales mode** - brief, every intent converted into sales leverage and
+   handling and flipped back to them toward the next step, with an unlimited budget for
+   objections answered precisely and shortly. Workaround attempts are handled as objections, not
+   served. Reach-outs continue in sales mode; a **stop filter** ("stop texting me" and kin)
+   immediately disables follow-ups for that person and can re-enable on their word. Hard
+   jailbreak prevention and workaround-intent guardrails land here. The 50% lean before the wall
+   reads the offer from `knowledge/offer.md` including the mirror (D122). Sensitive turns hold a
+   draft for HITL approval in the dashboard (plan 01, D130).
 6. **Public.** `/go` on the site opening the `sms:` link (mount-triggered, smoothest available
    mechanism), the number live per D114/D115 (which number: Q81), per-user and per-day cost
    views by CLI, and the allowlist deliberately widened per D115: invited warm prospects first.
@@ -123,8 +128,9 @@ plan's notes and the graph nodes. After each: quality pass, security pass, graph
   first.
 - Phase 4: a burst of three rapid inbounds produces exactly one reply addressing the latest
   message, proven by the ledger; a forced send retry produces no duplicate.
-- Phase 5: the token budget stops generation with a stated message; the wall behaves per D113
-  and Q78/Q79, and reach-outs still fire for a person before the wall.
+- Phase 5: the spend cap and the seven-day window each flip a person into sales mode, proven
+  by the ledger; sales mode answers an objection but refuses to do product work; "stop texting
+  me" cancels every scheduled message for that person; a jailbreak attempt is refused and logged.
 - Phase 6: `/go` opens a compose window to the right number on iPhone Safari.
 
 ## Security pass specifics
@@ -142,7 +148,7 @@ plan's notes and the graph nodes. After each: quality pass, security pass, graph
 
 `koa` (root) with `koa-webhook`, `koa-store`, `koa-voice-notes`, `koa-agent`, `koa-memory`,
 `koa-scheduler`, `koa-concurrency`, `koa-ledger`, `koa-wall`, `koa-hitl`, `koa-go-redirect`.
-Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyTokenBudgetPerUser`,
+Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.spendCapUsd`,
 `koa.trialDays`, `koa.followupDailyCap`, `koa.burstWindowMs`, `ai.model.koa`,
 `ai.model.embedding`, `ai.model.transcription`, `ai.model.sensitiveClassifier`.
 
@@ -202,3 +208,9 @@ Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyToke
     change them with `pnpm run db settings set`.
   - **For phase 2:** add pgvector through a new migration; scope every retrieval by `person_id`
     in the query, as `Store` does; record embedding calls in the ledger through `Models`.
+- 2026-09-24 (orchestrating agent, evening): Round 10 answered. Phase 5 rewritten for D126
+  (total cap, seven days, sales mode, stop filter, jailbreak guardrails); the first reply and
+  intents are decided (D125) and go into the seeded system prompt when phase 2 next touches it.
+  Plan 01 (dashboard) is inserted after phase 2 (D130) and hosts the HITL hold. Development and
+  production databases are separate (D135); production migrations wait for his word. Sendblue
+  is the free plan: recipients must be verified in its dashboard (D133).

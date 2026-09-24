@@ -1,6 +1,6 @@
 # Current state
 
-Updated 2026-09-24 (after plan 04 interim step). Read this first, then `decisions.md`, `compass.md`,
+Updated 2026-09-24 (evening, Round 10 recorded). Read this first, then `decisions.md`, `compass.md`,
 `offer.md`, `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
@@ -31,9 +31,17 @@ every Round 9 answer in one message:
 - **The hand-coded mirror is part of what $12,500 buys (D122);** `offer.md` states three things.
 - Challenges logged, not acted on (D123): the hand-coding pull, B2B automation, ALTERED RAW.
 
-Round 10 (Q76 to Q83) is asked: Koa's first reply, the onboarding intents, the threshold
-numbers, behaviour past the wall, the interim explainer's sections, which number, outreach
-pacing, and the HITL surface. Phase 1 builds with fail-closed placeholders for all of them.
+**Round 10 answered the same evening (D125 to D137),** archived in
+`sources/chats/2026-09-24-round-10-and-the-markdown-page.md`: first reply and intents (D125);
+the wall is a $5 total spend cap, seven days, or the milestone, then **sales mode** with
+unlimited budget, a stop filter, and jailbreak guardrails (D126); the page mentions the program
+without a price (D127); memorable number on Twilio with an auto-responder, Sendblue number
+as-is (D128); pacing accepted, ad sprint only after a proven funnel (D129); **build the
+dashboard**, plan 01 ordered after phase 2 (D130); build tooling is Cursor only, OpenRouter is
+product-only (D131); pricing ladder above $12,500 recorded as a consideration (D132); Sendblue
+is the free plan for now (D133); allowlist manual (D134); dev and prod databases are separate,
+production migrations on his word (D135); the landing page goes markdown-style at `/koa` with
+drafted copy for review (D136); Instagram professional is sufficient (D137).
 
 **Plan 08 phase 1 (the loop) is done** (2026-09-24). A verified Sendblue webhook persists every
 inbound, an empty allowlist refuses everyone, voice notes are saved and transcribed, one agent
