@@ -3,7 +3,7 @@
     changes size across breakpoints; only the side padding widens.
 */
 .page,
-.section {
+.stack {
     display: grid;
     gap: var(--line);
 }

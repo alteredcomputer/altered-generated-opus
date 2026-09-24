@@ -7,7 +7,7 @@
     one neutral ramp, so there is one palette. The neutrals carry zero chroma on purpose (D118):
     pure blacks, whites, and greys, no tint. The single accent is for selection and focus only.
 
-    Contrast: --fg-muted is 6.0:1 on the dark --bg and 6.6:1 on the light one, above the 4.5:1
+    Contrast: --fg-muted is 6.0:1 on the dark --bg and 6.7:1 on the light one, above the 4.5:1
     floor for body text. Change a neutral and the theme colours in layout.tsx together.
 */
 
