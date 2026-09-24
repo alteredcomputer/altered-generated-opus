@@ -1,8 +1,9 @@
 # Plan 01 - Dashboard foundation
 
-**Status:** waiting. **Blocker:** `RESEND_API_KEY` and `AUTH_EMAIL_FROM` in Vercel, then pulled
-locally (see `constraints.md`). Also needs `OPERATOR_EMAILS` added to Vercel by the owner (a
-comma-separated allowlist; one address for now).
+**Status:** ready. Ordered by D130 ("just build the damn dashboard") right after plan 08 phase 2.
+Login still needs Resend credentials, `AUTH_EMAIL_FROM`, and `OPERATOR_EMAILS` in Vercel (D046);
+the shell, allowlist, settings, ledger, and HITL views build against the phase 1 data layer
+regardless. Plan 08 phase 1 already delivered `packages/db` and the settings store.
 
 **Depends on:** nothing in this folder. **Unblocks:** 03, 06, and the web review in 02.
 

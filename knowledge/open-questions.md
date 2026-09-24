@@ -9,136 +9,12 @@ move to `decisions.md` and are removed from here.
 
 ---
 
-## Rounds 1 to 3 and 5 to 9
+## Rounds 1 to 3 and 5 to 10
 
 **Answered.** Round 1 on 2026-08-12 (D015 to D039), round 2 on 2026-08-14 (D040 to D051), round 3 on
 2026-08-15 (D052 to D061), round 5 on 2026-09-04 (D064 to D077), round 6 on 2026-09-07 (D078 to
 D087), round 7 on 2026-09-11 (D088 to D099), round 8 on 2026-09-15 (D100 to D111), round 9 on
-2026-09-24 (D112 to D123).
-
----
-
-## Round 10 - what Koa says and where the threshold sits (asked 2026-09-24)
-
-Round 9 confirmed the scope (D112), redefined the wall as a threshold on the real product (D113),
-and started generation. These are the things Koa will say or do to a real person that no decision
-covers yet. Phase 1 builds with placeholder values that fail closed; the answers replace them
-before anyone outside the allowlist texts.
-
-### Q76 - how Koa introduces itself on the first reply
-
-The first iMessage is always inbound (D103). The first reply sets the whole tone, and it is copy
-Koa speaks in his name.
-
-- a) Koa says what it is in one line - an alignment agent built by him, early access, remembers
-  what it is told - then asks what they are working on. No name-asking yet.
-- b) Same, and it also asks for their name so the thread is personal from message two.
-- c) Koa just talks: no self-description, disclosure lives on the page only.
-
-**Recommendation:** b. Honest about being an agent (the page's disclosure does not travel into a
-thread someone reached by scanning a reel), and a name is the cheapest way to make memory visible
-on the very next message. c risks a person discovering they were talking to software after
-sharing something real.
-
-### Q77 - the onboarding intents Koa collects as guidelines
-
-D101 says the intents are guidelines, not a script. Plan 08 names goal, blocker, and context.
-Confirm the set Koa steers toward over the first days.
-
-- a) Goal, the blocker they have been stuck on, and the context around it (what they have tried,
-  what they use today).
-- b) a plus one qualifying signal: how they currently use AI or notes, which tells Koa and him
-  whether the program fits.
-- c) a plus b plus an explicit budget or "would you invest in this" signal early.
-
-**Recommendation:** b. The AI-and-notes question is natural in conversation and doubles as
-qualification. A budget question early (c) reads as a pitch and breaks the half-lean rule
-(D104); the price surfaces at the wall, not before.
-
-### Q78 - the threshold numbers behind D113
-
-The wall is time, cost, or milestone, on the full product. Numbers are needed to build phase 5.
-
-- a) Cost: about $1 USD of model spend per person per day, fail-closed. Time: 14 days from their
-  first message. Milestone: the intents collected and one synthesis delivered. Any of the three
-  reached puts the thread past the wall.
-- b) Looser: about $2 a day, 30 days, same milestone.
-- c) Tighter: about $0.50 a day, 7 days, same milestone.
-
-**Recommendation:** a. Fourteen days is long enough for reach-outs to prove themselves (D113)
-and short enough that a free rider costs under $15. The milestone will usually arrive first for
-an engaged person, which is the point: the synthesis is the pitch.
-
-### Q79 - what Koa does past the wall
-
-- a) Koa keeps replying, but only about the program and the next step (a call or payment), one
-  reply per inbound, no reach-outs, until they book or pay. Memory is kept.
-- b) Koa sends one closing message with the synthesis and the program, then goes silent until
-  they pay or he re-opens the thread by hand.
-- c) Koa keeps working normally but tells them plainly it is now on his time and asks them to
-  decide within a few days.
-
-**Recommendation:** a. It stays useful as a sales conversation without consuming the product,
-and it never leaves a person unanswered. b feels like a shutter coming down; c is unbounded
-spend.
-
-### Q80 - what the interim page explainer says (D118)
-
-Price and date come off now. The refined minimal page keeps a short explainer. Which sections?
-
-- a) Koa only: what it is in two lines, what happens when you text, who it is for. The program
-  is not mentioned on the page; Koa raises it in the thread.
-- b) a plus one line that a founding program exists for people who want a custom build, with no
-  price, so the thread's pitch does not come out of nowhere.
-- c) a plus the program and the $12,500 stated plainly on the page.
-
-**Recommendation:** b. The page is the door (D103, D104) and the thread is the funnel; one
-honest line about the program makes the wall unsurprising without turning the page into a sales
-page before copy review (plan 04).
-
-### Q81 - the number: use the carried-over line or hunt a memorable one first
-
-The Vercel environment already holds a Sendblue number and credentials (D114). D104 preferred a
-memorable number, possibly ported from Twilio.
-
-- a) Go live on the existing number now; never change it once a single stranger has it, so the
-  memorable-number idea is dropped unless it happens before D115 widens the allowlist.
-- b) Hold the public launch until a memorable number is found and ported.
-- c) Live on the existing number now, port a memorable one later and keep both.
-
-**Recommendation:** a. Every day matters more than the digits, and a number that changes
-breaks every reel, DM, and card that carried the old one. If a memorable number is found while
-the allowlist is still closed, swap then; after that, the number is fixed.
-
-### Q82 - outreach pacing for the send-time tracker (D121)
-
-He asked for help tracking send times to maximise output and avoid a ban. The tracker needs a
-starting rule.
-
-- a) Warm up: 10 DMs a day spread across the day, at least three minutes apart, rising by 5
-  every three days to a ceiling of 30 to 40, only to accounts that follow back or engaged first
-  where possible. The tracker warns when the pace or the daily count is exceeded.
-- b) Start at the D064 target (10 a day) and hold there until the first reply rates are known.
-- c) Push harder from day one: 30 to 50 a day.
-
-**Recommendation:** a. Instagram's limits are undocumented and enforced by behaviour; a
-rising, spaced pace from a personal account with real history is the known-safe pattern. c is
-how accounts get action-blocked in week one, which would end the primary channel (D121).
-
-### Q83 - the HITL hold before the dashboard exists
-
-Sensitive turns hold a draft for approval (D104, plan 08 phase 5). Plan 01's dashboard is not
-built, so the approval surface has to be something he can reach from his phone.
-
-- a) Koa texts him, on the same Sendblue line, a one-line notice with the held draft, and he
-  replies approve or a rewrite. A runtime outbound to his own number; needs the same kill switch
-  and his approval here.
-- b) CLI only, checked from Cursor; slower, nothing new to approve.
-- c) No hold: Koa replies to sensitive turns with a fixed compassionate line and points at him
-  directly, no generated content on those topics.
-
-**Recommendation:** a, with c's fixed line as the immediate acknowledgement to the person so no
-one waits in silence. a is the only phone-usable path until plan 01, and the recipient is him.
+2026-09-24 (D112 to D124), round 10 on 2026-09-24 (D125 to D137).
 
 ---
 
@@ -284,6 +160,9 @@ than the visual, and an effect built around copy that then changes is wasted wor
   frequently-asked-questions set built from real objections, and Q37 to Q40.
 - **Round 12 - sales conversation.** The qualification script, objection handling, escalation
   triggers, follow-up cadence and timing, and the DM opener tonality for the bench.
+- **Content guidance (D129):** which organic content style to lean on if outreach throughput is
+  short (philosophical, tech-build, ALTERED information value); he asked to be guided.
+- **The memorable-number search schemes (D128)** and the auto-responder's exact text.
 
 ---
 
@@ -292,11 +171,10 @@ than the visual, and an effect built around copy that then changes is wasted wor
 Actions, not questions. Each unblocks a plan in `knowledge/plans/`. The plan-08 and outreach
 items lead (D120).
 
-- **Confirm the Sendblue subscription is active** behind the credentials already in Vercel
-  (D114). Blocks the loop going live the moment phase 1 deploys.
-- **Round 10 answers** (Q76 to Q83) before anyone outside the allowlist texts Koa.
-- **Instagram converted to a business account** (D105, D121), his action, before outreach
-  starts and before plan 06's inbox.
+- **Verify his own number in the Sendblue dashboard** (free plan, D133) so Koa can reply to
+  him; then say the word to apply the migrations to the production database (D135) and to turn
+  the switches on for the allowlist.
+- **The Sendblue paid plan** (about $160 CAD) before any real customer texts (D133).
 - **Resend credentials, `AUTH_EMAIL_FROM`, and `OPERATOR_EMAILS`** in Vercel, for dashboard
   login. Blocks the operator dashboard (plan 01), and therefore everything the dashboard hosts.
 - **Zernio API key with his Instagram connected**, in Vercel as `ZERNIO_API_KEY` plus the
