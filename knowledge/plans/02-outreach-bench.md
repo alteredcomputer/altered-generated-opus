@@ -86,6 +86,11 @@ funnel events, and the daily KPI is a query, not a memory.
    reserved from `funnel_events`. The dashboard home card reads the same query.
 10. Budget: `outreach.dailyBudgetCents` caps model plus paid-scraping spend per day; a run that
     would exceed it stops before the paid call and says so.
+11. Send-time tracker (D121): every `sent` event carries its timestamp; `pnpm bench pace`
+    shows today's count, the gap since the last send, and the hour-by-hour spread, and warns
+    when the daily cap (`outreach.dailySendCap`) or the minimum gap (`outreach.minSendGapMs`)
+    is exceeded, so his manual sends stay inside a pace that avoids an account ban. Starting
+    numbers per Q82's answer; until then the caps are unset and the tracker only reports.
 
 ## Not in scope
 
@@ -192,3 +197,6 @@ a product.
   superseded by the owner's explicit directive, with the personal-account line kept absolute.
   Verified the same day: official API cannot cold-DM (Zernio docs), public viewers pass only
   with a real browser (imginn returned a Cloudflare JS challenge to a plain fetch).
+- 2026-09-24 (orchestrating agent): outreach is now the primary lead channel (D121). Step 11,
+  the send-time tracker, added at his request. Controls `outreach.dailySendCap` and
+  `outreach.minSendGapMs` join the graph node when the plan starts.

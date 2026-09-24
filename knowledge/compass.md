@@ -62,19 +62,19 @@ clients, one new client every three to eight weeks, 60% of his calendar kept fre
   imports from it. The hand-written core is the long-term V1; his commit covenant work is
   stashed (D111).
 - Model and cost governance (D107): explicit models always, Opus 5 minimum for coding, Fable 5
-  only with explicit approval, Sonnet-class for proceduralised light tasks, roughly 300k context
+  only with explicit approval, Sonnet-class for proceduralised light tasks, roughly 150k context (D119)
   then summarise or restart, state saved every turn, series execution, cost reported against
   progress.
 - Build surfaces are web-first and phone-usable; scripts where they fit (D076).
 
-## The Sept 17 checkpoint
+## The Oct 10 checkpoint
 
-Moved from Sept 14 mid-move (D108): **meaningful lever-moving action by Sept 17** - the MVP
-generation underway, marketing surfaces moving, or leads touched. The apartment move is Sept 16.
-Daily KPIs stand: ten openers and three interested replies on a work day, double on a day off
-(D064). Missed in writing means the direction record's inheritor protocol; ALTERED stays the
-path (D062). Financially a productivity deadline, not survival (D085); the honest runway is
-roughly end of December with October rent free and November student funding.
+Sept 17 (D108) passed inside the move; he handed the date to the agent and named the target as
+sales (D120): **first payment collected by Oct 10.** Markers: Sept 28, Koa live on the number for
+his own daily use; Oct 1, outreach running daily. Daily KPIs stand: ten openers and three
+interested replies on a work day, double on a day off (D064). A miss does not change the path
+(D062); it feeds the Oct 15 floor decision, which is now about November's $1,600 rent arriving
+before student funding does (Nov 5 to 10). Outreach is the primary lead channel (D121).
 
 ## The problems we solve, in the buyer's language
 

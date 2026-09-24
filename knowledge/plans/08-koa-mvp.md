@@ -1,7 +1,9 @@
 # Plan 08 - Koa MVP, generated
 
-**Status:** ready pending Round 9 (Q69 confirms this scope; Q70 the wall; Q71 Sendblue timing;
-Q72 the access policy). Phase 1 can build against a mock before any credential exists.
+**Status:** in progress. Round 9 confirmed the scope (D112), the wall as a threshold (D113),
+Sendblue timing (D114), and access (D115). Phase 1 started 2026-09-24. Round 10 (Q76 to Q83)
+supplies Koa's first-reply copy, the intents, the threshold numbers, and the HITL surface; until
+answered, those are fail-closed placeholders and the allowlist stays closed.
 
 **Depends on:** nothing to start; Sendblue credentials to go live; plan 01 later for operator
 views. **Unblocks:** the product, the funnel (D103), the demo content engine (D110), and the
@@ -28,9 +30,13 @@ D100 generated MVP and its guardrails; D101 full Koa, no outbound-only sequence,
 cadence, Sendblue limits (free replies inside 24h of their last message; 150 follow-ups per day
 beyond that); D102 the offer it sells toward; D103 inbound-led funnel, `/go` redirect; D104 the
 number, 50% sales lean, a wall, HITL for sensitive topics; D106 program structure it references;
-D107 model and cost governance; D110 the owner is the demo user; D111 the Redis
-interrupt-and-continue sketch as concurrency design input and the observability-first
+D107 model and cost governance (context cap 150k, D119); D110 the owner is the demo user; D111
+the Redis interrupt-and-continue sketch as concurrency design input and the observability-first
 requirement; D023/D089 refund honesty in anything Koa claims; D019 outcome-led, never revenue.
+Round 9: D112 voice notes saved and transcribed from day one; D113 the wall is a threshold on
+the full product (memory and reach-outs on both sides); D114 Sendblue live when phase 1
+deploys, credentials already in Vercel; D115 allowlist, then invited prospects, then public;
+D116 the label "Koa - early access"; D122 the mirror as part of what the program sells.
 Prior art: the previous attempt burned roughly fifteen commits on iMessage concurrency with no
 event data to diagnose from (`prior-art.md`); observability lands before cleverness.
 
@@ -39,8 +45,12 @@ event data to diagnose from (`prior-art.md`); observability lands before clevern
 1. **The loop.** Sendblue webhook (signature verified, fail-closed when the secret is absent;
    the `/api/webhooks/sendblue` stub grows up), message store, one agent turn (AI SDK v7 through
    OpenRouter, model from settings), reply send behind `OUTBOUND_ENABLED` plus `koa.sendEnabled`,
-   and a recipient allowlist that admits nobody when empty (Q72). Until credentials exist, a
-   mock Sendblue adapter behind the same interface, driven by a CLI for local conversation.
+   and a recipient allowlist that admits nobody when empty (D115). A mock Sendblue adapter
+   behind the same interface, driven by a CLI for local conversation, so the loop is testable
+   without spending a message. **Voice notes (D112):** an inbound with a media attachment is
+   stored as source data (the media URL and the fetched bytes or a durable copy), and its
+   transcript is produced by a model named in settings and stored beside it, so the agent turn
+   reads the transcript and a human can read it later. Nothing inbound is dropped.
 2. **Memory.** pgvector on Neon: embeddings over messages and distilled facts (a compaction pass
    that turns threads into durable facts with provenance), retrieval into the system context,
    per-person. This is the "persistent memory" the offer names; data is durable and migrates by
@@ -59,12 +69,15 @@ event data to diagnose from (`prior-art.md`); observability lands before clevern
    record why. Build the ledger first, the cleverness second.
 5. **The wall and sales mode.** Per-user daily token budget (fail-closed, silent degradation is
    forbidden - Koa says it has hit its limit for the day rather than quietly worsening), the
-   wall per Q70's answer, the 50% sales lean in the system prompt reading the offer from
-   `knowledge/offer.md` truth, and a sensitive-topic flag that holds a draft for HITL approval
-   instead of sending (queue readable by CLI until plan 01's dashboard exists).
+   wall per D113: a threshold of time, cost, or milestone on the **full** product - memory and
+   reach-outs work identically before and after - past which the thread shifts to the program
+   conversation (numbers and behaviour per Q78 and Q79); the 50% sales lean in the system
+   prompt reading the offer from `knowledge/offer.md` truth including the mirror (D122); and a
+   sensitive-topic flag that holds a draft for HITL approval instead of sending (surface per
+   Q83; CLI queue at minimum).
 6. **Public.** `/go` on the site opening the `sms:` link (mount-triggered, smoothest available
-   mechanism), the number live per Q71/Q72, per-user and per-day cost views by CLI, and the
-   allowlist deliberately widened per Q72's answer.
+   mechanism), the number live per D114/D115 (which number: Q81), per-user and per-day cost
+   views by CLI, and the allowlist deliberately widened per D115: invited warm prospects first.
 
 ## Not in scope
 
@@ -94,7 +107,7 @@ repo - the hard wall stands in both directions.
 ## Steps
 
 Each phase is one branch, one merge, in series, with the D107 rules: explicit Opus 5 minimum for
-coding agents, roughly 300k context cap then summarise or restart, state saved to the repo every
+coding agents, roughly 150k context cap (D119) then summarise or restart, state saved to the repo every
 turn, cost reported against progress. Phase order as in Scope. Before each phase: update this
 plan's notes and the graph nodes. After each: quality pass, security pass, graph reconciliation,
 `pnpm check`, `pnpm build`, `state.md`, merge.
@@ -109,7 +122,8 @@ plan's notes and the graph nodes. After each: quality pass, security pass, graph
   first.
 - Phase 4: a burst of three rapid inbounds produces exactly one reply addressing the latest
   message, proven by the ledger; a forced send retry produces no duplicate.
-- Phase 5: the token budget stops generation with a stated message; the wall behaves per Q70.
+- Phase 5: the token budget stops generation with a stated message; the wall behaves per D113
+  and Q78/Q79, and reach-outs still fire for a person before the wall.
 - Phase 6: `/go` opens a compose window to the right number on iPhone Safari.
 
 ## Security pass specifics
@@ -125,11 +139,11 @@ plan's notes and the graph nodes. After each: quality pass, security pass, graph
 
 ## Feature graph nodes
 
-`koa` (root) with `koa-webhook`, `koa-store`, `koa-agent`, `koa-memory`, `koa-scheduler`,
-`koa-concurrency`, `koa-ledger`, `koa-wall`, `koa-hitl`, `koa-go-redirect`. Controls:
-`koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyTokenBudgetPerUser`,
-`koa.followupDailyCap`, `koa.burstWindowMs`, `ai.model.koa`, `ai.model.embedding`,
-`ai.model.sensitiveClassifier`.
+`koa` (root) with `koa-webhook`, `koa-store`, `koa-voice-notes`, `koa-agent`, `koa-memory`,
+`koa-scheduler`, `koa-concurrency`, `koa-ledger`, `koa-wall`, `koa-hitl`, `koa-go-redirect`.
+Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyTokenBudgetPerUser`,
+`koa.trialDays`, `koa.followupDailyCap`, `koa.burstWindowMs`, `ai.model.koa`,
+`ai.model.embedding`, `ai.model.transcription`, `ai.model.sensitiveClassifier`.
 
 ## Agent notes
 
@@ -137,3 +151,9 @@ plan's notes and the graph nodes. After each: quality pass, security pass, graph
   confirmation or trim lands here before phase 1 starts. The previous attempt's concurrency
   failure was an observability failure first (his own words in the source archive); that is why
   the ledger is designed in phase 1 rather than added in phase 4.
+- 2026-09-24 (orchestrating agent): Round 9 answered; status to in progress. Voice-note
+  ingestion added to phase 1 (D112). The wall redefined: free Koa is the full product, gated by
+  threshold not feature (D113); the phase 5 text above is rewritten accordingly. Sendblue,
+  Neon, Redis, and OpenRouter values confirmed present in the Vercel development environment by
+  a names-only check; the mock adapter still leads so no message is spent by accident. Phase 1
+  is delegated to a fresh-context Opus 5 agent with this file as its brief.
