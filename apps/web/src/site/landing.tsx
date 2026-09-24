@@ -1,35 +1,44 @@
 import { config } from "@opus/core/config"
 import { runRequest } from "@opus/core/runtime"
 import { Effect, Option } from "effect"
-import { hero, sections } from "./content.ts"
+import { type Block, footer, hero, sections, textKoa } from "./content.ts"
 import styles from "./landing.module.css"
-import { Section } from "./primitives.tsx"
+import { Divider, Heading, MarkdownLink, Prose } from "./primitives.tsx"
 
 /**
  * @remarks
  * The call to action opens a text thread, because the conversation is where the sale happens and
  * because a page that asks you to text an agent should prove the agent exists in one tap.
  *
- * If the number is not configured the button is not rendered as a link. An invented or empty href
+ * If the number is not configured the link is rendered as plain text. An invented or empty href
  * would look fine and silently lose every lead, which is the worst possible failure here.
  */
-const CallToAction = ({ phoneNumber }: { phoneNumber: Option.Option<string> }) => (
-    <div className={styles.callToActionGroup}>
-        <span className={styles.callToActionLabel}>{hero.callToActionLabel}</span>
-        {Option.isNone(phoneNumber) ? (
-            <div className={styles.callToActionUnavailable}>
-                {hero.callToAction} - unavailable, no contact number configured
-            </div>
-        ) : (
-            <>
-                <a className={styles.callToAction} href={`sms:${phoneNumber.value}`}>
-                    {hero.callToAction}
-                </a>
-                <span className={styles.callToActionNote}>{hero.callToActionNote}</span>
-            </>
-        )}
-    </div>
-)
+const TextKoa = ({ label, phoneNumber }: { label: string; phoneNumber: Option.Option<string> }) =>
+    Option.isNone(phoneNumber) ? (
+        <Prose>
+            {label} - {textKoa.unavailable}
+        </Prose>
+    ) : (
+        <MarkdownLink href={`sms:${phoneNumber.value}`} label={label} target={textKoa.target} />
+    )
+
+const renderBlock = (phoneNumber: Option.Option<string>) => (block: Block, index: number) => {
+    const key = `${block.kind}-${index}`
+
+    if (block.kind === "prose") return <Prose key={key}>{block.text}</Prose>
+    if (block.kind === "question")
+        return (
+            <Heading key={key} level={3}>
+                {block.text}
+            </Heading>
+        )
+    if (block.kind === "textKoa")
+        return <TextKoa key={key} label={block.label} phoneNumber={phoneNumber} />
+
+    return (
+        <MarkdownLink href={`#${block.to}`} key={key} label={block.label} target={`#${block.to}`} />
+    )
+}
 
 const Landing = async () => {
     const phoneNumber = await runRequest(
@@ -47,24 +56,26 @@ const Landing = async () => {
 
     return (
         <main className={styles.page}>
-            <header className={styles.header}>
-                <span>{hero.title}</span>
-                <span aria-hidden="true" className="cursor" />
+            <header className={styles.logo}>
+                <p>{hero.logo}</p>
             </header>
 
-            <div className={styles.hero}>
-                <h1 className={styles.headline}>{hero.headline}</h1>
-                <p className={styles.subhead}>{hero.subhead}</p>
-                <CallToAction phoneNumber={phoneNumber} />
-            </div>
-
-            {sections.map(section => (
-                <Section blocks={section.blocks} key={section.id} label={section.label} />
+            <Heading level={1}>{hero.headline}</Heading>
+            {hero.subtitle.map(paragraph => (
+                <Prose key={paragraph}>{paragraph}</Prose>
             ))}
 
-            <footer className={styles.footer}>
-                <span>ALTERED</span>
-                <span>Generated, and said so.</span>
+            {sections.map(section => (
+                <section className={styles.stack} id={section.id} key={section.id}>
+                    <Divider />
+                    <Heading level={2}>{section.heading}</Heading>
+                    {section.blocks.map(renderBlock(phoneNumber))}
+                </section>
+            ))}
+
+            <footer className={styles.stack}>
+                <Divider />
+                <p>{footer}</p>
             </footer>
         </main>
     )
