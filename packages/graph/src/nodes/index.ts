@@ -280,12 +280,17 @@ const nodes = defineNodes([
                     priority: 2
                 },
                 {
-                    text: "Add a frequently-asked-questions section built from real objections.",
+                    text: "Grow the frequently asked questions from real objections once prospects are texting.",
+                    priority: 3
+                },
+                {
+                    text: "Add the 'learn more about our approach to AI authoring' link to the footer once that page exists (D136).",
                     priority: 3
                 }
             ],
             remarks: [
-                "Statically generated, so the contact number is read at build time and changing it needs a redeploy."
+                "Statically generated, so the contact number is read at build time and changing it needs a redeploy.",
+                "The root redirect is temporary (not permanent) because a product page will take the root later."
             ]
         }
     },
