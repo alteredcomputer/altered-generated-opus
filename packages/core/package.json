@@ -5,6 +5,7 @@
     "type": "module",
     "exports": {
         "./config": "./src/config.ts",
+        "./phone": "./src/phone.ts",
         "./readiness": "./src/readiness.ts",
         "./runtime": "./src/runtime.ts"
     },
