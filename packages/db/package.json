@@ -1,0 +1,31 @@
+{
+    "name": "@opus/db",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./client": "./src/client.ts",
+        "./schema": "./src/schema.ts",
+        "./settings": "./src/settings.ts",
+        "./testing": "./src/testing.ts"
+    },
+    "scripts": {
+        "cli": "node --experimental-strip-types --no-warnings=ExperimentalWarning --env-file-if-exists=../../apps/web/.env.local src/cli.ts",
+        "generate": "drizzle-kit generate",
+        "check:types": "tsc --noEmit",
+        "check:tests": "vitest run"
+    },
+    "dependencies": {
+        "@opus/core": "workspace:*",
+        "@neondatabase/serverless": "1.1.0",
+        "drizzle-orm": "0.45.3",
+        "effect": "catalog:"
+    },
+    "devDependencies": {
+        "@electric-sql/pglite": "0.5.8",
+        "@types/node": "catalog:",
+        "drizzle-kit": "0.31.11",
+        "typescript": "catalog:",
+        "vitest": "catalog:"
+    }
+}
