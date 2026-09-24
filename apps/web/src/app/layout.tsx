@@ -26,9 +26,10 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
+    //  The sRGB equivalents of --bg in globals.css, light and dark; keep them in step.
     themeColor: [
-        { media: "(prefers-color-scheme: light)", color: "#fbfbfc" },
-        { media: "(prefers-color-scheme: dark)", color: "#1c1c1f" }
+        { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+        { media: "(prefers-color-scheme: dark)", color: "#0b0b0b" }
     ]
 }
 
