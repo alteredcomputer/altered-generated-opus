@@ -1,6 +1,9 @@
-import { createHash, timingSafeEqual } from "node:crypto"
+import { createHash, randomUUID, timingSafeEqual } from "node:crypto"
+import { config } from "@opus/core/config"
 import { E164 } from "@opus/core/phone"
-import { Option, Redacted, Schema } from "effect"
+import { type Config, Effect, Option, Redacted, Schema } from "effect"
+import { OutboundLive } from "./messenger.ts"
+import { receive, respond, respondLayer } from "./pipeline.ts"
 import type { InboundMessage } from "./store.ts"
 
 /**
@@ -84,5 +87,55 @@ const classify = (body: unknown): Classified => {
     }
 }
 
+/**
+ * Handles one Sendblue delivery.
+ *
+ * @remarks
+ * Refuses before reading the body: 503 when no secret is configured (fail-closed, never "accept
+ * everything"), 401 when the header does not match. A verified message is persisted with its
+ * inbound event before the 200, and the turn is handed to `defer` to run after the response, so
+ * a slow model never pushes Sendblue past its 45-second timeout into a retry.
+ */
+const handleSendblueWebhook = (
+    request: Request,
+    defer: (turn: Effect.Effect<void, Config.ConfigError>) => void
+) =>
+    Effect.gen(function* () {
+        const { signingSecret } = yield* config.imessageWebhook
+        const authentication = authenticate(request.headers.get(SIGNATURE_HEADER), signingSecret)
+
+        if (authentication === "unconfigured") {
+            yield* Effect.logError("Sendblue webhook refused: signing secret is not configured")
+            return Response.json({ error: "webhook not configured" }, { status: 503 })
+        }
+        if (authentication === "mismatch") {
+            yield* Effect.logWarning("Sendblue webhook refused: signing secret mismatch")
+            return Response.json({ error: "unauthorized" }, { status: 401 })
+        }
+
+        const body = yield* Effect.option(Effect.tryPromise(() => request.json()))
+        if (Option.isNone(body)) return Response.json({ error: "invalid json" }, { status: 400 })
+
+        const classified = classify(body.value)
+        if (classified._tag === "Ignored") {
+            yield* Effect.logInfo("Sendblue webhook ignored", { reason: classified.reason })
+            return Response.json({ received: true, processed: false })
+        }
+
+        const correlationId = randomUUID()
+        const recorded = yield* receive(classified.message, correlationId)
+        if (recorded._tag === "Duplicate")
+            return Response.json({ received: true, processed: false, duplicate: true })
+
+        defer(
+            respond(classified.message, recorded, correlationId).pipe(
+                Effect.provide(respondLayer(OutboundLive)),
+                Effect.asVoid
+            )
+        )
+
+        return Response.json({ received: true, processed: true })
+    })
+
 export type { Authentication, Classified }
-export { authenticate, classify, SIGNATURE_HEADER }
+export { authenticate, classify, handleSendblueWebhook, SIGNATURE_HEADER }
