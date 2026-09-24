@@ -176,13 +176,17 @@ const nodes = defineNodes([
         parent: "web",
         title: "Visual system",
         description:
-            "Berkeley Mono on a strict baseline grid, with one pure monochrome neutral ramp (zero chroma: blacks, whites, and greys) resolved through light-dark so both themes come from a single palette, and a single accent used only for selection and focus. Every vertical measurement is a multiple of one line.",
+            "Markdown-inspired (D136): Berkeley Mono at one font size for every piece of text, a tight terminal-like line height, and every vertical measurement a multiple of one line. Headings are not larger; they are bold and pure white (pure black in light mode) while body text is grey. One zero-chroma neutral ramp resolved through light-dark: dark is a #333333 background, and the body grey clears 4.5:1 against both backgrounds. Links are white, never blue, underlined only on hover or focus. The single accent is used only for selection and focus.",
         sources: ["apps/web/src/app/globals.css", "apps/web/public/fonts/**"],
         status: "in-progress",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" },
             ui: { brandPalette: true, radiusRule: true, responsive: true },
             todos: [
+                {
+                    text: "Owner review of the #333333 dark background (D136); he may revert toward #111111 after seeing it.",
+                    priority: 1
+                },
                 {
                     text: "Confirm dark-first against the current system-preference behaviour. His notes specify a dark grey background; the page currently follows the reader's setting.",
                     priority: 2
@@ -201,7 +205,7 @@ const nodes = defineNodes([
                 }
             ],
             remarks: [
-                "The blinking block cursor is the only motion on the page, and it respects reduced-motion.",
+                "No motion: the blinking cursor was dropped with the lettered logo (D136).",
                 "Grounded in knowledge/design-reference.md, which ranks his stated preferences and lists where this implementation currently conflicts with them."
             ]
         }
@@ -211,7 +215,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Site copy",
         description:
-            "Every word on the public site, in one module. Interim state (D118): no price, no date, and no deliverables; the call to action is 'Text Koa' under the 'Koa - early access' label (D103, D116), and the only explainer kept is existing copy that traces to a decision: the headline, what Koa is, and who it is for.",
+            "Every word on the public site, in one module, drafted for the owner's review (D136): the text logo, the headline, a subtitle on what Koa is, the early access program (Layer 1 mentioned without a price, D127), who this is for and who it is not for, the frequently asked questions, and the footer line. Every claim carries its decision id in a comment beside it. No price, no date, no revenue outcome.",
         sources: ["apps/web/src/site/content.ts"],
         status: "in-progress",
         data: {
@@ -219,7 +223,7 @@ const nodes = defineNodes([
             todos: [
                 { text: "Owner approval of every line before indexing is enabled.", priority: 1 },
                 {
-                    text: "Write the explainer's section set once Q80 is answered: Koa only, Koa plus one line on the founding program, or the program with its price.",
+                    text: "Owner picks the headline from the drafted one and its two alternatives.",
                     priority: 1
                 },
                 {
@@ -237,10 +241,10 @@ const nodes = defineNodes([
         parent: "web",
         title: "Site primitives",
         description:
-            "The four shapes the page is built from: a labelled section, prose, a list, and a two-column pair. Constraining the vocabulary keeps the layout on the baseline grid and lets copy stay editable as data.",
+            "The markdown shapes the page is built from: a heading with a literal '# ' or '## ' prefix, prose, a literal '---' divider, and a link written as visible '[label](target)' text. The markdown syntax is real text, not CSS decoration, so it copies and reads as markdown. Constraining the vocabulary keeps the layout on the line grid and lets copy stay editable as data.",
         sources: ["apps/web/src/site/primitives.tsx", "apps/web/src/site/primitives.module.css"],
         relations: [{ type: "uses", to: "web-visual-system" }],
-        status: "done",
+        status: "in-progress",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: false, security: "n/a" },
             ui: { brandPalette: true, radiusRule: true, responsive: true }
@@ -251,9 +255,9 @@ const nodes = defineNodes([
         parent: "web",
         title: "Landing page",
         description:
-            "The public page, in its interim form (D118): a headline, what Koa is, a 'Text Koa' button under the 'Koa - early access' label that opens an sms: link to the configured contact number, who it is for, and the generated-and-disclosed footer. The thread, not the page, is the funnel (D103). If the contact number is not configured the call to action renders disabled rather than as a link to nowhere.",
+            "The campaign page at /koa (D136), with the root redirecting there temporarily until a product page takes it (the redirect lives in next.config.ts). Top to bottom: the text logo, the headline, the subtitle, then '---'-divided sections for the early access program, who this is for, and frequently asked questions, and the footer 'This page was intentionally generated by AI.' The only call to action is the markdown link 'Get early access to Koa', which opens an sms: link to the configured contact number; the thread, not the page, is the funnel (D103). The last question links back to the early access section by anchor. If the contact number is not configured the link renders as plain text with an honest note rather than as a link to nowhere.",
         sources: [
-            "apps/web/src/app/page.tsx",
+            "apps/web/src/app/koa/page.tsx",
             "apps/web/src/site/landing.tsx",
             "apps/web/src/site/landing.module.css"
         ],
