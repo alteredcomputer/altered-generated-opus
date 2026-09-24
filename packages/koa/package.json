@@ -1,0 +1,29 @@
+{
+    "name": "@opus/koa",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "exports": {
+        "./pipeline": "./src/pipeline.ts",
+        "./webhook": "./src/webhook.ts"
+    },
+    "scripts": {
+        "cli": "node --experimental-strip-types --no-warnings=ExperimentalWarning --env-file-if-exists=../../apps/web/.env.local src/cli.ts",
+        "check:types": "tsc --noEmit",
+        "check:tests": "vitest run"
+    },
+    "dependencies": {
+        "@openrouter/ai-sdk-provider": "3.1.0",
+        "@opus/core": "workspace:*",
+        "@opus/db": "workspace:*",
+        "ai": "7.0.113",
+        "drizzle-orm": "0.45.3",
+        "effect": "catalog:",
+        "zod": "4.6.5"
+    },
+    "devDependencies": {
+        "@types/node": "catalog:",
+        "typescript": "catalog:",
+        "vitest": "catalog:"
+    }
+}
