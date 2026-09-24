@@ -1,56 +1,36 @@
 import type { ReactNode } from "react"
-import type { Block } from "./content.ts"
 import styles from "./primitives.module.css"
 
 /**
  * @remarks
- * The page is built from four shapes only: a labelled section, prose, a list, and a two-column
- * pair. Constraining the vocabulary is what keeps the layout on the baseline grid and keeps copy
- * editable as data rather than as markup.
+ * The page is built from markdown shapes only: a heading, prose, a divider, and a link. The
+ * markdown syntax (`# `, `---`, `[label](target)`) is real text rather than CSS decoration, so it
+ * copies and reads as markdown. Headings keep the `#` out of the accessible name, so a screen
+ * reader says the heading rather than "number sign".
  */
 
-const Label = ({ children }: { children: ReactNode }) => (
-    <div className={styles.label}>{children}</div>
-)
+const Heading = ({ level, children }: { level: 1 | 2 | 3; children: ReactNode }) => {
+    const Tag = `h${level}` as const
+    const marker = level === 3 ? "## " : "# "
+
+    return (
+        <Tag className={styles.heading}>
+            <span aria-hidden="true">{marker}</span>
+            {children}
+        </Tag>
+    )
+}
 
 const Prose = ({ children }: { children: ReactNode }) => <p className={styles.prose}>{children}</p>
 
-const Pairs = ({ items }: { items: readonly (readonly [string, string])[] }) => (
-    <dl className={styles.pairs}>
-        {items.map(([term, description]) => (
-            <div className={styles.pair} key={term}>
-                <dt className={styles.term}>{term}</dt>
-                <dd className={styles.description}>{description}</dd>
-            </div>
-        ))}
-    </dl>
+const Divider = () => <p aria-hidden="true">---</p>
+
+const MarkdownLink = ({ label, target, href }: { label: string; target: string; href: string }) => (
+    <p>
+        <a href={href}>
+            [{label}]({target})
+        </a>
+    </p>
 )
 
-const List = ({ items }: { items: readonly string[] }) => (
-    <ul className={styles.list}>
-        {items.map(item => (
-            <li className={styles.item} key={item}>
-                <span className={styles.bullet}>-</span>
-                <span>{item}</span>
-            </li>
-        ))}
-    </ul>
-)
-
-const renderBlock = (block: Block, index: number) => {
-    const key = `${block.kind}-${index}`
-
-    if (block.kind === "prose") return <Prose key={key}>{block.text}</Prose>
-    if (block.kind === "list") return <List items={block.items} key={key} />
-
-    return <Pairs items={block.items} key={key} />
-}
-
-const Section = ({ label, blocks }: { label: string; blocks: readonly Block[] }) => (
-    <section className={styles.section}>
-        <Label>{label}</Label>
-        <div className={styles.body}>{blocks.map(renderBlock)}</div>
-    </section>
-)
-
-export { Label, List, Pairs, Prose, Section }
+export { Divider, Heading, MarkdownLink, Prose }
