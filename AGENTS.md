@@ -101,11 +101,11 @@ indirectly. A missing credential is a loud startup failure, never a silent fallb
 Binding on every agent and every spawned subagent:
 
 - **Never a default model.** Every spawned agent names its model explicitly.
-- **Opus 5 minimum for coding.** Fable 5 only with the owner's explicit approval (reserved for
-  planning). Sonnet-class is allowed for proceduralised lightweight tasks (D105), such as
-  scraping and profile judging.
-- **Context cap around 300,000 tokens** per chat or agent; at the cap, summarise or start fresh.
-  This works because state is saved to the repo every turn.
+- **Opus 5.5 for all subagents (D124),** named explicitly. Fable 5 only with the owner's explicit
+  approval (reserved for planning). Sonnet-class is allowed for proceduralised lightweight tasks
+  (D105), such as scraping and profile judging.
+- **Context cap around 150,000 tokens** per chat or agent (D119); at the cap, summarise or start
+  fresh. Stay compact. This works because state is saved to the repo every turn.
 - **Save every turn.** Knowledge and code changes are committed each turn so any agent restarts
   with minimal context.
 - **Series execution** (D096); avoid parallel worktrees that waste tokens on merge conflicts.
