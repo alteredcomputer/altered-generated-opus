@@ -4,6 +4,7 @@
     Monospaced, on a strict baseline grid, with a single accent used only for selection and focus.
     Every vertical measurement is a multiple of --line, so the page reads as a grid rather than as
     a stack of boxes. Light and dark both derive from one neutral ramp, so there is one palette.
+    The neutrals carry zero chroma on purpose (D118): pure blacks, whites, and greys, no tint.
 */
 
 :root {
@@ -12,11 +13,11 @@
     --line: 1.375rem;
     --measure: 66ch;
 
-    --neutral: oklch(64% 0.008 280);
-    --bg: light-dark(oklch(98.5% 0.002 280), oklch(15% 0.004 280));
-    --fg: light-dark(oklch(22% 0.006 280), oklch(92% 0.004 280));
+    --neutral: oklch(64% 0 0);
+    --bg: light-dark(oklch(98.5% 0 0), oklch(15% 0 0));
+    --fg: light-dark(oklch(22% 0 0), oklch(92% 0 0));
     --fg-muted: var(--neutral);
-    --rule: light-dark(oklch(90% 0.004 280), oklch(26% 0.006 280));
+    --rule: light-dark(oklch(90% 0 0), oklch(26% 0 0));
 
     --accent: oklch(84% 0.17 96);
     --accent-fg: oklch(20% 0.02 96);
