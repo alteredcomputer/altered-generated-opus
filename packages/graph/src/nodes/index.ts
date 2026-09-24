@@ -176,7 +176,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Visual system",
         description:
-            "Berkeley Mono on a strict baseline grid, with one neutral ramp resolved through light-dark so both themes come from a single palette, and a single accent used only for selection and focus. Every vertical measurement is a multiple of one line.",
+            "Berkeley Mono on a strict baseline grid, with one pure monochrome neutral ramp (zero chroma: blacks, whites, and greys) resolved through light-dark so both themes come from a single palette, and a single accent used only for selection and focus. Every vertical measurement is a multiple of one line.",
         sources: ["apps/web/src/app/globals.css", "apps/web/public/fonts/**"],
         status: "in-progress",
         data: {
@@ -192,7 +192,7 @@ const nodes = defineNodes([
                     priority: 2
                 },
                 {
-                    text: "Confirm the accent. Currently a warm amber, which lands on 'human' in his semantic colour map, but chosen by taste rather than from it.",
+                    text: "Confirm the accent (Q39, open). Currently a warm amber, which lands on 'human' in his semantic colour map, but chosen by taste rather than from it. Left untouched by the monochrome change (D118).",
                     priority: 3
                 },
                 {
@@ -209,18 +209,21 @@ const nodes = defineNodes([
     {
         id: "web-site-copy",
         parent: "web",
-        title: "Site copy and offer facts",
+        title: "Site copy",
         description:
-            "Every word on the public site, plus the commercial facts it derives from, in one module. Price and date are stated once and rendered everywhere from that value, so the drift that put three different prices in the previous project cannot happen here.",
+            "Every word on the public site, in one module. Interim state (D118): no price, no date, and no deliverables; the call to action is 'Text Koa' under the 'Koa - early access' label (D103, D116), and the only explainer kept is existing copy that traces to a decision: the headline, what Koa is, and who it is for.",
         sources: ["apps/web/src/site/content.ts"],
         status: "in-progress",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" },
-            controls: ["offer.deposit", "offer.total", "offer.launchDate"],
             todos: [
                 { text: "Owner approval of every line before indexing is enabled.", priority: 1 },
                 {
-                    text: "Move the offer facts into the settings store so they change without a deploy.",
+                    text: "Write the explainer's section set once Q80 is answered: Koa only, Koa plus one line on the founding program, or the program with its price.",
+                    priority: 1
+                },
+                {
+                    text: "Move the offer facts into a validated data file when the full rewrite states them (plan 04 step 1).",
                     priority: 3
                 }
             ],
@@ -248,7 +251,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Landing page",
         description:
-            "The public page. It states the offer plainly and moves the reader into a text thread, which is where the sale happens. If the contact number is not configured the call to action renders disabled rather than as a link to nowhere.",
+            "The public page, in its interim form (D118): a headline, what Koa is, a 'Text Koa' button under the 'Koa - early access' label that opens an sms: link to the configured contact number, who it is for, and the generated-and-disclosed footer. The thread, not the page, is the funnel (D103). If the contact number is not configured the call to action renders disabled rather than as a link to nowhere.",
         sources: [
             "apps/web/src/app/page.tsx",
             "apps/web/src/site/landing.tsx",
