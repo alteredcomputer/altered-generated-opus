@@ -38,7 +38,7 @@ Round 6 answer before it can start; the plan says which).
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
 | 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 (the loop) done 2026-09-24; phase 2 (memory) next; Round 10 (Q76 to Q83) before anyone outside the allowlist texts; Sendblue subscription to confirm (D114) |
-| 04 | [Offer and page](04-offer-and-page.md) | ready | interim step decided (D118): strip price and date, monochrome palette, short explainer per Q80; runs right after plan 08 phase 1 in this chat; full copy approval before indexing |
+| 04 | [Offer and page](04-offer-and-page.md) | ready | interim step (D118) done 2026-09-24: no price, date, or deliverables; "Text Koa" under "Koa - early access"; zero-chroma neutrals; explainer is existing traced copy only, pending Q80. Next: step 1 onward (full rewrite), gated on Q80 and copy review; full copy approval before indexing |
 | 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; business-account conversion is his action; sourcing budget $25 (D105) |
 | 07 | [Offer assets](07-offer-assets.md) | ready | script and run-sheets need nothing; care package files per D090 |
 | 01 | [Dashboard foundation](01-dashboard-foundation.md) | waiting | Resend credentials and `OPERATOR_EMAILS` in Vercel |

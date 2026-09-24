@@ -79,7 +79,7 @@ No new copy is written in this step beyond the button label and the D116 label. 
 
 ## Steps
 
-0. Interim change above (D118). Commit.
+0. Interim change above (D118). Commit. **Done 2026-09-24.**
 1. `knowledge/data/offer.json` and its schema; build fails on a bad file; `content.ts` reads from
    it. Commit.
 2. Rewrite the sections in the order above from `offer.md`. Every sentence that states a
@@ -118,3 +118,15 @@ Update `web-site-copy` and `web-landing-page`; add `offer-facts` (the data file 
 - 2026-09-24 (orchestrating agent): interim step approved as D118 and specified above. The
   full rewrite now also states the mirror as part of the program (D122) and the threshold wall
   (D113) honestly: free Koa is the real product on a threshold, never a crippled version.
+- 2026-09-24 (executing agent): interim step (step 0) done and merged. Cut: Layer 1, the Nov 5
+  deliverables, the deposit, price, and "why we sell before it exists" sections, the `offer`
+  object, and the graph's `offer.*` controls. Kept, existing copy only: the headline, the Koa
+  subhead, "Opens a text thread." (the "No call, no form." half was cut because Q70 may put a
+  booked call behind the wall), and "Who this is for" minus two sentences: the opener, which
+  says "technical founders" against D081, and "We would be taking your money...", which sells
+  the program before Q80 decides whether the page mentions it. The "How it works" memory
+  paragraph was cut because memory (plan 08 phase 2) is not built yet. The tagline appears
+  only in the meta description, as before. Neutrals are zero chroma; the theme colours now
+  equal `--bg` exactly (the dark one had drifted to a lighter tinted grey). The four-shape
+  primitives stay although only prose renders today; the full rewrite uses them. Status stays
+  `ready` for steps 1 to 6.

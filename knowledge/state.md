@@ -1,6 +1,6 @@
 # Current state
 
-Updated 2026-09-24 (after plan 08 phase 1). Read this first, then `decisions.md`, `compass.md`,
+Updated 2026-09-24 (after plan 04 interim step). Read this first, then `decisions.md`, `compass.md`,
 `offer.md`, `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
@@ -40,8 +40,14 @@ inbound, an empty allowlist refuses everyone, voice notes are saved and transcri
 turn replies through OpenRouter, and every step lands in the event ledger. Sending stays off:
 `OUTBOUND_ENABLED` and `koa.sendEnabled` are both false, so a live inbound today is stored and
 skipped. Proven by CLI conversation on the dev database and a local run of the route. Phase 2
-(memory) is next; plan 04's interim page step follows in series. Live at `generated.altered.computer`, deployed from
-`main`, not indexed; the landing page still shows the retired offer until the interim step lands.
+(memory) is next. Live at `generated.altered.computer`, deployed from `main`, not indexed.
+
+**Plan 04's interim page step is done** (2026-09-24, D118). The live page no longer shows the
+retired offer: no price, no date, no deliverables. It shows the interim page - headline, what Koa
+is, a "Text Koa" button under "Koa - early access" opening the `sms:` link to
+`SENDBLUE_PHONE_NUMBER`, who it is for, and the generated-and-disclosed footer - on a zero-chroma
+monochrome palette with the amber accent untouched (Q39). The explainer is existing traced copy
+only, pending Q80; plan 04's full rewrite (steps 1 to 6) waits on Q80 and copy review.
 
 ## What is blocking
 
@@ -59,7 +65,7 @@ skipped. Proven by CLI conversation on the dev database and a local run of the r
 ## What can proceed without answers
 
 Plan 08 phases 1 to 4 in full (the loop, memory, scheduling, concurrency and the ledger) with the
-allowlist closed. Plan 04's interim step except the explainer's section choice. Plan 02's send-
+allowlist closed. Plan 02's send-
 time tracker and sourcing procedure inside the $25 budget (D105). Plan 07's script and run-sheets.
 
 ## Working notes for a fresh session
@@ -88,7 +94,10 @@ time tracker and sourcing procedure inside the $25 budget (D105). Plan 07's scri
   file would dilute the operating contract.
 - **Verify claims about the rendered page with the browser console**, not with screenshots.
   `document.fonts.check` and a glyph-width measurement both proved the font was loading when a
-  subagent's screenshot said otherwise.
+  subagent's screenshot said otherwise. Headless Chrome is at `/usr/local/bin/google-chrome`;
+  drive it over the DevTools protocol (Node 22's global `WebSocket`) to read `getComputedStyle`
+  at 390px and desktop in both colour schemes. Chrome reports the oklch neutrals as `lab(...)`;
+  zero chroma shows as a and b of 0 (or float noise around 1e-5).
 - **Recovering an unreachable Cursor chat:** `GET https://api.cursor.com/v0/agents/{id}/conversation`
   with the `READ_ONLY__CURSOR_TOKEN` bearer works regardless of scope. That is how the Aug 16-24
   chat was recovered.
