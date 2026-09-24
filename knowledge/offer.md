@@ -6,7 +6,7 @@ page (plan 04), the sales brief (plan 06), the fulfilment kit (plan 07), Koa's o
 (plan 08), and the video script read from. Items marked **OPEN** are registered in
 `open-questions.md` and do not ship in copy.
 
-Last reconciled 2026-09-15.
+Last reconciled 2026-09-24 (Round 9, D112 to D123).
 
 ## One sentence
 
@@ -45,6 +45,11 @@ re-explained to every AI from zero, the quiet important work dropping.
 
 Not for: no budget; procrastination we cannot solve; a skill gap we cannot close; no direction at
 all (D018). The price does most of this filtering, and Koa's own wall does the rest (D104).
+
+His Sept 24 sharpening (D123): most committed entrepreneurs are "not the smartest, not the most
+energetic, and are 80% in a state of 'I don't want to do the paperwork or code work' and half
+awake." Koa is the tool for that state - staying aligned and getting things done while tired -
+and it has to be built from one level above to be effective for them.
 
 ## The promise
 
@@ -85,11 +90,21 @@ opens (D078). Never revenue (D019).
 
 ## The product, and when
 
-**Koa early access exists now as a generated build** (D100): the iMessage agent with persistent
-vector memory and self-scheduled reach-outs, presented publicly per Q73 (**OPEN**), disclosed as
-generated where disclosure lives (D047). The hand-written core by the founder remains the
-long-term V1; user data migrates to it by transform. Voice notes and notes import (D040) join as
-the build progresses; the soft "Est. November" language for the full platform can move (D082).
+Three things a buyer gets, stated in this order (D122):
+
+1. **Koa - early access, now, as a generated build** (D100, D116): the iMessage agent with
+   persistent vector memory and self-scheduled reach-outs, labelled "Koa - early access",
+   disclosed as generated where disclosure lives (D047, kept on purpose per D116). Voice notes
+   are saved and transcribed from day one (D112); notes import (D040) joins as the build
+   progresses.
+2. **The custom builds and integrations of the program** (D078): the founder as technician,
+   building around their one blocked goal.
+3. **The hand-coded infrastructure mirror, with its integrated builds, as it lands** (D122): the
+   refined, versioned, all-cases-handled platform he writes himself, which the generated build
+   migrates into by transform (D100). This is the value: refinement in code design, in feature
+   and function polish, and in ergonomics - "the same reason why people buy a MacBook over a
+   windows laptop" - plus his design and tooling for knowledge data. No date is promised for it
+   beyond D082's soft language.
 
 ## The room (D084)
 
@@ -100,8 +115,12 @@ needed.
 
 **The funnel is the product** (D103, D104): every call to action is "text Koa" -
 `altered.computer/go` opens the thread. Koa is genuinely useful from the first message, leans
-about half toward the program, and gates at the wall (**OPEN**, Q70). The first iMessage is
-always inbound by platform rule. The long-form video informs (D086), scripted and shot near the
+about half toward the program, and gates at the wall - **a threshold, not a feature gate**
+(D113): free Koa is the full product, memory and reach-outs included, until a time, cost, or
+milestone threshold is reached (numbers: Q78), after which the thread is the program
+conversation (Q79). The first iMessage is always inbound by platform rule. **Outreach is the
+primary lead channel** (D121): manual Instagram DMs from his own account, paced by the bench's
+send-time tracker, each pointing at the thread; content is the compounding second channel. The long-form video informs (D086), scripted and shot near the
 end of marketing setup (D091); the page holds the video, states the offer, and points at the
 thread (D042); the close happens in the thread with HITL where sensitive (D073, D104). Outreach:
 Instagram openers sent manually from his personal account, sourced and drafted by the bench

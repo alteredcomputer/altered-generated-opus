@@ -57,16 +57,29 @@ the room; D086 the video.
 Proof assets (Q33, later plan). Payments (05). The hero visual treatment (Q40). Any statement
 about revenue, about the core's timeline beyond what Q52 locks, or about features beyond D040.
 
-## Interim, if the owner approves it in chat
+## Interim, approved 2026-09-24 (D118)
 
 The live page still shows the retired $100 deposit and $499 total, and the Nov 5 deliverables as
-a promise. It is not indexed, but at least one person has read it. Proposed interim commit, small
-and reversible: replace the price and date sections with one line, "Pricing and dates are shared
-in the thread," until the rewrite lands. This is copy, so it ships only on his word.
+a promise. His answer to Q75: option b first, then refine toward minimalism. The interim step,
+in one small branch right after plan 08 phase 1:
+
+1. Remove every price and date line and the retired deliverables. Where a section would now
+   say nothing, remove the section; do not replace prices with a placeholder sentence.
+2. The call to action becomes "Text Koa", labelled "Koa - early access" (D116), opening the
+   `sms:` link to the configured number; disabled state stays honest when the number is absent.
+3. Palette to pure monochrome (D118): the neutral ramp goes to zero chroma - blacks, whites,
+   greys, no blue tint. The amber accent is untouched (Q39 open).
+4. Keep a brief, hyper-concise explainer for the hesitant: what Koa is, what happens when you
+   text, who it is for. Section set per Q80's answer; until answered, keep only sentences that
+   already exist on the page and trace to a decision, and cut the rest.
+5. The generated-and-disclosed footer line stays (D116).
+
+No new copy is written in this step beyond the button label and the D116 label. The full rewrite
+(steps 1 to 6 below) still waits on copy review.
 
 ## Steps
 
-0. Interim change above, if approved. Commit.
+0. Interim change above (D118). Commit.
 1. `knowledge/data/offer.json` and its schema; build fails on a bad file; `content.ts` reads from
    it. Commit.
 2. Rewrite the sections in the order above from `offer.md`. Every sentence that states a
@@ -102,3 +115,6 @@ Update `web-site-copy` and `web-landing-page`; add `offer-facts` (the data file 
 - 2026-09-07 (planning agent): Q49 is locked (D078); the total may now be stated with its
   contents. The balance and refund timing lines stay as honest placeholders ("shared in the
   thread") until Q56 and Q57 close.
+- 2026-09-24 (orchestrating agent): interim step approved as D118 and specified above. The
+  full rewrite now also states the mirror as part of the program (D122) and the threshold wall
+  (D113) honestly: free Koa is the real product on a threshold, never a crippled version.

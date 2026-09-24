@@ -1,69 +1,57 @@
 # Current state
 
-Updated 2026-09-15. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
+Updated 2026-09-24. Read this first, then `decisions.md`, `compass.md`, `offer.md`,
 `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
 
 ## Where the project stands
 
-**Round 8 (2026-09-15) is the generation flip.** Recorded as D100 to D111; archived verbatim in
-`sources/chats/2026-09-15-round-8-the-generation-flip.md`. The structural changes:
+**Round 9 (2026-09-24) starts generation.** Recorded as D112 to D123; archived verbatim in
+`sources/chats/2026-09-24-round-9-back-from-the-move.md`. Nine days of silence for the move, then
+every Round 9 answer in one message:
 
-- **The MVP is generated (D100).** The Koa product buyers touch is built by agents in this repo
-  under binding guardrails, with an escalation ladder (generate, correct, hand-coded primitive,
-  thinnest slice) and an inverted challenge protocol: concerns about generation get fixed before
-  any flip back to hand code. The hard wall around `usealtered/altered` stands untouched; the
-  hand-written core is the long-term V1 with data migrating by transform. AGENTS.md is amended.
-- **The outbound-only runway is scrapped (D101).** Full interactive Koa - persistent vector
-  memory, self-scheduled reach-outs by agent judgment, no fixed cadence - ships on the paid
-  Sendblue number. Plan 08 (`plans/08-koa-mvp.md`) carries the proposed six-phase scope.
-- **The close is the full $12,500 (D102).** No reservation framing. Financing via an accredited
-  provider once Stripe works; $2,500 is the hidden floor tier (same product, no one-to-one),
-  never mentioned unless full price and financing both fail. Paying in full earns priority, not
-  extras (D106).
-- **The funnel is inbound-led (D103, D104):** every call to action is "text Koa";
-  `altered.computer/go` opens the thread; Koa sells at about half lean until the wall (Q70
-  open); outbound Instagram openers stay manual from his personal account.
-- **Model and cost governance (D107),** now in AGENTS.md: explicit models always, Opus 5 minimum
-  for coding, Fable 5 only with explicit approval, Sonnet-class for proceduralised light tasks
-  (D105, $25 sourcing budget), roughly 300k context then summarise or restart, save every turn,
-  series execution, cost reported against progress.
-- **The checkpoint is Sept 17 (D108):** meaningful lever-moving action. He moves into the new
-  apartment Sept 16. Honest financial runway: roughly end of December.
-- **Standing response format (D109):** every chat turn ends with his TODO list, then a deployed
-  assets list.
-- **Content (D110):** he is the demonstration user (his own Koa, screen recordings, talking
-  head); client 1 is the feedback loop, not public content. The "Video content strategy" chat
-  (id `bc-01a0937b-4169-7495-a3a5-d4647fd8e3a9`) holds his @inducingchaos transcripts for the
-  content plan.
+- **Scope confirmed (D112):** plan 08's six phases, in order, plus iMessage voice notes saved
+  as source data and transcribed from day one.
+- **The wall is a threshold, not a feature gate (D113):** free Koa is the full product, memory
+  and reach-outs included; time, cost, or milestone gates it. Never a crippled free version.
+- **Burn approved, Sendblue live when phase 1 deploys (D114).** Sendblue, Neon, Redis, and
+  OpenRouter values are already present in the Vercel development environment (names-only
+  check). Whether the Sendblue subscription is active is his to confirm.
+- **Access (D115):** allowlist, then invited warm prospects, then public.
+- **Label (D116):** "Koa - early access"; the generated disclosure stays on purpose.
+- **Budget (D117):** about $100 a week while the MVP generates, then about $50.
+- **Interim page (D118):** strip price and date now, monochrome palette (no blue tint), keep a
+  short explainer, refine toward minimal. Plan 04's interim step is specified.
+- **Context cap 150k (D119); Opus 5.5 for all subagents (D124).** AGENTS.md updated.
+- **Checkpoint (D120):** Oct 10, first payment collected. Markers Sept 28 (Koa live for him)
+  and Oct 1 (outreach daily). Oct 15 stays the floor decision; November rent is $1,600 before
+  student funding lands Nov 5 to 10.
+- **Outreach is the primary lead channel (D121);** the bench gets a send-time tracker.
+- **The hand-coded mirror is part of what $12,500 buys (D122);** `offer.md` states three things.
+- Challenges logged, not acted on (D123): the hand-coding pull, B2B automation, ALTERED RAW.
 
-Round 9 (Q69 to Q75) is asked - the last round before generation: MVP scope confirmation, the
-wall design, the standing monthly burn and Sendblue timing, pre-purchase access policy, public
-naming of the early build, the weekly generation budget, and the interim page. After the
-answers, the flow becomes generate-answer cycles: a build slice between every Q&A round, in
-series, fresh-context subagents on explicit models.
+Round 10 (Q76 to Q83) is asked: Koa's first reply, the onboarding intents, the threshold
+numbers, behaviour past the wall, the interim explainer's sections, which number, outreach
+pacing, and the HITL surface. Phase 1 builds with fail-closed placeholders for all of them.
 
-Live at `generated.altered.computer`, deployed from `main`, not indexed. The landing page still
-shows the **retired** $100/$499 offer; Q75 proposes a minimal interim page pointing at the
-thread. Eight plans exist; plan 08 (Koa MVP) leads the order. The feature graph passes with the
-new `koa` node planned.
+**Plan 08 phase 1 is in progress** on a fresh-context Opus 5.5 agent. Plan 04's interim page step
+follows it in the same chat, in series. Live at `generated.altered.computer`, deployed from
+`main`, not indexed; the landing page still shows the retired offer until the interim step lands.
 
 ## What is blocking
 
-- **Round 9 answers** gate plan 08's go signal (scope Q69, wall Q70, Sendblue Q71, access Q72)
-  and the interim page (Q75). Phase 1 can build against a mock Sendblue adapter regardless.
-- **Sendblue credentials** gate the loop going live; **Neon database** provisioning comes with
-  plan 08 phase 1 (the data-layer slice it needs).
-- **Owner actions** are listed in `open-questions.md` under "Waiting on the owner"; the plan-08
-  items lead now.
-- **Copy approval** before any page is indexed (plan 04).
+- **Sendblue subscription confirmation** (D114) gates the loop going live; the code ships
+  against the mock adapter and the real adapter behind kill switches regardless.
+- **Round 10 answers** gate anyone outside the allowlist texting Koa (Q76 to Q79, Q83) and the
+  interim explainer's section set (Q80).
+- **Owner actions** are listed in `open-questions.md` under "Waiting on the owner".
 
 ## What can proceed without answers
 
-Plan 08 phase 1 against the mock adapter (webhook shape, store, agent turn, CLI conversation,
-allowlist, kill switches) - everything except the live line. Plan 07's script and run-sheets.
-Plan 02's sourcing procedure inside the $25 budget (D105).
+Plan 08 phases 1 to 4 in full (the loop, memory, scheduling, concurrency and the ledger) with the
+allowlist closed. Plan 04's interim step except the explainer's section choice. Plan 02's send-
+time tracker and sourcing procedure inside the $25 budget (D105). Plan 07's script and run-sheets.
 
 ## Working notes for a fresh session
 

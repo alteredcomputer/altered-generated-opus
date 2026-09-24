@@ -37,9 +37,9 @@ Round 6 answer before it can start; the plan says which).
 
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
-| 08 | [Koa MVP, generated](08-koa-mvp.md) | ready | Round 9 (Q69 to Q72) for scope, wall, Sendblue timing, and access; phase 1 builds against a mock regardless |
-| 04 | [Offer and page](04-offer-and-page.md) | ready | Q75 decides the interim page; copy approval before indexing; price copy per D102 |
-| 02 | [Outreach bench](02-outreach-bench.md) | ready | secondary to the inbound funnel (D103); sourcing budget approved at $25 (D105) |
+| 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 underway (D112); Round 10 (Q76 to Q83) before anyone outside the allowlist texts; Sendblue subscription to confirm (D114) |
+| 04 | [Offer and page](04-offer-and-page.md) | ready | interim step decided (D118): strip price and date, monochrome palette, short explainer per Q80; runs right after plan 08 phase 1 in this chat; full copy approval before indexing |
+| 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; business-account conversion is his action; sourcing budget $25 (D105) |
 | 07 | [Offer assets](07-offer-assets.md) | ready | script and run-sheets need nothing; care package files per D090 |
 | 01 | [Dashboard foundation](01-dashboard-foundation.md) | waiting | Resend credentials and `OPERATOR_EMAILS` in Vercel |
 | 03 | [Truth surface](03-truth-surface.md) | waiting | plan 01; GitHub contents-write token in Vercel |
@@ -56,7 +56,7 @@ each result before saying "next" for the following one. Never start a plan while
 
 **Model and cost rules (D107) bind every agent on every plan:** explicit model per agent, Opus 5
 minimum for coding, Fable 5 only with the owner's explicit approval, Sonnet-class allowed for
-proceduralised light tasks (D105), roughly 300k tokens of context then summarise or restart,
+proceduralised light tasks (D105), roughly 150k tokens of context (D119) then summarise or restart,
 state committed every turn, cost reported against progress.
 
 ## Not yet planned in detail
@@ -112,3 +112,4 @@ chat; the agent that hears it writes it down.
 | 2026-09-05 to 07 | 0 | 0 | 0 | 0 | Round 6 answered; offer fixed; checkpoint moved to Sept 14 (D085). |
 | 2026-09-08 to 11 | 0 | 0 | 0 | 0 | Round 7 answered; day 4 of daily personal-brand reels on his Instagram; checkpoint re-scoped to leads and validation (D091). |
 | 2026-09-12 to 15 | 0 | 0 | 0 | 0 | Round 8 answered: the generation flip (D100), full Koa replaces the runway (D101), checkpoint moved to Sept 17 (D108). Mid-move to the new apartment (Sept 16). |
+| 2026-09-16 to 24 | 0 | 0 | 0 | 0 | No ALTERED work: the move and tenancy issues. Round 9 answered Sept 24 (D112 to D123); generation begins; checkpoint set to Oct 10, first payment (D120). |

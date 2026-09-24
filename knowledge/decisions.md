@@ -1348,7 +1348,7 @@ your developer." Supersedes the incentive framing in D088 and closes Q68 with "n
    is reserved for planning (he runs his own planning chats on it). Sonnet-class is allowed for
    lightweight proceduralised tasks per D105.
 3. **Context is capped at roughly 300,000 tokens per chat or agent.** At the cap: summarise or
-   start fresh. This works because of rule 4.
+   start fresh. This works because of rule 4. **Lowered to 150,000 by D119 (2026-09-24).**
 4. **Every turn saves state.** Knowledge and code changes are committed every turn so any agent
    can be restarted with minimal context. (Already the operating contract; now also the cost
    mechanism.)
@@ -1400,3 +1400,152 @@ anything stays inside a couple hundred dollars.
   stable, not now.
 - **The commit covenant work** he started by hand is stashed by his own call; generation makes
   it a later project.
+
+---
+
+## Round 9 - back from the move, generation begins (2026-09-24)
+
+Source: `sources/chats/2026-09-24-round-9-back-from-the-move.md`. Nine days of silence for the
+apartment move, then the Round 9 answers in one message, plus the checkpoint handed to the agent
+to set, outreach named as the lead channel, the wall redefined as a threshold, the context cap
+lowered, and the hand-written mirror named as the value behind the $12,500.
+
+### D112 - Q69: build phases 1 to 6 as proposed, plus voice notes saved from day one
+
+**Verdict:** "a. Get it done." Plan 08's six phases ship in order, nothing else - with one
+addition he named: iMessage voice notes are accepted at minimum, saved as source data, and
+transcribed for human and AI reference. "Save everything deemed as source data." Full
+conversational voice (ElevenLabs, D111) stays out of v1; this is ingestion, not output.
+
+**Re-open cost:** High. Plan 08 executes against it.
+
+### D113 - Q70: the wall is a threshold on the real product, never a feature gate
+
+**Verdict:** The recommendation (milestone wall layered on a token budget) is accepted with one
+correction that changes the design: **the free or trial Koa is the full product, reach-outs
+included.** "The free version or trial should be 100% effective, even including reach outs, and
+gate that not on features, but time/cost/milestones. Give them the real deal but on a
+threshold." Rejected: keeping self-scheduled reach-outs member-only, and any framing that
+implies free Koa forgets. So the wall is: the onboarding milestone (goal, blocker, context
+collected, one genuine synthesis delivered) and a per-user cost or time threshold, after which
+the thread shifts to the program conversation until they book or pay. Memory and reach-outs
+work the same on both sides of the wall.
+
+**Re-open cost:** Medium. Phase 5 of plan 08 builds it.
+
+### D114 - Q71: the standing burn is approved; Sendblue goes live when phase 1 deploys
+
+**Verdict:** Option a. Roughly $150 to $200 a month all in (Sendblue about $100 USD, OpenRouter
+usage, free tiers elsewhere). The Sendblue line is bought or activated the moment phase 1's
+webhook is deployed and ready to receive, so the paid month starts when messages can flow.
+Verified 2026-09-24: `SENDBLUE_API_KEY`, `SENDBLUE_API_SECRET`, `SENDBLUE_PHONE_NUMBER`, and
+`SENDBLUE_SIGNING_SECRET` already hold values in the Vercel development environment, alongside
+`DATABASE_URL`, `REDIS_URL`, and `OPENROUTER_API_KEY`. Whether the Sendblue subscription behind
+them is active is his to confirm.
+
+### D115 - Q72: allowlist first, then invited warm prospects, then public
+
+**Verdict:** Option a moving to c. Allowlist only (him, Kiera, one or two friends) until phases
+4 and 5 are verified; then a manually invited handful of warm prospects as the first real test;
+public only when the allowlist is deliberately widened. The empty allowlist admits nobody.
+
+### D116 - Q73: "Koa - early access", and the generated disclosure stays on purpose
+
+**Verdict:** Option a. The public label is "Koa - early access". The generated-and-disclosed
+line stays in the footer deliberately, not grudgingly: "in the future when I handcode
+everything and add 'ai authoring' data features - this will add value, rather than
+depreciating it." Authorship provenance is a future product feature, so the record starts now.
+
+### D117 - Q74: about $100 a week while the MVP generates, then about $50
+
+**Verdict:** Option b then a. If generation needs more money than that, his stated fallback is a
+second job funding the AI rather than hand-coding to save tokens.
+
+### D118 - Q75: strip the page now, then refine toward a minimal monochrome page with a short explainer
+
+**Verdict:** Option b first - take the retired price and date lines off the live page - then
+refine toward minimalism. Two constraints on the refinement: keep "a brief, hyper concise
+explainer for those hesitant on taking action" ("a few sections of precision text can go a long
+ways"), and **drop the blue hues from the palette for pure monochromatic blacks, whites, and
+greys.** The current neutral ramp carries a cool tint (oklch hue 280 with small chroma); it goes
+to zero chroma. The amber accent was not mentioned; Q39 stays open. The call to action becomes
+"text Koa" per D103, labelled per D116.
+
+**Re-open cost:** Low. Plan 04's interim step carries it.
+
+### D119 - the context cap is 150,000 tokens; Opus 5 for all subagent code work, restated
+
+**Verdict:** Amends D107 rule 3: context per chat or agent is capped at roughly **150,000
+tokens**, not 300,000, and agents stay compact, relying on the repo's state files to carry
+context across restarts. Rule 2 restated by him: Opus 5 for all subagent code work, always
+explicit. AGENTS.md is updated.
+
+### D120 - the checkpoint: Oct 10, first payment collected; Oct 15 stays the floor decision
+
+**Verdict:** Sept 17 (D108) passed inside the move and is deferred. He asked the agent to pick
+the date and named the target: sales, not validation - "All I know is we need sales, either via
+pre-sell style, early access, to a product or care package, or a fine combination of all." His
+own estimate: five to ten days from the right offer and execution. His hard constraint: a
+second job must be found by about Oct 15 if ALTERED has not made November's $1,600 rent
+(student funding lands Nov 5 to 10, too late for Nov 1).
+
+The agent's pick, recorded as the decision: **Oct 10 - first payment collected** from a real
+prospect (any amount toward the $12,500, e-transfer per D097). Intermediate markers, so the
+date is not a surprise: Sept 28, Koa live on the number for his own daily use; Oct 1, outreach
+running daily with the KPI log filling (ten openers and three interested replies on a work day,
+D064). Oct 15 remains the floor decision in the macro plan, made by the numbers on the day. A
+miss on Oct 10 does not change the path (D062); it changes the floor.
+
+**Re-open cost:** Low to move the date, high to blur the target.
+
+### D121 - outreach is the primary lead channel; content second; ads not now
+
+**Verdict:** Manual Instagram DM outreach from his own account (D103) is the primary lead
+channel: "the hardest but most reliable form of high-feedback lead acquisition", deterministic
+through human psychology rather than an algorithm. Organic content stays as the compounding
+second channel and the demo engine (D110). Paid ads are out for now: they need about $100 a day
+to test and give no direct feedback. Every DM still points at "text Koa" (D103). The bench (plan
+02) gets a **send-time tracker**: every opener logged with its timestamp so daily and hourly
+pacing is visible and account bans are avoided; he asked for this explicitly. Converting his
+Instagram to a business account is his action.
+
+### D122 - the hand-written mirror is advertised as part of the $12,500
+
+**Verdict:** The offer names three things a buyer gets: the generated Koa MVP now, the custom
+builds and integrations of the program, and **the hand-coded infrastructure mirror with its
+integrated builds** as it lands - the refined, versioned, all-cases-handled platform he writes
+himself. The value being bought is refinement: "the same reason why people buy a MacBook over a
+windows laptop", in code design, feature and function polish, and ergonomics polish, plus his
+design and tooling for knowledge data. "Refinement that provides tools to build tools and execute
+as a human." Copy may claim this; no date for the mirror is promised beyond D082's soft
+language. The hard wall is unaffected: the mirror is written by him, in his repo.
+
+**Re-open cost:** Medium. Page copy and Koa's sales lean read it.
+
+### D123 - challenges logged 2026-09-16 to 24, none acted on
+
+Under the direction record's protocol.
+
+- **The hand-coding pull, Sept 16.** Wanting to ship "a small slice that I completely
+  understand", the motocross clutch analogy, and the belief that a market for human
+  authenticity will exist "like organic food". Resolved by him in the same breath: "we will
+  continue generating for now... one before the other." Recorded as sentiment, honoured by D116
+  (the disclosure stays) and D122 (the mirror is the value). The inverted challenge protocol
+  (D100) stands.
+- **B2B "marketing brain" automation buildouts** and **ALTERED RAW** (livestreamed building,
+  possibly subscription): both raised Sept 16 at 10:10, neither quoted nor defeated a recorded
+  reason (D062's bar); the livestream dismissed by him for time cost. Parked.
+- **The mission framing, Sept 24:** most committed entrepreneurs are "80% in a state of 'I don't
+  want to do the paperwork or code work' and half awake"; Koa is the tool for that state, built
+  "from one level above" so it is actually effective. Not a change; a sharpening of the compass's
+  buyer language, carried into the offer file.
+- **The anger doctrine** reaffirmed (D099): "Anger is powerful. We need to use anger to generate
+  money." Posture, not path.
+
+### D124 - Opus 5.5 for all subagents
+
+**Verdict:** Stated 2026-09-24 after Round 9 was recorded: "you can use the new opus 5.5 for all
+subagents." Amends D107 rule 2 and D119: every spawned subagent runs on Opus 5.5, named
+explicitly, with the reasoning level chosen by the orchestrating agent for the task (high for
+coding by default). Fable stays reserved for planning with his approval; Sonnet-class stays
+allowed for proceduralised light tasks (D105).

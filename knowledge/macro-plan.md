@@ -14,7 +14,7 @@ The prior chat is archived and distilled, the compass exists, Round 5 is answere
 the plans are written. A fresh session can resume with zero loss. **Milestone: this repo is the
 source of truth again.**
 
-## Phase 2 - generate Koa, open the funnel (now; checkpoint Sept 17, D108)
+## Phase 2 - generate Koa, open the funnel (now; checkpoint Oct 10, D120)
 
 The offer is fixed at the full $12,500 (D102) and the MVP is generated (D100). The governing
 work is plan 08: Koa live on the number, the funnel inbound-led (D103), everything in series
@@ -25,16 +25,17 @@ work is plan 08: Koa live on the number, the funnel inbound-led (D103), everythi
 - The interim page (Q75) points every surface at "text Koa"; the full page (plan 04) follows
   copy approval. The video script (plan 07) is written; the shoot comes near the end of
   marketing setup (D091).
-- The bench (plan 02) sources and drafts Instagram openers inside the $25 budget (D105); he
-  sends manually from his personal account (D103).
+- Outreach is the primary lead channel (D121): the bench (plan 02) sources and drafts
+  Instagram openers inside the $25 budget (D105); he sends manually from his personal account
+  (D103), paced by the send-time tracker.
 - His own hours: Cursor chats, voice type, content, and daily use of his own Koa (D110). The
   commit covenant and hand-coding are stashed (D111).
 - A sale collects by e-transfer with proof by screenshot (D097), recorded by hand.
 - Daily KPIs are logged: ten openers and three interested replies on a work day (D064).
 
-**Milestone: meaningful lever-moving action in writing on Sept 17 (D108)** - generation underway,
-surfaces moving, or leads touched. Miss activates the inheritor protocol in the direction
-record; ALTERED stays the path (D062).
+**Milestone: first payment collected by Oct 10 (D120).** Markers on the way: Sept 28, Koa live
+on the number for his own use; Oct 1, outreach running daily with the KPI log filling. A miss
+does not change the path (D062); it feeds the Oct 15 floor decision below.
 
 ## Phase 3 - the operator surfaces (Sept, overlapping)
 
@@ -54,8 +55,10 @@ one, the personal page built for that person. Weekly 30 to 45 minute sessions be
 Generation continues on the platform (thought editor next after Koa is stable, D111); the
 hand-written core resumes when revenue sustains it, with data migrating by transform (D100).
 Two closes is the hard yes to leave the job (D102). Oct 15 winter checkpoint: program revenue
-versus the job floor, decided by the numbers on that day; student funding arrives Nov 1 and is
-reserved for essentials (D085).
+versus the job floor, decided by the numbers on that day. The arithmetic as of Sept 24 (D120):
+November rent is $1,600 on Nov 1, student funding lands Nov 5 to 10, income is $350 to $450 a
+week and tapers with the lawn season from about Oct 10; without a payment by mid-October a
+second job is the floor.
 
 **Milestone: three seats, the refinement clock running, the winter floor decided.**
 
