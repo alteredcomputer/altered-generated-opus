@@ -158,7 +158,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Application shell",
         description:
-            "Next.js configuration and the root layout, including the typeface declaration and the theme colour. Next's own agent-instruction generation is disabled here, because a nested instruction file would sit below the operating contract and dilute it.",
+            "Next.js configuration and the root layout, including the typeface declaration, the theme colour, and the temporary redirect from the root to the campaign page at /koa. Next's own agent-instruction generation is disabled here, because a nested instruction file would sit below the operating contract and dilute it.",
         sources: [
             "apps/web/package.json",
             "apps/web/tsconfig.json",
@@ -244,7 +244,7 @@ const nodes = defineNodes([
             "The markdown shapes the page is built from: a heading with a literal '# ' or '## ' prefix, prose, a literal '---' divider, and a link written as visible '[label](target)' text. The markdown syntax is real text, not CSS decoration, so it copies and reads as markdown. Constraining the vocabulary keeps the layout on the line grid and lets copy stay editable as data.",
         sources: ["apps/web/src/site/primitives.tsx", "apps/web/src/site/primitives.module.css"],
         relations: [{ type: "uses", to: "web-visual-system" }],
-        status: "in-progress",
+        status: "done",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: false, security: "n/a" },
             ui: { brandPalette: true, radiusRule: true, responsive: true }
