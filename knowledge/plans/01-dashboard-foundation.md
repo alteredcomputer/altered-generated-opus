@@ -116,3 +116,11 @@ Append-only, dated. The planning agent's notes:
   the registry before pinning; the catalogue in `pnpm-workspace.yaml` is where shared versions go.
 - 2026-09-04: The public site must not gain Tailwind's preflight. Scope Tailwind's base layer to
   the dashboard group or disable preflight; check the landing page renders byte-identical after.
+- 2026-09-24 (plan 08 phase 1 agent): the database package and the settings store landed ahead
+  of this plan. `packages/db` (`@opus/db`) holds the Drizzle schema, committed migrations, a typed
+  `Database` service over the Neon HTTP driver, and `Settings` (one schema per key, missing or
+  malformed is a typed failure). `pnpm run db migrate` and `pnpm run db settings ...` exist, and
+  `check:tests` is already wired into `pnpm check` and CI through turbo. What remains here: the
+  audit table, Better Auth's tables (add them to `packages/db/src/schema.ts` and generate a new
+  migration), and the `outbound.*` controls, which nothing reads yet. Tests use PGlite with the
+  real migrations (`@opus/db/testing`); follow that pattern.

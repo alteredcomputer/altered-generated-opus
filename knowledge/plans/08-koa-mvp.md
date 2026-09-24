@@ -1,9 +1,10 @@
 # Plan 08 - Koa MVP, generated
 
-**Status:** in progress. Round 9 confirmed the scope (D112), the wall as a threshold (D113),
-Sendblue timing (D114), and access (D115). Phase 1 started 2026-09-24. Round 10 (Q76 to Q83)
-supplies Koa's first-reply copy, the intents, the threshold numbers, and the HITL surface; until
-answered, those are fail-closed placeholders and the allowlist stays closed.
+**Status:** in progress. Phase 1 (the loop) done and merged 2026-09-24; phase 2 (memory) is
+next. Round 9 confirmed the scope (D112), the wall as a threshold (D113), Sendblue timing
+(D114), and access (D115). Round 10 (Q76 to Q83) supplies Koa's first-reply copy, the intents,
+the threshold numbers, and the HITL surface; until answered, those are fail-closed placeholders
+and the allowlist stays closed.
 
 **Depends on:** nothing to start; Sendblue credentials to go live; plan 01 later for operator
 views. **Unblocks:** the product, the funnel (D103), the demo content engine (D110), and the
@@ -157,3 +158,47 @@ Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyToke
   Neon, Redis, and OpenRouter values confirmed present in the Vercel development environment by
   a names-only check; the mock adapter still leads so no message is spent by accident. Phase 1
   is delegated to a fresh-context Opus 5.5 agent (D124) with this file as its brief.
+- 2026-09-24 (phase 1 agent, Opus 5.5): **phase 1 done.** What exists: `@opus/db` (schema,
+  migrations 0000 and 0001, `Database` over the Neon HTTP driver, the settings store and CLI) and
+  `@opus/koa` (webhook verification and handler, store, ledger, voice notes, agent turn, mock and
+  Sendblue messengers, the receive and respond pipeline, the CLI). The route at
+  `/api/webhooks/sendblue` delegates to `handleSendblueWebhook`.
+  - **Sendblue's webhook scheme, verified against
+    [docs.sendblue.com/getting-started/webhooks](https://docs.sendblue.com/getting-started/webhooks/)
+    ("Webhook Security"):** no HMAC and no timestamp. The secret configured on the webhook (per
+    webhook, global, or legacy) is sent verbatim in a request header. The docs do not name the
+    header; Sendblue's official Chat SDK adapter (`chat-adapter-sendblue` 0.2.0 on npm, linked from
+    their docs) defaults it to `sb-signing-secret`, which is what we check, in constant time over
+    SHA-256 digests. Replay: the docs say delivery can repeat (3 retries on 5xx, 45-second
+    timeout) and to dedupe by `message_handle`; we store it as the unique
+    `provider_message_id`, so a replay is a recorded skip. Receive payload fields used:
+    `message_handle`, `from_number`, `content`, `media_url` (expires after 30 days), `is_outbound`,
+    `status` ("RECEIVED"), `group_id`. Send: `POST https://api.sendblue.com/api/send-message` with
+    `sb-api-key-id` and `sb-api-secret-key`, body `number`, `from_number`, `content`; Sendblue
+    documents no idempotency key, so ours is a unique key claimed in the database before the send.
+  - **Verified end to end against the dev Neon database and OpenRouter:** migrations applied;
+    settings seeded (send off, allowlist empty, placeholder prompt, models
+    `anthropic/claude-sonnet-5` and `google/gemini-3.8-flash`); `pnpm run koa chat` refused the
+    test number while the allowlist was empty, then held a three-turn conversation once it was
+    allowlisted (about $0.0016 per turn, recorded in the ledger) and declined a prompt-injection
+    attempt. Under `next start` the route answered 401 with no or a wrong header, 200 with the
+    real secret, treated the replay as a duplicate, and the deferred turn recorded "OUTBOUND_ENABLED
+    is off". The allowlist was emptied again afterwards. The dev database keeps the test person
+    `+15555550123` and its messages and events. Total model spend: under two cents.
+  - **Could not do:** transcribe a real iMessage voice note (none available). OpenRouter accepts
+    audio only as base64 in wav, mp3, aiff, aac, ogg, flac, m4a, or pcm; if Sendblue delivers
+    Apple's `.caf`, transcription is recorded as an error event and the message is kept. A
+    one-second silent WAV came back from `google/gemini-3.8-flash` as invented text ("I made a
+    joke."), so transcripts can hallucinate. First real voice note: check `pnpm run koa ledger`.
+  - **Deviations and calls made:** media bytes are stored in Postgres (`media` table, bytea)
+    because no bucket may be provisioned; this is a durable copy, with a graph todo to move to
+    object storage. Group-thread messages and non-E.164 senders are acknowledged and logged but
+    not stored (group messaging is out of scope). The turn runs in `next/server` `after()` so a
+    slow model cannot push Sendblue into a retry; the inbound is persisted before the 200. The
+    outbound decision is made before generation, so a turn that cannot send spends nothing. The
+    whole history is sent each turn until phase 2. `messages` and `events` carry an identity `seq`
+    for ordering (timestamps tie). `web-imessage-webhook` was folded into `koa-webhook` and
+    retired. Seeded model names and the placeholder prompt are values in settings, not decisions;
+    change them with `pnpm run db settings set`.
+  - **For phase 2:** add pgvector through a new migration; scope every retrieval by `person_id`
+    in the query, as `Store` does; record embedding calls in the ledger through `Models`.
