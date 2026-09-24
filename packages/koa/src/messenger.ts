@@ -71,16 +71,21 @@ const makeSendblue = Effect.gen(function* () {
                         detail: cause instanceof Error ? cause.message : "request failed"
                     })
             })
+            if (!response.ok)
+                return yield* new SendError({
+                    messenger: "sendblue",
+                    detail: `status ${response.status}`
+                })
+
             const body = yield* Effect.tryPromise({
                 try: () => response.json() as Promise<{ message_handle?: unknown }>,
                 catch: () =>
                     new SendError({ messenger: "sendblue", detail: "response was not JSON" })
             })
-
-            if (!response.ok || typeof body.message_handle !== "string")
+            if (typeof body.message_handle !== "string")
                 return yield* new SendError({
                     messenger: "sendblue",
-                    detail: `status ${response.status}, no message handle`
+                    detail: "accepted without a message handle"
                 })
 
             yield* Effect.logInfo("Sendblue send accepted", { idempotencyKey })

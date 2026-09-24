@@ -104,8 +104,8 @@ const imessage = Config.all({
 /**
  * @remarks
  * The webhook needs only the signing secret, and it must answer an absent secret with its own
- * refusal (503) rather than a generic failure, so absence is an `Option` here. An empty value is
- * still a failure, never a secret that matches an empty header.
+ * refusal (503) rather than a generic failure, so absence is an `Option` here. An empty value reads
+ * as absent and is refused the same way, never as a secret that matches an empty header.
  */
 const imessageWebhook = Config.all({
     signingSecret: Config.option(secret(ENV.sendblueSigningSecret))
