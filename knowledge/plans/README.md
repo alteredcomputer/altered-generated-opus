@@ -38,7 +38,7 @@ Round 6 answer before it can start; the plan says which).
 | # | Plan | Status | Blocker, if any |
 | --- | --- | --- | --- |
 | 08 | [Koa MVP, generated](08-koa-mvp.md) | in progress | phase 1 (the loop) done 2026-09-24; phase 2 (memory) next; Round 10 answered (D125 to D137); production migrations on his word (D135) |
-| 04 | [Offer and page](04-offer-and-page.md) | in progress | markdown-style rework at /koa with drafted copy for review (D136); not indexed until he approves the copy |
+| 04 | [Offer and page](04-offer-and-page.md) | in progress | markdown page live at /koa with drafted copy (D136, merged 2026-09-24); his copy review is the next gate; not indexed until he approves |
 | 01 | [Dashboard foundation](01-dashboard-foundation.md) | ready | ordered by D130, right after plan 08 phase 2; login needs Resend credentials and `OPERATOR_EMAILS` in Vercel |
 | 02 | [Outreach bench](02-outreach-bench.md) | ready | primary lead channel (D121); send-time tracker added; pacing per D129; his Instagram is professional (D137); sourcing budget $25 (D105) |
 | 07 | [Offer assets](07-offer-assets.md) | ready | script and run-sheets need nothing; care package files per D090 |

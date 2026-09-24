@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
 
     typedRoutes: true,
 
+    //  The campaign page holds the root until a product page takes it, so the redirect is temporary.
+    redirects: async () => [{ source: "/", destination: "/koa", permanent: false }],
+
     //  Next writes its own AGENTS.md and CLAUDE.md into the app directory. A nested instruction
     //  file would sit below the operating contract at the repo root and dilute it, which is exactly
     //  the failure that made agents ignore their workflow rules in the previous project.
