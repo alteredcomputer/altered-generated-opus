@@ -1541,3 +1541,11 @@ Under the direction record's protocol.
   buyer language, carried into the offer file.
 - **The anger doctrine** reaffirmed (D099): "Anger is powerful. We need to use anger to generate
   money." Posture, not path.
+
+### D124 - Opus 5.5 for all subagents
+
+**Verdict:** Stated 2026-09-24 after Round 9 was recorded: "you can use the new opus 5.5 for all
+subagents." Amends D107 rule 2 and D119: every spawned subagent runs on Opus 5.5, named
+explicitly, with the reasoning level chosen by the orchestrating agent for the task (high for
+coding by default). Fable stays reserved for planning with his approval; Sonnet-class stays
+allowed for proceduralised light tasks (D105).

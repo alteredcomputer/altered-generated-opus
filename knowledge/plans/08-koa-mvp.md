@@ -156,4 +156,4 @@ Controls: `koa.sendEnabled`, `koa.allowlist`, `koa.systemPrompt`, `koa.dailyToke
   threshold not feature (D113); the phase 5 text above is rewritten accordingly. Sendblue,
   Neon, Redis, and OpenRouter values confirmed present in the Vercel development environment by
   a names-only check; the mock adapter still leads so no message is spent by accident. Phase 1
-  is delegated to a fresh-context Opus 5 agent with this file as its brief.
+  is delegated to a fresh-context Opus 5.5 agent (D124) with this file as its brief.

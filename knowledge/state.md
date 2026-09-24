@@ -23,7 +23,7 @@ every Round 9 answer in one message:
 - **Budget (D117):** about $100 a week while the MVP generates, then about $50.
 - **Interim page (D118):** strip price and date now, monochrome palette (no blue tint), keep a
   short explainer, refine toward minimal. Plan 04's interim step is specified.
-- **Context cap 150k (D119);** Opus 5 for all subagent code work. AGENTS.md updated.
+- **Context cap 150k (D119); Opus 5.5 for all subagents (D124).** AGENTS.md updated.
 - **Checkpoint (D120):** Oct 10, first payment collected. Markers Sept 28 (Koa live for him)
   and Oct 1 (outreach daily). Oct 15 stays the floor decision; November rent is $1,600 before
   student funding lands Nov 5 to 10.
@@ -35,7 +35,7 @@ Round 10 (Q76 to Q83) is asked: Koa's first reply, the onboarding intents, the t
 numbers, behaviour past the wall, the interim explainer's sections, which number, outreach
 pacing, and the HITL surface. Phase 1 builds with fail-closed placeholders for all of them.
 
-**Plan 08 phase 1 is in progress** on a fresh-context Opus 5 agent. Plan 04's interim page step
+**Plan 08 phase 1 is in progress** on a fresh-context Opus 5.5 agent. Plan 04's interim page step
 follows it in the same chat, in series. Live at `generated.altered.computer`, deployed from
 `main`, not indexed; the landing page still shows the retired offer until the interim step lands.
 
