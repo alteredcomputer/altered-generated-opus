@@ -1,4 +1,4 @@
-import { Cause, Effect, Exit, Layer, Logger } from "effect"
+import { Cause, Effect, Exit, Layer, Logger, References } from "effect"
 
 /**
  * @remarks
@@ -34,4 +34,31 @@ const runRequest = async <A, E>(effect: Effect.Effect<A, E>): Promise<A> => {
     throw new Error(Cause.pretty(exit.cause))
 }
 
-export { loggingLayer, runRequest }
+/**
+ * @remarks
+ * Command lines print their own output to stdout, so logs go to stderr as uncoloured logfmt and a
+ * transcript on stdout stays clean and readable on a phone. Info and debug lines are suppressed:
+ * the event ledger is the record of what happened, and warnings and errors still surface.
+ */
+const cliLoggingLayer = Layer.mergeAll(
+    Logger.layer([Logger.withConsoleError(Logger.formatLogFmt)]),
+    Layer.succeed(References.MinimumLogLevel, "Warn")
+)
+
+/**
+ * Runs a command-line program to completion.
+ *
+ * @remarks
+ * A failure prints its full cause to stderr and sets a non-zero exit code, so a script that chains
+ * commands stops at the first one that failed.
+ */
+const runCli = async <E>(effect: Effect.Effect<void, E>): Promise<void> => {
+    const exit = await Effect.runPromiseExit(effect.pipe(Effect.provide(cliLoggingLayer)))
+
+    if (Exit.isFailure(exit)) {
+        process.stderr.write(`${Cause.pretty(exit.cause)}\n`)
+        process.exitCode = 1
+    }
+}
+
+export { loggingLayer, runCli, runRequest }

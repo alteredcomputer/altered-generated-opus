@@ -9,11 +9,14 @@
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
-        "check": "pnpm run check:types && pnpm run check:style && pnpm run check:graph",
+        "check": "pnpm run check:types && pnpm run check:style && pnpm run check:tests && pnpm run check:graph",
         "check:types": "turbo run check:types",
+        "check:tests": "turbo run check:tests",
         "check:style": "biome check .",
         "check:graph": "pnpm --filter @opus/graph run check",
-        "fix:style": "biome check --write ."
+        "fix:style": "biome check --write .",
+        "db": "pnpm --silent --filter @opus/db run cli",
+        "koa": "pnpm --silent --filter @opus/koa run cli"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.8",
