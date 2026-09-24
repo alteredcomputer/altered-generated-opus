@@ -66,14 +66,14 @@ const Landing = async () => {
             ))}
 
             {sections.map(section => (
-                <section className={styles.section} id={section.id} key={section.id}>
+                <section className={styles.stack} id={section.id} key={section.id}>
                     <Divider />
                     <Heading level={2}>{section.heading}</Heading>
                     {section.blocks.map(renderBlock(phoneNumber))}
                 </section>
             ))}
 
-            <footer className={styles.section}>
+            <footer className={styles.stack}>
                 <Divider />
                 <p>{footer}</p>
             </footer>
