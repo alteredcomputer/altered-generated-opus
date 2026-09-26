@@ -88,6 +88,20 @@ was searched and the raster candidates.
   (paragraphs split only). **His review of pass two is the next gate**, plus two flags: the
   access blue is under 4.5:1 contrast, and pierre's marks are fainter than its body.
 
+**Unpushed work (2026-09-26):** the session's git write token expired mid-turn; plan 04 pass
+two (merge `bdf3f82` and branch `cursor/plan-04-pass-two-481f`) is merged on this VM's local
+main but NOT on GitHub. A git bundle of the unpushed commits is saved at
+`/cursor/stores/self/plan-04-pass-two.bundle` (this agent's persistent store). Recovery: on the
+next turn in the same chat, `git push origin main cursor/plan-04-pass-two-481f` (a fresh turn
+usually carries a fresh token). If this VM is gone and a new chat picks up, the bundle is
+unreachable; pass two must be regenerated from D139 plus plan 04's spec - about 100k tokens of
+work, fully specified in the knowledge files that ARE pushed.
+
+**Resend domain mismatch (2026-09-26, verified by DNS):** Resend is verified for
+`generated.altered.computer` (DKIM live) and NOT for `usealtered.com`, so
+`AUTH_EMAIL_FROM=system@usealtered.com` will be refused by Resend until he verifies
+usealtered.com there, or the value changes to `system@generated.altered.computer`.
+
 ## What is blocking
 
 - **Sendblue subscription confirmation** (D114) gates the loop going live. Going live also
