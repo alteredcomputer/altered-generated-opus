@@ -1702,3 +1702,96 @@ traces to a decision (D019, D047, D067, D075, D078, D081, D082, D100, D113, D116
 types, business and creator; both are professional and both work with the Instagram API. No
 change needed unless Zernio asks for the business type specifically, in which case the switch
 is Settings, Account type and tools, Switch to business account.
+
+---
+
+## Round 11 - env parity, go-live for testing, the page pass, the DNS break (2026-09-25)
+
+Source: `sources/chats/2026-09-25-round-11-dns-golive-and-the-page-pass.md`.
+
+### D138 - environment parity: development and production values are the same by design
+
+**Verdict, correcting the inference in D135:** the development and production `DATABASE_URL`,
+`REDIS_URL`, and most other values are **the same**. He entered production and preview as
+sensitive variables (which can never be read back, only injected into deployments) and
+development as a readable variable, which is why a pull-and-hash comparison showed them as
+different: the sensitive values simply cannot be pulled. Only things that must differ
+(`APP_ENV` and kin) differ. Consequence: there is **one database and one Redis** for the whole
+app, schema pushed straight to what production uses; phase 1's migrations are therefore already
+live for the deployed application. If dev and prod ever diversify, that is a deliberate later
+move. Settings written by CLI here are read by the deployed app immediately.
+
+### D139 - the page, pass two (amends D136 details)
+
+- Background dark: **#202020** (he first said #3f3f3f, then settled #202020 after looking).
+- Logo: a **front-matter block** instead of dashes - a fenced `---` front matter with a chosen
+  key; the agent picks the key wording (candidates he listed: title, logo, company name, app
+  name, name, logo text, or the brutally-obvious "page name: altered koa landing page").
+- The Koa access link: **#0080ff** (hsl 210 100% 50%) and **bold**. The one deliberate colour on
+  the page; monochrome elsewhere stands.
+- Universal text size **14px** ("15 is a weird number").
+- Font: **try Geist Mono** first in place of Berkeley Mono; keeping Berkeley smaller is the
+  fallback direction; monospace stays either way. Make the swap one variable so flipping back
+  is trivial.
+- **pierre.computer is the visual benchmark**: pull its live styles and match text size,
+  letter and line spacing, side insets, paragraph chunk cadence, concise section length, and
+  the heading `#` marks rendered in a fainter shade than the heading text.
+- The headline is **not an H1**: semantically it is the tagline or emphasised body text at the
+  top (markdown asterisks for bold or italic are welcome character); headings are real section
+  names like Introduction or Preface. Structure the page as an honest markdown document.
+- Footer: markdown **blockquote** styling (or similar markdown-native feature), muted and
+  italic, so the generated-by-AI line reads distinct from body text.
+- **Copy: hold.** Small adjustments only; the readability problem is font and colour, not
+  words. Direction comes after he sees this pass.
+
+### D140 - go-live for his own testing; the Sendblue number was replaced
+
+**Verdict:** His number is verified in the Sendblue dashboard and he said "you can go live
+now" - testing scope, allowlist of one. Executed the same turn: his number is the sole
+allowlist entry, `koa.sendEnabled` is true, and the system prompt is upgraded to the D125
+behaviour (still non-selling). The previous shared Sendblue number was compromised and
+replaced: **no hard-coded number anywhere; `SENDBLUE_PHONE_NUMBER` in Vercel is the only
+source of truth** (the page already reads it at build time; a redeploy picks up the new one).
+Still his side: `OUTBOUND_ENABLED=true` in Vercel production (it is false in development and
+unreadable-but-presumably-false in production; it is the master kill switch, his to flip) and
+the DNS fix (D143) so the webhook URL resolves.
+
+### D141 - transactional email: system@usealtered.com; the operator variables exist
+
+**Verdict:** He added `RESEND_API_KEY`, `OPERATOR_EMAILS` (comma-separated, his main email),
+and `AUTH_EMAIL_FROM=system@usealtered.com` (his pick; "pretty sleek") to Vercel. The Resend
+domain is verified through Resend's automated installer, which wrote its records into the
+altered.computer zone under `generated` (see D143 for the side effect). Plan 01's login gate
+is now provisioned.
+
+### D142 - the second pricing reel, and the standing request for depth
+
+Reference recorded: `https://www.instagram.com/reel/Ddgz7Kyyilw/` - the same operator's $500k
+AI-implementation invoice breakdown with line items. Kept beside D132 as pricing-frame source
+material for the ladder above $12,500. **Standing request:** when he raises an off-tangent
+perspective or opportunity (a reel, a work sprint, an advertising path), the agent responds to
+it in depth in chat, not just records it. The work-sprint opinion and the reel analysis are
+owed and delivered in the Round 11 chat reply.
+
+### D143 - the DNS break: Resend's records shadowed the wildcard; the fix is one explicit record
+
+**Diagnosis, verified 2026-09-25 from this environment (read-only):**
+`generated.altered.computer` returns NXDOMAIN from every public resolver, worldwide - not a
+MacBook, router, or network problem; his phone still loading it is DNS cache. Cause: the
+altered.computer zone serves the site through wildcard and apex ALIAS records
+(`*` and `@` to `cname.vercel-dns-017.com.`) with **no explicit record for `generated`**.
+Resend's automated installer added `email.generated` (MX and TXT),
+`resend._domainkey.generated` (TXT), and `email-links.generated` (CNAME). Creating names under
+`generated` made `generated` itself exist in the zone as an empty node, and per DNS wildcard
+rules an existing name is no longer covered by `*`. Proof: `koa.altered.computer` and any other
+name still resolve through the wildcard; `generated` alone does not. Timing matches his
+observation (it broke within the hour after the Resend installer ran). The Vercel domains tab
+showing "Invalid Configuration" is the same fact surfaced; the IP-range migration note is
+unrelated.
+
+**The fix (his action, one record, no downside):** in Vercel, altered.computer DNS, add
+`generated` as a CNAME to `cname.vercel-dns-017.com.` (the value Vercel currently recommends;
+the wildcard uses the same). Propagates in minutes.
+
+**Unrelated to D061:** the U of A hospital issue was a network-side TLS/content filter on a
+resolving domain; this is the domain not resolving at all.

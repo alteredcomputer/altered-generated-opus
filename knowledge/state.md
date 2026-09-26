@@ -1,6 +1,6 @@
 # Current state
 
-Updated 2026-09-24 (evening, Round 10 recorded). Read this first, then `decisions.md`, `compass.md`,
+Updated 2026-09-25 (Round 11: env parity, go-live for testing, page pass two, the DNS break). Read this first, then `decisions.md`, `compass.md`,
 `offer.md`, `plans/README.md`, `open-questions.md`, `direction-record.md`, `macro-plan.md`,
 `feature-graph.md`, `prior-art.md`, `constraints.md`, `product-primitives.md`,
 `design-reference.md`.
@@ -61,6 +61,28 @@ The copy is an agent draft traced to decisions in `content.ts`. **His copy revie
 gate** (plus the headline pick and whether #333333 stays); the page stays not indexed until he
 approves. The old brand-mark SVG was not found in any visible repo; plan 04's notes list what
 was searched and the raster candidates.
+
+**Round 11 (2026-09-25), D138 to D143,** archived in
+`sources/chats/2026-09-25-round-11-dns-golive-and-the-page-pass.md`:
+
+- **One database, one Redis (D138):** development and production values are the same by his
+  design; the earlier hash comparison differed only because sensitive variables cannot be
+  pulled. Phase 1's migrations are live for the deployed app; CLI settings writes take effect
+  in production immediately.
+- **Go-live for testing executed (D140):** his number (from `OPERATOR_PHONE_NUMBER`) is the
+  sole allowlist entry, `koa.sendEnabled` is true, and `koa.systemPrompt` carries the D125
+  first-reply behaviour, still non-selling. The old Sendblue number was compromised and
+  replaced; `SENDBLUE_PHONE_NUMBER` in Vercel is the only source of truth, never hard-code it.
+  Waiting on him: `OUTBOUND_ENABLED=true` in Vercel production, and the DNS fix.
+- **The DNS break (D143):** Resend's installer records under `generated` shadowed the wildcard;
+  `generated.altered.computer` is NXDOMAIN globally until he adds one explicit CNAME record
+  (`generated` to `cname.vercel-dns-017.com.`). The site and the webhook are unreachable until
+  then.
+- **Email provisioned (D141):** `RESEND_API_KEY`, `OPERATOR_EMAILS`,
+  `AUTH_EMAIL_FROM=system@usealtered.com` are in Vercel; plan 01's login is unblocked.
+- **Page pass two specified (D139):** #202020, front matter logo, #0080ff bold access link,
+  14px, Geist Mono trial behind a one-variable swap, pierre.computer as the spacing benchmark,
+  headline demoted from H1, blockquote footer, copy held.
 
 ## What is blocking
 
