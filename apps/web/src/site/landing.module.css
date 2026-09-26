@@ -1,6 +1,6 @@
 /*
     One blank line between every block, the way rendered markdown reads in a terminal. Nothing
-    changes size across breakpoints; only the side padding widens.
+    changes size across breakpoints, and the inset is pierre.computer's 40px at every width.
 */
 .page,
 .stack {
@@ -9,18 +9,7 @@
 }
 
 .page {
-    max-width: calc(var(--measure) + 5rem);
+    max-width: calc(var(--measure) + var(--inset) * 2);
     margin: 0 auto;
-    padding: calc(var(--line) * 2) 1.5rem calc(var(--line) * 4);
-}
-
-.logo {
-    color: var(--fg);
-    padding-block-end: var(--line);
-}
-
-@media (min-width: 48rem) {
-    .page {
-        padding-inline: 2.5rem;
-    }
+    padding: var(--inset);
 }
