@@ -1,25 +1,37 @@
 /*
     The visual system.
 
-    Markdown-inspired (D136): one monospaced font size for every piece of text, a tight
-    terminal-like line height, and every vertical measurement a multiple of --line. Headings and
-    links are distinguished by weight and colour, never by size. Light and dark both derive from
-    one neutral ramp, so there is one palette. The neutrals carry zero chroma on purpose (D118):
-    pure blacks, whites, and greys, no tint. The single accent is for selection and focus only.
+    Markdown-inspired (D136, pass two D139), benchmarked on pierre.computer: one monospaced size
+    for every piece of text, pierre's 5:3 line-height-to-size ratio (their 12px on 20px), and
+    every vertical measurement a multiple of --line. Headings and links are distinguished by
+    weight and colour, never by size. Markdown syntax marks take --fg-muted so they recede behind
+    the words they mark. Light and dark both derive from one neutral ramp, so there is one
+    palette. The neutrals carry zero chroma on purpose (D118): pure blacks, whites, and greys, no
+    tint. The two colours are deliberate exceptions: --link-access for the one access link
+    (D139), and --accent for selection and focus only.
 
-    Contrast: --fg-muted is 6.0:1 on the dark --bg and 6.7:1 on the light one, above the 4.5:1
-    floor for body text. Change a neutral and the theme colours in layout.tsx together.
+    Contrast: --fg-muted is 7.8:1 on the dark --bg and 6.7:1 on the light one, above the 4.5:1
+    floor for body text. The muted-to-foreground step does not depend on the background, so the
+    dark grey stayed #b3b3b3 when the background moved from #333333 to #202020. Change a neutral
+    and the theme colours in layout.tsx together.
 */
 
 :root {
     color-scheme: light dark;
 
-    --line: 1.25rem;
-    --measure: 66ch;
+    /* The typeface switch (D139): var(--font-berkeley-mono) flips back to Berkeley Mono. */
+    --font-mono: var(--font-geist-mono);
 
-    --bg: light-dark(#fafafa, #333333);
+    --size: 0.875rem;
+    --line: calc(var(--size) * 5 / 3);
+    --measure: 66ch;
+    --inset: 2.5rem;
+
+    --bg: light-dark(#fafafa, #202020);
     --fg: light-dark(#000000, #ffffff);
     --fg-muted: light-dark(#595959, #b3b3b3);
+
+    --link-access: #0080ff;
 
     --accent: oklch(84% 0.17 96);
     --accent-fg: oklch(20% 0.02 96);
@@ -42,7 +54,7 @@ body {
     background: var(--bg);
     color: var(--fg-muted);
     font-family: var(--font-mono);
-    font-size: 0.9375rem;
+    font-size: var(--size);
     line-height: var(--line);
     font-variant-ligatures: none;
 }
@@ -71,7 +83,8 @@ a:focus-visible {
 h1,
 h2,
 h3,
-p {
+p,
+blockquote {
     margin: 0;
     font-size: inherit;
     font-weight: inherit;

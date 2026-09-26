@@ -1,9 +1,26 @@
 import { config } from "@opus/core/config"
 import { runRequest } from "@opus/core/runtime"
 import { Effect, Option } from "effect"
-import { type Block, footer, hero, sections, textKoa } from "./content.ts"
+import {
+    type Block,
+    footer,
+    frontMatter,
+    introduction,
+    type Section,
+    sections,
+    tagline,
+    textKoa
+} from "./content.ts"
 import styles from "./landing.module.css"
-import { Divider, Heading, MarkdownLink, Prose } from "./primitives.tsx"
+import {
+    Blockquote,
+    Divider,
+    FrontMatter,
+    Heading,
+    MarkdownLink,
+    Prose,
+    Strong
+} from "./primitives.tsx"
 
 /**
  * @remarks
@@ -19,7 +36,12 @@ const TextKoa = ({ label, phoneNumber }: { label: string; phoneNumber: Option.Op
             {label} - {textKoa.unavailable}
         </Prose>
     ) : (
-        <MarkdownLink href={`sms:${phoneNumber.value}`} label={label} target={textKoa.target} />
+        <MarkdownLink
+            href={`sms:${phoneNumber.value}`}
+            label={label}
+            prominent
+            target={textKoa.target}
+        />
     )
 
 const renderBlock = (phoneNumber: Option.Option<string>) => (block: Block, index: number) => {
@@ -40,6 +62,27 @@ const renderBlock = (phoneNumber: Option.Option<string>) => (block: Block, index
     )
 }
 
+const SectionView = ({
+    section,
+    level,
+    phoneNumber
+}: {
+    section: Section
+    level: 1 | 2
+    phoneNumber: Option.Option<string>
+}) => (
+    <section className={styles.stack} id={section.id}>
+        {level === 2 && <Divider />}
+        <Heading level={level}>{section.heading}</Heading>
+        {section.blocks.map(renderBlock(phoneNumber))}
+    </section>
+)
+
+/**
+ * @remarks
+ * Laid out as one honest markdown document (D139): front matter, the tagline as bold body text,
+ * the single h1 opening the introduction, then `---`-divided h2 sections.
+ */
 const Landing = async () => {
     const phoneNumber = await runRequest(
         Effect.gen(function* () {
@@ -56,26 +99,22 @@ const Landing = async () => {
 
     return (
         <main className={styles.page}>
-            <header className={styles.logo}>
-                <p>{hero.logo}</p>
-            </header>
+            <FrontMatter field={frontMatter.field} value={frontMatter.value} />
+            <Strong>{tagline}</Strong>
 
-            <Heading level={1}>{hero.headline}</Heading>
-            {hero.subtitle.map(paragraph => (
-                <Prose key={paragraph}>{paragraph}</Prose>
-            ))}
-
+            <SectionView level={1} phoneNumber={phoneNumber} section={introduction} />
             {sections.map(section => (
-                <section className={styles.stack} id={section.id} key={section.id}>
-                    <Divider />
-                    <Heading level={2}>{section.heading}</Heading>
-                    {section.blocks.map(renderBlock(phoneNumber))}
-                </section>
+                <SectionView
+                    key={section.id}
+                    level={2}
+                    phoneNumber={phoneNumber}
+                    section={section}
+                />
             ))}
 
             <footer className={styles.stack}>
                 <Divider />
-                <p>{footer}</p>
+                <Blockquote>{footer}</Blockquote>
             </footer>
         </main>
     )
