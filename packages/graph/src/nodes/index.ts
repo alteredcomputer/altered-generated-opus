@@ -958,7 +958,7 @@ const nodes = defineNodes([
             "apps/thought-editor/src/main.tsx",
             "apps/thought-editor/src/app.tsx"
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
     },
     {
@@ -968,7 +968,7 @@ const nodes = defineNodes([
         description:
             "The IndexedDB tables (thoughts with embedded attributes, datasets, schemas), one live query that keeps every view current without refetching, the writes, the 25-thought demo seed, and the subtle pending-write indicator. Opening the app reads from disk, so there is never a loading skeleton.",
         sources: ["apps/thought-editor/src/data/**"],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
@@ -978,7 +978,7 @@ const nodes = defineNodes([
         description:
             "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast.",
         sources: ["apps/thought-editor/src/keyboard/**"],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
     },
     {
@@ -994,7 +994,7 @@ const nodes = defineNodes([
             "apps/thought-editor/src/observability/**"
         ],
         relations: [{ type: "uses", to: "thought-editor-keyboard" }],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
     },
     {
@@ -1008,7 +1008,7 @@ const nodes = defineNodes([
             { type: "uses", to: "thought-editor-local-store" },
             { type: "uses", to: "thought-editor-shell" }
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
     },
 
