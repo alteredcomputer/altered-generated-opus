@@ -13,6 +13,9 @@ export default defineConfig({
         react(),
         VitePWA({
             registerType: "autoUpdate",
+            //  Vercel deployment protection gates the site; without credentials the browser
+            //  fetches the manifest anonymously, gets the login wall, and offers no install.
+            useCredentials: true,
             includeAssets: ["icon.svg"],
             manifest: {
                 name: "ALTERED",
