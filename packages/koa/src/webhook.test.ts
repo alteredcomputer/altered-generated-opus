@@ -9,7 +9,7 @@ const payload = (overrides: Record<string, unknown> = {}) => ({
     message_handle: "99DCC379-DD76-4712-BA65-11EFB33B8CD6",
     from_number: "+15555550100",
     number: "+15555550100",
-    to_number: "+15122164639",
+    to_number: "+15555550150",
     content: "Hello!",
     is_outbound: false,
     status: "RECEIVED",
