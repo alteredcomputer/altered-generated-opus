@@ -158,7 +158,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Application shell",
         description:
-            "Next.js configuration and the root layout, including the typeface declaration, the theme colour, and the temporary redirect from the root to the campaign page at /koa. Next's own agent-instruction generation is disabled here, because a nested instruction file would sit below the operating contract and dilute it.",
+            "Next.js configuration and the root layout, including the typeface declarations (Geist Mono from the geist package, and Berkeley Mono kept declared but unused, D139), the theme colour, and the temporary redirect from the root to the campaign page at /koa. Next's own agent-instruction generation is disabled here, because a nested instruction file would sit below the operating contract and dilute it.",
         sources: [
             "apps/web/package.json",
             "apps/web/tsconfig.json",

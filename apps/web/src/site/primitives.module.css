@@ -1,3 +1,21 @@
+.mark {
+    color: var(--fg-muted);
+}
+
+/* Consecutive lines with no blank line between them, as front matter is written. */
+.frontMatter {
+    display: grid;
+}
+
+.value,
+.strong {
+    color: var(--fg);
+}
+
+.strong {
+    font-weight: 700;
+}
+
 .heading {
     color: var(--fg);
     font-weight: 700;
@@ -6,4 +24,13 @@
 
 .prose {
     text-wrap: pretty;
+}
+
+.quote {
+    font-style: italic;
+}
+
+.prominent {
+    color: var(--link-access);
+    font-weight: 700;
 }
