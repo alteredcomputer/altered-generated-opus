@@ -59,6 +59,10 @@ select.field {
     gap: 8px;
 }
 
+.schema-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+}
+
 .remove {
     width: 34px;
     color: var(--fg-faint);
