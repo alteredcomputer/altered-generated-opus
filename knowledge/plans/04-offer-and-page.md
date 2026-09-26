@@ -161,3 +161,29 @@ Update `web-site-copy` and `web-landing-page`; add `offer-facts` (the data file 
   `apps/web/public/icon-rounded.png` and `apps/launcher/assets/icon@dark.png`. The SVG exports in
   `alteredcomputer/generated-mark-studies/exports/` are generated studies, not the original.
   Nothing was downloaded; not used (D136).
+- 2026-09-26 (executing agent, D139): pass two shipped. **pierre.computer, fetched live** (all
+  styles are inline in its HTML): body 12px on a 20px line height (5:3), letter-spacing normal,
+  a 480px column (about 66.7ch of 7.2px Berkeley Mono) left-aligned inside 40px body padding at
+  every width (no media queries), paragraphs separated by one blank line (20px, it is a `pre`),
+  headings bold, uppercase, and the same colour as body text, with `# ` / `## ` as `::before`
+  content in a fainter grey (`oklch(65% 0.01 286)` against a near-white body). **Ours:** 14px on
+  `calc(14px * 5 / 3)` = 23.33px (pierre's ratio), normal letter-spacing, 66ch measure (554px in
+  Geist Mono), 40px inset at every width, one blank line between blocks. Heading marks are real
+  text in the muted grey with the heading words pure white or black; `**`, `> `, and the
+  front-matter fences and key take the same muted grey. **Front matter key:** `name: altered`,
+  one line, the shortest honest metadata; screen readers hear only "altered". A second line
+  (`page: koa - early access`, D116's label) was judged extra for now. **Structure:** front
+  matter, the tagline as `**bold**` body text, the only h1 `# Introduction` (the old subtitle),
+  then `---` and `## ` sections, FAQ questions as `### ` h3s, footer as a `> ` italic blockquote.
+  **Dark ramp:** background #202020; body grey kept at #b3b3b3, now 7.77:1 (the grey-to-white
+  step is background-independent, so the hierarchy is unchanged); headings 16.29:1. The access
+  link is #0080ff bold: 4.29:1 on dark, 3.64:1 on light, under 4.5:1, flagged to him. **Copy:**
+  held; long paragraphs split into shorter chunks with no words changed, each with its decision
+  ids. **Font flip:** Geist Mono comes from the `geist` package (`geist/font/mono`); to return to
+  Berkeley Mono, change `--font-mono: var(--font-geist-mono)` in `globals.css` to
+  `var(--font-berkeley-mono)`, and set Berkeley's `preload` back to true in `layout.tsx` (it is
+  false while unused so the file is not fetched). Geist Mono's variable file is upright only, so
+  the footer's italic is browser-synthesised. Left for him: pierre's marks are fainter than its
+  body (ours share the body grey), and pierre left-aligns while ours stays centred. Also fixed:
+  the one real-format phone number in source (a Sendblue sample `to_number` in a Koa test) is
+  now a fictional 555 number; no number is hard-coded anywhere (D140).

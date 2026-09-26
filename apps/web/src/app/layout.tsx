@@ -1,3 +1,4 @@
+import { GeistMono } from "geist/font/mono"
 import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import type { ReactNode } from "react"
@@ -5,15 +6,17 @@ import "./globals.css"
 
 /**
  * @remarks
- * Berkeley Mono, variable, as the single typeface. The fallback stack is listed so that a failed
- * font load degrades to another monospace rather than to a proportional face, which would break
- * the character-based measurements the layout is built on.
+ * Two monospace faces are declared and `--font-mono` in globals.css picks one, so the Geist Mono
+ * trial (D139) flips back to Berkeley Mono by editing that single line. Berkeley is not preloaded
+ * while unused; set `preload` back to true when it is picked again. Both fallback stacks are
+ * monospace, so a failed load never breaks the character-based measurements the layout uses.
  */
 const berkeleyMono = localFont({
     src: "../../public/fonts/berkeley-mono-variable.woff2",
     weight: "100 900",
     display: "swap",
-    variable: "--font-mono",
+    preload: false,
+    variable: "--font-berkeley-mono",
     fallback: ["ui-monospace", "SFMono-Regular", "Menlo", "Consolas", "monospace"]
 })
 
@@ -29,12 +32,12 @@ export const viewport: Viewport = {
     //  Equal to --bg in globals.css, light and dark; keep them in step.
     themeColor: [
         { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-        { media: "(prefers-color-scheme: dark)", color: "#333333" }
+        { media: "(prefers-color-scheme: dark)", color: "#202020" }
     ]
 }
 
 const RootLayout = ({ children }: { children: ReactNode }) => (
-    <html className={berkeleyMono.variable} lang="en">
+    <html className={`${GeistMono.variable} ${berkeleyMono.variable}`} lang="en">
         <body>{children}</body>
     </html>
 )
