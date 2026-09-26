@@ -192,6 +192,10 @@ const nodes = defineNodes([
                     priority: 1
                 },
                 {
+                    text: "Two differences from pierre.computer left for him: pierre's syntax marks are fainter than its body text (ours share the body grey), and pierre left-aligns its column at wide widths (ours stays centred).",
+                    priority: 2
+                },
+                {
                     text: "Confirm dark-first against the current system-preference behaviour. His notes specify a dark grey background; the page currently follows the reader's setting.",
                     priority: 2
                 },
