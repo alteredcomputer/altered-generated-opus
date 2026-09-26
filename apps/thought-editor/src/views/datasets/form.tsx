@@ -146,7 +146,7 @@ export function DatasetForm({
                         </p>
                     )}
                     {drafts.map(schema => (
-                        <div key={schema.key} className="attribute">
+                        <div key={schema.key} className="attribute schema-row">
                             <input
                                 data-focus-key={schema.key}
                                 className="field"
@@ -173,7 +173,6 @@ export function DatasetForm({
                                     </option>
                                 ))}
                             </select>
-                            <span />
                             <button
                                 type="button"
                                 className="remove"
