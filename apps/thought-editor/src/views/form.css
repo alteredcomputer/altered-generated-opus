@@ -1,0 +1,83 @@
+.form {
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 12ch minmax(0, 1fr);
+    align-content: start;
+    gap: 12px 2ch;
+    padding: 24px 20px;
+    max-width: 960px;
+}
+
+.form-label {
+    padding-top: 5px;
+    text-align: right;
+    color: var(--fg-faint);
+}
+
+.field {
+    width: 100%;
+    min-height: 34px;
+    padding: 4px 10px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    color: var(--fg);
+    caret-color: var(--accent);
+}
+
+.field:focus {
+    border-color: var(--accent);
+}
+
+.field-content {
+    min-height: calc(var(--line) * 5 + 10px);
+    resize: none;
+    field-sizing: content;
+}
+
+.field-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+}
+
+select.field {
+    appearance: none;
+    color: var(--fg-muted);
+    cursor: pointer;
+}
+
+.attributes {
+    display: grid;
+    gap: 8px;
+}
+
+.attribute {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) minmax(0, 1.4fr) auto;
+    gap: 8px;
+}
+
+.remove {
+    width: 34px;
+    color: var(--fg-faint);
+}
+
+.remove:hover,
+.remove:focus {
+    color: var(--danger);
+}
+
+.add {
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 0;
+    color: var(--fg-muted);
+}
+
+.add:hover,
+.add:focus {
+    color: var(--fg);
+}
