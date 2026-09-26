@@ -942,6 +942,76 @@ const nodes = defineNodes([
         }
     },
 
+    //  === Thought editor prototype ===
+
+    {
+        id: "thought-editor",
+        title: "Thought editor prototype",
+        description:
+            "A Raycast-style, keyboard-first editor for thoughts, datasets, attributes, and schemas, installable as a desktop PWA (D144). Generated and disclosed as such; the long-term editor belongs to the hand-written core. Data lives in the browser's IndexedDB, so it has no server, no routes, and no credentials.",
+        sources: [
+            "apps/thought-editor/package.json",
+            "apps/thought-editor/tsconfig.json",
+            "apps/thought-editor/vite.config.ts",
+            "apps/thought-editor/index.html",
+            "apps/thought-editor/public/**",
+            "apps/thought-editor/src/main.tsx",
+            "apps/thought-editor/src/app.tsx"
+        ],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+    {
+        id: "thought-editor-local-store",
+        parent: "thought-editor",
+        title: "Local store",
+        description:
+            "The IndexedDB tables (thoughts with embedded attributes, datasets, schemas), one live query that keeps every view current without refetching, the writes, the 25-thought demo seed, and the subtle pending-write indicator. Opening the app reads from disk, so there is never a loading skeleton.",
+        sources: ["apps/thought-editor/src/data/**"],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "thought-editor-keyboard",
+        parent: "thought-editor",
+        title: "Keyboard layer",
+        description:
+            "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast.",
+        sources: ["apps/thought-editor/src/keyboard/**"],
+        status: "in-progress",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
+    },
+    {
+        id: "thought-editor-shell",
+        parent: "thought-editor",
+        title: "Window shell",
+        description:
+            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state), confirmations, toasts, and the visual system taken from the Koa page screenshot.",
+        sources: [
+            "apps/thought-editor/src/shell/**",
+            "apps/thought-editor/src/ui/**",
+            "apps/thought-editor/src/theme.css",
+            "apps/thought-editor/src/observability/**"
+        ],
+        relations: [{ type: "uses", to: "thought-editor-keyboard" }],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
+    },
+    {
+        id: "thought-editor-views",
+        parent: "thought-editor",
+        title: "Views",
+        description:
+            "The root command list, the thoughts list with its inspector pane and dataset filter, the thought form (alias, content, datasets, attributes with a schema each), the dataset picker, and the datasets list and form where schemas are defined. Text is the only schema type for now.",
+        sources: ["apps/thought-editor/src/views/**"],
+        relations: [
+            { type: "uses", to: "thought-editor-local-store" },
+            { type: "uses", to: "thought-editor-shell" }
+        ],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
+    },
+
     //  === Tooling ===
 
     {

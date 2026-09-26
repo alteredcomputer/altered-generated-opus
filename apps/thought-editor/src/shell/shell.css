@@ -1,0 +1,254 @@
+.frame {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.frame-header {
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5ch;
+    height: 56px;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.back {
+    color: var(--fg-faint);
+}
+
+.back:hover {
+    color: var(--fg);
+}
+
+.search {
+    flex: 1;
+    min-width: 0;
+    color: var(--fg);
+    caret-color: var(--accent);
+}
+
+.frame-title {
+    flex: 1;
+    color: var(--fg);
+    font-weight: 700;
+}
+
+.sync-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.sync-line[data-syncing="true"]::after {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 30%;
+    background: var(--accent);
+    animation: sync 900ms ease-in-out infinite;
+}
+
+@keyframes sync {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(340%);
+    }
+}
+
+.frame-body {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+}
+
+.frame-footer {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 2ch;
+    height: 40px;
+    padding: 0 12px 0 20px;
+    background: var(--bg-raised);
+    border-top: 1px solid var(--rule);
+}
+
+.footer-status {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.footer-status[data-style="success"] {
+    color: var(--fg);
+}
+
+.footer-status[data-style="failure"] {
+    color: var(--accent);
+}
+
+.footer-title {
+    color: var(--fg-muted);
+}
+
+.footer-action {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    color: var(--fg-muted);
+    white-space: nowrap;
+}
+
+.footer-action:hover {
+    background: var(--bg-cursor);
+}
+
+.footer-primary {
+    color: var(--fg);
+    font-weight: 700;
+}
+
+.footer-divider {
+    width: 1px;
+    height: 16px;
+    margin: 0 -1ch;
+    background: var(--rule);
+}
+
+.accessory {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+    color: var(--fg-muted);
+    white-space: nowrap;
+}
+
+.accessory:hover {
+    color: var(--fg);
+}
+
+/* Picker: the Cmd-K action panel and the dataset filter. */
+
+.picker-backdrop {
+    position: fixed;
+    inset: 0;
+    cursor: default;
+}
+
+.picker {
+    position: fixed;
+    right: 12px;
+    width: min(420px, calc(100vw - 24px));
+    display: flex;
+    flex-direction: column;
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+    box-shadow: 0 16px 48px rgb(0 0 0 / 60%);
+}
+
+.picker-bottom {
+    bottom: 48px;
+}
+
+.picker-top {
+    top: 48px;
+    flex-direction: column-reverse;
+}
+
+.picker-list {
+    max-height: min(420px, 60vh);
+    overflow-y: auto;
+    padding: 6px;
+}
+
+.picker-section {
+    padding: 6px 8px 2px;
+    color: var(--fg-faint);
+}
+
+.picker-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 4px 8px;
+    text-align: left;
+    color: var(--fg-muted);
+}
+
+.picker-item[aria-selected="true"] {
+    background: var(--bg-cursor);
+    color: var(--fg);
+}
+
+.picker-item[data-destructive="true"] {
+    color: var(--danger);
+}
+
+.picker-empty {
+    padding: 4px 8px;
+    color: var(--fg-faint);
+}
+
+.picker-search {
+    padding: 10px 14px;
+    border-top: 1px solid var(--rule);
+    color: var(--fg);
+    caret-color: var(--accent);
+}
+
+.picker-top .picker-search {
+    border-top: 0;
+    border-bottom: 1px solid var(--rule);
+}
+
+/* Confirmation dialog. */
+
+.scrim {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    background: rgb(0 0 0 / 55%);
+}
+
+.dialog {
+    width: min(420px, calc(100vw - 32px));
+    padding: 20px;
+    display: grid;
+    gap: var(--line);
+    background: var(--bg-raised);
+    border: 1px solid var(--rule);
+}
+
+.dialog-title {
+    color: var(--fg);
+    font-weight: 700;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1ch;
+}
+
+.dialog-actions button {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border: 1px solid var(--rule);
+}
+
+.dialog-actions .danger {
+    color: var(--danger);
+}

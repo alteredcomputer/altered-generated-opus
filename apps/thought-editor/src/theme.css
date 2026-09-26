@@ -1,0 +1,129 @@
+/*
+    The visual system, sampled from the Koa page screenshot the owner supplied: #101010 ground,
+    #b3b3b3 body text, #ffffff for anything that is a name or a heading, one orange (#ef8733) for
+    focus and emphasis, and Geist Mono at a single 14px size on the page's 5:3 line height.
+    Markdown marks (#, ---, [x], backticks) take --fg-faint so they recede behind the words they
+    mark. No radius anywhere; separation is by hairline and by weight, never by size.
+*/
+
+:root {
+    color-scheme: dark;
+
+    --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+    --size: 14px;
+    --line: calc(var(--size) * 5 / 3);
+
+    --bg: #101010;
+    --bg-raised: #161616;
+    --bg-cursor: #242424;
+    --bg-chip: #1f1f1f;
+    --rule: #262626;
+
+    --fg: #ffffff;
+    --fg-muted: #b3b3b3;
+    --fg-faint: #6e6e6e;
+
+    --accent: #ef8733;
+    --danger: #ff5f57;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--bg);
+    color: var(--fg-muted);
+    font-family: var(--font-mono);
+    font-size: var(--size);
+    line-height: var(--line);
+    font-variant-ligatures: none;
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+}
+
+::selection {
+    background: var(--accent);
+    color: var(--bg);
+}
+
+p,
+h1,
+h2 {
+    margin: 0;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+    color: inherit;
+    background: none;
+    border: 0;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    cursor: pointer;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--fg-faint);
+}
+
+:focus {
+    outline: none;
+}
+
+.faint,
+.mark {
+    color: var(--fg-faint);
+}
+
+.strong {
+    color: var(--fg);
+    font-weight: 700;
+}
+
+.chip {
+    background: var(--bg-chip);
+    color: var(--fg-muted);
+    padding: 0 0.5ch;
+    white-space: nowrap;
+}
+
+.keys {
+    display: inline-flex;
+    gap: 2px;
+    margin-left: 1ch;
+}
+
+kbd {
+    font: inherit;
+    min-width: 2.4ch;
+    padding: 0 0.5ch;
+    text-align: center;
+    background: var(--bg-chip);
+    color: var(--fg-muted);
+}
+
+.view {
+    height: 100%;
+}
+
+.view[hidden] {
+    display: none;
+}
