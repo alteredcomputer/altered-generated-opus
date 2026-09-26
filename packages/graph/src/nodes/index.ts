@@ -176,7 +176,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Visual system",
         description:
-            "Markdown-inspired (D136): Berkeley Mono at one font size for every piece of text, a tight terminal-like line height, and every vertical measurement a multiple of one line. Headings are not larger; they are bold and pure white (pure black in light mode) while body text is grey. One zero-chroma neutral ramp resolved through light-dark: dark is a #333333 background, and the body grey clears 4.5:1 against both backgrounds. Links are white, never blue, underlined only on hover or focus. The single accent is used only for selection and focus.",
+            "Markdown-inspired (D136, pass two D139), benchmarked on pierre.computer: 14px for every piece of text, pierre's 5:3 line-height-to-size ratio, every vertical measurement a multiple of one line, a 66ch measure, and 40px side insets. The typeface is one CSS variable, --font-mono, currently pointing at Geist Mono (a trial); Berkeley Mono stays declared beside it so flipping back is one line. Headings are not larger; they are bold and pure white (pure black in light mode) while body text is grey, and markdown syntax marks (#, **, >, front-matter fences) take the muted grey so they recede. One zero-chroma neutral ramp resolved through light-dark: dark is a #202020 background, and the body grey clears 4.5:1 against both backgrounds. Links are white and underlined only on hover or focus; the one exception is the access link, #0080ff and bold (D139). The amber accent is used only for selection and focus.",
         sources: ["apps/web/src/app/globals.css", "apps/web/public/fonts/**"],
         status: "in-progress",
         data: {
@@ -184,7 +184,11 @@ const nodes = defineNodes([
             ui: { brandPalette: true, radiusRule: true, responsive: true },
             todos: [
                 {
-                    text: "Owner review of the #333333 dark background (D136); he may revert toward #111111 after seeing it.",
+                    text: "Owner review of pass two (D139): the #202020 background and the Geist Mono trial against Berkeley Mono.",
+                    priority: 1
+                },
+                {
+                    text: "The #0080ff access link measures about 4.3:1 on #202020 and 3.6:1 on #fafafa, under the 4.5:1 body-text floor. It is his exact colour; raise it with him before shipping it as final.",
                     priority: 1
                 },
                 {
@@ -215,7 +219,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Site copy",
         description:
-            "Every word on the public site, in one module, drafted for the owner's review (D136): the text logo, the headline, a subtitle on what Koa is, the early access program (Layer 1 mentioned without a price, D127), who this is for and who it is not for, the frequently asked questions, and the footer line. Every claim carries its decision id in a comment beside it. No price, no date, no revenue outcome.",
+            "Every word on the public site, in one module, drafted for the owner's review (D136) and held in pass two (D139: splits and small trims only): the front-matter logo, the tagline, the introduction on what Koa is, the early access program (Layer 1 mentioned without a price, D127), who this is for and who it is not for, the frequently asked questions, and the footer line. Every claim carries its decision id in a comment beside it. No price, no date, no revenue outcome.",
         sources: ["apps/web/src/site/content.ts"],
         status: "in-progress",
         data: {
@@ -223,7 +227,7 @@ const nodes = defineNodes([
             todos: [
                 { text: "Owner approval of every line before indexing is enabled.", priority: 1 },
                 {
-                    text: "Owner picks the headline from the drafted one and its two alternatives.",
+                    text: "Owner picks the tagline from the drafted one and its two alternatives.",
                     priority: 1
                 },
                 {
@@ -241,7 +245,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Site primitives",
         description:
-            "The markdown shapes the page is built from: a heading with a literal '# ' or '## ' prefix, prose, a literal '---' divider, and a link written as visible '[label](target)' text. The markdown syntax is real text, not CSS decoration, so it copies and reads as markdown. Constraining the vocabulary keeps the layout on the line grid and lets copy stay editable as data.",
+            "The markdown shapes the page is built from: a front-matter block, a heading whose literal '#', '##', or '###' prefix matches its level, prose, bold text inside literal '**' marks, a literal '---' divider, a blockquote with a literal '> ', and a link written as visible '[label](target)' text, optionally prominent (the access link). The markdown syntax is real text, not CSS decoration, so it copies and reads as markdown; the marks are muted and hidden from screen readers, so assistive technology reads only the words. Constraining the vocabulary keeps the layout on the line grid and lets copy stay editable as data.",
         sources: ["apps/web/src/site/primitives.tsx", "apps/web/src/site/primitives.module.css"],
         relations: [{ type: "uses", to: "web-visual-system" }],
         status: "done",
@@ -255,7 +259,7 @@ const nodes = defineNodes([
         parent: "web",
         title: "Landing page",
         description:
-            "The campaign page at /koa (D136), with the root redirecting there temporarily until a product page takes it (the redirect lives in next.config.ts). Top to bottom: the text logo, the headline, the subtitle, then '---'-divided sections for the early access program, who this is for, and frequently asked questions, and the footer 'This page was intentionally generated by AI.' The only call to action is the markdown link 'Get early access to Koa', which opens an sms: link to the configured contact number; the thread, not the page, is the funnel (D103). The last question links back to the early access section by anchor. If the contact number is not configured the link renders as plain text with an honest note rather than as a link to nowhere.",
+            "The campaign page at /koa (D136), with the root redirecting there temporarily until a product page takes it (the redirect lives in next.config.ts). Structured as an honest markdown document (D139): a front-matter block as the logo, the tagline as bold body text, the one h1 '# Introduction', then '---'-divided h2 sections for the early access program, who this is for, and frequently asked questions (questions are h3), and the footer 'This page was intentionally generated by AI.' as a markdown blockquote. The only call to action is the markdown link 'Get early access to Koa', in #0080ff and bold,, which opens an sms: link to the configured contact number; the thread, not the page, is the funnel (D103). The last question links back to the early access section by anchor. If the contact number is not configured the link renders as plain text with an honest note rather than as a link to nowhere.",
         sources: [
             "apps/web/src/app/koa/page.tsx",
             "apps/web/src/site/landing.tsx",
