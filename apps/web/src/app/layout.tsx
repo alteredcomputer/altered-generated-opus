@@ -32,7 +32,7 @@ export const viewport: Viewport = {
     //  Equal to --bg in globals.css, light and dark; keep them in step.
     themeColor: [
         { media: "(prefers-color-scheme: light)", color: "#fafafa" },
-        { media: "(prefers-color-scheme: dark)", color: "#202020" }
+        { media: "(prefers-color-scheme: dark)", color: "#101010" }
     ]
 }
 

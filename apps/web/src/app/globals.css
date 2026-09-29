@@ -1,18 +1,19 @@
 /*
     The visual system.
 
-    Markdown-inspired (D136, pass two D139), benchmarked on pierre.computer: one monospaced size
-    for every piece of text, pierre's 5:3 line-height-to-size ratio (their 12px on 20px), and
-    every vertical measurement a multiple of --line. Headings and links are distinguished by
-    weight and colour, never by size. Markdown syntax marks take --fg-muted so they recede behind
+    Markdown-inspired (D136, pass two D139, pass three D152): one monospaced size for every piece
+    of text, 13px on a 1.5 line height, and every vertical measurement a multiple of --line.
+    Headings and links are distinguished by weight and colour, never by size. Markdown syntax marks take --fg-muted so they recede behind
     the words they mark. Light and dark both derive from one neutral ramp, so there is one
     palette. The neutrals carry zero chroma on purpose (D118): pure blacks, whites, and greys, no
-    tint. The two colours are deliberate exceptions: --link-access for the one access link
-    (D139), and --accent for selection and focus only.
+    tint. The two colours are deliberate exceptions: --link-access, orange to inspire action, for
+    the one access link (D152; a milder khaki near #9f9361 is noted as a later refinement), and
+    --accent for selection and focus only.
 
-    Contrast: --fg-muted is 7.8:1 on the dark --bg and 6.7:1 on the light one, above the 4.5:1
-    floor for body text. The muted-to-foreground step does not depend on the background, so the
-    dark grey stayed #b3b3b3 when the background moved from #333333 to #202020. Change a neutral
+    Contrast: --fg-muted is 9.1:1 on the dark --bg and 6.7:1 on the light one, above the 4.5:1
+    floor for body text. --link-access is 7.6:1 on the dark --bg but 2.4:1 on the light one,
+    under the floor; the light scheme's orange is his call (D152). The dark grey stayed #b3b3b3
+    as the background moved from #333333 to #202020 to #101010. Change a neutral
     and the theme colours in layout.tsx together.
 */
 
@@ -22,16 +23,16 @@
     /* The typeface switch (D139): var(--font-berkeley-mono) flips back to Berkeley Mono. */
     --font-mono: var(--font-geist-mono);
 
-    --size: 0.875rem;
-    --line: calc(var(--size) * 5 / 3);
+    --size: 0.8125rem;
+    --line: calc(var(--size) * 1.5);
     --measure: 66ch;
     --inset: 2.5rem;
 
-    --bg: light-dark(#fafafa, #202020);
+    --bg: light-dark(#fafafa, #101010);
     --fg: light-dark(#000000, #ffffff);
     --fg-muted: light-dark(#595959, #b3b3b3);
 
-    --link-access: #0080ff;
+    --link-access: #ff8000;
 
     --accent: oklch(84% 0.17 96);
     --accent-fg: oklch(20% 0.02 96);
