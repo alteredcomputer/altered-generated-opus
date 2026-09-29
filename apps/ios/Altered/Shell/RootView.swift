@@ -1,31 +1,31 @@
 import AlteredCore
 import SwiftUI
 
-/// Five tabs, each with its own navigation stack, all kept alive so switching is instant and a
-/// tab comes back exactly as it was left. No transitions between tabs.
+/// Five tabs, each with its own navigation stack. SwiftUI's TabView keeps every tab alive, so
+/// switching is instant and a tab comes back exactly as it was left, and it exposes only the
+/// selected tab to VoiceOver. Its system tab bar is hidden; the flat `TabBar` is drawn instead.
 struct RootView: View {
     @Environment(AppModel.self) private var app
 
     var body: some View {
+        let selection = Binding(get: { app.router.tab }, set: { app.router.tab = $0 })
         ZStack(alignment: .top) {
             Theme.bg.ignoresSafeArea()
-            ForEach(Tab.allCases) { tab in
-                let active = app.router.tab == tab
-                // The active tab is drawn on top, so the hidden ones can never sit in its way.
-                TabStack(tab: tab)
-                    .opacity(active ? 1 : 0)
-                    .zIndex(active ? 1 : 0)
-                    .allowsHitTesting(active)
-                    .accessibilityHidden(!active)
+            TabView(selection: selection) {
+                ForEach(Tab.allCases) { tab in
+                    TabStack(tab: tab)
+                        .toolbar(.hidden, for: .tabBar)
+                        .tag(tab)
+                }
             }
             if let toast = app.toast {
-                ToastView(toast: toast).zIndex(2)
+                ToastView(toast: toast)
             }
             if let panel = app.panel {
-                PanelView(panel: panel).id(panel.id).zIndex(3)
+                PanelView(panel: panel).id(panel.id)
             }
             if app.testing {
-                Probes().zIndex(4)
+                Probes()
             }
         }
         .tint(Theme.accent)
@@ -40,9 +40,11 @@ struct TabStack: View {
         NavigationStack(path: app.router.path(tab)) {
             root
                 .toolbar(.hidden, for: .navigationBar)
+                .toolbar(.hidden, for: .tabBar)
                 .navigationDestination(for: Route.self) { route in
                     Destination(route: route)
                         .toolbar(.hidden, for: .navigationBar)
+                        .toolbar(.hidden, for: .tabBar)
                         .background(Theme.bg.ignoresSafeArea())
                 }
         }

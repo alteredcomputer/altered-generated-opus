@@ -136,6 +136,9 @@ struct ViewBody: View {
                         .frame(maxWidth: .infinity, minHeight: metrics.size * 10, alignment: .topLeading)
                     }
                 }
+                if thoughts.count % 2 == 1 {
+                    Theme.bg.frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             }
             .background(Theme.line)
         case .board:

@@ -25,6 +25,11 @@ struct SetsScreen: View {
                         }
                         .accessibilityIdentifier("tile.\(dataset.alias)")
                     }
+                    // An odd count leaves the last cell empty; fill it so the divider colour
+                    // behind the grid never shows as a grey block.
+                    if library.datasets.count % 2 == 1 {
+                        Theme.bg.frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
                 }
                 .background(Theme.line)
                 .overlay(alignment: .bottom) { Hairline() }
