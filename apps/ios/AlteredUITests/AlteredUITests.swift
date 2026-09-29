@@ -224,6 +224,8 @@ final class AlteredUITests: XCTestCase {
         XCTAssertTrue(el("schema.status").waitForExistence(timeout: 3))
         snap("14 dataset")
 
+        // Pushed screens hide the tab bar, as system apps do; go back to the root first.
+        tap("back")
         tap("tab.views")
         tap("view.v-decisions")
         XCTAssertTrue(el("column.open").waitForExistence(timeout: 3))
