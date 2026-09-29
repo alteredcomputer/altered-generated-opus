@@ -57,6 +57,30 @@ public struct Revision: Codable, Hashable, Sendable {
 public enum RelationKind: String, Codable, CaseIterable, Sendable {
     case parent, child, similar, precedes, follows, equivalent
 
+    /// How a row reads: "child  Versioned thoughts".
+    public var label: String {
+        switch self {
+        case .parent: "parent"
+        case .child: "child"
+        case .similar: "similar"
+        case .precedes: "before"
+        case .follows: "after"
+        case .equivalent: "same as"
+        }
+    }
+
+    /// "X is <phrase> Y", for confirmations.
+    public var phrase: String {
+        switch self {
+        case .parent: "the parent of"
+        case .child: "a child of"
+        case .similar: "similar to"
+        case .precedes: "before"
+        case .follows: "after"
+        case .equivalent: "the same as"
+        }
+    }
+
     /// The kind stored on the other thought, so every link reads correctly from both ends.
     public var inverse: RelationKind {
         switch self {
@@ -70,6 +94,8 @@ public enum RelationKind: String, Codable, CaseIterable, Sendable {
     }
 }
 
+/// A link as seen from the thought that stores it: `Relation(.child, to: x)` on a thought means
+/// x is its child. The other thought stores the inverse.
 public struct Relation: Codable, Hashable, Sendable {
     public var kind: RelationKind
     public var to: ID

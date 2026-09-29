@@ -1,0 +1,121 @@
+#  iOS: AlteredCore tests, then the app's unit and UI tests on the newest iPhone Simulator.
+#  Screenshots from the UI tests are uploaded as the `screenshots` artifact. macOS minutes are
+#  free only while the repository is public, so the job is skipped if it goes private.
+name: ios
+
+on:
+    push:
+        paths: ["apps/ios/**", ".github/workflows/ios.yml"]
+    workflow_dispatch:
+
+concurrency:
+    group: ios-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    test:
+        if: ${{ !github.event.repository.private }}
+        runs-on: macos-26
+        timeout-minutes: 45
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Pick the newest Xcode 26
+              run: |
+                  XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+                  echo "Using $XCODE"
+                  sudo xcode-select -s "$XCODE"
+                  xcodebuild -version
+
+            - name: AlteredCore tests
+              working-directory: apps/ios/AlteredCore
+              run: swift test
+
+            - name: Generate the Xcode project
+              working-directory: apps/ios
+              run: |
+                  command -v xcodegen >/dev/null || brew install xcodegen
+                  xcodegen generate
+
+            - name: Pick a Simulator
+              id: sim
+              run: |
+                  ID=$(xcrun simctl list devices available -j | python3 -c '
+                  import json, sys, re
+                  d = json.load(sys.stdin)["devices"]
+                  best = None
+                  for rt, devs in d.items():
+                      m = re.search(r"iOS-(\d+)-(\d+)", rt)
+                      if not m: continue
+                      v = (int(m.group(1)), int(m.group(2)))
+                      for dev in devs:
+                          name = dev["name"]
+                          if not name.startswith("iPhone") or "Pro Max" in name or "Plus" in name or " e" in name: continue
+                          key = (v, name)
+                          if best is None or key > best[0]: best = (key, dev["udid"])
+                  print(best[1]); print(best[0], file=sys.stderr)
+                  ')
+                  echo "id=$ID" >> "$GITHUB_OUTPUT"
+                  #  Type with the on-screen keyboard, so the tests see what a phone does.
+                  defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
+                  xcrun simctl boot "$ID" || true
+
+            - name: Build and test
+              working-directory: apps/ios
+              run: |
+                  mkdir -p build
+                  #  Report every compile error in one run, not just the first file's.
+                  defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool YES
+                  set +e
+                  xcodebuild test \
+                    -project Altered.xcodeproj -scheme Altered \
+                    -destination "id=${{ steps.sim.outputs.id }}" \
+                    -resultBundlePath build/Altered.xcresult \
+                    ALTERED_BUILD="${GITHUB_SHA::7}" \
+                    SWIFT_COMPILATION_MODE=wholemodule \
+                    CODE_SIGNING_ALLOWED=NO \
+                    > build/xcodebuild.log 2>&1
+                  STATUS=$?
+                  grep -E "error:|warning: .*/apps/ios/Altered|Test (Case|Suite) .*(passed|failed)|XCTAssert|\*\* (BUILD|TEST) " build/xcodebuild.log | tail -400
+                  exit $STATUS
+
+            - name: Export screenshots
+              if: always()
+              working-directory: apps/ios
+              run: |
+                  mkdir -p build/screenshots
+                  if [ -d build/Altered.xcresult ]; then
+                    xcrun xcresulttool export attachments --path build/Altered.xcresult --output-path build/attachments || true
+                    python3 - <<'PY'
+                  import json, os, re, shutil
+                  src = "build/attachments"; dst = "build/screenshots"
+                  try:
+                      manifest = json.load(open(os.path.join(src, "manifest.json")))
+                  except Exception as e:
+                      print("no manifest:", e); manifest = []
+                  for test in manifest:
+                      for a in test.get("attachments", []):
+                          name = a.get("suggestedHumanReadableName") or a["exportedFileName"]
+                          ext = os.path.splitext(a["exportedFileName"])[1]
+                          name = name.split("_0_")[0]
+                          if not name.endswith(ext): name += ext
+                          if ext == ".mp4": continue
+                          name = re.sub(r'[\\/:*?"<>|\r\n`]', "_", name)
+                          shutil.copy(os.path.join(src, a["exportedFileName"]), os.path.join(dst, name))
+                          print(name)
+                  PY
+                  fi
+
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: screenshots
+                  path: apps/ios/build/screenshots
+                  if-no-files-found: ignore
+
+            - uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: xcodebuild-log
+                  path: apps/ios/build/xcodebuild.log
+                  if-no-files-found: ignore

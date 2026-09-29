@@ -18,3 +18,4 @@ next-env.d.ts
 apps/ios/*.xcodeproj
 apps/ios/build/
 apps/ios/AlteredCore/.build/
+apps/ios/Altered/Info.plist

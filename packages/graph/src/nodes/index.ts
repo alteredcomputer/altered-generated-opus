@@ -1016,6 +1016,80 @@ const nodes = defineNodes([
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
     },
 
+    //  === iPhone editor prototype ===
+
+    {
+        id: "ios-editor",
+        title: "iPhone editor prototype",
+        description:
+            "A native Swift and SwiftUI editor for thoughts, datasets, schemas, versions, and agent proposals, in the Koa page's brutalist monochrome style, built for one hand instead of a keyboard (D157). Local-first with a simulated network; generated and disclosed as such.",
+        sources: [
+            "apps/ios/project.yml",
+            "apps/ios/README.md",
+            "apps/ios/Altered/App/**",
+            "apps/ios/Altered/Resources/**",
+            ".github/workflows/ios.yml"
+        ],
+        relations: [{ type: "supersedes", to: "thought-editor" }],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "ios-editor-core",
+        parent: "ios-editor",
+        title: "Core model and sync engine",
+        description:
+            "The Swift package under the app: thoughts, datasets with default-closed fields, relations, revisions with authorship, proposals, saved views, the search language, a word diff, and an optimistic store that replays an outbox over confirmed state so overlapping changes compose and rejected ones roll back. No UI, so it tests on Linux.",
+        sources: ["apps/ios/AlteredCore/**"],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "ios-editor-shell",
+        parent: "ios-editor",
+        title: "Design system and shell",
+        description:
+            "Tokens and type from one text size, the flat press style and haptics, the keyboard layer (search that rides on the keyboard over a tab bar that stays, a text view that keeps its caret visible), five kept-alive tab stacks with instant navigation and the swipe back restored, toasts, and the thumb-anchored action panel.",
+        sources: ["apps/ios/Altered/Design/**", "apps/ios/Altered/Shell/**"],
+        relations: [{ type: "uses", to: "ios-editor-core" }],
+        status: "in-progress",
+        data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "ios-editor-screens",
+        parent: "ios-editor",
+        title: "Screens",
+        description:
+            "Thoughts (list, markdown detail, composer, fields form, history and diff, link picker), Sets (grid, dataset page, dataset and field forms), Views (list, grid, and board layouts rendered from stored definitions), Review (proposals, drafts, incomplete, unvalidated), and Sys (network simulation, display, outbox, log, export, reset).",
+        sources: [
+            "apps/ios/Altered/Thoughts/**",
+            "apps/ios/Altered/Sets/**",
+            "apps/ios/Altered/Views/**",
+            "apps/ios/Altered/Review/**",
+            "apps/ios/Altered/Sys/**"
+        ],
+        relations: [
+            { type: "uses", to: "ios-editor-core" },
+            { type: "uses", to: "ios-editor-shell" }
+        ],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "ios-editor-tests",
+        parent: "ios-editor",
+        title: "App and UI tests",
+        description:
+            "Unit tests for the app model, router, and keyboard maths, and UI tests on the Simulator that drive every flow and measure the keyboard layout: the search bar sits on the keyboard, the tab bar stays, the composer's toolbar and caret stay visible. Screenshots are kept as CI artifacts.",
+        sources: ["apps/ios/AlteredTests/**", "apps/ios/AlteredUITests/**"],
+        relations: [
+            { type: "verifies", to: "ios-editor-shell" },
+            { type: "verifies", to: "ios-editor-screens" }
+        ],
+        status: "in-progress",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
+    },
+
     //  === Tooling ===
 
     {

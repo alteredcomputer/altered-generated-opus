@@ -166,13 +166,13 @@ public enum Seed {
             if let i = thoughts.firstIndex(where: { $0.id == a }) { thoughts[i].relations.append(Relation(kind, to: b)) }
             if let j = thoughts.firstIndex(where: { $0.id == b }) { thoughts[j].relations.append(Relation(kind.inverse, to: a)) }
         }
-        link("t-freeze", .parent, "t-versioned")
-        link("t-freeze", .parent, "t-relations")
+        link("t-freeze", .child, "t-versioned")
+        link("t-freeze", .child, "t-relations")
         link("t-versioned", .similar, "t-authored")
-        link("t-validate", .precedes, "t-authored")
+        link("t-validate", .follows, "t-authored")
         link("t-remembers", .similar, "t-ledger")
         link("t-minimal", .equivalent, "t-pierre")
-        link("t-interfaces", .follows, "t-tags")
+        link("t-interfaces", .precedes, "t-tags")
         link("t-sync", .similar, "t-local")
 
         let proposals = [

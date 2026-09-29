@@ -134,10 +134,10 @@ private let seed = Seed.library(now: now)
 
     @Test func requiredFieldsCanFillExistingThoughts() throws {
         let field = Field(id: "f-owner", name: "owner", type: .text)
-        let after = try apply(.addField(datasetId: "ds-ideas", field: field, fill: "riley", at: now))
+        let after = try apply(.addField(datasetId: "ds-ideas", field: field, fill: "owner", at: now))
         let ideas = after.thoughts(in: "ds-ideas")
         #expect(!ideas.isEmpty)
-        #expect(ideas.allSatisfy { $0.values["f-owner"] == "riley" })
+        #expect(ideas.allSatisfy { $0.values["f-owner"] == "owner" })
         #expect(ideas.allSatisfy { $0.revisions.last?.note == "filled ideas.owner" })
 
         let unfilled = try apply(.addField(datasetId: "ds-ideas", field: field, fill: nil, at: now))
