@@ -1031,7 +1031,7 @@ const nodes = defineNodes([
             ".github/workflows/ios.yml"
         ],
         relations: [{ type: "supersedes", to: "thought-editor" }],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
@@ -1041,7 +1041,7 @@ const nodes = defineNodes([
         description:
             "The Swift package under the app: thoughts, datasets with default-closed fields, relations, revisions with authorship, proposals, saved views, the search language, a word diff, and an optimistic store that replays an outbox over confirmed state so overlapping changes compose and rejected ones roll back. No UI, so it tests on Linux.",
         sources: ["apps/ios/AlteredCore/**"],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
@@ -1052,7 +1052,7 @@ const nodes = defineNodes([
             "Tokens and type from one text size, the flat press style and haptics, the keyboard layer (search that rides on the keyboard over a tab bar that stays, a text view that keeps its caret visible), five kept-alive tab stacks with instant navigation and the swipe back restored, toasts, and the thumb-anchored action panel.",
         sources: ["apps/ios/Altered/Design/**", "apps/ios/Altered/Shell/**"],
         relations: [{ type: "uses", to: "ios-editor-core" }],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
     },
     {
@@ -1072,7 +1072,7 @@ const nodes = defineNodes([
             { type: "uses", to: "ios-editor-core" },
             { type: "uses", to: "ios-editor-shell" }
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
@@ -1086,7 +1086,7 @@ const nodes = defineNodes([
             { type: "verifies", to: "ios-editor-shell" },
             { type: "verifies", to: "ios-editor-screens" }
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
     },
 
