@@ -1,0 +1,86 @@
+# XcodeGen spec: `cd apps/ios && xcodegen` makes Altered.xcodeproj (gitignored).
+# Signing: `ALTERED_TEAM=<team id> xcodegen` fills in the team, so a regenerated project keeps it.
+name: Altered
+options:
+  bundleIdPrefix: com.rileybarabash
+  deploymentTarget:
+    iOS: "26.0"
+  createIntermediateGroups: true
+  developmentLanguage: en
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    CODE_SIGN_STYLE: Automatic
+    DEVELOPMENT_TEAM: ${ALTERED_TEAM}
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
+packages:
+  AlteredCore:
+    path: AlteredCore
+targets:
+  Altered:
+    type: application
+    platform: iOS
+    sources:
+      - path: Altered
+    dependencies:
+      - package: AlteredCore
+    info:
+      path: Altered/Info.plist
+      properties:
+        CFBundleDisplayName: ALTERED
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        UILaunchScreen:
+          UIColorName: LaunchBackground
+        UIApplicationSupportsIndirectInputEvents: true
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        UIAppFonts: [GeistMono-Regular.ttf, GeistMono-SemiBold.ttf]
+        UIUserInterfaceStyle: Dark
+        ITSAppUsesNonExemptEncryption: false
+        AlteredBuild: $(ALTERED_BUILD)
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.rileybarabash.altered-editor
+        PRODUCT_NAME: Altered
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+        SWIFT_APPROACHABLE_CONCURRENCY: YES
+        ALTERED_BUILD: dev
+  AlteredTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [AlteredTests]
+    dependencies:
+      - target: Altered
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.rileybarabash.altered-editor.tests
+        SWIFT_DEFAULT_ACTOR_ISOLATION: MainActor
+  AlteredUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [AlteredUITests]
+    dependencies:
+      - target: Altered
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        PRODUCT_BUNDLE_IDENTIFIER: com.rileybarabash.altered-editor.uitests
+        TEST_TARGET_NAME: Altered
+schemes:
+  Altered:
+    build:
+      targets:
+        Altered: all
+        AlteredTests: [test]
+        AlteredUITests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets: [AlteredTests, AlteredUITests]
