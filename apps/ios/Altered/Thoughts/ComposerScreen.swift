@@ -102,7 +102,13 @@ struct ComposerScreen: View {
             edit = original
         }
         loaded = true
-        if id == nil { aliasFocused = true }
+        // Focus once the push has settled; focusing during the push is ignored.
+        if id == nil {
+            Task {
+                try? await Task.sleep(for: .milliseconds(150))
+                aliasFocused = true
+            }
+        }
     }
 
     private func discard() {

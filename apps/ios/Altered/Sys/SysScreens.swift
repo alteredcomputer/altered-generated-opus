@@ -10,7 +10,6 @@ struct SysScreen: View {
     @State private var armedReset = false
 
     var body: some View {
-        @Bindable var app = app
         let network = app.settings.network
         TabScaffold {
             Header(title: "Sys") { SyncStatus() }

@@ -80,15 +80,14 @@ final class AppModel {
 
         let defaults = UserDefaults.standard
         let settings = Settings.load(from: defaults)
-        let persistence: (any Persistence)?
+        var persistence: (any Persistence)?
         var snapshot = Snapshot(confirmed: Seed.library(now: now))
         var problem: String?
         do {
             let disk = try FilePersistence.inApplicationSupport()
-            persistence = disk
             if let saved = try disk.load() { snapshot = saved }
+            persistence = disk
         } catch {
-            persistence = nil
             problem = "could not open the library on disk: \(error). Running from the demo seed in memory."
         }
         let store = Store(snapshot: snapshot, persistence: persistence, network: settings.network)

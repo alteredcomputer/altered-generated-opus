@@ -93,7 +93,7 @@ struct TabScaffold<Content: View, Bottom: View>: View {
         GeometryReader { geometry in
             let lift = KeyboardObserver.lift(overlap: overlap, below: geometry.safeAreaInsets.bottom + TabBar.height)
             VStack(spacing: 0) {
-                content()
+                VStack(spacing: 0) { content() }
                     .frame(maxHeight: .infinity, alignment: .top)
                 bottom()
                     .padding(.bottom, lift)
