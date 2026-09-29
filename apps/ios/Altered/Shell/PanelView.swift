@@ -53,6 +53,7 @@ struct PanelView: View {
             .background(Theme.raised.ignoresSafeArea(edges: .bottom))
             .overlay(alignment: .top) { Hairline() }
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("panel")
     }
 

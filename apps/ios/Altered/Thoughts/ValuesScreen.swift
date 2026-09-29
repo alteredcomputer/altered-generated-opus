@@ -133,6 +133,7 @@ struct FieldEditor: View {
         }
         .padding(.horizontal, metrics.px)
         .padding(.vertical, metrics.py * 1.5)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("field.\(field.name)")
     }
 

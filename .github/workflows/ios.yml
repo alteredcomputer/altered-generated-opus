@@ -76,7 +76,7 @@ jobs:
                     CODE_SIGNING_ALLOWED=NO \
                     > build/xcodebuild.log 2>&1
                   STATUS=$?
-                  grep -E "error:|warning: .*/apps/ios/Altered|Test (Case|Suite) .*(passed|failed)|\*\* (BUILD|TEST) " build/xcodebuild.log | tail -400
+                  grep -E "error:|warning: .*/apps/ios/Altered|Test ([Cc]ase|Suite) .*(passed|failed)|\*\* (BUILD|TEST) " build/xcodebuild.log | tail -400
                   exit $STATUS
 
             - name: Export screenshots

@@ -208,10 +208,13 @@ struct Heading: View {
     var body: some View {
         HStack(alignment: .firstTextBaseline, spacing: metrics.ch) {
             Text(String(repeating: "#", count: level)).styled(.faint, scale: level == 1 ? 1.15 : 1)
+                .accessibilityHidden(true)
             Text(text).styled(dim ? .dim : .strong, scale: level == 1 ? 1.15 : 1)
                 .fixedSize(horizontal: false, vertical: true)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .accessibilityElement(children: .combine)
+        .accessibilityAddTraits(.isHeader)
     }
 }
 

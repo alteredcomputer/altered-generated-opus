@@ -33,6 +33,13 @@ final class AlteredUITests: XCTestCase {
 
     var keyboard: XCUIElement { app.keyboards.firstMatch }
 
+    /// The keyboard's top edge as UIKit reports it to the app. It includes the suggestion strip,
+    /// which XCUITest's keyboard element leaves out, so layouts are measured against this.
+    var keyboardTop: CGFloat {
+        let overlap = Double(el("probe.keyboard").label) ?? 0
+        return app.windows.firstMatch.frame.maxY - CGFloat(overlap)
+    }
+
     func waitForKeyboard(_ visible: Bool, timeout: TimeInterval = 5) {
         let predicate = NSPredicate(format: "exists == %@", NSNumber(value: visible))
         let expectation = XCTNSPredicateExpectation(predicate: predicate, object: keyboard)
@@ -65,8 +72,8 @@ final class AlteredUITests: XCTestCase {
         waitForKeyboard(true)
 
         let bar = el("searchbar").frame
-        let top = keyboard.frame.minY
-        XCTAssertEqual(bar.maxY, top, accuracy: 2, "search bar should sit on the keyboard")
+        XCTAssertEqual(bar.maxY, keyboardTop, accuracy: 2, "search bar should sit on the keyboard")
+        XCTAssertLessThanOrEqual(bar.maxY, keyboard.frame.minY + 1, "search bar must not be covered by keys")
         XCTAssertEqual(tabbar.frame.minY, before.minY, accuracy: 1, "tab bar should stay under the keyboard")
         XCTAssertTrue(el("token.#questions").exists, "query tokens show while searching")
         snap("02 search with keyboard")
@@ -123,9 +130,8 @@ final class AlteredUITests: XCTestCase {
 
         let toolbar = el("composer.toolbar").frame
         let editor = el("editor.content").frame
-        let top = keyboard.frame.minY
-        XCTAssertLessThanOrEqual(toolbar.maxY, top + 1, "toolbar must sit on or above the keyboard")
-        XCTAssertGreaterThan(toolbar.maxY, top - 4, "toolbar must sit right on the keyboard, not float")
+        XCTAssertEqual(toolbar.maxY, keyboardTop, accuracy: 2, "toolbar must sit right on the keyboard")
+        XCTAssertLessThanOrEqual(toolbar.maxY, keyboard.frame.minY + 1, "toolbar must not be covered by keys")
         XCTAssertLessThanOrEqual(editor.maxY, toolbar.minY + 1, "editor must end above the toolbar")
         XCTAssertEqual(el("probe.caret").label, "yes", "caret must be visible after typing past the fold")
         snap("06 composer with keyboard")
@@ -167,6 +173,10 @@ final class AlteredUITests: XCTestCase {
     }
 
     func testRejectedChangesRollBack() {
+        // A long latency, so the in-flight state is still showing when the test looks.
+        app.terminate()
+        app.launchArguments = ["-uitest", "-latency", "4000"]
+        app.launch()
         tap("tab.sys")
         for _ in 0..<3 { tap("setting.failures") }
         XCTAssertTrue(el("setting.failures").label.contains("100%"))
@@ -177,9 +187,9 @@ final class AlteredUITests: XCTestCase {
         XCTAssertTrue(row.waitForExistence(timeout: 3))
         row.swipeLeft()
         tap("Pin", timeout: 3)
-        XCTAssertTrue(el("sync").waitForExistence(timeout: 2), "the outbox shows while the change is in flight")
+        XCTAssertTrue(el("sync").waitForExistence(timeout: 3), "the outbox shows while the change is in flight")
         snap("10 pending change")
-        waitForToast(containing: "Rolled back")
+        waitForToast(containing: "Rolled back", timeout: 10)
         XCTAssertFalse(el("sync").exists, "nothing left in the outbox")
     }
 

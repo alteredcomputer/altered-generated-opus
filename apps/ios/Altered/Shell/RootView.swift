@@ -11,19 +11,21 @@ struct RootView: View {
             Theme.bg.ignoresSafeArea()
             ForEach(Tab.allCases) { tab in
                 let active = app.router.tab == tab
+                // The active tab is drawn on top, so the hidden ones can never sit in its way.
                 TabStack(tab: tab)
                     .opacity(active ? 1 : 0)
+                    .zIndex(active ? 1 : 0)
                     .allowsHitTesting(active)
                     .accessibilityHidden(!active)
             }
             if let toast = app.toast {
-                ToastView(toast: toast)
+                ToastView(toast: toast).zIndex(2)
             }
             if let panel = app.panel {
-                PanelView(panel: panel).id(panel.id)
+                PanelView(panel: panel).id(panel.id).zIndex(3)
             }
             if app.testing {
-                Probes()
+                Probes().zIndex(4)
             }
         }
         .tint(Theme.accent)
