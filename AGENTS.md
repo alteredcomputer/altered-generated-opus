@@ -80,6 +80,11 @@ Reads are allowed.
 - **Merge to `main` yourself with plain git.** Do not use the pull request tooling; it asks the
   owner for approval, which defeats the point. `git checkout main && git merge --no-ff <branch> &&
   git push origin main`.
+- **Claude Code sessions (D151):** the same rules, with the session's own branch. Claude Code pins
+  each session to a `claude/...` branch; work there, then merge to `main` with plain git the same
+  way (`git fetch origin main`, merge `origin/main` into the branch, `git checkout main && git
+  reset --hard origin/main && git merge --no-ff <branch> && git push origin main`). No pull
+  request. `CLAUDE.md` exists only to point Claude Code at this file.
 
 ### Secrets
 
