@@ -36,42 +36,14 @@ const nodes = defineNodes([
         parent: "governance",
         title: "Knowledge base",
         description:
-            "The durable memory of the project: locked decisions with their reasoning, the open-question register, the owner's compass and macro plan, the direction record, guardrails and resource inventory, prior-art failures to avoid, and the resume file. Written so a restarted session loses nothing.",
-        sources: ["knowledge/*.md", "README.md"],
+            "The durable memory of the project: locked decisions with their reasoning, the open-question register, the owner's compass and macro plan, the direction record, guardrails and resource inventory, prior-art failures to avoid, the resume file, the execution plans, and verbatim source archives. Private since D158: it lives in alteredcomputer/altered-generated-kb, and this public repository holds only the README pointing at it and the feature graph. Written so a restarted session loses nothing.",
+        sources: ["README.md", "knowledge/feature-graph.md"],
         status: "done",
         data: {
             quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true },
             docs: {
                 title: "Knowledge base",
                 description: "Decisions, constraints, open questions, prior art, and current state."
-            }
-        }
-    },
-    {
-        id: "governance-source-archive",
-        parent: "governance",
-        title: "Source archive",
-        description:
-            "Verbatim records of the conversations the knowledge base distils from, preserved unaltered so no derivation loses its evidence. Content rules that apply to authored copy deliberately do not apply here.",
-        sources: ["knowledge/sources/**"],
-        relations: [{ type: "uses", to: "governance-knowledge-base" }],
-        status: "done",
-        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true } }
-    },
-    {
-        id: "governance-plans",
-        parent: "governance",
-        title: "Execution plans",
-        description:
-            "End-to-end plans, one per workstream, plus a master file carrying order and status. Written so a fresh agent can execute a plan from the file alone when the owner opens a chat and says next or finish. Executing agents append dated notes and update status in place.",
-        sources: ["knowledge/plans/**"],
-        relations: [{ type: "uses", to: "governance-knowledge-base" }],
-        status: "done",
-        data: {
-            quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: true },
-            docs: {
-                title: "Plans",
-                description: "The protocol for picking up a plan, the order, and the daily KPI log."
             }
         }
     },
@@ -466,7 +438,7 @@ const nodes = defineNodes([
 
     //  === Planned workstreams ===
     //
-    //  One root per plan in knowledge/plans. Each plan names the child nodes it will add when it
+    //  One root per plan in the private knowledge base (plans/). Each plan names the child nodes it will add when it
     //  is executed; until then the root carries the contract so the graph and the plans agree.
 
     {

@@ -3,6 +3,21 @@
 This repo is built and maintained entirely by AI agents in Cursor cloud sessions. The owner does not
 touch git, pull requests, or code. Assume you are a fresh agent with no memory of prior turns.
 
+## The knowledge base is private: fetch it first (D158, D164)
+
+Everything this contract calls `knowledge/<file>`, except `knowledge/feature-graph.md`, lives at
+the root of the private repository `alteredcomputer/altered-generated-kb` (for example
+`knowledge/state.md` means `state.md` there). **Before planning or executing any work in this
+repository, fetch that repository and read it.**
+
+- **Claude Code:** attach it to the session (add_repo, push access), clone it beside this repo,
+  read its `state.md` and `decisions.md`. The session's git proxy reaches only attached repos.
+- **Cursor:** clone it with the `READ_ONLY__GITHUB_TOKEN` environment token.
+- Knowledge changes are committed and pushed there, straight to `main`, in the same turn as the
+  code change here.
+- **Nothing private is ever committed here.** This repository is public: no decisions, strategy,
+  finances, archives, prospects, or names of private people. Code comments may cite decision ids.
+
 ## Read this first, every session
 
 1. `knowledge/state.md` - where the project stands and what to do next.

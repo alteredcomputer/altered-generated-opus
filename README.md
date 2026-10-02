@@ -3,16 +3,6 @@
 The generated go-to-market system for ALTERED: content, leads, sales, and the operator surfaces
 around them.
 
-This repository is built and maintained by AI agents. Start with `AGENTS.md`, then `knowledge/`.
-
-| File | Purpose |
-| --- | --- |
-| `AGENTS.md` | The operating contract every agent session follows |
-| `knowledge/state.md` | Where the project stands and what to do next |
-| `knowledge/decisions.md` | Locked decisions, with reasoning and cost to re-open |
-| `knowledge/open-questions.md` | What is still unresolved, in dependency order |
-| `knowledge/plans/` | End-to-end execution plans, one chat each, with order and status |
-| `knowledge/constraints.md` | Guardrails, approvals, and the resource inventory |
-| `knowledge/prior-art.md` | What to inherit from earlier attempts, and what to avoid |
-
-Scope is still being confirmed with the owner and this description will be corrected once it is.
+This repository is built and maintained by AI agents. Start with `AGENTS.md`. The knowledge base
+(decisions, state, plans) is private, in `alteredcomputer/altered-generated-kb`; only the feature
+graph (`knowledge/feature-graph.md`, `packages/graph`) lives here.
