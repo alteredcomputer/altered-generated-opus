@@ -71,6 +71,7 @@ export function DatasetPicker({ title, initial, onConfirm }: DatasetPickerProps)
     return (
         <Frame
             title={title}
+            count={{ total: rows.length - (canCreate ? 1 : 0) }}
             status={`${chosen.length} chosen`}
             search={{
                 value: query,
@@ -88,7 +89,6 @@ export function DatasetPicker({ title, initial, onConfirm }: DatasetPickerProps)
             <List
                 items={rows}
                 getId={row => row.id}
-                section="Datasets"
                 empty="Type a name to create a dataset."
                 cursor={list.cursor}
                 selected={[]}

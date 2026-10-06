@@ -222,6 +222,7 @@ export function ThoughtsList({ datasetId = null }: { datasetId?: string | null }
     return (
         <Frame
             title="View Thoughts"
+            count={{ total: visible.length, selected: list.selected.length }}
             status={activeFilter ? `in ${filterLabel}` : ""}
             search={{ value: query, onChange: setQuery, placeholder: "Search thoughts..." }}
             accessory={
@@ -242,7 +243,6 @@ export function ThoughtsList({ datasetId = null }: { datasetId?: string | null }
             <List
                 items={visible}
                 getId={thought => thought.id}
-                section={filterLabel ?? "Thoughts"}
                 empty={
                     query ? "No thoughts match." : "No thoughts yet. Press Ctrl-N to capture one."
                 }

@@ -39,5 +39,7 @@ export default defineConfig({
             workbox: { globPatterns: ["**/*.{js,css,html,svg,png,woff2}"] }
         })
     ],
+    //  Maps styles inspected in devtools back to their source file and line.
+    css: { devSourcemap: true },
     test: { include: ["src/**/*.test.ts"] }
 })

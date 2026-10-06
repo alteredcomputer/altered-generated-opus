@@ -1,30 +1,43 @@
 /*
-    The visual system, sampled from the Koa page screenshot the owner supplied: #101010 ground,
-    #b3b3b3 body text, #ffffff for anything that is a name or a heading, one orange (#ef8733) for
-    focus and emphasis, and Geist Mono at a single 14px size on the page's 5:3 line height.
-    Markdown marks (#, ---, [x], backticks) take --fg-faint so they recede behind the words they
-    mark. No radius anywhere; separation is by hairline and by weight, never by size.
+    The visual system: a monochrome, TUI-style ramp on a #101010 ground. Grays step by lightness
+    (100, 75, 50, 25 percent for text; 1/16, 3/32, 1/8 for surfaces), every panel shares one
+    background, and colour is reserved for marketing surfaces. Spacing is in ch so the layout sits
+    on the monospace grid. Geist Mono at 13px on a 2.5ch (about 1.5) line height. Markdown marks
+    (#, ---, [x], backticks) take --fg-faint so they recede behind the words they mark. No radius
+    and no shadow anywhere; separation is by hairline and by weight, never by size.
 */
 
 :root {
     color-scheme: dark;
 
     --font-mono: "Geist Mono Variable", ui-monospace, monospace;
-    --size: 14px;
-    --line: calc(var(--size) * 5 / 3);
+    --font-glyphs: system-ui, sans-serif;
+    --size: 13px;
+    --line: 2.5ch;
 
-    --bg: #101010;
-    --bg-raised: #161616;
-    --bg-cursor: #242424;
-    --bg-chip: #1f1f1f;
-    --rule: #262626;
+    --gray-6: #101010;
+    --gray-9: #181818;
+    --gray-12: #202020;
+    --gray-25: #404040;
+    --gray-50: #808080;
+    --gray-75: #bfbfbf;
+    --gray-100: #ffffff;
 
-    --fg: #ffffff;
-    --fg-muted: #b3b3b3;
-    --fg-faint: #6e6e6e;
+    --bg: var(--gray-6);
+    --bg-hover: var(--gray-9);
+    --bg-cursor: var(--gray-12);
+    --bg-chip: var(--gray-12);
 
-    --accent: #ef8733;
-    --danger: #ff5f57;
+    --fg: var(--gray-100);
+    --fg-muted: var(--gray-50);
+    --fg-faint: var(--gray-25);
+
+    --accent: var(--gray-75);
+    --danger: var(--fg-muted);
+
+    --rule: var(--gray-12);
+    --rule-width: 1px;
+    --border: var(--rule-width) solid var(--rule);
 }
 
 * {
@@ -79,6 +92,12 @@ button {
     cursor: pointer;
 }
 
+input,
+textarea {
+    caret-color: var(--accent);
+    caret-shape: block;
+}
+
 input::placeholder,
 textarea::placeholder {
     color: var(--fg-faint);
@@ -107,16 +126,23 @@ textarea::placeholder {
 
 .keys {
     display: inline-flex;
-    gap: 2px;
+    align-items: center;
+    gap: 0.5ch;
     margin-left: 1ch;
 }
 
+/* Transparent, so a key always matches the row or button it sits on, hovered or not. */
 kbd {
-    font: inherit;
-    min-width: 2.4ch;
-    padding: 0 0.5ch;
-    text-align: center;
-    background: var(--bg-chip);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3ch;
+    min-height: 3ch;
+    font-family: var(--font-glyphs);
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    border: 1px solid var(--rule);
     color: var(--fg-muted);
 }
 

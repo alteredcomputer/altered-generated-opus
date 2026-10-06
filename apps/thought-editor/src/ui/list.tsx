@@ -6,7 +6,6 @@ type ClickModifiers = { shiftKey: boolean; metaKey: boolean; ctrlKey: boolean }
 type ListProps<T> = {
     items: T[]
     getId: (item: T) => string
-    section: string
     empty: string
     cursor: string | null
     selected: string[]
@@ -23,7 +22,7 @@ type ListProps<T> = {
  * is selected every row shows a markdown checkbox, which is the only selection affordance.
  */
 export function List<T>(props: ListProps<T>) {
-    const { items, getId, section, empty, cursor, selected, inspector, inspectorWidth } = props
+    const { items, getId, empty, cursor, selected, inspector, inspectorWidth } = props
     const listRef = useRef<HTMLDivElement>(null)
     const selecting = selected.length > 0
 
@@ -37,12 +36,6 @@ export function List<T>(props: ListProps<T>) {
     return (
         <div className="split">
             <div className="list" ref={listRef} role="listbox">
-                <p className="list-section">
-                    <span>{section}</span>
-                    <span className="faint">
-                        {selecting ? `${selected.length} of ${items.length}` : items.length}
-                    </span>
-                </p>
                 {items.length === 0 && <p className="list-empty">{empty}</p>}
                 {items.map(item => {
                     const id = getId(item)
