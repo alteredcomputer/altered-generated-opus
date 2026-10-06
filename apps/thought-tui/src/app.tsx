@@ -1,18 +1,28 @@
+import { UiProvider, useUi } from "./config/provider.tsx"
+import type { Config } from "./config/schema.ts"
 import { StoreProvider } from "./data/store.tsx"
 import { ConfirmHost } from "./shell/confirm.tsx"
 import { KeyRouter } from "./shell/keyboard.ts"
 import { Navigator } from "./shell/navigation.tsx"
-import { color } from "./ui/theme.ts"
 import { ThoughtsList } from "./views/thoughts/list.tsx"
 
-export function App() {
+export function App({ config }: { config: Config }) {
     return (
-        <StoreProvider>
-            <KeyRouter />
-            <box flexGrow={1} backgroundColor={color.bg}>
-                <Navigator root={<ThoughtsList />} />
-                <ConfirmHost />
-            </box>
-        </StoreProvider>
+        <UiProvider initial={config}>
+            <StoreProvider>
+                <KeyRouter />
+                <Ground />
+            </StoreProvider>
+        </UiProvider>
+    )
+}
+
+function Ground() {
+    const { colors } = useUi()
+    return (
+        <box flexGrow={1} backgroundColor={colors.bg}>
+            <Navigator root={<ThoughtsList />} />
+            <ConfirmHost />
+        </box>
     )
 }

@@ -994,11 +994,12 @@ const nodes = defineNodes([
         id: "thought-tui",
         title: "Thought editor TUI",
         description:
-            "A terminal edition of the thought editor, to measure whether a TUI means less code to own than the web editor (D173). OpenTUI with its React renderer on Bun, the D172 gray ramp in truecolor, vim-style keys. An in-memory demo seeded with the web editor's 25 thoughts; nothing is saved. Generated and disclosed as such.",
+            "A terminal edition of the thought editor (D173, D174), the editor he leans toward prototyping first. OpenTUI with its React renderer on Bun; app-style keys with an always-focused search; a hot-reloaded settings file for visual experiments. An in-memory demo seeded with the web editor's thoughts; nothing is saved. Generated and disclosed as such.",
         sources: [
             "apps/thought-tui/package.json",
             "apps/thought-tui/tsconfig.json",
             "apps/thought-tui/README.md",
+            "apps/thought-tui/tui.config.ts",
             "apps/thought-tui/src/main.tsx",
             "apps/thought-tui/src/app.tsx",
             "apps/thought-tui/src/observability/**"
@@ -1006,6 +1007,16 @@ const nodes = defineNodes([
         relations: [{ type: "uses", to: "thought-editor" }],
         status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+    {
+        id: "thought-tui-config",
+        parent: "thought-tui",
+        title: "Live settings and theme",
+        description:
+            "Every visual setting with its default and validation, the settings file reloaded on save (a bad value is refused with a toast), and the colours: the D172 ramp in dark or light, or the terminal's own palette with a transparent ground, plus the sparse #ff8000 attention colour.",
+        sources: ["apps/thought-tui/src/config/**"],
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
         id: "thought-tui-store",
@@ -1022,7 +1033,7 @@ const nodes = defineNodes([
         parent: "thought-tui",
         title: "Terminal shell",
         description:
-            "A stack of key layers so exactly one surface owns the keyboard, the view stack, the frame (search header, body, footer with count or toast and key-capped actions), the type-to-search palette behind the action menu, filter, and help, confirmations, list cursor and selection, and end-ellipsis row fitting (OpenTUI's own truncation elides the middle).",
+            "Key layers so exactly one surface owns the keyboard, the view stack, the frame (ALTERED bar with the account menu, always-focused search and view selector, clickable status bar with activity glyph and braille-animated toasts), the bottom-anchored action menu, the keyboard map, confirmations, overlays that close on an outside click, the list with selection boxes and drag, range, and gap selection, a native-feeling text field, and end-ellipsis row fitting.",
         sources: ["apps/thought-tui/src/shell/**", "apps/thought-tui/src/ui/**"],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
@@ -1032,11 +1043,12 @@ const nodes = defineNodes([
         parent: "thought-tui",
         title: "Views",
         description:
-            "The thoughts list with its markdown inspector and dataset filter, the vim-modal thought form (alias, content, datasets, attributes with schemas), the dataset picker, and the datasets list.",
+            "The thoughts list with its uniform attribute inspector and view picker, the app-style thought form (alias, content, typed datasets with suggestions and background validation, attributes from the datasets with validation errors), the dataset picker, and the datasets list.",
         sources: ["apps/thought-tui/src/views/**"],
         relations: [
             { type: "uses", to: "thought-tui-store" },
-            { type: "uses", to: "thought-tui-shell" }
+            { type: "uses", to: "thought-tui-shell" },
+            { type: "uses", to: "thought-tui-config" }
         ],
         status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }

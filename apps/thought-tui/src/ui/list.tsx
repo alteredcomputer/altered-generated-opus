@@ -1,6 +1,7 @@
 import type { ScrollBoxRenderable } from "@opentui/core"
 import { type ReactNode, useEffect, useId, useRef, useState } from "react"
-import { color, inset } from "./theme.ts"
+import { useUi } from "../config/provider.tsx"
+import { inset } from "./theme.ts"
 
 type ListProps<T> = {
     items: T[]
@@ -10,26 +11,33 @@ type ListProps<T> = {
     empty: string
     /** The list's width in cells, so rows can trim their text to fit (see ui/text.ts). */
     width: number
+    /** Show the selection boxes (only while something is selected). */
+    selecting: boolean
     renderRow: (item: T, active: boolean, cells: number) => ReactNode
     onCursor: (id: string) => void
+    onToggle: (id: string) => void
     onActivate: (id: string) => void
 }
 
 const DOUBLE_CLICK_MS = 400
+/** "[×]" and two spaces. */
+const BOX = 5
 
 /**
  * Rows edge to edge on one ground: the cursor row takes the cursor gray, a hovered row the hover
- * gray, and a selected row a dot in the gutter. Scrolls to keep the cursor in view; the mouse can
- * click to move, double-click to open, and wheel to scroll.
+ * gray. While anything is selected every row grows a `[×]` or `[ ]` box and shifts right; with
+ * nothing selected the rows sit at the plain inset. `list.gap` puts blank rows between rows as
+ * margins, so the cursor and the mouse never land on them. Click moves the cursor, a click on the
+ * box toggles, a double-click opens, the wheel scrolls.
  */
 export function List<T>(props: ListProps<T>) {
-    const { cursor, getId } = props
+    const { cursor, getId, selecting } = props
+    const { config, colors } = useUi()
     const scroll = useRef<ScrollBoxRenderable>(null)
     const [hovered, setHovered] = useState<string | null>(null)
     const lastClick = useRef({ id: "", at: 0 })
     const prefix = useId()
-    // Gutter cell, marker and its space, and the right inset.
-    const cells = props.width - 3 - inset
+    const cells = props.width - 2 * inset - (selecting ? BOX : 0)
 
     useEffect(() => {
         if (cursor) scroll.current?.scrollChildIntoView(`${prefix}${cursor}`)
@@ -38,7 +46,7 @@ export function List<T>(props: ListProps<T>) {
     if (props.items.length === 0)
         return (
             <box width={props.width} paddingX={inset} paddingY={1}>
-                <text fg={color.fgFaint}>{props.empty}</text>
+                <text fg={colors.fgFaint}>{props.empty}</text>
             </box>
         )
 
@@ -49,18 +57,20 @@ export function List<T>(props: ListProps<T>) {
             paddingY={1}
             verticalScrollbarOptions={{ visible: false }}
         >
-            {props.items.map(item => {
+            {props.items.map((item, i) => {
                 const id = getId(item)
                 const active = id === cursor
+                const on = props.selected.includes(id)
                 return (
                     <box
                         key={id}
                         id={`${prefix}${id}`}
                         flexDirection="row"
-                        paddingLeft={1}
-                        paddingRight={inset}
+                        flexShrink={0}
+                        paddingX={inset}
+                        marginBottom={i < props.items.length - 1 ? config.list.gap : 0}
                         backgroundColor={
-                            active ? color.bgCursor : id === hovered ? color.bgHover : color.bg
+                            active ? colors.bgCursor : id === hovered ? colors.bgHover : colors.bg
                         }
                         onMouseOver={() => setHovered(id)}
                         onMouseOut={() => setHovered(current => (current === id ? null : current))}
@@ -74,9 +84,22 @@ export function List<T>(props: ListProps<T>) {
                             else props.onCursor(id)
                         }}
                     >
-                        <text flexShrink={0} fg={color.accent}>
-                            {props.selected.includes(id) ? "● " : "  "}
-                        </text>
+                        {selecting && (
+                            <box
+                                flexShrink={0}
+                                width={BOX}
+                                onMouseDown={event => {
+                                    event.stopPropagation()
+                                    props.onToggle(id)
+                                }}
+                            >
+                                <text>
+                                    <span fg={colors.fgFaint}>[</span>
+                                    <span fg={colors.fg}>{on ? config.selection.mark : " "}</span>
+                                    <span fg={colors.fgFaint}>]</span>
+                                </text>
+                            </box>
+                        )}
                         {props.renderRow(item, active, cells)}
                     </box>
                 )
