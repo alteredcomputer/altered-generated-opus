@@ -1,0 +1,21 @@
+{
+    "name": "@opus/thought-tui",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "bun src/main.tsx",
+        "check:types": "tsc --noEmit",
+        "check:tests": "bun test src"
+    },
+    "dependencies": {
+        "@opentui/core": "0.5.14",
+        "@opentui/react": "0.5.14",
+        "react": "19.2.8"
+    },
+    "devDependencies": {
+        "@types/bun": "1.4.2",
+        "@types/react": "19.2.18",
+        "typescript": "catalog:"
+    }
+}

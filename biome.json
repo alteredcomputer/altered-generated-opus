@@ -32,9 +32,21 @@
             "style": {
                 "useConsistentTypeDefinitions": {
                     "level": "error",
-                    "options": { "style": "type" }
+                    "options": {
+                        "style": "type"
+                    }
                 }
             }
         }
-    }
+    },
+    "overrides": [
+        {
+            "includes": ["apps/thought-tui/**"],
+            "linter": {
+                "rules": {
+                    "a11y": "off"
+                }
+            }
+        }
+    ]
 }

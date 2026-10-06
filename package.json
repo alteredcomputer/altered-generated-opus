@@ -16,7 +16,8 @@
         "check:graph": "pnpm --filter @opus/graph run check",
         "fix:style": "biome check --write .",
         "db": "pnpm --silent --filter @opus/db run cli",
-        "koa": "pnpm --silent --filter @opus/koa run cli"
+        "koa": "pnpm --silent --filter @opus/koa run cli",
+        "tui": "pnpm --silent --filter @opus/thought-tui run start"
     },
     "devDependencies": {
         "@biomejs/biome": "2.5.8",
