@@ -988,6 +988,60 @@ const nodes = defineNodes([
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
     },
 
+    //  === Thought editor TUI ===
+
+    {
+        id: "thought-tui",
+        title: "Thought editor TUI",
+        description:
+            "A terminal edition of the thought editor, to measure whether a TUI means less code to own than the web editor (D173). OpenTUI with its React renderer on Bun, the D172 gray ramp in truecolor, vim-style keys. An in-memory demo seeded with the web editor's 25 thoughts; nothing is saved. Generated and disclosed as such.",
+        sources: [
+            "apps/thought-tui/package.json",
+            "apps/thought-tui/tsconfig.json",
+            "apps/thought-tui/README.md",
+            "apps/thought-tui/src/main.tsx",
+            "apps/thought-tui/src/app.tsx",
+            "apps/thought-tui/src/observability/**"
+        ],
+        relations: [{ type: "uses", to: "thought-editor" }],
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+    {
+        id: "thought-tui-store",
+        parent: "thought-tui",
+        title: "In-memory store",
+        description:
+            "The web editor's model, seed, and search, copied unchanged, plus pure snapshot-to-snapshot writes and one React state holding the snapshot. Relaunching reseeds.",
+        sources: ["apps/thought-tui/src/data/**"],
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "thought-tui-shell",
+        parent: "thought-tui",
+        title: "Terminal shell",
+        description:
+            "A stack of key layers so exactly one surface owns the keyboard, the view stack, the frame (search header, body, footer with count or toast and key-capped actions), the type-to-search palette behind the action menu, filter, and help, confirmations, list cursor and selection, and end-ellipsis row fitting (OpenTUI's own truncation elides the middle).",
+        sources: ["apps/thought-tui/src/shell/**", "apps/thought-tui/src/ui/**"],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
+    },
+    {
+        id: "thought-tui-views",
+        parent: "thought-tui",
+        title: "Views",
+        description:
+            "The thoughts list with its markdown inspector and dataset filter, the vim-modal thought form (alias, content, datasets, attributes with schemas), the dataset picker, and the datasets list.",
+        sources: ["apps/thought-tui/src/views/**"],
+        relations: [
+            { type: "uses", to: "thought-tui-store" },
+            { type: "uses", to: "thought-tui-shell" }
+        ],
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
+    },
+
     //  === iPhone editor prototype ===
 
     {
