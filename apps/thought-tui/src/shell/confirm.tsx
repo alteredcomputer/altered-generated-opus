@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react"
-import { color, inset } from "../ui/theme.ts"
-import { Caps } from "./caps.tsx"
+import { useUi } from "../config/provider.tsx"
+import { inset } from "../ui/theme.ts"
 import { useKeyLayer } from "./keyboard.ts"
 import { Overlay } from "./overlay.tsx"
 
@@ -34,6 +34,7 @@ export function ConfirmHost() {
 }
 
 function ConfirmDialog({ request }: { request: Request }) {
+    const { colors } = useUi()
     const answer = (ok: boolean) => {
         set(null)
         request.resolve(ok)
@@ -41,20 +42,34 @@ function ConfirmDialog({ request }: { request: Request }) {
 
     useKeyLayer(event => {
         if (event.name === "y" || event.name === "return") answer(true)
-        else if (event.name === "n" || event.name === "escape" || event.name === "q") answer(false)
+        else if (event.name === "n" || event.name === "escape") answer(false)
         return true
     })
 
     return (
-        <Overlay width={52} top={8}>
-            <box paddingX={inset - 1} paddingY={1} flexDirection="column" gap={1}>
-                <text fg={color.fg}>
+        <Overlay width={56} height={9} onClose={() => answer(false)}>
+            <box paddingX={inset} paddingY={1} flexDirection="column" gap={1}>
+                <text fg={colors.fg}>
                     <strong>{request.title}</strong>
                 </text>
-                <text fg={color.fgMuted}>{request.message}</text>
+                <text fg={colors.fgMuted}>{request.message}</text>
                 <box flexDirection="row" gap={3}>
-                    <Caps title={request.confirmLabel} keys="y" strong />
-                    <Caps title="Cancel" keys="n" />
+                    <box onMouseDown={() => answer(true)}>
+                        <text>
+                            <span fg={colors.attention}>{`${request.confirmLabel} `}</span>
+                            <span fg={colors.fgMuted} bg={colors.bgCursor}>
+                                {" Y "}
+                            </span>
+                        </text>
+                    </box>
+                    <box onMouseDown={() => answer(false)}>
+                        <text>
+                            <span fg={colors.fgMuted}>{"Cancel "}</span>
+                            <span fg={colors.fgMuted} bg={colors.bgCursor}>
+                                {" N "}
+                            </span>
+                        </text>
+                    </box>
                 </box>
             </box>
         </Overlay>

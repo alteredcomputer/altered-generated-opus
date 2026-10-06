@@ -7,14 +7,41 @@ type SeedThought = {
     attributes?: Record<string, string>
 }
 
-const datasetSeeds = [
-    { alias: "tenets", description: "Principles to reread daily.", schemas: ["source"] },
-    { alias: "decisions", description: "Locked calls and why.", schemas: ["status", "decided"] },
-    { alias: "koa", description: "The iMessage agent.", schemas: ["phase"] },
-    { alias: "marketing", description: "Offer, copy, and channels.", schemas: [] },
-    { alias: "questions", description: "Open questions still unanswered.", schemas: [] },
-    { alias: "ideas", description: "Unfiled sparks.", schemas: [] }
+type SeedSchema = { name: string; description: string; type?: Schema["type"] }
+
+/** Dataset names are title case and plural (D174); so are attribute names, in title case. */
+const datasetSeeds: { alias: string; description: string; schemas: SeedSchema[] }[] = [
+    {
+        alias: "Tenets",
+        description: "Principles to reread daily.",
+        schemas: [{ name: "Source", description: "Where this tenet came from" }]
+    },
+    {
+        alias: "Decisions",
+        description: "Locked calls and why.",
+        schemas: [
+            { name: "Status", description: "Locked, prototype, or open" },
+            { name: "Decided", description: "The day it was decided", type: "date" }
+        ]
+    },
+    {
+        alias: "Koa Features",
+        description: "What the iMessage agent does.",
+        schemas: [{ name: "Phase", description: "The plan 08 phase that ships it" }]
+    },
+    { alias: "Marketing Notes", description: "Offer, copy, and channels.", schemas: [] },
+    { alias: "Questions", description: "Open questions still unanswered.", schemas: [] },
+    { alias: "Ideas", description: "Unfiled sparks.", schemas: [] }
 ]
+
+const names: Record<string, string> = {
+    tenets: "Tenets",
+    decisions: "Decisions",
+    koa: "Koa Features",
+    marketing: "Marketing Notes",
+    questions: "Questions",
+    ideas: "Ideas"
+}
 
 const thoughtSeeds: SeedThought[] = [
     {
@@ -168,12 +195,12 @@ export const seed = (now = Date.now()): Snapshot => {
             updatedAt: createdAt
         }
         datasets.push(dataset)
-        for (const name of entry.schemas)
-            schemas.push({ id: newId(), datasetId: dataset.id, name, type: "text", createdAt })
+        for (const schema of entry.schemas)
+            schemas.push({ id: newId(), datasetId: dataset.id, type: "text", createdAt, ...schema })
     }
 
     const datasetId = (alias: string) => {
-        const id = datasets.find(d => d.alias === alias)?.id
+        const id = datasets.find(d => d.alias === names[alias])?.id
         if (!id) throw new Error(`Seed thought names an unknown dataset: ${alias}`)
         return id
     }
@@ -187,15 +214,20 @@ export const seed = (now = Date.now()): Snapshot => {
             alias: entry.alias ?? null,
             content: entry.content,
             datasetIds: ids,
-            attributes: Object.entries(entry.attributes ?? {}).map(([name, value]) => ({
-                id: newId(),
-                name,
-                value,
-                schemaId:
-                    schemas.find(s => s.name === name && ids.includes(s.datasetId))?.id ?? null
-            })),
-            createdAt,
-            updatedAt: createdAt
+            attributes: Object.entries(entry.attributes ?? {}).map(([key, value]) => {
+                const name = key.charAt(0).toUpperCase() + key.slice(1)
+                return {
+                    id: newId(),
+                    name,
+                    value,
+                    schemaId:
+                        schemas.find(s => s.name === name && ids.includes(s.datasetId))?.id ?? null
+                }
+            }),
+            // Some thoughts predate ALTERED (an imported note), so created can be well before added.
+            createdAt: createdAt - (index % 3) * 40 * DAY,
+            updatedAt: createdAt + (index % 4) * 3_600_000,
+            addedAt: createdAt
         }
     })
 

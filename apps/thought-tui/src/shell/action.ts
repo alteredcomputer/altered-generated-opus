@@ -6,5 +6,7 @@ export type Action = {
     title: string
     section: string
     shortcut?: Shortcut
+    /** Drawn in the attention colour: irreversible. */
+    danger?: boolean
     run: () => void
 }

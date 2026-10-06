@@ -1,4 +1,4 @@
-import { newId, type Snapshot, type Thought } from "./model.ts"
+import { type Dataset, newId, type Snapshot, type Thought } from "./model.ts"
 
 /**
  * Every write is a pure function from one snapshot to the next. The store keeps snapshots in memory
@@ -25,7 +25,7 @@ export const saveThought = (
 
     const thought: Thought = existing
         ? { ...existing, ...clean, updatedAt: now }
-        : { id: newId(), ...clean, createdAt: now, updatedAt: now }
+        : { id: newId(), ...clean, createdAt: now, updatedAt: now, addedAt: now }
 
     const thoughts = existing
         ? snapshot.thoughts.map(t => (t.id === thought.id ? thought : t))
@@ -88,3 +88,18 @@ export const detachSchemas = (
             ? { ...attribute, schemaId: null }
             : attribute
     })
+
+/** A new, empty dataset. Names are unique, case-insensitively, and cannot hold commas. */
+export const createDataset = (
+    snapshot: Snapshot,
+    alias: string,
+    now = Date.now()
+): { snapshot: Snapshot; dataset: Dataset } => {
+    const name = alias.trim()
+    if (!name || name.includes(","))
+        throw new Error("A dataset name cannot be empty or hold a comma.")
+    if (snapshot.datasets.some(d => d.alias.toLowerCase() === name.toLowerCase()))
+        throw new Error(`"${name}" already exists.`)
+    const dataset = { id: newId(), alias: name, description: "", createdAt: now, updatedAt: now }
+    return { snapshot: { ...snapshot, datasets: [...snapshot.datasets, dataset] }, dataset }
+}

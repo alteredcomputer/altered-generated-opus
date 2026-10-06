@@ -1,29 +1,89 @@
-/**
- * The D172 visual system in truecolor: a monochrome ramp stepped by lightness, one ground for every
- * panel, hairlines at the cursor gray. Text at 100, 75, 50, and 25 percent; surfaces at 1/16, 3/32,
- * and 1/8. Colour is reserved for marketing surfaces, so there is none here.
- */
-export const gray = {
-    6: "#101010",
-    9: "#181818",
-    12: "#202020",
-    25: "#404040",
-    50: "#808080",
-    75: "#bfbfbf",
-    100: "#ffffff"
-} as const
+import type { TerminalColors } from "@opentui/core"
 
-export const color = {
-    bg: gray[6],
-    bgHover: gray[9],
-    bgCursor: gray[12],
-    bgChip: gray[12],
-    fg: gray[100],
-    fgMuted: gray[50],
-    fgFaint: gray[25],
-    accent: gray[75],
-    rule: gray[12]
-} as const
+/**
+ * Colour roles (D172): a monochrome ramp stepped by lightness, one ground for every panel, and one
+ * attention colour, #ff8000, used sparingly (toasts, the spinner, delete, validation errors; D174).
+ */
+export type Colors = {
+    /** The ground. "transparent" in the terminal palette, so the terminal's own background shows. */
+    bg: string
+    /** An opaque ground for overlays, which must hide what they cover. */
+    panel: string
+    bgHover: string
+    bgCursor: string
+    fg: string
+    fgMuted: string
+    fgFaint: string
+    accent: string
+    rule: string
+    attention: string
+}
+
+const attention = "#ff8000"
+
+export const dark: Colors = {
+    bg: "#101010",
+    panel: "#101010",
+    bgHover: "#181818",
+    bgCursor: "#202020",
+    fg: "#ffffff",
+    fgMuted: "#808080",
+    fgFaint: "#404040",
+    accent: "#bfbfbf",
+    rule: "#202020",
+    attention
+}
+
+/** The same ramp mirrored: pure white ground, grays stepped toward black. */
+export const light: Colors = {
+    bg: "#ffffff",
+    panel: "#ffffff",
+    bgHover: "#f7f7f7",
+    bgCursor: "#efefef",
+    fg: "#000000",
+    fgMuted: "#808080",
+    fgFaint: "#bfbfbf",
+    accent: "#404040",
+    rule: "#efefef",
+    attention
+}
+
+const channels = (hex: string) => [1, 3, 5].map(i => Number.parseInt(hex.slice(i, i + 2), 16))
+
+/** Mixes `amount` of `to` into `from`, both #rrggbb. */
+export const mix = (from: string, to: string, amount: number) => {
+    const a = channels(from)
+    const b = channels(to)
+    return `#${a
+        .map((v, i) =>
+            Math.round(v + ((b[i] ?? v) - v) * amount)
+                .toString(16)
+                .padStart(2, "0")
+        )
+        .join("")}`
+}
+
+/**
+ * The terminal's own theme: its foreground, a transparent ground, and the in-between grays mixed
+ * from its foreground and background, so custom themes and transparency come through. Its yellow
+ * stands in for the attention colour.
+ */
+export const fromTerminal = (terminal: TerminalColors): Colors => {
+    const fg = terminal.defaultForeground ?? dark.fg
+    const bg = terminal.defaultBackground ?? dark.bg
+    return {
+        bg: "transparent",
+        panel: bg,
+        bgHover: mix(bg, fg, 0.06),
+        bgCursor: mix(bg, fg, 0.12),
+        fg,
+        fgMuted: mix(bg, fg, 0.5),
+        fgFaint: mix(bg, fg, 0.25),
+        accent: mix(bg, fg, 0.75),
+        rule: mix(bg, fg, 0.12),
+        attention: terminal.palette[3] ?? attention
+    }
+}
 
 /** Horizontal padding of rows and panels, in cells (the web's 3ch). */
 export const inset = 3

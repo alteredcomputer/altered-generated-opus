@@ -1,34 +1,30 @@
 import type { KeyEvent } from "@opentui/core"
+import type { Config } from "../config/schema.ts"
 
 /**
  * A key binding as data, so one value both matches events and labels the action menu, the footer,
- * and the help overlay. `key` is OpenTUI's key name ("j", "return", "space", "up").
+ * and the keyboard map. `key` is OpenTUI's key name ("e", "return", "tab", "up", "/").
  */
 export type Shortcut = { key: string; ctrl?: boolean; shift?: boolean }
 
-const glyphs: Record<string, string> = {
-    return: "⏎",
-    space: "␣",
-    escape: "esc",
-    tab: "⇥",
-    up: "↑",
-    down: "↓",
-    left: "←",
-    right: "→",
-    backspace: "⌫"
-}
+export const matches = (event: KeyEvent, shortcut: Shortcut) =>
+    event.name === shortcut.key &&
+    event.ctrl === (shortcut.ctrl ?? false) &&
+    event.shift === (shortcut.shift ?? false) &&
+    !event.meta
 
-/** Shifted letters arrive as `shift` plus the lowercase name; a binding to "J" means shift-j. */
-export const matches = (event: KeyEvent, shortcut: Shortcut) => {
-    const upper = shortcut.key.length === 1 && shortcut.key !== shortcut.key.toLowerCase()
-    const name = upper ? shortcut.key.toLowerCase() : shortcut.key
-    return (
-        event.name === name &&
-        event.ctrl === (shortcut.ctrl ?? false) &&
-        event.shift === (upper || (shortcut.shift ?? false)) &&
-        !event.meta
-    )
+/** "^⇧D", "↵", "⇥": glyphs come from the config, so they can be swapped per font. */
+export const label = (shortcut: Shortcut, glyphs: Config["glyphs"]) => {
+    const named: Record<string, string> = {
+        return: glyphs.enter,
+        tab: glyphs.tab,
+        escape: glyphs.escape,
+        up: glyphs.up,
+        down: glyphs.down,
+        backspace: glyphs.backspace
+    }
+    const key =
+        named[shortcut.key] ??
+        (shortcut.key.length === 1 ? shortcut.key.toUpperCase() : shortcut.key)
+    return `${shortcut.ctrl ? glyphs.ctrl : ""}${shortcut.shift ? glyphs.shift : ""}${key}`
 }
-
-export const label = (shortcut: Shortcut) =>
-    `${shortcut.ctrl ? "^" : ""}${shortcut.shift ? "⇧" : ""}${glyphs[shortcut.key] ?? shortcut.key}`
