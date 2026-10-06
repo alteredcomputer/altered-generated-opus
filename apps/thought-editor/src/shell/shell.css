@@ -12,10 +12,16 @@
     gap: 1.5ch;
     height: 56px;
     padding: 0 20px;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: var(--border);
 }
 
 .back {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-glyphs);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
     color: var(--fg-faint);
 }
 
@@ -27,7 +33,6 @@
     flex: 1;
     min-width: 0;
     color: var(--fg);
-    caret-color: var(--accent);
 }
 
 .frame-title {
@@ -40,8 +45,8 @@
     position: absolute;
     left: 0;
     right: 0;
-    bottom: -1px;
-    height: 1px;
+    bottom: calc(-1 * var(--rule-width));
+    height: var(--rule-width);
     overflow: hidden;
 }
 
@@ -69,23 +74,24 @@
     display: flex;
 }
 
+/*
+    Text-first footer: the status, then borderless segments split by full-height hairlines. Each
+    segment carries its own padding, so its hover fills the whole cell edge to edge.
+*/
 .frame-footer {
     flex: none;
     display: flex;
-    align-items: center;
-    gap: 2ch;
-    height: 40px;
-    padding: 0 12px 0 20px;
-    background: var(--bg-raised);
-    border-top: 1px solid var(--rule);
+    border-top: var(--border);
 }
 
 .footer-status {
     flex: 1;
     min-width: 0;
+    display: flex;
+    gap: 2ch;
+    padding: 1ch 3ch;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis;
 }
 
 .footer-status[data-style="success"] {
@@ -96,20 +102,28 @@
     color: var(--accent);
 }
 
-.footer-title {
-    color: var(--fg-muted);
-}
-
 .footer-action {
     display: inline-flex;
     align-items: center;
-    padding: 2px 8px;
+    padding: 1ch 2ch;
+    border-left: var(--border);
     color: var(--fg-muted);
     white-space: nowrap;
 }
 
+.footer-action:last-child {
+    padding-right: 3ch;
+}
+
 .footer-action:hover {
-    background: var(--bg-cursor);
+    background: var(--bg-hover);
+    color: var(--fg);
+}
+
+.footer-action:hover kbd,
+.accessory:hover kbd {
+    color: var(--fg);
+    border-color: var(--fg-faint);
 }
 
 .footer-primary {
@@ -117,18 +131,9 @@
     font-weight: 700;
 }
 
-.footer-divider {
-    width: 1px;
-    height: 16px;
-    margin: 0 -1ch;
-    background: var(--rule);
-}
-
 .accessory {
     display: inline-flex;
     align-items: center;
-    padding: 2px 8px;
-    border: 1px solid var(--rule);
     color: var(--fg-muted);
     white-space: nowrap;
 }
@@ -151,9 +156,8 @@
     width: min(420px, calc(100vw - 24px));
     display: flex;
     flex-direction: column;
-    background: var(--bg-raised);
-    border: 1px solid var(--rule);
-    box-shadow: 0 16px 48px rgb(0 0 0 / 60%);
+    background: var(--bg);
+    border: var(--border);
 }
 
 .picker-bottom {
@@ -202,14 +206,13 @@
 
 .picker-search {
     padding: 10px 14px;
-    border-top: 1px solid var(--rule);
+    border-top: var(--border);
     color: var(--fg);
-    caret-color: var(--accent);
 }
 
 .picker-top .picker-search {
     border-top: 0;
-    border-bottom: 1px solid var(--rule);
+    border-bottom: var(--border);
 }
 
 /* Confirmation dialog. */
@@ -227,8 +230,8 @@
     padding: 20px;
     display: grid;
     gap: var(--line);
-    background: var(--bg-raised);
-    border: 1px solid var(--rule);
+    background: var(--bg);
+    border: var(--border);
 }
 
 .dialog-title {
@@ -246,7 +249,7 @@
     display: inline-flex;
     align-items: center;
     padding: 2px 8px;
-    border: 1px solid var(--rule);
+    border: var(--border);
 }
 
 .dialog-actions .danger {

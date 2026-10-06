@@ -60,6 +60,7 @@ export function Root() {
     return (
         <Frame
             title="ALTERED"
+            count={{ total: visible.length }}
             status={`${thoughts.length} thoughts - generated prototype`}
             search={{ value: query, onChange: setQuery, placeholder: "Search commands..." }}
             actions={actions}
@@ -73,7 +74,6 @@ export function Root() {
             <List
                 items={visible}
                 getId={command => command.id}
-                section="Commands"
                 empty="No matching commands."
                 cursor={list.cursor}
                 selected={[]}

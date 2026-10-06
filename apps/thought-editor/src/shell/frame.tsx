@@ -11,6 +11,8 @@ import "./shell.css"
 
 type FrameProps = {
     title: string
+    /** The list size shown after the title in the footer; `selected` reads as "3 of 12". */
+    count?: { total: number; selected?: number }
     status?: string
     search?: { value: string; onChange: (value: string) => void; placeholder: string }
     accessory?: ReactNode
@@ -30,6 +32,7 @@ const PALETTE = { key: "k", mod: true }
  */
 export function Frame({
     title,
+    count,
     status,
     search,
     accessory,
@@ -106,8 +109,14 @@ export function Frame({
                         toast.title
                     ) : (
                         <>
-                            <span className="footer-title">{title}</span>
-                            {status && <span className="faint"> {status}</span>}
+                            <span>{title}</span>
+                            {count && (
+                                <span className="faint">
+                                    {count.selected ? `${count.selected} of ` : ""}
+                                    {count.total} Total
+                                </span>
+                            )}
+                            {status && <span className="faint">{status}</span>}
                         </>
                     )}
                 </p>
@@ -117,7 +126,6 @@ export function Frame({
                         {primary.shortcut && <Keys keys={shortcutKeys(primary.shortcut)} />}
                     </button>
                 )}
-                <span className="footer-divider" aria-hidden />
                 <button
                     type="button"
                     className="footer-action"

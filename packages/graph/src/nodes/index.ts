@@ -962,7 +962,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Window shell",
         description:
-            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state), confirmations, toasts, and the visual system taken from the Koa page screenshot.",
+            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state), confirmations, toasts, and the visual system: a monochrome gray ramp stepped by lightness, one background for every panel, ch-based spacing, a block caret, hairlines through one adjustable border token, no shadows. The footer shows the list count after the title; its actions are segments split by full-height hairlines.",
         sources: [
             "apps/thought-editor/src/shell/**",
             "apps/thought-editor/src/ui/**",
@@ -1087,8 +1087,8 @@ const nodes = defineNodes([
         parent: "tooling",
         title: "Formatting and linting",
         description:
-            "Biome as the single formatter and linter. Console usage is an error, so logging goes through the observability layer rather than appearing ad hoc.",
-        sources: ["biome.json"],
+            "Biome as the single formatter and linter. Console usage is an error, so logging goes through the observability layer rather than appearing ad hoc. The workspace editor settings make Biome the format-on-save formatter and switch Prettier off, so a local editor cannot reformat against the repo's rules.",
+        sources: ["biome.json", ".vscode/*.json"],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: "n/a", security: "n/a" } }
     },

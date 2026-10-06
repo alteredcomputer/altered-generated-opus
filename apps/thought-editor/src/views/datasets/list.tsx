@@ -84,6 +84,7 @@ export function DatasetsList() {
     return (
         <Frame
             title="Manage Datasets"
+            count={{ total: visible.length }}
             search={{ value: query, onChange: setQuery, placeholder: "Search datasets..." }}
             actions={actions}
             onKey={list.handleKey}
@@ -96,7 +97,6 @@ export function DatasetsList() {
             <List
                 items={visible}
                 getId={dataset => dataset.id}
-                section="Datasets"
                 empty={
                     query ? "No datasets match." : "No datasets yet. Press Ctrl-N to create one."
                 }
