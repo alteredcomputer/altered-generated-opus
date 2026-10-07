@@ -4,6 +4,7 @@ import Foundation
 enum ConfigError: Error, CustomStringConvertible {
     case malformedURL(String)
     case missingVersion
+    case notAppBound(String)
 
     var description: String {
         switch self {
@@ -11,6 +12,8 @@ enum ConfigError: Error, CustomStringConvertible {
             "The start URL is not an http or https address with a host: \"\(raw)\"."
         case .missingVersion:
             "Info.plist has no CFBundleShortVersionString, so the user agent cannot name the shell."
+        case .notAppBound(let host):
+            "Info.plist WKAppBoundDomains does not list \(host), so its service worker cannot run."
         }
     }
 }
@@ -53,10 +56,15 @@ struct ShellConfig {
             !version.isEmpty
         else { throw .missingVersion }
 
+        let isProduction = scheme == "https" && host.lowercased() == productionHost
+        //  The host is written twice (here and in project.yml); a drift fails here, loudly.
+        let appBound = bundle.object(forInfoDictionaryKey: "WKAppBoundDomains") as? [String] ?? []
+        if isProduction && !appBound.contains(productionHost) { throw .notAppBound(productionHost) }
+
         return ShellConfig(
             startURL: url,
             userAgentName: "AlteredShell/\(version)",
-            isProduction: scheme == "https" && host.lowercased() == productionHost
+            isProduction: isProduction
         )
     }
 

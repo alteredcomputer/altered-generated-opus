@@ -22,7 +22,9 @@ targets:
     type: application
     supportedDestinations: [iOS, macOS]
     sources:
+      #  `*_iOS.swift` and `*_macOS.swift` compile only for their own destination.
       - path: Shell
+        inferDestinationFiltersByPath: true
     info:
       path: Shell/Info.plist
       properties:
@@ -34,6 +36,22 @@ targets:
           UIColorName: Background
         UIUserInterfaceStyle: Dark
         ITSAppUsesNonExemptEncryption: false
+        #  iOS: the one host the web view may navigate to, so its service worker runs (D175).
+        #  Config.swift refuses to start if this stops matching its production host.
+        WKAppBoundDomains: [generated-thought-editor-prototype.vercel.app]
+    postBuildScripts:
+      #  Debug only: let the web view reach a dev server on the local network. Release builds keep
+      #  the default App Transport Security and never read the dev URL override.
+      - name: Allow the local dev server (Debug only)
+        basedOnDependencyAnalysis: false
+        showEnvVars: false
+        inputFiles: ["$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)"]
+        script: |
+          set -e
+          [ "$CONFIGURATION" = Debug ] || exit 0
+          plist="$TARGET_BUILD_DIR/$INFOPLIST_PATH"
+          plutil -replace NSAppTransportSecurity -json '{"NSAllowsLocalNetworking":true}' "$plist"
+          plutil -replace NSLocalNetworkUsageDescription -string "Debug builds load the editor from a dev server on this network." "$plist"
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.rileybarabash.altered-shell
