@@ -96,7 +96,13 @@ export function ThoughtForm({ thought, datasetIds: initialIds = [], onSaved }: T
     const chosen = splitNames(datasetText)
         .map(name => datasets.find(d => d.alias.toLowerCase() === name.toLowerCase()))
         .filter(d => d !== undefined)
-    const fieldSchemas = chosen.flatMap(dataset => schemas.filter(s => s.datasetId === dataset.id))
+    // In creation order, then by name: the store orders schemas only by dataset, and ties fall to
+    // random ids, which would shuffle the fields between browsers.
+    const fieldSchemas = chosen.flatMap(dataset =>
+        schemas
+            .filter(s => s.datasetId === dataset.id)
+            .sort((a, b) => a.createdAt - b.createdAt || a.name.localeCompare(b.name))
+    )
     const fieldKeys: FieldKey[] = [
         "alias",
         "content",
