@@ -1128,6 +1128,46 @@ const nodes = defineNodes([
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
     },
 
+    //  === Apple shell ===
+
+    {
+        id: "apple-shell",
+        title: "Apple shell for Mac and iPhone",
+        description:
+            "ALTERED as a native app on the Mac and the iPhone: one SwiftUI multiplatform target with one web view on the hosted thought editor, so every deploy is the update and Cmd-N, Cmd-T, and Cmd-W reach the editor instead of a browser (D175). As thin as it can be: no bridge, no plugins, no bundled build. Generated and disclosed as such.",
+        sources: [
+            "apps/shell/project.yml",
+            "apps/shell/.gitignore",
+            "apps/shell/README.md",
+            "apps/shell/Shell/App.swift",
+            "apps/shell/Shell/Config.swift",
+            "apps/shell/Shell/WebView.swift",
+            "apps/shell/Shell/Resources/**"
+        ],
+        relations: [{ type: "uses", to: "thought-editor" }],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+    {
+        id: "apple-shell-ios",
+        parent: "apple-shell",
+        title: "iPhone shell",
+        description:
+            "The web view full screen under the safe areas with the page handling the insets, no root bounce, the production host as the only app-bound domain so the editor's service worker runs and cold opens come from cache, and links that leave it opening in Safari.",
+        status: "planned",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+    {
+        id: "apple-shell-macos",
+        parent: "apple-shell",
+        title: "Mac shell",
+        description:
+            "A window with no title bar: the stoplights sit in a thin #101010 strip that drags the window, the web view fills the rest, and closing the window keeps the app warm so the Dock reopens the same page. The menus are stripped to Quit, Hide, Minimize, and the Edit commands, so the other Cmd keys reach the editor.",
+        sources: ["apps/shell/Shell/Mac.entitlements"],
+        status: "in-progress",
+        data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
+    },
+
     //  === Tooling ===
 
     {
