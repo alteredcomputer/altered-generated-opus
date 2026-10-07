@@ -35,7 +35,12 @@ const screens = [
     { name: "datasets", path: "/grid", keys: ["ControlOrMeta+b", "ArrowDown"] },
     { name: "light", path: "/grid", keys: ["ControlOrMeta+Shift+d"] }
 ]
-/** Every page sees the same clock, so ages and dates match across engines. */
+/**
+ * Every page sees the same clock, so ages and dates match, and the same user agent, so both
+ * engines take the same host (Safari's: Cmd for every shortcut) and draw the same key glyphs.
+ */
+const USER_AGENT =
+    "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.0 Safari/605.1.15"
 const NOW = new Date("2026-10-07T12:00:00Z")
 
 const say = line => process.stdout.write(`${line}\n`)
@@ -107,7 +112,8 @@ for (const size of sizes)
         for (const engine of engines) {
             const context = await browsers[engine].newContext({
                 viewport: { width: size.width, height: size.height },
-                deviceScaleFactor: 1
+                deviceScaleFactor: 1,
+                userAgent: USER_AGENT
             })
             const page = await context.newPage()
             await page.clock.setFixedTime(NOW)
