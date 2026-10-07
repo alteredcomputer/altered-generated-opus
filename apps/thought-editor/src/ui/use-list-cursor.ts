@@ -1,14 +1,16 @@
-import { useState } from "react"
+import { useViewState } from "../shell/navigation.tsx"
+import { isStringArray, isStringOrNull } from "../shell/restore.ts"
 
 /**
  * Cursor and multi-selection for a keyboard list. Arrows and Tab move, Shift-arrows extend a
  * range from an anchor (as in Finder), Cmd-arrows jump to the ends. Ids that leave the list (a
- * delete, a filter) simply stop counting, with no effect to keep in sync.
+ * delete, a filter) simply stop counting, with no effect to keep in sync. The view remembers all
+ * three across relaunches.
  */
 export const useListCursor = (ids: string[]) => {
-    const [cursorId, setCursorId] = useState<string | null>(null)
-    const [selectedIds, setSelectedIds] = useState<string[]>([])
-    const [anchorId, setAnchorId] = useState<string | null>(null)
+    const [cursorId, setCursorId] = useViewState<string | null>("cursor", null, isStringOrNull)
+    const [selectedIds, setSelectedIds] = useViewState<string[]>("selected", [], isStringArray)
+    const [anchorId, setAnchorId] = useViewState<string | null>("anchor", null, isStringOrNull)
 
     const cursor = cursorId && ids.includes(cursorId) ? cursorId : (ids[0] ?? null)
     const selected = selectedIds.filter(id => ids.includes(id))

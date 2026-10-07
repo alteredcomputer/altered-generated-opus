@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <title>Shell key log</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                background: #101010;
+                color: #bfbfbf;
+                font: 13px/1.5 ui-monospace, monospace;
+            }
+            body {
+                padding: 16px;
+            }
+            label {
+                display: block;
+                margin-bottom: 12px;
+                color: #ffffff;
+            }
+        </style>
+    </head>
+    <body>
+        <!--
+            A development aid for apps/shell (plan 10, step 4), not part of the app: point a Debug
+            build at it with ALTERED_SHELL_URL and press Cmd-N, Cmd-T, Cmd-W, Cmd-K, Cmd-comma,
+            and Cmd-slash. Each keydown is listed with its modifiers. With the box ticked the page
+            calls preventDefault on every Cmd key, which should also stop the system beep.
+        -->
+        <label><input id="prevent" type="checkbox" checked /> preventDefault on Cmd keys</label>
+        <p id="agent"></p>
+        <ol id="log" reversed></ol>
+        <script>
+            const prevent = document.getElementById("prevent")
+            const log = document.getElementById("log")
+            document.getElementById("agent").textContent = navigator.userAgent
+
+            window.addEventListener("keydown", event => {
+                const prevented = prevent.checked && event.metaKey
+                if (prevented) event.preventDefault()
+                const mods = ["metaKey", "ctrlKey", "altKey", "shiftKey"].filter(m => event[m])
+                const line = document.createElement("li")
+                line.textContent = `${event.key} (${event.code}) ${mods.join(" ")}${prevented ? " prevented" : ""}`
+                log.prepend(line)
+            })
+        </script>
+    </body>
+</html>

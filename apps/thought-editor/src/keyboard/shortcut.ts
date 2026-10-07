@@ -1,7 +1,8 @@
 /**
  * @remarks
  * `mod` is Command on macOS and Control elsewhere. Chrome never delivers Cmd-N, Cmd-T, or Cmd-W
- * to a page, so creation shortcuts use Control, as Raycast does for its own reserved keys.
+ * to a page, so creation shortcuts use Control, as Raycast does for its own reserved keys. The
+ * Apple shell (D175) does deliver them, so there a Control shortcut also answers to Command.
  */
 export type Shortcut = {
     key: string
@@ -13,6 +14,9 @@ export type Shortcut = {
 
 const isMac = typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform)
 
+/** The Apple shell names itself in the user agent (`AlteredShell/<version>`). */
+const inShell = typeof navigator !== "undefined" && /AlteredShell\//.test(navigator.userAgent)
+
 /**
  * Letters and digits match on the physical key, so Option and Shift (which change `event.key`,
  * for example Option-A typing "å") do not break a binding.
@@ -23,17 +27,46 @@ const keyOf = (event: KeyboardEvent) => {
     return event.key.toLowerCase()
 }
 
-export const matchShortcut = (shortcut: Shortcut, event: KeyboardEvent, mac = isMac) => {
-    const wantMeta = mac ? Boolean(shortcut.mod) : false
-    const wantCtrl = Boolean(shortcut.ctrl) || (!mac && Boolean(shortcut.mod))
+type TextField = { value: string; selectionStart: number; selectionEnd: number }
 
-    return (
-        keyOf(event) === shortcut.key &&
-        event.metaKey === wantMeta &&
-        event.ctrlKey === wantCtrl &&
+const textField = (target: EventTarget | null | undefined) => {
+    const field = target as Partial<TextField> | null | undefined
+    return typeof field?.value === "string" && typeof field.selectionStart === "number"
+        ? (field as TextField)
+        : null
+}
+
+/**
+ * Cmd-X and Cmd-A are Cut and Select All in a text field. They stand in for Ctrl-X (delete) and
+ * Ctrl-A (add) only when that Edit command would do nothing: no selected text, no text at all.
+ */
+const editCommandWouldAct = (key: string, target: EventTarget | null | undefined) => {
+    const field = textField(target)
+    if (!field) return false
+    if (key === "x") return field.selectionStart !== field.selectionEnd
+    if (key === "a") return field.value.length > 0
+    return false
+}
+
+export const matchShortcut = (
+    shortcut: Shortcut,
+    event: KeyboardEvent,
+    mac = isMac,
+    shell = inShell
+) => {
+    if (keyOf(event) !== shortcut.key) return false
+    const exact = (meta: boolean, ctrl: boolean) =>
+        event.metaKey === meta &&
+        event.ctrlKey === ctrl &&
         event.shiftKey === Boolean(shortcut.shift) &&
         event.altKey === Boolean(shortcut.alt)
-    )
+
+    const wantMeta = mac ? Boolean(shortcut.mod) : false
+    const wantCtrl = Boolean(shortcut.ctrl) || (!mac && Boolean(shortcut.mod))
+    if (exact(wantMeta, wantCtrl)) return true
+
+    const commandStandsIn = shell && mac && Boolean(shortcut.ctrl) && !shortcut.mod
+    return commandStandsIn && exact(true, false) && !editCommandWouldAct(shortcut.key, event.target)
 }
 
 const keyLabels: Record<string, string> = {
@@ -48,13 +81,17 @@ const keyLabels: Record<string, string> = {
     arrowright: "→"
 }
 
-/** Splits a shortcut into keycaps, in macOS modifier order. */
-export const shortcutKeys = (shortcut: Shortcut, mac = isMac) => {
+/**
+ * Splits a shortcut into keycaps, in macOS modifier order. In the shell a Control shortcut shows
+ * as Command, the key it is pressed with there (Control still works).
+ */
+export const shortcutKeys = (shortcut: Shortcut, mac = isMac, shell = inShell) => {
     const keys: string[] = []
-    if (shortcut.ctrl) keys.push(mac ? "⌃" : "Ctrl")
+    const ctrlAsCommand = Boolean(shortcut.ctrl) && mac && shell && !shortcut.mod
+    if (shortcut.ctrl && !ctrlAsCommand) keys.push(mac ? "⌃" : "Ctrl")
     if (shortcut.alt) keys.push(mac ? "⌥" : "Alt")
     if (shortcut.shift) keys.push("⇧")
-    if (shortcut.mod) keys.push(mac ? "⌘" : "Ctrl")
+    if (shortcut.mod || ctrlAsCommand) keys.push(mac ? "⌘" : "Ctrl")
     keys.push(keyLabels[shortcut.key] ?? shortcut.key.toUpperCase())
     return keys
 }

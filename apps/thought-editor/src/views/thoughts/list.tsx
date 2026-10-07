@@ -9,8 +9,9 @@ import type { Action } from "../../shell/action.ts"
 import { confirm } from "../../shell/confirm.tsx"
 import { runWrite } from "../../shell/feedback.ts"
 import { Frame } from "../../shell/frame.tsx"
-import { useNavigation } from "../../shell/navigation.tsx"
+import { useNavigation, useViewState } from "../../shell/navigation.tsx"
 import { Picker } from "../../shell/picker.tsx"
+import { isString, isStringOrNull } from "../../shell/restore.ts"
 import { showToast } from "../../shell/toast.ts"
 import { formatAge } from "../../ui/format.ts"
 import { Keys } from "../../ui/kbd.tsx"
@@ -19,6 +20,7 @@ import { useListCursor } from "../../ui/use-list-cursor.ts"
 import { usePersistentState } from "../../ui/use-persistent-state.ts"
 import { DatasetPicker } from "../datasets/picker.tsx"
 import { resetDemoAction } from "../reset-demo.ts"
+import { route } from "../route.ts"
 import { ThoughtForm } from "./form.tsx"
 import { ThoughtInspector } from "./inspector.tsx"
 
@@ -28,8 +30,8 @@ const FILTER = { key: "p", mod: true }
 export function ThoughtsList({ datasetId = null }: { datasetId?: string | null }) {
     const { thoughts, datasets, datasetById } = useStore()
     const { push } = useNavigation()
-    const [query, setQuery] = useState("")
-    const [filter, setFilter] = useState(datasetId)
+    const [query, setQuery] = useViewState("query", "", isString)
+    const [filter, setFilter] = useViewState("filter", datasetId, isStringOrNull)
     const [filterOpen, setFilterOpen] = useState(false)
     const [inspector, setInspector] = usePersistentState("thoughts.inspector", true)
     const [width, setWidth] = usePersistentState("thoughts.inspector-width", 0)
@@ -45,11 +47,18 @@ export function ThoughtsList({ datasetId = null }: { datasetId?: string | null }
     const many = targets.length > 1
 
     const edit = (thought: Thought) =>
-        push(<ThoughtForm thought={thought} onSaved={list.setCursor} />)
+        push(
+            <ThoughtForm thought={thought} onSaved={list.setCursor} />,
+            route.thoughtForm(thought.id)
+        )
 
     const create = () =>
         push(
-            <ThoughtForm datasetIds={activeFilter ? [activeFilter] : []} onSaved={list.setCursor} />
+            <ThoughtForm
+                datasetIds={activeFilter ? [activeFilter] : []}
+                onSaved={list.setCursor}
+            />,
+            route.thoughtForm(null, activeFilter ? [activeFilter] : [])
         )
 
     const pickDatasets = () => {
