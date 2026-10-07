@@ -924,7 +924,7 @@ const nodes = defineNodes([
         id: "thought-editor",
         title: "Thought editor prototype",
         description:
-            "A Raycast-style, keyboard-first editor for thoughts, datasets, attributes, and schemas, installable as a desktop PWA (D144). Generated and disclosed as such; the long-term editor belongs to the hand-written core. Data lives in the browser's IndexedDB, so it has no server, no routes, and no credentials.",
+            "A Raycast-style, keyboard-first editor for thoughts, datasets, attributes, and schemas, installable as a desktop PWA (D144). Generated and disclosed as such; the long-term editor belongs to the hand-written core. Data lives in the browser's IndexedDB, so it has no server, no API routes, and no credentials. Two static pages share that data and one service worker: the classic editor at / and the grid editor at /grid (D176).",
         sources: [
             "apps/thought-editor/package.json",
             "apps/thought-editor/tsconfig.json",
@@ -942,7 +942,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Local store",
         description:
-            "The IndexedDB tables (thoughts with embedded attributes, datasets, schemas), one live query that keeps every view current without refetching, the writes, the 25-thought demo seed, and the subtle pending-write indicator. Opening the app reads from disk, so there is never a loading skeleton.",
+            "The IndexedDB tables (thoughts with embedded attributes and an Added date since schema version 2, datasets, schemas), one live query that keeps every view current without refetching, the writes, the 25-thought demo seed, and the subtle pending-write indicator. Opening the app reads from disk, so there is never a loading skeleton.",
         sources: ["apps/thought-editor/src/data/**"],
         status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
@@ -1063,14 +1063,21 @@ const nodes = defineNodes([
             "The TUI's round 2 screens, density, and keys ported to the web on a strict character grid (D176), at /grid in the thought editor app, over the same IndexedDB data as the classic editor at /. Geist Mono Medium 12px; every cell is whole pixels, so Chrome and Safari draw the same layout. The DOM still does text, input, selection, and accessibility. Generated and disclosed as such.",
         sources: [
             "apps/thought-editor/grid.html",
+            "apps/thought-editor/vercel.json",
+            "apps/thought-editor/src/grid/README.md",
             "apps/thought-editor/src/grid/main.tsx",
             "apps/thought-editor/src/grid/app.tsx",
             "apps/thought-editor/src/grid/config/**",
             "apps/thought-editor/src/grid/shell/**",
-            "apps/thought-editor/src/grid/demo/**"
+            "apps/thought-editor/src/grid/demo/**",
+            "apps/thought-editor/src/grid/parity/**",
+            ".github/workflows/grid-parity.yml"
         ],
         relations: [{ type: "uses", to: "thought-editor-local-store" }],
-        status: "in-progress"
+        status: "done",
+        data: {
+            quality: { logging: true, errorHandling: true, tests: true, security: true }
+        }
     },
     {
         id: "web-grid-primitives",
@@ -1079,7 +1086,8 @@ const nodes = defineNodes([
         description:
             "A closed set of primitives mirroring OpenTUI's box, text, span, strong, scrollbox, input, and textarea, in cell and row units, with theme tokens as the only colours. Borders take one cell and join cleanly; characters the font lacks are pinned to their cells; scrolling moves by whole rows; inputs draw a blinking block caret that matches in every engine. Views cannot style anything else.",
         sources: ["apps/thought-editor/src/grid/ui/**"],
-        status: "in-progress"
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
     {
         id: "web-grid-views",
@@ -1092,7 +1100,8 @@ const nodes = defineNodes([
             { type: "uses", to: "web-grid-primitives" },
             { type: "uses", to: "thought-editor-local-store" }
         ],
-        status: "in-progress"
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
     },
 
     //  === iPhone editor prototype ===
