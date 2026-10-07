@@ -25,8 +25,14 @@
         /// App-bound domains gate the service worker on iOS only, so the Mac needs nothing extra.
         static func configurePlatform(_ configuration: WKWebViewConfiguration, for config: ShellConfig) {}
 
+        /// Transparent until the page paints. An opaque WKWebView fills its frame with the system
+        /// colour (white, or #1D1D1D in dark mode) for the first frames of a launch, which showed
+        /// as a flash under the strip. There is no public switch for the Mac web view's own
+        /// background, so this sets `drawsBackground` by key, as AppKit hosts commonly do; the
+        /// window's #101010 shows through instead.
         static func makeWebView(configuration: WKWebViewConfiguration) -> WKWebView {
             let webView = KeyWebView(frame: .zero, configuration: configuration)
+            webView.setValue(false, forKey: "drawsBackground")
             webView.underPageBackgroundColor = NSColor(Color.shellBackground)
             return webView
         }
