@@ -1,3 +1,5 @@
+import "@fontsource-variable/geist-mono"
+import "./grid.css"
 import { type CSSProperties, type ReactNode, useLayoutEffect, useRef, useState } from "react"
 import { gridSize, type Metrics, MetricsContext, settleCell } from "./metrics.ts"
 import { colorVariables, type Mode } from "./theme.ts"

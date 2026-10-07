@@ -1,7 +1,8 @@
 /**
  * The grid's closed set of primitives (D176), mirroring OpenTUI's intrinsics: `box`, `text`,
  * `span`, `strong`, `scrollbox`, `input`, and a textarea. Views compose these and nothing else;
- * `scripts/check-closed-styling.ts` enforces that no file outside this folder styles anything.
+ * `closed-styling.test.ts` (run by check:tests) enforces that no file outside this folder styles
+ * anything.
  */
 export { Box, type BoxProps, type Cells, type Side } from "./box.tsx"
 export {

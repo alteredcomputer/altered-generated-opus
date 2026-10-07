@@ -1,5 +1,3 @@
-import "@fontsource-variable/geist-mono"
-import "./ui/grid.css"
 import { registerSW } from "virtual:pwa-register"
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
