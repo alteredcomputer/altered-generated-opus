@@ -195,7 +195,8 @@ export const seed = (now = Date.now()): Snapshot => {
                     schemas.find(s => s.name === name && ids.includes(s.datasetId))?.id ?? null
             })),
             createdAt,
-            updatedAt: createdAt
+            updatedAt: createdAt,
+            addedAt: createdAt
         }
     })
 

@@ -110,3 +110,19 @@ describe("filterThoughts", () => {
         ).toHaveLength(7)
     })
 })
+
+describe("addedAt", () => {
+    it("is set on create and kept on update", async () => {
+        const id = await saveThought({ alias: "New", content: "", datasetIds: [], attributes: [] })
+        const created = await db.thoughts.get(id)
+        expect(created?.addedAt).toBe(created?.createdAt)
+
+        await saveThought({ id, alias: "Renamed", content: "", datasetIds: [], attributes: [] })
+        expect((await db.thoughts.get(id))?.addedAt).toBe(created?.addedAt)
+    })
+
+    it("is seeded on every demo thought", async () => {
+        for (const thought of await db.thoughts.toArray())
+            expect(thought.addedAt).toBe(thought.createdAt)
+    })
+})

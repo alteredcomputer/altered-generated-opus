@@ -20,6 +20,20 @@ export const createDatabase = (name: string) => {
         meta: "key"
     })
 
+    //  Version 2 (D176): thoughts gain `addedAt`, when they entered ALTERED, the grid editor's sort
+    //  key. Every thought stored before it was added in place, so it is filled from `createdAt`;
+    //  nothing else changes, and the classic editor reads the same rows.
+    db.version(2)
+        .stores({ thoughts: "id, createdAt, addedAt, *datasetIds" })
+        .upgrade(tx =>
+            tx
+                .table<Thought, string>("thoughts")
+                .toCollection()
+                .modify(thought => {
+                    thought.addedAt ??= thought.createdAt
+                })
+        )
+
     return db
 }
 

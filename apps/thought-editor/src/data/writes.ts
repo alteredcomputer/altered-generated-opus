@@ -99,7 +99,8 @@ export const saveThought = (input: ThoughtInput) =>
             datasetIds,
             attributes,
             createdAt: existing?.createdAt ?? now,
-            updatedAt: now
+            updatedAt: now,
+            addedAt: existing?.addedAt ?? now
         }
 
         await db.thoughts.put(thought)

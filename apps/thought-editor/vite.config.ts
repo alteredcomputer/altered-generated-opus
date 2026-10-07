@@ -1,7 +1,31 @@
 /// <reference types="vitest/config" />
 import react from "@vitejs/plugin-react"
-import { defineConfig } from "vite"
+import { defineConfig, type Plugin } from "vite"
 import { VitePWA } from "vite-plugin-pwa"
+
+/**
+ * `/grid` serves grid.html in dev and preview, as `cleanUrls` in vercel.json does on Vercel, and
+ * as the service worker's precache does offline (Workbox tries `/grid.html` for `/grid`).
+ */
+const gridRoute = (): Plugin => {
+    const rewrite = (url: string | undefined) =>
+        url === "/grid" || url?.startsWith("/grid?") ? url.replace("/grid", "/grid.html") : url
+    return {
+        name: "grid-route",
+        configureServer: server => {
+            server.middlewares.use((req, _res, next) => {
+                req.url = rewrite(req.url)
+                next()
+            })
+        },
+        configurePreviewServer: server => {
+            server.middlewares.use((req, _res, next) => {
+                req.url = rewrite(req.url)
+                next()
+            })
+        }
+    }
+}
 
 /**
  * @remarks
@@ -10,6 +34,7 @@ import { VitePWA } from "vite-plugin-pwa"
  */
 export default defineConfig({
     plugins: [
+        gridRoute(),
         react(),
         VitePWA({
             registerType: "autoUpdate",
@@ -39,6 +64,16 @@ export default defineConfig({
             workbox: { globPatterns: ["**/*.{js,css,html,svg,png,woff2}"] }
         })
     ],
+    //  Two pages, one deploy and one service worker: the classic editor at / and the grid at
+    //  /grid (D176).
+    build: {
+        rolldownOptions: {
+            input: {
+                main: "index.html",
+                grid: "grid.html"
+            }
+        }
+    },
     //  Maps styles inspected in devtools back to their source file and line.
     css: { devSourcemap: true },
     test: { include: ["src/**/*.test.ts"] }

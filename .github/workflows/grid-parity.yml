@@ -1,0 +1,56 @@
+#  Grid engine parity (D176): the grid's main screens in Chromium and WebKit on macOS, every
+#  layout box compared to the pixel, screenshots and a pixel diff uploaded as the `grid-parity`
+#  artifact. macOS minutes are free only while the repository is public, so the job is skipped
+#  if it goes private.
+name: grid-parity
+
+on:
+    push:
+        paths: ["apps/thought-editor/**", ".github/workflows/grid-parity.yml"]
+    workflow_dispatch:
+
+concurrency:
+    group: grid-parity-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    parity:
+        if: ${{ !github.event.repository.private }}
+        runs-on: macos-26
+        timeout-minutes: 30
+        defaults:
+            run:
+                working-directory: apps/thought-editor
+        steps:
+            - uses: actions/checkout@v6
+
+            - uses: pnpm/action-setup@v4
+
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 22
+                  cache: pnpm
+
+            - run: pnpm install --frozen-lockfile
+
+            - run: pnpm exec playwright install chromium webkit
+
+            - run: pnpm run build
+
+            - name: Serve the build
+              run: |
+                  pnpm exec vite preview --port 4173 --strictPort &
+                  for _ in $(seq 1 30); do curl -sf http://localhost:4173/grid > /dev/null && exit 0; sleep 1; done
+                  echo "vite preview did not start" && exit 1
+
+            - name: Compare engines
+              run: node src/grid/parity/capture.mjs
+              env:
+                  GRID_URL: http://localhost:4173
+                  OUT: parity
+
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: grid-parity
+                  path: apps/thought-editor/parity
