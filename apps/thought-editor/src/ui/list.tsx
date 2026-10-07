@@ -1,4 +1,6 @@
-import { type ReactNode, useEffect, useRef } from "react"
+import { type ReactNode, useEffect, useLayoutEffect, useRef } from "react"
+import { useIsActiveView, useViewMemory } from "../shell/navigation.tsx"
+import { isNumber } from "../shell/restore.ts"
 import "./list.css"
 
 type ClickModifiers = { shiftKey: boolean; metaKey: boolean; ctrlKey: boolean }
@@ -25,6 +27,16 @@ export function List<T>(props: ListProps<T>) {
     const { items, getId, empty, cursor, selected, inspector, inspectorWidth } = props
     const listRef = useRef<HTMLDivElement>(null)
     const selecting = selected.length > 0
+    const memory = useViewMemory()
+    const active = useIsActiveView()
+    const scrollRestored = useRef(false)
+
+    //  A hidden view has no layout to scroll, so the saved offset is applied when it first shows.
+    useLayoutEffect(() => {
+        if (!active || scrollRestored.current || !listRef.current) return
+        scrollRestored.current = true
+        listRef.current.scrollTop = memory?.recall("scroll", isNumber) ?? 0
+    }, [active, memory])
 
     useEffect(() => {
         if (cursor)
@@ -35,7 +47,12 @@ export function List<T>(props: ListProps<T>) {
 
     return (
         <div className="split">
-            <div className="list" ref={listRef} role="listbox">
+            <div
+                className="list"
+                ref={listRef}
+                role="listbox"
+                onScroll={event => memory?.remember("scroll", event.currentTarget.scrollTop)}
+            >
                 {items.length === 0 && <p className="list-empty">{empty}</p>}
                 {items.map(item => {
                     const id = getId(item)

@@ -1,7 +1,14 @@
+/*
+    The page runs under the iPhone's corners (viewport-fit=cover), so the frame pads itself by the
+    safe areas: the header clears the status bar, the footer clears the home indicator. Elsewhere
+    the insets are zero.
+*/
 .frame {
     height: 100%;
     display: flex;
     flex-direction: column;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
 }
 
 .frame-header {
@@ -152,7 +159,7 @@
 
 .picker {
     position: fixed;
-    right: 12px;
+    right: calc(12px + env(safe-area-inset-right));
     width: min(420px, calc(100vw - 24px));
     display: flex;
     flex-direction: column;
@@ -161,11 +168,11 @@
 }
 
 .picker-bottom {
-    bottom: 48px;
+    bottom: calc(48px + env(safe-area-inset-bottom));
 }
 
 .picker-top {
-    top: 48px;
+    top: calc(48px + env(safe-area-inset-top));
     flex-direction: column-reverse;
 }
 

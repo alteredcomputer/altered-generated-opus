@@ -1,0 +1,68 @@
+#  Apple shell: generate the Xcode project and build it, unsigned, for the iPhone Simulator and for
+#  the Mac, in Debug and in Release (Release compiles without the dev URL override). No UI test:
+#  the app only shows the hosted editor, so a test would mostly measure the network.
+#  macOS minutes are free only while the repository is public, so the job is skipped if it goes
+#  private.
+name: shell
+
+on:
+    push:
+        paths: ["apps/shell/**", ".github/workflows/shell.yml"]
+    workflow_dispatch:
+
+concurrency:
+    group: shell-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build:
+        if: ${{ !github.event.repository.private }}
+        runs-on: macos-26
+        timeout-minutes: 30
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Pick the newest Xcode 26
+              run: |
+                  XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+                  echo "Using $XCODE"
+                  sudo xcode-select -s "$XCODE"
+                  xcodebuild -version
+
+            - name: Generate the Xcode project
+              working-directory: apps/shell
+              run: |
+                  command -v xcodegen >/dev/null || brew install xcodegen
+                  xcodegen generate
+
+            - name: Build
+              working-directory: apps/shell
+              run: |
+                  mkdir -p build
+                  STATUS=0
+                  for CONFIG in Debug Release; do
+                    for DEST in "generic/platform=iOS Simulator" "platform=macOS"; do
+                      echo "::group::$CONFIG, $DEST"
+                      LOG="build/$CONFIG-$(echo "$DEST" | tr -c 'A-Za-z0-9' '-').log"
+                      if xcodebuild build \
+                          -project AlteredShell.xcodeproj -scheme AlteredShell \
+                          -configuration "$CONFIG" -destination "$DEST" \
+                          -derivedDataPath build/DerivedData \
+                          CODE_SIGNING_ALLOWED=NO \
+                          > "$LOG" 2>&1; then
+                        echo "built"
+                      else
+                        STATUS=1
+                      fi
+                      grep -E "error:|warning: .*/apps/shell/|\*\* BUILD " "$LOG" | tail -200
+                      echo "::endgroup::"
+                    done
+                  done
+                  exit $STATUS
+
+            - uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: xcodebuild-logs
+                  path: apps/shell/build/*.log
+                  if-no-files-found: ignore
