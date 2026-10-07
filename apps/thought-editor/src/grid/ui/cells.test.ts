@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { ellipsize, ellipsizeMiddle, fitRow, segments, width } from "./cells.ts"
+import { ellipsize, ellipsizeMiddle, fitRow, segments, width, wrappedRows } from "./cells.ts"
 
 describe("cells", () => {
     it("counts wide characters as two cells and marks as none", () => {
@@ -52,5 +52,15 @@ describe("fitRow", () => {
 
     it("lets a long title use the room a short subtitle leaves", () => {
         expect(fitRow("A".repeat(40), "bb", 50).title).toBe("A".repeat(40))
+    })
+})
+
+describe("wrappedRows", () => {
+    it("breaks between words, at newlines, and inside words longer than a row", () => {
+        expect(wrappedRows("hello world", 11)).toBe(1)
+        expect(wrappedRows("hello world", 10)).toBe(2)
+        expect(wrappedRows("a\nb", 10)).toBe(2)
+        expect(wrappedRows("x".repeat(25), 10)).toBe(3)
+        expect(wrappedRows("", 10)).toBe(1)
     })
 })

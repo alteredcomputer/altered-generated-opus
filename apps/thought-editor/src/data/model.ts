@@ -42,6 +42,8 @@ export type Thought = {
     attributes: Attribute[]
     createdAt: number
     updatedAt: number
+    /** When it entered ALTERED, which can be later than its creation (an imported note). */
+    addedAt: number
 }
 
 export type Snapshot = {

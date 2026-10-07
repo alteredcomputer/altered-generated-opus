@@ -12,7 +12,8 @@ export {
     fitRow,
     padEnd,
     padStart,
-    width
+    width,
+    wrappedRows
 } from "./cells.ts"
 export { focusOwner, Input, Textarea } from "./input.tsx"
 export { type Metrics, useGridSize } from "./metrics.ts"

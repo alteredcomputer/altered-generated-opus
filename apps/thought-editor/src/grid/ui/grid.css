@@ -239,22 +239,44 @@
         cursor: text;
     }
 
+    /* The input's own glyphs are transparent; .g-field-text draws them on the grid. */
+    .g-field > input,
+    .g-field > input::placeholder,
     .g-field > textarea,
+    .g-field > textarea::placeholder {
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .g-field-text {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+        white-space: pre;
+    }
+
+    .g-field-text > span {
+        display: inline-block;
+    }
+
+    .g-field > textarea,
+    .g-field-text-area,
     .g-mirror {
         white-space: pre-wrap;
         overflow-wrap: anywhere;
         word-break: normal;
     }
 
-    .g-field > input::placeholder,
-    .g-field > textarea::placeholder {
-        color: var(--f-placeholder);
-        opacity: 1;
-    }
-
     .g-field ::selection {
         background: var(--c-fgFaint);
         color: var(--c-fg);
+    }
+
+    .g-field > input::selection,
+    .g-field > textarea::selection {
+        color: transparent;
+        -webkit-text-fill-color: transparent;
     }
 
     .g-mirror {

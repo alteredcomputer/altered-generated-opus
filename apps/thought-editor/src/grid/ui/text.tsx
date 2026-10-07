@@ -32,7 +32,7 @@ const inlineStyle = ({ fg, bg, attributes = [] }: Inline): CSSProperties => {
  * Strings render as runs the font draws on the grid; a character the font lacks (↵, ✓, braille)
  * is pinned to its cells, so it cannot shift what follows.
  */
-const gridText = (children: ReactNode): ReactNode =>
+export const gridText = (children: ReactNode): ReactNode =>
     Children.map(children, child => {
         if (typeof child === "number") return String(child)
         if (isValidElement<{ children?: ReactNode }>(child) && child.type === Fragment)

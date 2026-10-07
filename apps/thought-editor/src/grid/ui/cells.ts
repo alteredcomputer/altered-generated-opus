@@ -144,3 +144,30 @@ export const padEnd = (text: string, cells: number) =>
 
 export const padStart = (text: string, cells: number) =>
     " ".repeat(Math.max(0, cells - width(text))) + text
+
+/**
+ * The rows `text` takes when word-wrapped to `cells`, as `wrapMode="word"` lays it out: lines
+ * break at newlines and between words, spaces hang at a line's end, and a word longer than a row
+ * breaks anywhere.
+ */
+export const wrappedRows = (text: string, cells: number): number => {
+    if (cells <= 0) return 0
+    return text.split("\n").reduce((total, line) => {
+        let rows = 1
+        let used = 0
+        for (const token of line.split(/(\s+)/).filter(Boolean)) {
+            const size = width(token)
+            if (/^\s+$/.test(token)) {
+                used = Math.min(cells, used + size)
+                continue
+            }
+            if (used > 0 && used + size > cells) {
+                rows++
+                used = 0
+            }
+            rows += Math.floor((used + size - 1) / cells)
+            used = ((used + size - 1) % cells) + 1
+        }
+        return total + rows
+    }, 0)
+}

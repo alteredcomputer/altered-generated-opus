@@ -1064,6 +1064,9 @@ const nodes = defineNodes([
         sources: [
             "apps/thought-editor/grid.html",
             "apps/thought-editor/src/grid/main.tsx",
+            "apps/thought-editor/src/grid/app.tsx",
+            "apps/thought-editor/src/grid/config/**",
+            "apps/thought-editor/src/grid/shell/**",
             "apps/thought-editor/src/grid/demo/**"
         ],
         relations: [{ type: "uses", to: "thought-editor-local-store" }],
@@ -1076,6 +1079,19 @@ const nodes = defineNodes([
         description:
             "A closed set of primitives mirroring OpenTUI's box, text, span, strong, scrollbox, input, and textarea, in cell and row units, with theme tokens as the only colours. Borders take one cell and join cleanly; characters the font lacks are pinned to their cells; scrolling moves by whole rows; inputs draw a blinking block caret that matches in every engine. Views cannot style anything else.",
         sources: ["apps/thought-editor/src/grid/ui/**"],
+        status: "in-progress"
+    },
+    {
+        id: "web-grid-views",
+        parent: "web-grid",
+        title: "Grid views",
+        description:
+            "The TUI's views on the grid: the thoughts list with selection boxes and drag, range, and gap selection, its uniform inspector with Created, Modified, and Added, the view picker, the app-style thought form with dataset suggestions and validation, the dataset picker, and the datasets list.",
+        sources: ["apps/thought-editor/src/grid/views/**"],
+        relations: [
+            { type: "uses", to: "web-grid-primitives" },
+            { type: "uses", to: "thought-editor-local-store" }
+        ],
         status: "in-progress"
     },
 

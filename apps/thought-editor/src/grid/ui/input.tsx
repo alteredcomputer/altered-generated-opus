@@ -2,6 +2,7 @@ import { type CSSProperties, useEffect, useLayoutEffect, useRef, useState } from
 import { type Cells, cells, rows } from "./box.tsx"
 import { width } from "./cells.ts"
 import { useGridSize } from "./metrics.ts"
+import { gridText } from "./text.tsx"
 import { color, type Token } from "./theme.ts"
 
 type Element = HTMLInputElement | HTMLTextAreaElement
@@ -103,27 +104,28 @@ const useFieldFocus = (ref: { current: Element | null }, focused: boolean) => {
  * every engine fires for every caret move (arrows, clicks, IME, undo), and a frame read is cheap.
  * A range selection hides the block caret and shows the native highlight instead.
  */
-const useCaret = (active: boolean, measure: () => Caret | null) => {
-    const [caret, setCaret] = useState<Caret | null>(null)
+const useCaret = <T,>(active: boolean, measure: () => T, idle: T) => {
+    const [state, setState] = useState<T>(idle)
     const read = useRef(measure)
     read.current = measure
+    const rest = useRef(idle)
     useEffect(() => {
-        if (!active) return setCaret(null)
+        if (!active) return setState(rest.current)
         let frame = 0
         let last = ""
         const tick = () => {
             const next = read.current()
-            const key = next ? `${next.x},${next.row},${next.char}` : ""
+            const key = JSON.stringify(next)
             if (key !== last) {
                 last = key
-                setCaret(next)
+                setState(next)
             }
             frame = requestAnimationFrame(tick)
         }
         tick()
         return () => cancelAnimationFrame(frame)
     }, [active])
-    return caret
+    return state
 }
 
 function BlockCaret({ caret }: { caret: Caret | null }) {
@@ -140,19 +142,51 @@ function BlockCaret({ caret }: { caret: Caret | null }) {
     )
 }
 
-/** A native single-line input on the grid, with the drawn block caret (D172, D176). */
+/** The caret, and how far the field has scrolled: pixels for an input, rows for a textarea. */
+type InputView = { caret: Caret | null; scroll: number }
+const idleInput: InputView = { caret: null, scroll: 0 }
+
+/**
+ * A native single-line input on the grid, with the drawn block caret (D172, D176). The native
+ * element keeps focus, the caret, selection, IME, and the clipboard, but its glyphs are
+ * transparent: engines centre an input's text in its line by their own rounding (Chromium draws
+ * it a pixel lower than block text at a 15 px line), so the visible text is drawn as ordinary grid
+ * text, scrolled with the input, and every engine puts it on the same pixels.
+ */
 export function Input(props: FieldProps) {
     const { cw } = useGridSize()
     const ref = useRef<HTMLInputElement>(null)
     const active = useFieldFocus(ref, props.focused ?? false)
-    const caret = useCaret(active, () => {
-        const el = ref.current
-        if (!el || el.selectionStart === null || el.selectionStart !== el.selectionEnd) return null
-        return inputCaret(el.value, el.selectionStart, el.scrollLeft, cw, props.placeholder ?? "")
-    })
+    const placeholder = props.placeholder ?? ""
+    const view = useCaret<InputView>(
+        active,
+        () => {
+            const el = ref.current
+            if (!el || el.selectionStart === null) return idleInput
+            const scroll = el.scrollLeft
+            const collapsed = el.selectionStart === el.selectionEnd
+            return {
+                caret: collapsed
+                    ? inputCaret(el.value, el.selectionStart, scroll, cw, placeholder)
+                    : null,
+                scroll
+            }
+        },
+        idleInput
+    )
 
     return (
         <div className="g-field" style={fieldStyle(props)}>
+            <div className="g-field-text" aria-hidden>
+                <span
+                    style={{
+                        transform: `translateX(${-view.scroll}px)`,
+                        ...(!props.value && { color: "var(--f-placeholder)" })
+                    }}
+                >
+                    {gridText(props.value || placeholder)}
+                </span>
+            </div>
             <input
                 ref={ref}
                 value={props.value}
@@ -164,7 +198,7 @@ export function Input(props: FieldProps) {
                 autoCapitalize="off"
                 onChange={event => props.onInput(event.target.value)}
             />
-            <BlockCaret caret={caret} />
+            <BlockCaret caret={view.caret} />
         </div>
     )
 }
@@ -172,8 +206,9 @@ export function Input(props: FieldProps) {
 type TextareaProps = FieldProps & { minRows?: number; maxRows?: number }
 
 /**
- * A native textarea on the grid that grows by whole rows with its wrapped text. The caret's row
- * and column come from a hidden mirror with the same width and wrapping, snapped to the cell.
+ * A native textarea on the grid that grows by whole rows with its wrapped text, drawn like
+ * `Input` (transparent native glyphs, grid text on top). The caret's row and column come from a
+ * hidden mirror with the same width and wrapping, snapped to the cell.
  */
 export function Textarea({ minRows = 1, maxRows = 12, ...props }: TextareaProps) {
     const { cw, lh } = useGridSize()
@@ -203,13 +238,21 @@ export function Textarea({ minRows = 1, maxRows = 12, ...props }: TextareaProps)
         if (measured) setHeight(Math.max(minRows, Math.min(maxRows, measured.rows)))
     })
 
-    const caret = useCaret(active, () => {
-        const el = ref.current
-        if (!el || el.selectionStart !== el.selectionEnd) return null
-        const at = layout(el.selectionStart)
-        if (!at) return null
-        return { x: at.col * cw, row: at.row - toCell(el.scrollTop, lh), char: at.char }
-    })
+    const view = useCaret<InputView>(
+        active,
+        () => {
+            const el = ref.current
+            if (!el) return idleInput
+            const scroll = toCell(el.scrollTop, lh)
+            if (el.selectionStart !== el.selectionEnd) return { caret: null, scroll }
+            const at = layout(el.selectionStart)
+            return {
+                caret: at && { x: at.col * cw, row: at.row - scroll, char: at.char },
+                scroll
+            }
+        },
+        idleInput
+    )
 
     return (
         <div
@@ -217,6 +260,16 @@ export function Textarea({ minRows = 1, maxRows = 12, ...props }: TextareaProps)
             style={{ ...fieldStyle(props), height: rows(height) }}
         >
             <div ref={mirror} className="g-mirror" aria-hidden />
+            <div className="g-field-text g-field-text-area" aria-hidden>
+                <div
+                    style={{
+                        transform: `translateY(${-view.scroll * lh}px)`,
+                        ...(!props.value && { color: "var(--f-placeholder)" })
+                    }}
+                >
+                    {gridText(props.value || (props.placeholder ?? ""))}
+                </div>
+            </div>
             <textarea
                 ref={ref}
                 value={props.value}
@@ -228,7 +281,7 @@ export function Textarea({ minRows = 1, maxRows = 12, ...props }: TextareaProps)
                 autoCapitalize="off"
                 onChange={event => props.onInput(event.target.value)}
             />
-            <BlockCaret caret={caret} />
+            <BlockCaret caret={view.caret} />
         </div>
     )
 }

@@ -3,6 +3,7 @@ import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { seedOnce } from "../data/writes.ts"
 import { log } from "../observability/log.ts"
+import { GridApp } from "./app.tsx"
 import { PrimitivesPage } from "./demo/primitives.tsx"
 
 const root = document.getElementById("root")
@@ -36,7 +37,11 @@ Promise.all([
             onUncaughtError: cause => fail("The grid stopped.", cause)
         }).render(
             <StrictMode>
-                <PrimitivesPage />
+                {new URLSearchParams(location.search).has("primitives") ? (
+                    <PrimitivesPage />
+                ) : (
+                    <GridApp />
+                )}
             </StrictMode>
         )
     })
