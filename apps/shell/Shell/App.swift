@@ -4,13 +4,24 @@ import SwiftUI
 /// no plugins; see README.md for what is deliberately not here yet.
 @main
 struct AlteredShellApp: App {
+    #if os(macOS)
+        @NSApplicationDelegateAdaptor(MacAppDelegate.self) private var appDelegate
+    #endif
     @State private var launch = Launch.start()
 
     var body: some Scene {
         WindowGroup {
             ShellRoot(launch: launch)
                 .preferredColorScheme(.dark)
+                #if os(macOS)
+                    .containerBackground(Color.shellBackground, for: .window)
+                #endif
         }
+        #if os(macOS)
+            //  No title bar; SwiftUI keeps the window's size and position between launches.
+            .windowStyle(.hiddenTitleBar)
+            .defaultSize(width: 1100, height: 720)
+        #endif
     }
 }
 
@@ -30,7 +41,8 @@ enum Launch {
 }
 
 /// The page fills the window; until its first load finishes the background shows instead, so
-/// there is never a white or black frame.
+/// there is never a white or black frame. A failure screen sits inside the safe area, so on the
+/// Mac the strip above it still drags the window.
 struct ShellRoot: View {
     let launch: Launch
 
@@ -42,6 +54,9 @@ struct ShellRoot: View {
                 FailureView(message: message, retry: nil)
             case .running(let controller):
                 WebScreen(controller: controller)
+                if case .failed(let message) = controller.phase {
+                    FailureView(message: message, retry: controller.load)
+                }
             }
         }
     }
@@ -51,14 +66,14 @@ struct WebScreen: View {
     let controller: WebController
 
     var body: some View {
-        WebView(controller: controller)
-            .opacity(controller.phase == .ready ? 1 : 0)
-            .ignoresSafeArea()
-            .overlay {
-                if case .failed(let message) = controller.phase {
-                    FailureView(message: message, retry: controller.load)
-                }
-            }
+        VStack(spacing: 0) {
+            #if os(macOS)
+                WindowStrip()
+            #endif
+            WebView(controller: controller)
+                .opacity(controller.phase == .ready ? 1 : 0)
+        }
+        .ignoresSafeArea()
     }
 }
 
