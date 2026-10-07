@@ -12,12 +12,21 @@
         func updateNSView(_ webView: WKWebView, context: Context) {}
     }
 
+    /// Takes keyboard focus whenever it lands in a window, so Cmd keys go to the page from the
+    /// first keystroke instead of falling through to the (stripped) menus with a beep.
+    final class KeyWebView: WKWebView {
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            _ = window?.makeFirstResponder(self)
+        }
+    }
+
     extension WebController {
         /// App-bound domains gate the service worker on iOS only, so the Mac needs nothing extra.
         static func configurePlatform(_ configuration: WKWebViewConfiguration, for config: ShellConfig) {}
 
         static func makeWebView(configuration: WKWebViewConfiguration) -> WKWebView {
-            let webView = WKWebView(frame: .zero, configuration: configuration)
+            let webView = KeyWebView(frame: .zero, configuration: configuration)
             webView.underPageBackgroundColor = NSColor(Color.shellBackground)
             return webView
         }

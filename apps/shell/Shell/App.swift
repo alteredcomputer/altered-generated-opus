@@ -21,6 +21,7 @@ struct AlteredShellApp: App {
             //  No title bar; SwiftUI keeps the window's size and position between launches.
             .windowStyle(.hiddenTitleBar)
             .defaultSize(width: 1100, height: 720)
+            .commands { ShellCommands() }
         #endif
     }
 }

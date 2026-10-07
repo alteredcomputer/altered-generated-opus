@@ -1164,7 +1164,11 @@ const nodes = defineNodes([
         title: "Mac shell",
         description:
             "A window with no title bar: the stoplights sit in a thin #101010 strip that drags the window, the web view fills the rest, and closing the window keeps the app warm so the Dock reopens the same page. The menus are stripped to Quit, Hide, Minimize, and the Edit commands, so the other Cmd keys reach the editor.",
-        sources: ["apps/shell/Shell/*_macOS.swift", "apps/shell/Shell/Mac.entitlements"],
+        sources: [
+            "apps/shell/Shell/*_macOS.swift",
+            "apps/shell/Shell/Mac.entitlements",
+            "apps/shell/Tools/keylog.html"
+        ],
         status: "in-progress",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
     },
