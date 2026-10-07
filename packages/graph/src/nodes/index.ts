@@ -1142,7 +1142,8 @@ const nodes = defineNodes([
             "apps/shell/Shell/App.swift",
             "apps/shell/Shell/Config.swift",
             "apps/shell/Shell/WebView.swift",
-            "apps/shell/Shell/Resources/**"
+            "apps/shell/Shell/Resources/**",
+            ".github/workflows/shell.yml"
         ],
         relations: [{ type: "uses", to: "thought-editor" }],
         status: "in-progress",
