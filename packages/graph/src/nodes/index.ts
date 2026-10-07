@@ -952,7 +952,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Keyboard layer",
         description:
-            "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast.",
+            "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast. In the Apple shell the Control shortcuts also answer to Command and show as Command, while Cmd-X and Cmd-A keep Cut and Select All whenever those would act on a text field.",
         sources: ["apps/thought-editor/src/keyboard/**"],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
@@ -962,7 +962,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Window shell",
         description:
-            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state), confirmations, toasts, and the visual system: a monochrome gray ramp stepped by lightness, one background for every panel, ch-based spacing, a block caret, hairlines through one adjustable border token, no shadows. The footer shows the list count after the title; its actions are segments split by full-height hairlines.",
+            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state; the stack and each view's cursor, selection, search, and scroll are saved to local storage and restored at boot, so a relaunch lands on the same screen), confirmations, toasts, and the visual system: a monochrome gray ramp stepped by lightness, one background for every panel, ch-based spacing, a block caret, hairlines through one adjustable border token, no shadows. The footer shows the list count after the title; its actions are segments split by full-height hairlines. The frame pads itself by the iPhone's safe areas.",
         sources: [
             "apps/thought-editor/src/shell/**",
             "apps/thought-editor/src/ui/**",
@@ -978,7 +978,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Views",
         description:
-            "The root command list, the thoughts list with its inspector pane and dataset filter, the thought form (alias, content, datasets, attributes with a schema each), the dataset picker, and the datasets list and form where schemas are defined. Text is the only schema type for now.",
+            "The root command list, the thoughts list with its inspector pane and dataset filter, the thought form (alias, content, datasets, attributes with a schema each), the dataset picker, and the datasets list and form where schemas are defined. Text is the only schema type for now. Each pushed view carries a route, plain data from which it is rebuilt after a relaunch.",
         sources: ["apps/thought-editor/src/views/**"],
         relations: [
             { type: "uses", to: "thought-editor-local-store" },
@@ -1146,7 +1146,7 @@ const nodes = defineNodes([
             ".github/workflows/shell.yml"
         ],
         relations: [{ type: "uses", to: "thought-editor" }],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
     },
     {
@@ -1156,7 +1156,7 @@ const nodes = defineNodes([
         description:
             "The web view full screen under the safe areas with the page handling the insets, no root bounce, the production host as the only app-bound domain so the editor's service worker runs and cold opens come from cache, and links that leave it opening in Safari.",
         sources: ["apps/shell/Shell/*_iOS.swift"],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
     },
     {
@@ -1170,7 +1170,7 @@ const nodes = defineNodes([
             "apps/shell/Shell/Mac.entitlements",
             "apps/shell/Tools/keylog.html"
         ],
-        status: "in-progress",
+        status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: true } }
     },
 
