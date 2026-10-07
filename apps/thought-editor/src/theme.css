@@ -92,10 +92,57 @@ button {
     cursor: pointer;
 }
 
+/*
+    The caret is a block in every engine. ui/caret.tsx draws it over the focused field and sets
+    data-block-caret while it does, which turns the native caret transparent so there is never a
+    second one. Without the drawn caret (a range selection, an IME composition) the native caret
+    returns: a block in Chromium, a thin bar elsewhere.
+*/
 input,
 textarea {
     caret-color: var(--accent);
     caret-shape: block;
+}
+
+:root[data-block-caret] :is(input, textarea):focus {
+    caret-color: transparent;
+}
+
+.caret {
+    position: fixed;
+    z-index: 1000;
+    width: 1ch;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    white-space: pre;
+    animation: caret-blink 1s steps(1, end) infinite;
+}
+
+@keyframes caret-blink {
+    50% {
+        visibility: hidden;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .caret {
+        animation: none;
+    }
+}
+
+/* Lays a field's value out off screen, as the field does, to find where its caret falls. */
+.caret-mirror {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: content-box;
+    visibility: hidden;
+    pointer-events: none;
+    overflow: hidden;
+    height: 0;
 }
 
 input::placeholder,

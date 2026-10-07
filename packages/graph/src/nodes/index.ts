@@ -962,7 +962,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Window shell",
         description:
-            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state; the stack and each view's cursor, selection, search, and scroll are saved to local storage and restored at boot, so a relaunch lands on the same screen), confirmations, toasts, and the visual system: a monochrome gray ramp stepped by lightness, one background for every panel, ch-based spacing, a block caret, hairlines through one adjustable border token, no shadows. The footer shows the list count after the title; its actions are segments split by full-height hairlines. The frame pads itself by the iPhone's safe areas.",
+            "The Raycast-shaped frame every view renders into: search bar with its loading line, body, and the footer with status, primary action, and the Cmd-K action palette. Also the navigation stack (push and pop, parents keep their state; the stack and each view's cursor, selection, search, and scroll are saved to local storage and restored at boot, so a relaunch lands on the same screen), confirmations, toasts, and the visual system: a monochrome gray ramp stepped by lightness, one background for every panel, ch-based spacing, a drawn block caret in every engine, hairlines through one adjustable border token, no shadows. The footer shows the list count after the title; its actions are segments split by full-height hairlines. The frame pads itself by the iPhone's safe areas.",
         sources: [
             "apps/thought-editor/src/shell/**",
             "apps/thought-editor/src/ui/**",
@@ -972,6 +972,21 @@ const nodes = defineNodes([
         relations: [{ type: "uses", to: "thought-editor-keyboard" }],
         status: "done",
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
+    },
+    {
+        id: "thought-editor-block-caret",
+        parent: "thought-editor-shell",
+        title: "Block caret",
+        description:
+            "A drawn block caret, one character cell wide, on every text field of the classic editor, so Safari and the Apple shell show the same block as Chrome (whose native block shape is Chromium-only). Mounted once, it follows the focused field, measures the caret with an off-screen mirror of the field's text, blinks (solid while typing, still under reduced motion), and steps aside for a range selection, an IME composition, or a blur, when the native caret returns. A browser check confirms its cell after typing, a wrap, and a line break.",
+        sources: [
+            "apps/thought-editor/src/ui/caret.tsx",
+            "apps/thought-editor/src/ui/caret-math.ts",
+            "apps/thought-editor/src/ui/caret-math.test.ts",
+            "apps/thought-editor/src/ui/caret.check.mjs"
+        ],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
     },
     {
         id: "thought-editor-views",
