@@ -29,7 +29,7 @@ targets:
     info:
       path: Altered/Info.plist
       properties:
-        CFBundleDisplayName: ALTERED
+        CFBundleDisplayName: ALTERED Swift
         CFBundleShortVersionString: $(MARKETING_VERSION)
         CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen:
