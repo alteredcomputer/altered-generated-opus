@@ -113,6 +113,13 @@ export function Frame(props: FrameProps) {
         }
     ]
 
+    const classic: Action = {
+        id: "classic",
+        title: "Open Classic Editor",
+        section: "App",
+        run: () => location.assign(CLASSIC)
+    }
+
     const globals: Action[] = [
         {
             id: "keys",
@@ -139,12 +146,7 @@ export function Frame(props: FrameProps) {
                     subtitle: "apps/thought-editor/src/grid/config/grid.config.ts"
                 })
         },
-        {
-            id: "classic",
-            title: "Open Classic Editor",
-            section: "App",
-            run: () => location.assign(CLASSIC)
-        },
+        classic,
         {
             id: "docs",
             title: "Help and Docs",
@@ -315,7 +317,7 @@ export function Frame(props: FrameProps) {
             {overlay === "menu" && (
                 <Palette
                     placeholder="Search actions..."
-                    items={asItems([...actions, ...development])}
+                    items={asItems([...actions, classic, ...development])}
                     bottom={footerBottom}
                     onClose={() => setOverlay(null)}
                 />

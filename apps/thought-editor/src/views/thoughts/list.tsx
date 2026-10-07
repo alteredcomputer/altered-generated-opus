@@ -214,7 +214,14 @@ export function ThoughtsList({ datasetId = null }: { datasetId?: string | null }
                   }
               ]
             : []),
-        resetDemoAction
+        resetDemoAction,
+        //  The grid editor at /grid shares this data (D176).
+        {
+            id: "open-grid",
+            title: "Open Grid Editor",
+            section: "Prototype",
+            run: () => location.assign("/grid")
+        }
     ]
 
     const filterLabel = activeFilter ? datasetById.get(activeFilter)?.alias : "All Thoughts"
