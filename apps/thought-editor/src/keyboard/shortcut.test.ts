@@ -44,7 +44,46 @@ describe("matchShortcut", () => {
     })
 })
 
+describe("matchShortcut in the Apple shell", () => {
+    const createThought = { key: "n", ctrl: true }
+    const deleteThought = { key: "x", ctrl: true }
+    const addAttribute = { key: "a", ctrl: true }
+    const field = (value: string, selectionStart: number, selectionEnd = selectionStart) =>
+        ({ value, selectionStart, selectionEnd }) as unknown as EventTarget
+
+    it("lets Command stand in for Control there, and only there", () => {
+        const cmdN = press({ key: "n", code: "KeyN", metaKey: true })
+        const ctrlN = press({ key: "n", code: "KeyN", ctrlKey: true })
+
+        expect(matchShortcut(createThought, cmdN, true, true)).toBe(true)
+        expect(matchShortcut(createThought, ctrlN, true, true)).toBe(true)
+        expect(matchShortcut(createThought, cmdN, true, false)).toBe(false)
+        expect(matchShortcut(createThought, cmdN, false, true)).toBe(false)
+    })
+
+    it("leaves Cmd-X to Cut while there is selected text", () => {
+        const cmdX = (target: EventTarget) =>
+            press({ key: "x", code: "KeyX", metaKey: true, target })
+
+        expect(matchShortcut(deleteThought, cmdX(field("draft", 0, 5)), true, true)).toBe(false)
+        expect(matchShortcut(deleteThought, cmdX(field("draft", 5)), true, true)).toBe(true)
+    })
+
+    it("leaves Cmd-A to Select All while the field has text", () => {
+        const cmdA = (target: EventTarget) =>
+            press({ key: "a", code: "KeyA", metaKey: true, target })
+
+        expect(matchShortcut(addAttribute, cmdA(field("text", 4)), true, true)).toBe(false)
+        expect(matchShortcut(addAttribute, cmdA(field("", 0)), true, true)).toBe(true)
+    })
+})
+
 describe("shortcutKeys", () => {
+    it("shows a Control shortcut as Command in the shell", () => {
+        expect(shortcutKeys({ key: "n", ctrl: true }, true, true)).toEqual(["⌘", "N"])
+        expect(shortcutKeys({ key: "n", ctrl: true }, true, false)).toEqual(["⌃", "N"])
+    })
+
     it("orders macOS modifiers as Control, Option, Shift, Command", () => {
         expect(shortcutKeys({ key: "x", ctrl: true, shift: true }, true)).toEqual(["⌃", "⇧", "X"])
         expect(shortcutKeys({ key: "enter", mod: true }, true)).toEqual(["⌘", "↵"])

@@ -1,14 +1,16 @@
-import { Fragment, useState } from "react"
+import { Fragment } from "react"
 import type { Dataset } from "../../data/model.ts"
 import { matches } from "../../data/search.ts"
 import { useStore } from "../../data/store.tsx"
 import type { Action } from "../../shell/action.ts"
 import { Frame } from "../../shell/frame.tsx"
-import { useNavigation } from "../../shell/navigation.tsx"
+import { useNavigation, useViewState } from "../../shell/navigation.tsx"
+import { isString } from "../../shell/restore.ts"
 import { List } from "../../ui/list.tsx"
 import { useListCursor } from "../../ui/use-list-cursor.ts"
 import { usePersistentState } from "../../ui/use-persistent-state.ts"
 import { resetDemoAction } from "../reset-demo.ts"
+import { route } from "../route.ts"
 import { ThoughtsList } from "../thoughts/list.tsx"
 import { DatasetForm } from "./form.tsx"
 import { removeDataset } from "./remove.ts"
@@ -18,7 +20,7 @@ const plural = (count: number, word: string) => `${count} ${word}${count === 1 ?
 export function DatasetsList() {
     const { datasets, schemas, thoughts } = useStore()
     const { push } = useNavigation()
-    const [query, setQuery] = useState("")
+    const [query, setQuery] = useViewState("query", "", isString)
     const [inspector, setInspector] = usePersistentState("datasets.inspector", true)
 
     const visible = datasets.filter(dataset => matches(query, dataset.alias, dataset.description))
@@ -30,8 +32,12 @@ export function DatasetsList() {
         thoughts.filter(t => t.datasetIds.includes(dataset.id)).length
 
     const edit = (dataset: Dataset) =>
-        push(<DatasetForm dataset={dataset} onSaved={list.setCursor} />)
-    const open = (dataset: Dataset) => push(<ThoughtsList datasetId={dataset.id} />)
+        push(
+            <DatasetForm dataset={dataset} onSaved={list.setCursor} />,
+            route.datasetForm(dataset.id)
+        )
+    const open = (dataset: Dataset) =>
+        push(<ThoughtsList datasetId={dataset.id} />, route.thoughts(dataset.id))
 
     const actions: Action[] = [
         ...(current
@@ -57,7 +63,7 @@ export function DatasetsList() {
             title: "Create Dataset",
             section: "Dataset",
             shortcut: { key: "n", ctrl: true },
-            run: () => push(<DatasetForm onSaved={list.setCursor} />)
+            run: () => push(<DatasetForm onSaved={list.setCursor} />, route.datasetForm(null))
         },
         ...(current
             ? [
