@@ -1,0 +1,289 @@
+/*
+ * The grid's one stylesheet (D176). Everything sits on a cell of --cw by --lh whole pixels; every
+ * length is a whole number of cells or rows, or the border width token. It never imports the
+ * classic editor's CSS, and the classic editor never imports it.
+ */
+
+@property --cw {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --cwh {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@property --lhh {
+    syntax: "<length>";
+    inherits: true;
+    initial-value: 0;
+}
+
+@layer grid.reset, grid.base;
+
+@layer grid.reset {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font: inherit;
+        letter-spacing: inherit;
+        color: inherit;
+        background: none;
+        text-decoration: none;
+        list-style: none;
+        outline: none;
+        appearance: none;
+        border-radius: 0;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+        height: 100%;
+        overflow: hidden;
+        overscroll-behavior: none;
+        background: var(--c-bg, #101010);
+    }
+
+    input,
+    textarea {
+        display: block;
+        min-width: 0;
+        resize: none;
+        overflow: hidden;
+    }
+
+    input::-webkit-search-decoration,
+    input::-webkit-search-cancel-button,
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+        appearance: none;
+    }
+}
+
+@layer grid.base {
+    .g-root {
+        /* The cell: the font's advance snapped to whole pixels, and a whole-pixel line height. */
+        --cw: round(1ch, 1px);
+        --lh: 15px;
+        --bw: 1px;
+        --cwh: round(down, calc(var(--cw) / 2), var(--bw));
+        --lhh: round(down, calc(var(--lh) / 2), var(--bw));
+
+        position: relative;
+        width: calc(var(--cols) * var(--cw));
+        height: calc(var(--rows) * var(--lh));
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+
+        font-family: "Geist Mono Variable", monospace;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: var(--lh);
+        /* Each glyph advances exactly one cell. */
+        letter-spacing: calc(var(--cw) - 1ch);
+        font-kerning: none;
+        font-variant-ligatures: none;
+        font-feature-settings:
+            "liga" 0,
+            "calt" 0;
+        font-synthesis: none;
+        font-optical-sizing: none;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        white-space: pre;
+        tab-size: 4;
+        cursor: default;
+        user-select: none;
+        -webkit-user-select: none;
+
+        background: var(--c-bg);
+        color: var(--c-fg);
+    }
+
+    .g-box {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-shrink: 1;
+        min-width: 0;
+        min-height: 0;
+    }
+
+    .g-hidden {
+        display: none;
+    }
+
+    /* A border is one cell on each side; the line runs through the middle of those cells. */
+    .g-border::before {
+        content: "";
+        position: absolute;
+        pointer-events: none;
+        left: var(--b-l, 0);
+        right: var(--b-r, 0);
+        top: var(--b-t, 0);
+        bottom: var(--b-b, 0);
+        border-color: var(--b-c);
+        border-style: solid;
+        border-left-width: var(--b-lw, 0);
+        border-right-width: var(--b-rw, 0);
+        border-top-width: var(--b-tw, 0);
+        border-bottom-width: var(--b-bw, 0);
+        border-radius: var(--b-radius, 0);
+    }
+
+    .g-text {
+        display: block;
+        flex-shrink: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .g-wrap-none {
+        white-space: pre;
+    }
+
+    .g-wrap-word {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    .g-wrap-char {
+        white-space: pre-wrap;
+        word-break: break-all;
+    }
+
+    .g-selectable {
+        user-select: text;
+        -webkit-user-select: text;
+        cursor: text;
+    }
+
+    /* A character the font lacks, pinned to its cells so later glyphs stay on the grid. */
+    .g-cell {
+        display: inline-block;
+        width: calc(var(--n) * var(--cw));
+        height: var(--lh);
+        vertical-align: top;
+        overflow: hidden;
+        text-align: center;
+        letter-spacing: 0;
+        white-space: pre;
+    }
+
+    .g-bold {
+        font-weight: 700;
+    }
+
+    .g-dim {
+        opacity: 0.5;
+    }
+
+    .g-italic {
+        font-style: italic;
+    }
+
+    .g-underline {
+        text-decoration: underline;
+        text-decoration-thickness: var(--bw);
+        text-underline-offset: var(--bw);
+    }
+
+    .g-viewport {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        min-height: 0;
+        overflow: hidden;
+        overscroll-behavior: contain;
+        touch-action: none;
+    }
+
+    /* Scrolled rows keep their height; the viewport scrolls instead of squeezing them. */
+    .g-viewport > * {
+        flex-shrink: 0;
+    }
+
+    .g-field {
+        position: relative;
+        flex-shrink: 0;
+        min-width: 0;
+        height: var(--lh);
+        background: var(--f-bg);
+        color: var(--f-fg);
+    }
+
+    .g-field-area {
+        height: auto;
+    }
+
+    .g-field > input,
+    .g-field > textarea {
+        width: 100%;
+        height: 100%;
+        line-height: var(--lh);
+        white-space: pre;
+        caret-color: transparent;
+        user-select: text;
+        -webkit-user-select: text;
+        cursor: text;
+    }
+
+    .g-field > textarea,
+    .g-mirror {
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        word-break: normal;
+    }
+
+    .g-field > input::placeholder,
+    .g-field > textarea::placeholder {
+        color: var(--f-placeholder);
+        opacity: 1;
+    }
+
+    .g-field ::selection {
+        background: var(--c-fgFaint);
+        color: var(--c-fg);
+    }
+
+    .g-mirror {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    /* The drawn block caret, one cell wide, the same in every engine. */
+    .g-caret {
+        position: absolute;
+        top: 0;
+        width: var(--cw);
+        height: var(--lh);
+        overflow: hidden;
+        pointer-events: none;
+        background: var(--f-fg);
+        color: var(--f-bg);
+        text-align: center;
+        letter-spacing: 0;
+        animation: g-blink 1s steps(1, end) infinite;
+    }
+
+    @keyframes g-blink {
+        50% {
+            visibility: hidden;
+        }
+    }
+}

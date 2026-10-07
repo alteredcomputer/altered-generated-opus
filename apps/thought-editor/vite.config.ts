@@ -39,6 +39,16 @@ export default defineConfig({
             workbox: { globPatterns: ["**/*.{js,css,html,svg,png,woff2}"] }
         })
     ],
+    //  Two pages, one deploy and one service worker: the classic editor at / and the grid at
+    //  /grid (D176).
+    build: {
+        rolldownOptions: {
+            input: {
+                main: "index.html",
+                grid: "grid.html"
+            }
+        }
+    },
     //  Maps styles inspected in devtools back to their source file and line.
     css: { devSourcemap: true },
     test: { include: ["src/**/*.test.ts"] }

@@ -1054,6 +1054,31 @@ const nodes = defineNodes([
         data: { quality: { logging: true, errorHandling: true, tests: "n/a", security: "n/a" } }
     },
 
+    //  === Web grid editor ===
+
+    {
+        id: "web-grid",
+        title: "Web grid editor",
+        description:
+            "The TUI's round 2 screens, density, and keys ported to the web on a strict character grid (D176), at /grid in the thought editor app, over the same IndexedDB data as the classic editor at /. Geist Mono Medium 12px; every cell is whole pixels, so Chrome and Safari draw the same layout. The DOM still does text, input, selection, and accessibility. Generated and disclosed as such.",
+        sources: [
+            "apps/thought-editor/grid.html",
+            "apps/thought-editor/src/grid/main.tsx",
+            "apps/thought-editor/src/grid/demo/**"
+        ],
+        relations: [{ type: "uses", to: "thought-editor-local-store" }],
+        status: "in-progress"
+    },
+    {
+        id: "web-grid-primitives",
+        parent: "web-grid",
+        title: "Grid primitives",
+        description:
+            "A closed set of primitives mirroring OpenTUI's box, text, span, strong, scrollbox, input, and textarea, in cell and row units, with theme tokens as the only colours. Borders take one cell and join cleanly; characters the font lacks are pinned to their cells; scrolling moves by whole rows; inputs draw a blinking block caret that matches in every engine. Views cannot style anything else.",
+        sources: ["apps/thought-editor/src/grid/ui/**"],
+        status: "in-progress"
+    },
+
     //  === iPhone editor prototype ===
 
     {
