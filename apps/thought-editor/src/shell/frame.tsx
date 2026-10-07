@@ -1,5 +1,6 @@
 import { type ReactNode, useEffect, useRef, useState } from "react"
 import { useIsSyncing } from "../data/pending.ts"
+import { focusFromCode } from "../keyboard/focus.ts"
 import { useKeyLayer } from "../keyboard/layers.ts"
 import { matchShortcut, shortcutKeys } from "../keyboard/shortcut.ts"
 import { Keys } from "../ui/kbd.tsx"
@@ -49,7 +50,7 @@ export function Frame({
     const rootRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        if (active) rootRef.current?.querySelector<HTMLElement>("[data-autofocus]")?.focus()
+        if (active) focusFromCode(rootRef.current?.querySelector<HTMLElement>("[data-autofocus]"))
     }, [active])
 
     const runShortcut = (event: KeyboardEvent) => {
@@ -92,6 +93,8 @@ export function Frame({
                         placeholder={search.placeholder}
                         value={search.value}
                         onChange={event => search.onChange(event.target.value)}
+                        autoCapitalize="off"
+                        autoCorrect="off"
                         spellCheck={false}
                     />
                 ) : (

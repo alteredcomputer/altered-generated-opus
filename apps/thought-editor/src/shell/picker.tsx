@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
 import { matches } from "../data/search.ts"
+import { focusFromCode } from "../keyboard/focus.ts"
 import { useKeyLayer } from "../keyboard/layers.ts"
 import { Keys } from "../ui/kbd.tsx"
 
@@ -37,9 +38,12 @@ export function Picker({ items, placeholder, position, onClose, onOtherKey }: Pi
 
     useEffect(() => {
         const previous = document.activeElement
-        inputRef.current?.focus()
+        const input = inputRef.current
+        focusFromCode(input)
         return () => {
-            if (previous instanceof HTMLElement) previous.focus()
+            //  Let go of the keyboard before the input unmounts, then hand focus back.
+            if (document.activeElement === input) input?.blur()
+            if (previous instanceof HTMLElement) focusFromCode(previous)
         }
     }, [])
 
@@ -114,6 +118,9 @@ export function Picker({ items, placeholder, position, onClose, onOtherKey }: Pi
                     ref={inputRef}
                     className="picker-search"
                     placeholder={placeholder}
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck={false}
                     value={query}
                     onChange={event => {
                         setQuery(event.target.value)

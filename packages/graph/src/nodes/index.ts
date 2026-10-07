@@ -952,7 +952,7 @@ const nodes = defineNodes([
         parent: "thought-editor",
         title: "Keyboard layer",
         description:
-            "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast. In the Apple shell the Control shortcuts also answer to Command and show as Command, while Cmd-X and Cmd-A keep Cut and Select All whenever those would act on a text field.",
+            "Shortcut matching and a stack of key layers, so exactly one surface (the active view, the action palette, or a confirmation) receives keys at a time. This is what lets Cmd-K, arrows, Tab, and Shift-arrow selection behave like Raycast. In the Apple shell the Control shortcuts also answer to Command and show as Command, while Cmd-X and Cmd-A keep Cut and Select All whenever those would act on a text field. On a touch-only device code never moves focus (the person taps a field to type), so menus do not summon or swap the iPhone keyboard.",
         sources: ["apps/thought-editor/src/keyboard/**"],
         status: "done",
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
@@ -1214,7 +1214,7 @@ const nodes = defineNodes([
         parent: "apple-shell",
         title: "Mac shell",
         description:
-            "A window with no title bar: the stoplights sit in a thin #101010 strip that drags the window, the web view fills the rest, and closing the window keeps the app warm so the Dock reopens the same page. The menus are stripped to Quit, Hide, Minimize, and the Edit commands, so the other Cmd keys reach the editor.",
+            "A window with no title bar: the stoplights sit in a thin #101010 strip that drags the window, the web view fills the rest, and closing the window keeps the app warm so the Dock reopens the same page. The menus are stripped to Quit, Hide, Minimize, and the Edit commands, so the other Cmd keys reach the editor. The web view draws no background of its own, so a launch shows #101010 until the page paints, never a white flash.",
         sources: [
             "apps/shell/Shell/*_macOS.swift",
             "apps/shell/Shell/Mac.entitlements",
@@ -1272,7 +1272,7 @@ const nodes = defineNodes([
         parent: "tooling",
         title: "Continuous integration",
         description:
-            "Runs the same verification and build on every push that an agent runs locally, so a drifted graph or a broken type cannot reach main even if a session skips its end-of-turn pass.",
+            "Runs the same verification and build on every push that an agent runs locally, so a drifted graph or a broken type cannot reach main even if a session skips its end-of-turn pass. Bun is installed for the TUI's tests.",
         sources: [".github/workflows/check.yml"],
         relations: [{ type: "verifies", to: "tooling-verification" }],
         status: "done",
