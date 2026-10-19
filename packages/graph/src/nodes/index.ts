@@ -1193,6 +1193,84 @@ const nodes = defineNodes([
         data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
     },
 
+    //  === Native Ergonomics ===
+
+    {
+        id: "native-ergonomics",
+        title: "Native Ergonomics (iPhone)",
+        description:
+            "A separate native iPhone test UI for thoughts and datasets, built ergonomics first from stock SwiftUI and iOS 26 Liquid Glass: Notes crossed with a database editor, operable near desktop speed (D198). Its own local SwiftData store seeded with the web editor's demo library; no network. Generated and disclosed as such.",
+        sources: [
+            "apps/native/project.yml",
+            "apps/native/.gitignore",
+            "apps/native/README.md",
+            "apps/native/NativeErgonomics/App/**",
+            "apps/native/NativeErgonomics/Resources/**",
+            "apps/native/NativeErgonomics/Shared/**",
+            ".github/workflows/native.yml"
+        ],
+        relations: [{ type: "uses", to: "native-ergonomics-model" }],
+        status: "done",
+        data: { quality: { logging: true, errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "native-ergonomics-model",
+        parent: "native-ergonomics",
+        title: "Model, seed, and rules",
+        description:
+            "The SwiftData model ported from the web editor (thoughts with alias, content, datasets, embedded attributes, and created, modified, and added dates; datasets with text fields), its seed, and the pure rules: derived row and search fields, every-word search, previous and next order, attribute validation, and field detaching.",
+        sources: ["apps/native/NativeErgonomics/Model/**"],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "native-ergonomics-thoughts",
+        parent: "native-ergonomics",
+        title: "Thoughts list",
+        description:
+            "Finger-wide Notes-style rows with search and dataset tokens, a sort menu, a dataset filter, swipe actions, long-press menus with previews that act on a whole selection, multi-select with a bulk glass bar, and compose that opens a new thought with the keyboard up.",
+        sources: ["apps/native/NativeErgonomics/Thoughts/**"],
+        relations: [{ type: "uses", to: "native-ergonomics-model" }],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "native-ergonomics-editor",
+        parent: "native-ergonomics",
+        title: "Thought editor",
+        description:
+            "SwiftUI's own TextEditor, autosaved as you type, with interactive keyboard dismissal and a keyboard bar for previous and next thought, datasets, details, and hiding the keyboard; a half-height details sheet for alias, datasets, fields, and attributes. Empty thoughts are discarded on leave.",
+        sources: ["apps/native/NativeErgonomics/Editor/**"],
+        relations: [{ type: "uses", to: "native-ergonomics-model" }],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "native-ergonomics-datasets",
+        parent: "native-ergonomics",
+        title: "Datasets tab",
+        description:
+            "Datasets with thought counts; tap for a dataset's thoughts, and create, rename, or delete with confirmation. Deleting keeps the thoughts and turns their field values into plain attributes.",
+        sources: ["apps/native/NativeErgonomics/Datasets/**"],
+        relations: [{ type: "uses", to: "native-ergonomics-thoughts" }],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: true, tests: true, security: "n/a" } }
+    },
+    {
+        id: "native-ergonomics-tests",
+        parent: "native-ergonomics",
+        title: "Unit and UI tests",
+        description:
+            "Swift Testing suites for the rules, seed integrity, search, previous and next order, empty-thought discard, validation, undo, and dataset changes against an in-memory store, plus a Simulator UI test that composes a thought, types, goes back, and finds it.",
+        sources: ["apps/native/NativeErgonomicsTests/**", "apps/native/NativeErgonomicsUITests/**"],
+        relations: [
+            { type: "verifies", to: "native-ergonomics-model" },
+            { type: "verifies", to: "native-ergonomics-editor" }
+        ],
+        status: "done",
+        data: { quality: { logging: "n/a", errorHandling: "n/a", tests: true, security: "n/a" } }
+    },
+
     //  === Apple shell ===
 
     {
