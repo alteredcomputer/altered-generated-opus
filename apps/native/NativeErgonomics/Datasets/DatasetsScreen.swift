@@ -2,7 +2,7 @@ import SwiftData
 import SwiftUI
 
 /// Every dataset with its thought count. Tap for its thoughts; swipe or long-press to rename or
-/// delete; the bottom bar makes a new one.
+/// delete; the plus button makes a new one.
 struct DatasetsScreen: View {
     @Binding var path: [Route]
 
@@ -60,8 +60,7 @@ struct DatasetsScreen: View {
         }
         .navigationTitle("Datasets")
         .toolbar {
-            ToolbarSpacer(.flexible, placement: .bottomBar)
-            ToolbarItem(placement: .bottomBar) {
+            ToolbarItem(placement: .topBarTrailing) {
                 Button("New Dataset", systemImage: "plus") { startNaming(.create) }
                     .keyboardShortcut("n", modifiers: .command)
                     .disabled(!path.isEmpty)

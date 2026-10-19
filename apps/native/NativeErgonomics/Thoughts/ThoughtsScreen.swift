@@ -78,6 +78,8 @@ struct ThoughtList: View {
             Label(token.alias, systemImage: "square.stack")
         }
         .toolbar { toolbar(visible: visible, order: order) }
+        //  Select mode trades the tab bar for the bulk bar, as Photos and Mail do.
+        .toolbar(editMode.isEditing ? .hidden : .visible, for: .tabBar)
         .sheet(item: $picking) { target in
             DatasetPicker(thoughtIDs: target.thoughtIDs)
         }
@@ -265,10 +267,10 @@ struct ThoughtList: View {
         } else {
             ToolbarItem(placement: .topBarTrailing) { filterMenu }
             ToolbarItem(placement: .topBarTrailing) { moreMenu }
+            //  Compose sits at the top: under a tab bar, iOS 26 gives the bottom edge to the tabs.
             if scope != .search {
-                DefaultToolbarItem(kind: .search, placement: .bottomBar)
-                ToolbarSpacer(.fixed, placement: .bottomBar)
-                ToolbarItem(placement: .bottomBar) {
+                ToolbarSpacer(.fixed, placement: .topBarTrailing)
+                ToolbarItem(placement: .topBarTrailing) {
                     Button("New Thought", systemImage: "square.and.pencil") { compose(order: order) }
                         .keyboardShortcut("n", modifiers: .command)
                         .accessibilityIdentifier("compose")

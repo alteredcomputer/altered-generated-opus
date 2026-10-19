@@ -38,13 +38,13 @@ tests and the compose UI test on the newest iPhone Simulator (screenshots in the
 | Swipe right | Copy contents |
 | Two-finger swipe down the rows | Select a range (enters Select mode) |
 | More menu, Select Thoughts | Select mode; Select All in the top left |
-| Bulk bar (Select mode) | Datasets, Copy, Delete for the whole selection |
+| Bulk bar (Select mode, in place of the tabs) | Datasets, Copy, Delete for the whole selection |
 | Long press a selected row | The actions apply to the whole selection |
 | Filter button | Show only thoughts in the checked datasets |
 | More menu, Sort By | Date Modified, Date Created, Date Added, or Title |
-| Search field (bottom bar) | Every word must match: alias, text, datasets, attributes |
+| Search (pull the list down, or the search tab) | Every word must match: alias, text, datasets, attributes |
 | Dataset suggestions while searching | Tap one to filter by it as a token |
-| Compose button (bottom right) | New thought, opened with the keyboard up |
+| Compose button (top right) | New thought, opened with the keyboard up |
 | Undo in the banner, shake, or three-finger swipe left | Undo a delete or a dataset change |
 
 ### Editor
@@ -94,6 +94,9 @@ Holding Cmd shows the list where iOS offers it.
 - **Datasets are tags.** As on the web, a thought can be in many datasets, so "move" is a
   checkmark menu: choosing a dataset adds the thought (or the selection) to it, or removes it when
   every target is already in.
+- **Compose at the top.** Under a tab bar, iOS 26 gives the bottom edge to the tabs, so list
+  toolbars sit at the top; Select mode hides the tabs to show its bulk bar, and the editor hides
+  them to keep previous, next, and compose at the bottom.
 - **Speed.** Each thought stores its title, snippet, dataset line, and lowercased search text,
   updated on write, so rows and search never parse content while scrolling or typing. Typing is
   staged and saved after a short pause, so a keystroke never waits on a write.
