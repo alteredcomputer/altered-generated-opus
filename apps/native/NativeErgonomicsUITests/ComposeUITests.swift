@@ -14,7 +14,12 @@ final class ComposeUITests: XCTestCase {
         XCTAssertTrue(compose.waitForExistence(timeout: 10))
         compose.tap()
 
-        XCTAssertTrue(app.textViews["editor"].waitForExistence(timeout: 5), "The editor should open")
+        let editor = app.textViews["editor"]
+        if !editor.waitForExistence(timeout: 5) {
+            add(screenshot(app, "after-compose"))
+            print("UI-TREE-BEGIN\n\(app.debugDescription)\nUI-TREE-END")
+        }
+        XCTAssertTrue(editor.exists, "The editor should open")
 
         XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5), "The keyboard should be up")
         app.typeText("Written on the Simulator\nSecond line")
