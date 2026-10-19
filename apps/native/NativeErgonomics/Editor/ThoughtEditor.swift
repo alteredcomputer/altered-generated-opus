@@ -37,6 +37,7 @@ struct ThoughtEditor: View {
                 if let thought { DetailsSheet(thought: thought) }
             }
             .onAppear(perform: appear)
+            .task { await raiseKeyboard() }
             .background {
                 KeyCommand("Back", key: .escape, modifiers: []) { dismiss() }
             }
@@ -48,12 +49,20 @@ struct ThoughtEditor: View {
         if thought == nil {
             order = route.order
             show(route.id)
-            if route.focus { focused = true }
         } else if let thought, thought.modelContext == nil || thought.isDeleted {
             //  Deleted from another tab while this editor waited underneath.
             self.thought = nil
             dismiss()
         }
+    }
+
+    /// A new thought arrives with the keyboard up. Focus asked for while the push is still
+    /// animating can be dropped, so it is asked again once the screen has settled.
+    private func raiseKeyboard() async {
+        guard route.focus else { return }
+        focused = true
+        guard (try? await Task.sleep(for: .milliseconds(450))) != nil else { return }
+        if !focused { focused = true }
     }
 
     private func show(_ id: UUID) {

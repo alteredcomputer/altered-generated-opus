@@ -14,6 +14,8 @@ final class ComposeUITests: XCTestCase {
         XCTAssertTrue(compose.waitForExistence(timeout: 10))
         compose.tap()
 
+        XCTAssertTrue(app.textViews["editor"].waitForExistence(timeout: 5), "The editor should open")
+
         XCTAssertTrue(app.keyboards.firstMatch.waitForExistence(timeout: 5), "The keyboard should be up")
         app.typeText("Written on the Simulator\nSecond line")
         add(screenshot(app, "editor"))
