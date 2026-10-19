@@ -30,6 +30,8 @@ struct ThoughtRow: View {
         }
         .padding(.vertical, 6)
         .frame(minHeight: 52)
+        //  The dataset label's icon would otherwise pull the separator in; keep it under the title.
+        .alignmentGuide(.listRowSeparatorLeading) { dimensions in dimensions[.leading] }
         .accessibilityElement(children: .combine)
     }
 }
