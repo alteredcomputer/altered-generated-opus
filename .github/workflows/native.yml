@@ -1,0 +1,123 @@
+#  Native Ergonomics (D198): generate the Xcode project, build it unsigned for the iPhone Simulator
+#  in Debug and Release, then run the unit tests and the compose UI test on the newest iPhone
+#  Simulator. Screenshots from the UI test are uploaded as the `native-screenshots` artifact.
+#  macOS minutes are free only while the repository is public, so the job is skipped if it goes
+#  private.
+name: native
+
+on:
+    push:
+        paths: ["apps/native/**", ".github/workflows/native.yml"]
+    workflow_dispatch:
+
+concurrency:
+    group: native-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-and-test:
+        if: ${{ !github.event.repository.private }}
+        runs-on: macos-26
+        timeout-minutes: 45
+        steps:
+            - uses: actions/checkout@v6
+
+            - name: Pick the newest Xcode 26
+              run: |
+                  XCODE=$(ls -d /Applications/Xcode_26*.app | sort -V | tail -1)
+                  echo "Using $XCODE"
+                  sudo xcode-select -s "$XCODE"
+                  xcodebuild -version
+
+            - name: Generate the Xcode project
+              working-directory: apps/native
+              run: |
+                  command -v xcodegen >/dev/null || brew install xcodegen
+                  xcodegen generate
+
+            - name: Build
+              working-directory: apps/native
+              run: |
+                  mkdir -p build
+                  #  Report every compile error in one run, not just the first file's.
+                  defaults write com.apple.dt.Xcode IDEBuildingContinueBuildingAfterErrors -bool YES
+                  STATUS=0
+                  for CONFIG in Debug Release; do
+                    echo "::group::$CONFIG"
+                    LOG="build/build-$CONFIG.log"
+                    if xcodebuild build \
+                        -project NativeErgonomics.xcodeproj -scheme NativeErgonomics \
+                        -configuration "$CONFIG" -destination "generic/platform=iOS Simulator" \
+                        -derivedDataPath build/DerivedData \
+                        CODE_SIGNING_ALLOWED=NO \
+                        > "$LOG" 2>&1; then
+                      echo "built"
+                    else
+                      STATUS=1
+                    fi
+                    grep -E "error:|warning: .*/apps/native/|\*\* BUILD " "$LOG" | tail -200
+                    echo "::endgroup::"
+                  done
+                  exit $STATUS
+
+            - name: Pick a Simulator
+              id: sim
+              run: |
+                  ID=$(xcrun simctl list devices available -j | python3 -c '
+                  import json, sys, re
+                  d = json.load(sys.stdin)["devices"]
+                  best = None
+                  for rt, devs in d.items():
+                      m = re.search(r"iOS-(\d+)-(\d+)", rt)
+                      if not m: continue
+                      v = (int(m.group(1)), int(m.group(2)))
+                      for dev in devs:
+                          name = dev["name"]
+                          if not name.startswith("iPhone") or "Pro Max" in name or "Plus" in name or " e" in name: continue
+                          key = (v, name)
+                          if best is None or key > best[0]: best = (key, dev["udid"])
+                  print(best[1]); print(best[0], file=sys.stderr)
+                  ')
+                  echo "id=$ID" >> "$GITHUB_OUTPUT"
+                  #  Type with the on-screen keyboard, so the UI test sees what a phone does.
+                  defaults write com.apple.iphonesimulator ConnectHardwareKeyboard -bool false
+                  xcrun simctl boot "$ID" || true
+
+            - name: Test
+              working-directory: apps/native
+              run: |
+                  set +e
+                  xcodebuild test \
+                    -project NativeErgonomics.xcodeproj -scheme NativeErgonomics \
+                    -destination "id=${{ steps.sim.outputs.id }}" \
+                    -derivedDataPath build/DerivedData \
+                    -resultBundlePath build/NativeErgonomics.xcresult \
+                    CODE_SIGNING_ALLOWED=NO \
+                    > build/test.log 2>&1
+                  STATUS=$?
+                  grep -E "error:|warning: .*/apps/native/|[Tt]est ([Cc]ase|Suite|run) .*(passed|failed)|✘|\*\* (BUILD|TEST) " build/test.log | tail -400
+                  exit $STATUS
+
+            - name: Export screenshots
+              if: always()
+              working-directory: apps/native
+              run: |
+                  mkdir -p build/screenshots
+                  if [ -d build/NativeErgonomics.xcresult ]; then
+                    xcrun xcresulttool export attachments --path build/NativeErgonomics.xcresult --output-path build/attachments || true
+                    find build/attachments -name '*.png' -exec cp {} build/screenshots/ \; 2>/dev/null || true
+                  fi
+
+            - uses: actions/upload-artifact@v4
+              if: always()
+              with:
+                  name: native-screenshots
+                  path: apps/native/build/screenshots
+                  if-no-files-found: ignore
+
+            - uses: actions/upload-artifact@v4
+              if: failure()
+              with:
+                  name: native-xcodebuild-logs
+                  path: apps/native/build/*.log
+                  if-no-files-found: ignore
